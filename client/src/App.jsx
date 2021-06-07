@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import useApplicationData from './hooks/useApplicationData';
 import {
@@ -8,6 +7,8 @@ import {
   Link
 } from "react-router-dom";
 import Home from "./components/Home/Home";
+import PlaylistsList from "./components/PlaylistsList/PlaylistsList";
+import Game from "./components/Game/Game";
 
 function App () {
 
@@ -25,7 +26,9 @@ function App () {
       <div className="App" >
 
         <nav>
+          <Link to="/"> Home </Link>
           <Link to="/playlists"> My playlists </Link>
+          <Link to="/game"> My game </Link>
         </nav>
         
         <Switch>
@@ -33,9 +36,13 @@ function App () {
             <Home />
           </Route>
           <Route path="/playlists" exact>
-            <Playlists />
+            <PlaylistsList />
+          </Route>
+          <Route path="/game" exact>
+            <Game />
           </Route>
         </Switch>
+
         <ul> {userList} </ul>
       </div >
     </Router>
