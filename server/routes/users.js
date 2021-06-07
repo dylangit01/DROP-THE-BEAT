@@ -14,34 +14,6 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPlaylists }) => {
       );
   });
 
-  // router.get('/posts', (req, res) => {
-  //   getUsersPosts()
-  //     .then((usersPosts) => {
-  //       const formattedPosts = getPostsByUsers(usersPosts);
-  //       res.json(formattedPosts);
-  //     })
-  //     .catch((err) =>
-  //       res.json({
-  //         error: err.message,
-  //       })
-  //     );
-  // });
-
-  /* GET playlists for a user */
-  router.get('/:id/playlists', (req, res) => {
-    // Currently this gets all the playlists for all the users
-    getUsersPlaylists()
-      .then((usersPlaylists) => {
-        const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
-        res.json(formattedPlaylists);
-      })
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-  });
-
   router.post('/', (req, res) => {
     const { username, email, password } = req.body;
 
@@ -56,6 +28,21 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPlaylists }) => {
         }
       })
       .then((newUser) => res.json(newUser))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  /* GET playlists for a user */
+  router.get('/:id/playlists', (req, res) => {
+    // Currently this gets all the playlists for all the users
+    getUsersPlaylists()
+      .then((usersPlaylists) => {
+        const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
+        res.json(formattedPlaylists);
+      })
       .catch((err) =>
         res.json({
           error: err.message,
