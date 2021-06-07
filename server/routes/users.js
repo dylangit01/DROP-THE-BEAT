@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getPostsByUsers } = require('../helpers/dataHelpers');
 
-module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
+module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPlaylists }) => {
   /* GET users listing. */
   router.get('/', (req, res) => {
     getUsers()
@@ -14,11 +14,25 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
       );
   });
 
-  router.get('/posts', (req, res) => {
-    getUsersPosts()
-      .then((usersPosts) => {
-        const formattedPosts = getPostsByUsers(usersPosts);
-        res.json(formattedPosts);
+  // router.get('/posts', (req, res) => {
+  //   getUsersPosts()
+  //     .then((usersPosts) => {
+  //       const formattedPosts = getPostsByUsers(usersPosts);
+  //       res.json(formattedPosts);
+  //     })
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
+
+  /* GET playlists for a user */
+  router.get('/:id/playlists', (req, res) => {
+    getUsersPlaylists()
+      .then((usersPlaylists) => {
+        const formattedPlaylists = getPostsByUsers(usersPlaylists);
+        res.json(formattedPlaylists);
       })
       .catch((err) =>
         res.json({
