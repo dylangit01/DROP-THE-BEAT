@@ -7,9 +7,6 @@ module.exports = ({
 	getUserByEmail,
 	addUser,
 	getUsersPlaylists,
-	getSongs,
-	getPlaylists,
-	getPlaylistsSongs,
 }) => {
 	/* GET users listing. */
 	router.get('/', (req, res) => {
@@ -56,30 +53,7 @@ module.exports = ({
 			);
 	});
 
-	// Get songs
-	router.get('/songs', (req, res) => {
-		getSongs()
-			.then((songs) => res.json(songs))
-			.catch((err) =>
-				res.json({
-					error: err.message,
-				})
-			);
-	});
-
-	// Get playlists
-	router.get('/playlists', (req, res) => {
-		getPlaylists()
-			.then((playlists) => res.json(playlists))
-			.catch((err) =>
-				res.json({
-					error: err.message,
-				})
-			);
-	});
-
 	// May not need route for "getPlaylistsSongs" as getUsersPlaylists() seems have same result?
 	
-
 	return router;
 };
