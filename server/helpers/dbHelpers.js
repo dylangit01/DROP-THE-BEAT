@@ -50,12 +50,14 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getUsersSongs = (userId) => {
+  const getPlaylistsSongs = (userId) => {
     const query = {
-      text: `SELECT users.id as user_id, username, email, playlists.id as playlist_id, name as playlist_name, image_url, rating
-        FROM users
-        INNER JOIN playlists
-        ON users.id = playlists.user_id`,
+      text: `SELECT playlists.id as playlist_id, songs.*
+        FROM playlists 
+        JOIN playlists_songs ON playlists.id = playlist_id 
+        JOIN songs ON song_id = songs.id 
+        WHERE user_id = $1`,
+      values: [userId],
     };
 
     return db
@@ -69,6 +71,6 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getUsersPlaylists,
-    getUsersSongs,
+    getPlaylistsSongs,
   };
 };
