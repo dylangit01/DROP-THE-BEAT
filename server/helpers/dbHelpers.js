@@ -22,10 +22,10 @@ module.exports = (db) => {
 			.catch((err) => err);
 	};
 
-	const addUser = (firstName, lastName, email, password) => {
+	const addUser = (username, email, password) => {
 		const query = {
-			text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *`,
-			values: [firstName, lastName, email, password],
+			text: `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
+			values: [username, email, password],
 		};
 
 		return db
@@ -34,24 +34,76 @@ module.exports = (db) => {
 			.catch((err) => err);
 	};
 
-	const getUsersPosts = () => {
-		const query = {
-			text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
+		const getUsersPlaylists = () => {
+			const query = {
+				text: `SELECT users.id as user_id, username, email, playlists.id as playlist_id, name as playlist_name, image_url, rating
         FROM users
-        INNER JOIN posts
-        ON users.id = posts.user_id`,
+        INNER JOIN playlists
+        ON users.id = playlists.user_id`,
+			};
+
+			return db
+				.query(query)
+				.then((result) => result.rows)
+				.catch((err) => err);
 		};
 
-		return db
-			.query(query)
-			.then((result) => result.rows)
-			.catch((err) => err);
-	};
+	// const getUsersPosts = () => {
+	// 	const query = {
+	// 		text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
+  //       FROM users
+  //       INNER JOIN posts
+  //       ON users.id = posts.user_id`,
+	// 	};
+
+	// 	return db
+	// 		.query(query)
+	// 		.then((result) => result.rows)
+	// 		.catch((err) => err);
+	// };
+
+		const getSongs = () => {
+			const query = {
+				text: 'SELECT * FROM songs',
+			};
+
+			return db
+				.query(query)
+				.then((result) => result.rows)
+				.catch((err) => err);
+		};
+	
+		const getPlaylists = () => {
+			const query = {
+				text: 'SELECT * FROM playlists',
+			};
+
+			return db
+				.query(query)
+				.then((result) => result.rows)
+				.catch((err) => err);
+		};
+	
+			const getPlaylistsSongs = (userID) => {
+				const query = {
+					text: 'SELECT playlists.name as playlist_name, songs.name as song_name FROM playlists JOIN playlists_songs ON playlists.id = playlist_id JOIN songs ON song_id = songs.id WHERE user_id = $1 GROUP BY playlists.id',
+					values:[userID]
+				};
+
+				return db
+					.query(query, values)
+					.then((result) => result.rows)
+					.catch((err) => err);
+			};
+	
 
 	return {
 		getUsers,
 		getUserByEmail,
 		addUser,
-		getUsersPosts,
+		getUsersPlaylists,
+		getSongs,
+		getPlaylists,
+		getPlaylistsSongs,
 	};
 };
