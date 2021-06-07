@@ -13,6 +13,7 @@ const useApplicationData = () => {
 	 * In below axios call, when receiving the returned data, using "dispatch" with matched type to send the action to data_reducer.js, which will update the global state
 	 **/
 	useEffect(() => {
+
 		axios({ method: 'GET', url: '/api/users' })
 			.then(({ data }) => {
 				console.log(data);
@@ -20,6 +21,8 @@ const useApplicationData = () => {
 			})
 			.catch((err) => console.log(err));
 	}, []);
+
+
 
 	return { state, dispatch };
 };
