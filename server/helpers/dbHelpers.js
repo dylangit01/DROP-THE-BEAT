@@ -34,7 +34,23 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getUsersPlaylists = () => {
+  const getUsersPlaylists = (userId) => {
+    const query = {
+      text: `SELECT users.id as user_id, username, email, playlists.id as playlist_id, name as playlist_name, image_url, rating
+        FROM users
+        INNER JOIN playlists
+        ON users.id = playlists.user_id
+        WHERE users.id = $1`,
+      values: [userId],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const getUsersSongs = (userId) => {
     const query = {
       text: `SELECT users.id as user_id, username, email, playlists.id as playlist_id, name as playlist_name, image_url, rating
         FROM users
@@ -53,5 +69,6 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getUsersPlaylists,
+    getUsersSongs,
   };
 };

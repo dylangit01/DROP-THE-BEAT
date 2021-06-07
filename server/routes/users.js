@@ -37,11 +37,26 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPlaylists }) => {
 
   /* GET playlists for a user */
   router.get('/:id/playlists', (req, res) => {
-    // Currently this gets all the playlists for all the users
-    getUsersPlaylists()
+    // Currently this gets all the playlists for user 1 hardcoded
+    getUsersPlaylists(1)
       .then((usersPlaylists) => {
         const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
         res.json(formattedPlaylists);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  /* GET songs for a user */
+  router.get('/:id/songs', (req, res) => {
+    // Currently this gets all the songs for all the users
+    getUsersSongs()
+      .then((usersSongs) => {
+        const formattedSongs = getSongsByUsers(usersSongs);
+        res.json(formattedSongs);
       })
       .catch((err) =>
         res.json({
