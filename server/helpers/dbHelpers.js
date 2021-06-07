@@ -34,12 +34,12 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getUsersPosts = () => {
+  const getUsersPlaylists = () => {
     const query = {
-      text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
+      text: `SELECT users.id as user_id, username, email, playlists.id as playlist_id, name as playlist_name, image_url, rating
         FROM users
-        INNER JOIN posts
-        ON users.id = posts.user_id`,
+        INNER JOIN playlists
+        ON users.id = playlists.user_id`,
     };
 
     return db
@@ -52,6 +52,6 @@ module.exports = (db) => {
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts,
+    getUsersPlaylists,
   };
 };

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPostsByUsers } = require('../helpers/dataHelpers');
+const { getPlaylistsByUsers } = require('../helpers/dataHelpers');
 
 module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPlaylists }) => {
   /* GET users listing. */
@@ -29,9 +29,10 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPlaylists }) => {
 
   /* GET playlists for a user */
   router.get('/:id/playlists', (req, res) => {
+    // Currently this gets all the playlists for all the users
     getUsersPlaylists()
       .then((usersPlaylists) => {
-        const formattedPlaylists = getPostsByUsers(usersPlaylists);
+        const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
         res.json(formattedPlaylists);
       })
       .catch((err) =>
