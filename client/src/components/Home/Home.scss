@@ -1,10 +1,18 @@
 .home {
-  height: 100vh;
+  height: 90vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .headphones {
+  .headphones-img {
     width: 65vmin;
+  }
+
+  .call-to-action {
+    width: 65vmin;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5vmin;
   }
 }
