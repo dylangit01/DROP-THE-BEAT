@@ -5,6 +5,8 @@ import Playlist from "./Playlist/Playlist"
 import './Playlists.scss';
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -31,7 +33,9 @@ export default function Playlists({playlists}) {
 
   return (
     <div className="playlists">
-      <h1>Select a Playlist!</h1>
+      <Typography variant="h3" className={classes.title}>
+        Select a Playlist!
+      </Typography>
       <Grid
         container
         spacing={4}
@@ -43,3 +47,5 @@ export default function Playlists({playlists}) {
     </div>
   );
 };
+
+// MINOR STYLING ISSUES: WHY THE BACKGROUND COVER LOOKS A BIT DIFFERENT AND THERE'S SCROLL?
