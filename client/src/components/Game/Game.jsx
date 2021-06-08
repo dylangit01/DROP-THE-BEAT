@@ -1,10 +1,4 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
 import './Game.scss';
 import Chat from "./Chat/Chat";
 import Score from "./Score/Score";
