@@ -35,12 +35,15 @@ function App () {
           <Route path="/" exact>
             <Home />
           </Route>
+
           <Route path="/playlists" exact>
             <PlaylistsList />
           </Route>
+
           <Route path="/lobby" exact>
             <Join />
           </Route>
+          
           <Route path="/game" exact>
             <Game />
           </Route>
