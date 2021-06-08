@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Route,
-  Link
-} from "react-router-dom";
-
-// Components
-import Join from "../Join/Join"
+import { Link } from "react-router-dom";
 
 // Styles
 import './Home.scss';
@@ -23,8 +17,14 @@ export default function Home() {
           <Join />
         </Route> */}
         <div className="call-to-action">
-          <Button color="inherit"><Link to="/playlists">Choose a Playlist</Link></Button>
-          <Button color="inherit"><Link to="/join">Join A Game</Link></Button>
+          <div>
+            <p>Want to host a game?</p>
+            <Button variant="outlined" style={{width: '200px'}} color="inherit"><Link to="/playlists">Select a Playlist</Link></Button>
+          </div>
+          <div>
+            <p>Have a game code?</p>
+            <Button variant="outlined" style={{width: '200px'}} color="inherit"><Link to="/join">Join A Game</Link></Button>
+          </div>
         </div>
 
     </div>
