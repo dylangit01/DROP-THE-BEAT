@@ -39,7 +39,9 @@ function App () {
           </Route>
 
           <Route path="/playlists/:id" exact>
-            <PlaylistPage />
+            <PlaylistPage 
+              playlists={state.playlists}
+            />
           </Route>
 
           <Route path="/join" exact>
@@ -48,6 +50,10 @@ function App () {
 
           <Route path="/game" exact>
             <Game />
+          </Route>
+
+          <Route path="*" exact>
+            <h2>404 - Page Not Found</h2>
           </Route>
         </Switch>
       </div >
