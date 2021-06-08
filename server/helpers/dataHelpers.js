@@ -3,7 +3,7 @@ const getPlaylistsByUsers = (usersPlaylists) => {
 
   for (const playlist of usersPlaylists) {
     if (!playlistsByUsers[playlist.user_id]) {
-      playlistsByUsers[playlist.user_id] = {
+        playlistsByUsers[playlist.user_id] = {
         userId: playlist.user_id,
         username: playlist.username,
         email: playlist.email,

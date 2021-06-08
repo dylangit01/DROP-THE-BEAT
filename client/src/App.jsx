@@ -21,27 +21,25 @@ import Game from "./components/Game/Game";
 function App () {
 
   const { state, dispatch } = useApplicationData();
-  
   const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
 
   return (
     <Router>
       <div className="App" >
-        {/* Navbar */}
         <Navbar />
         
-        {/* Navigation Views */}
         <Switch>
+
           <Route path="/" exact>
             <Home />
           </Route>
 
           <Route path="/playlists" exact>
-            <Playlists />
+            <Playlists playlists={state.playlists}/>
           </Route>
 
           <Route path="/playlists/:id" exact>
-            <PlaylistPage />
+            <PlaylistPage playlists={state.playlists}/>
           </Route>
 
           <Route path="/join" exact>
@@ -49,8 +47,13 @@ function App () {
           </Route>
 
           <Route path="/game" exact>
-            <Game />
+            <Game playlists={state.playlists} />
           </Route>
+
+          <Route path="*">
+            <h2>404 - Page Not Found</h2>
+          </Route>
+
         </Switch>
       </div >
     </Router>
