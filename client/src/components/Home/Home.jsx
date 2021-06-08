@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    background: "linear-gradient(45deg, #9e66f2 30%, #21CBF3 90%)",
+    background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
     color: "white",
   },
 }));
@@ -18,13 +18,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      <img className="headphones-img" src="https://github.com/dylangit01/DROP-THE-BEAT/blob/ruby/feature/navbar-home/client/public/images/headphones.png?raw=true" alt="logo" />
-
-        {/* <Link to="/lobby"> Do you want to join the existing game? </Link> <br />
-        <Link to="/login"> Do you want to host a new game? </Link>
-        <Route path="/join" exact>
-          <Join />
-        </Route> */}
+      <img className="headphones-img" src="https://github.com/dylangit01/DROP-THE-BEAT/blob/ruby/feature/navbar-home/client/public/images/headphones.png?raw=true" alt="headphones" />
         <div className="call-to-action">
           <div>
             <p>Want to host a game?</p>

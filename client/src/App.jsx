@@ -26,10 +26,11 @@ function App () {
   return (
     <Router>
       <div className="App" >
+        {/* Navbar */}
         <Navbar />
         
+        {/* Navigation Routes */}
         <Switch>
-
           <Route path="/" exact>
             <Home />
           </Route>
