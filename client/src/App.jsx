@@ -7,7 +7,8 @@ import {
   Link
 } from "react-router-dom";
 import Home from "./components/Home/Home";
-import PlaylistsList from "./components/PlaylistsList/PlaylistsList";
+import PlaylistsList from "./components/Game/PlaylistsList/PlaylistsList";
+import Lobby from "./components/Lobby/Lobby";
 import Game from "./components/Game/Game";
 
 function App () {
@@ -38,12 +39,13 @@ function App () {
           <Route path="/playlists" exact>
             <PlaylistsList />
           </Route>
+          <Route path="/lobby" exact>
+            <Lobby />
+          </Route>
           <Route path="/game" exact>
             <Game />
           </Route>
         </Switch>
-
-        <ul> {userList} </ul>
       </div >
     </Router>
 
