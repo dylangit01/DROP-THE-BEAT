@@ -15,7 +15,6 @@ const getPlaylistsByUsers = (usersPlaylists) => {
       name: playlist.playlist_name,
       image: playlist.image_url,
       rating: playlist.rating,
-      songs: [],
     });
   }
 
