@@ -7,7 +7,7 @@
 
   .headphones-img {
     width: 65vmin;
-    opacity: 75%;
+    opacity: 60%;
     animation: 1.5s ease 0s infinite beat;
   }
 
@@ -24,12 +24,10 @@
   50%,
   100% {
     transform: scale(1, 1);
+    opacity: 90%;
   }
   30%,
   80% {
     transform: scale(0.92, 0.95);
-  }
-  100% {
-    transform: scale(1, 1);
   }
 }
