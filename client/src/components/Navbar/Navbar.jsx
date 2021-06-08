@@ -32,7 +32,7 @@ export default function Navbar() {
 
   return (
     <div className={classes.root}>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <div className="mainNavbarGroup">
               {/* Left Navbar Group */}
