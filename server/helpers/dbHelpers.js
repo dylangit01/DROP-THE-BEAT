@@ -52,7 +52,7 @@ module.exports = (db) => {
 
   const getPlaylistsSongs = (userId) => {
     const query = {
-      text: `SELECT playlists.id as playlist_id, playlists.name as playlists_name, image_url, rating, songs.id as song_id, songs.*
+      text: `SELECT playlists.id as playlist_id, playlists.name as playlist_name, image_url, rating, songs.id as song_id, songs.*
         FROM playlists 
         JOIN playlists_songs ON playlists.id = playlist_id 
         JOIN songs ON song_id = songs.id 
