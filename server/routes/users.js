@@ -1,17 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {
-  getPlaylistsByUsers,
-  getSongsByPlaylists,
-} = require('../helpers/dataHelpers');
+// const {
+//   getPlaylistsByUsers,
+//   getSongsByPlaylists,
+// } = require('../helpers/dataHelpers');
 
-module.exports = ({
-  getUsers,
-  getUserByEmail,
-  addUser,
-  getUsersPlaylists,
-  getPlaylistsSongs,
-}) => {
+module.exports = ({ getUsers, getUserByEmail, addUser }) => {
   /* GET users listing. */
   router.get('/', (req, res) => {
     getUsers()
@@ -44,36 +38,36 @@ module.exports = ({
       );
   });
 
-  /* GET playlists for a user */
-  router.get('/:id/playlists', (req, res) => {
-    // Currently this gets all the playlists for user 1 hardcoded
-    getUsersPlaylists(1)
-      .then((usersPlaylists) => {
-        const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
-        res.json(formattedPlaylists);
-      })
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-  });
+  // /* GET playlists for a user */
+  // router.get('/:id/playlists', (req, res) => {
+  //   // Currently this gets all the playlists for user 1 hardcoded
+  //   getUsersPlaylists(1)
+  //     .then((usersPlaylists) => {
+  //       const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
+  //       res.json(formattedPlaylists);
+  //     })
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
 
-  /* GET songs for a user */
-  router.get('/:id/songs', (req, res) => {
-    // Currently this gets all the songs for user 1 hardcoded
-    getPlaylistsSongs(1)
-      .then((playlistsSongs) => {
-        console.log(playlistsSongs);
-        const formattedSongs = getSongsByPlaylists(playlistsSongs);
-        res.json(formattedSongs);
-      })
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
-  });
+  // /* GET songs for a user */
+  // router.get('/:id/songs', (req, res) => {
+  //   // Currently this gets all the songs for user 1 hardcoded
+  //   getPlaylistsSongs(1)
+  //     .then((playlistsSongs) => {
+  //       console.log(playlistsSongs);
+  //       const formattedSongs = getSongsByPlaylists(playlistsSongs);
+  //       res.json(formattedSongs);
+  //     })
+  //     .catch((err) =>
+  //       res.json({
+  //         error: err.message,
+  //       })
+  //     );
+  // });
 
   return router;
 };

@@ -66,41 +66,11 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getSongs = (userId) => {
-    const query = {
-      text: `SELECT playlists.id as playlist_id, playlists.name as playlists_name, image_url, rating, songs.id as song_id, songs.*
-        FROM playlists 
-        JOIN playlists_songs ON playlists.id = playlist_id 
-        JOIN songs ON song_id = songs.id 
-        WHERE user_id = $1`,
-      values: [userId],
-    };
-
-    return db
-      .query(query)
-      .then((result) => result.rows)
-      .catch((err) => err);
-  };
-
-  const getPlaylists = (userId) => {
-    const query = {
-      text: `SELECT * FROM playlists WHERE user_id = $1`,
-      values: [userId],
-    };
-
-    return db
-      .query(query)
-      .then((result) => result.rows)
-      .catch((err) => err);
-  };
-
   return {
     getUsers,
     getUserByEmail,
     addUser,
     getUsersPlaylists,
     getPlaylistsSongs,
-    getPlaylists,
-    getSongs,
   };
 };
