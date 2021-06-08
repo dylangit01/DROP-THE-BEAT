@@ -5,10 +5,10 @@ export default function PlaylistItem(props) {
   return (
     <div className="playlist">
       <p>
-        Playlist name: {props.name}
+        Playlist name: {props.id}
         <br />
       </p>
-      <img src={props.image}></img>
+      <img src={props.playlistPhoto}></img>
     </div>
   )
 }

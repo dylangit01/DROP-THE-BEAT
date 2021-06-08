@@ -5,9 +5,10 @@ import './PlaylistsList.scss';
 export default function PlaylistsList(props) {
 
   const playlist = props.playlists.map((playlist) => {
-    return <PlaylistsItem key={playlist.id}
-            name={playlist.name}
-            image={playlist.imageURL}>
+    return <PlaylistsItem
+              key={playlist.id}
+              name={playlist.playlistName}
+              image={playlist.playlistPhoto}>
            </PlaylistsItem>
   })
 
