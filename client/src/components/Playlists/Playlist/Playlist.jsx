@@ -13,7 +13,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 // import Button from '@material-ui/core/Button';
 // import Rating from '@material-ui/core/Rating'; // HAVE TO INSTALL SOMETHING ELSE FOR RATING - leave as stretch
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 
 export default function Playlist({id, name, image, rating}) {
   const useStyles = makeStyles((theme) => ({
