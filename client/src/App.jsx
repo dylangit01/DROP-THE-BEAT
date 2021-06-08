@@ -12,7 +12,7 @@ import useApplicationData from './hooks/useApplicationData';
 // Components
 import Home from "./components/Home/Home";
 import PlaylistsList from "./components/Game/PlaylistsList/PlaylistsList";
-import Lobby from "./components/Lobby/Lobby";
+import Join from "./components/Join/Join";
 import Game from "./components/Game/Game";
 
 function App () {
@@ -39,7 +39,7 @@ function App () {
             <PlaylistsList />
           </Route>
           <Route path="/lobby" exact>
-            <Lobby />
+            <Join />
           </Route>
           <Route path="/game" exact>
             <Game />

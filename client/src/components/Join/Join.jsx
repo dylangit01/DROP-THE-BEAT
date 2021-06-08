@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Lobby.scss';
+import './Join.scss';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,14 +8,14 @@ import {
 } from "react-router-dom";
 import Game from "../Game/Game";
 
-export default function Lobby() {
+export default function Join() {
 
   const [name, setName] = useState("");
   const [emoji, setEmoji] = useState("");
 
   return (
     <div className="lobby">
-      <h1>Lobby and players form is here</h1>
+      <h1>Join and players form is here</h1>
       <form>
         <label for="name"> Enter your name:
           <input 
