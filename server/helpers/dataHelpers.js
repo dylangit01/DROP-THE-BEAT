@@ -33,12 +33,12 @@ const getSongsByPlaylists = (usersSongs) => {
     }
 
     songsByPlaylists[song.playlist_id].songs.push({
-      userId: song.user_id,
+      id: song.id,
       title: song.title,
       artist: song.artist,
       spotifyId: song.spotify_id,
       albumPhoto: song.album_photo,
-      previewUrl: song.previewUrl,
+      previewUrl: song.preview_url,
     });
   }
 
