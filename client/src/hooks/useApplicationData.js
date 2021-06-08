@@ -8,6 +8,7 @@ const useApplicationData = () => {
     playlists: [],
     loading: true,
   });
+
   useEffect(() => {
     axios({ method: 'GET', url: '/api/songs' })
       .then(({ data }) => {
@@ -15,19 +16,6 @@ const useApplicationData = () => {
         dispatch({ type: SET_PLAYLISTS, playlists: data });
       })
       .catch((err) => console.log(err));
-
-    // axios({
-    //   method: 'GET',
-    //   url: '/api/users',
-    // })
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     dispatch({
-    //       type: SET_USERS,
-    //       users: data,
-    //     });
-    //   })
-    //   .catch((err) => console.log(err));
   }, []);
 
   return {
