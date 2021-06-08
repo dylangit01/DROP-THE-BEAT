@@ -31,7 +31,7 @@ export default function Playlists({playlists}) {
 
   return (
     <div className="playlists">
-      <h1>Playlists Page</h1>
+      <h1>Select a Playlist!</h1>
       <Grid
         container
         spacing={4}
