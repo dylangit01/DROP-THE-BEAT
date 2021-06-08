@@ -8,7 +8,7 @@ import {
 import './Game.scss';
 import Chat from "./Chat/Chat";
 import Score from "./Score/Score";
-import Player from "./Player/Player";
+import MusicPlayer from "./MusicPlayer/MusicPlayer";
 import TrackList from "./TrackList/TrackList";
 
 
@@ -36,7 +36,7 @@ export default function Game() {
       <h1>I am a Game page</h1>
       <Chat />
       <Score />
-      <Player 
+      <MusicPlayer 
         playlists={playlists}
       />
       <TrackList />

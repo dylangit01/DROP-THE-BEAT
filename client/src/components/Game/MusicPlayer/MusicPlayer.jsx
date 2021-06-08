@@ -1,10 +1,10 @@
 import React from 'react';
-import './Player.scss';
+import './MusicPlayer.scss';
 import PlaylistsList from "../PlaylistsList/PlaylistsList"
 
 export default function Player(props) {
   return (
-    <div className="player">
+    <div className="music-player">
       <h6>Music player is here</h6>
       <PlaylistsList 
         playlists={props.playlists}
