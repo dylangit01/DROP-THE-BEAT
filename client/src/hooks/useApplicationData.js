@@ -11,10 +11,7 @@ const useApplicationData = () => {
   });
   useEffect(() => {
     // Get all playlists and songs for a user (hard-coded)
-    Promise.all([
-      axios.get('/api/users/1/playlists'),
-      axios.get('/api/users/1/songs'),
-    ])
+    Promise.all([axios.get('/api/playlists'), axios.get('/api/songs')])
       .then((all) => {
         const [playlistsResponse, songsResponse] = all;
         const playlistsData = playlistsResponse.data;
