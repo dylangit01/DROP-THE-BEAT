@@ -10,6 +10,8 @@ import {
 import useApplicationData from './hooks/useApplicationData';
 
 // Components
+import Navbar from "./components/Navbar/Navbar";
+
 import Home from "./components/Home/Home";
 import Playlists from "./components/Playlists/Playlists";
 import PlaylistPage from "./components/PlaylistPage/PlaylistPage";
@@ -26,11 +28,7 @@ function App () {
     <Router>
       <div className="App" >
         {/* Navbar */}
-        <nav>
-          <Link to="/"> Home </Link>
-          <Link to="/playlists"> My playlists </Link>
-          <Link to="/game"> My game </Link>
-        </nav>
+        <Navbar />
         
         {/* Navigation Views */}
         <Switch>
