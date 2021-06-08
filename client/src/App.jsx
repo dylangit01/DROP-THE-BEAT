@@ -1,11 +1,20 @@
 import './App.css';
-import useApplicationData from './hooks/useApplicationData';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
+// Hooks
+import useApplicationData from './hooks/useApplicationData';
+
+// Helpers
+import {
+  getSongsForPlaylists,
+} from './helpers/selectors';
+
+// Components
 import Home from "./components/Home/Home";
 import PlaylistsList from "./components/Game/PlaylistsList/PlaylistsList";
 import Lobby from "./components/Lobby/Lobby";
@@ -13,12 +22,11 @@ import Game from "./components/Game/Game";
 
 function App () {
 
-  const {
-        state,
-        dispatch
-    } = useApplicationData();
-      const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
-  ));
+  const { state, dispatch } = useApplicationData();
+  
+  const songsForPlaylists = getSongsForPlaylists(state.playlists, state.songs);
+
+  const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
 
 
 

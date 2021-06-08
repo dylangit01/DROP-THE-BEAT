@@ -12,6 +12,7 @@ const getPlaylistsByUsers = (usersPlaylists) => {
     }
 
     playlistsByUsers[playlist.user_id].playlists.push({
+      id: playlist.playlist_id,
       name: playlist.playlist_name,
       image: playlist.image_url,
       rating: playlist.rating,
