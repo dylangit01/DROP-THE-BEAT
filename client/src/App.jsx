@@ -11,7 +11,7 @@ import useApplicationData from './hooks/useApplicationData';
 
 // Components
 import Home from "./components/Home/Home";
-import PlaylistsList from "./components/Game/PlaylistsList/PlaylistsList";
+import Playlists from "./components/Playlists/Playlists";
 import Join from "./components/Join/Join";
 import Game from "./components/Game/Game";
 
@@ -37,13 +37,13 @@ function App () {
           </Route>
 
           <Route path="/playlists" exact>
-            <PlaylistsList />
+            <Playlists/>
           </Route>
 
-          <Route path="/lobby" exact>
+          <Route path="/join" exact>
             <Join />
           </Route>
-          
+
           <Route path="/game" exact>
             <Game />
           </Route>
