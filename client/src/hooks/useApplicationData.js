@@ -5,27 +5,38 @@ import axios from 'axios';
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
     users: [],
-    songs: [],
     playlists: [],
     loading: true,
   });
   useEffect(() => {
     // Get all playlists and songs for a user (hard-coded)
-    Promise.all([axios.get('/api/playlists'), axios.get('/api/songs')])
-      .then((all) => {
-        const [playlistsResponse, songsResponse] = all;
-        const playlistsData = playlistsResponse.data;
-        const songsData = songsResponse.data;
+    // Promise.all([axios.get('/api/playlists'), axios.get('/api/songs')])
+    //   .then((all) => {
+    //     const [playlistsResponse, songsResponse] = all;
+    //     const playlistsData = playlistsResponse.data;
+    //     const songsData = songsResponse.data;
 
-        // console.log(playlistsData);
-        // console.log(songsData);
+    //     // console.log(playlistsData);
+    //     // console.log(songsData);
 
-        dispatch({ type: SET_PLAYLISTS, playlists: playlistsData });
-        dispatch({ type: SET_SONGS, songs: songsData });
+    //     dispatch({ type: SET_PLAYLISTS, playlists: playlistsData });
+    //     dispatch({ type: SET_SONGS, songs: songsData });
+    //   })
+    //   .catch((error) => {
+    //     console.log('Error: ', error);
+    //   });
+    axios({
+      method: 'GET',
+      url: '/api/songs',
+    })
+      .then(({ data }) => {
+        console.log(data);
+        dispatch({
+          type: SET_PLAYLISTS,
+          playlists: data,
+        });
       })
-      .catch((error) => {
-        console.log('Error: ', error);
-      });
+      .catch((err) => console.log(err));
 
     // axios({
     //   method: 'GET',

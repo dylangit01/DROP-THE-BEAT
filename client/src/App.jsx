@@ -9,11 +9,6 @@ import {
 // Hooks
 import useApplicationData from './hooks/useApplicationData';
 
-// Helpers
-import {
-  getSongsForPlaylists,
-} from './helpers/selectors';
-
 // Components
 import Home from "./components/Home/Home";
 import PlaylistsList from "./components/Game/PlaylistsList/PlaylistsList";
@@ -24,11 +19,7 @@ function App () {
 
   const { state, dispatch } = useApplicationData();
   
-  const songsForPlaylists = getSongsForPlaylists(state.playlists, state.songs);
-
   const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
-
-
 
   return (
     <Router>
