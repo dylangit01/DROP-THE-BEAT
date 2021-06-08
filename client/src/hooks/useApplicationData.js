@@ -10,7 +10,7 @@ const useApplicationData = () => {
   });
 
   useEffect(() => {
-    axios({ method: 'GET', url: '/api/songs' })
+    axios({ method: 'GET', url: '/api/playlists' })
       .then(({ data }) => {
         console.log(data);
         dispatch({ type: SET_PLAYLISTS, playlists: data });

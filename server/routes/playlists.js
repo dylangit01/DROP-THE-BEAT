@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { getPlaylistsByUsers } = require('../helpers/dataHelpers');
+const { getSongsByPlaylists } = require('../helpers/dataHelpers');
 
-module.exports = ({ getUsersPlaylists }) => {
+module.exports = ({ getPlaylistsSongs }) => {
   router.get('/', (req, res) => {
-    // Currently this gets all the playlists for user 1 hardcoded
-    getUsersPlaylists(1)
-      .then((usersPlaylists) => {
-        const formattedPlaylists = getPlaylistsByUsers(usersPlaylists);
-        res.json(formattedPlaylists);
+    // Currently this gets all the songs for user 1 hardcoded
+    getPlaylistsSongs(1)
+      .then((playlistsSongs) => {
+        console.log(playlistsSongs);
+        const formattedSongs = getSongsByPlaylists(playlistsSongs);
+        res.json(formattedSongs);
       })
       .catch((err) =>
         res.json({
