@@ -15,33 +15,34 @@ import Typography from '@material-ui/core/Typography';
 // import Rating from '@material-ui/core/Rating'; // HAVE TO INSTALL SOMETHING ELSE FOR RATING - leave as stretch
 // import Box from '@material-ui/core/Box';
 
-export default function Playlist({id, name, image, rating}) {
-  const useStyles = makeStyles((theme) => ({
-    cover: {
-      height: 200,
-      width: 200
-    },
-    button: {
-      background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
-      color: "white",
-    },
-    overlay: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-end',
-      height: "100px",
-      color: 'white',
-      backgroundImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
-   },
-   playlistName: {
-    padding: theme.spacing(0.5)
-   }
-  }));
+const useStyles = makeStyles((theme) => ({
+  cover: {
+    height: 200,
+    width: 200
+  },
+  button: {
+    background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
+    color: "white",
+  },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    height: "100px",
+    color: 'white',
+    backgroundImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
+ },
+ playlistName: {
+  padding: theme.spacing(0.5)
+ }
+}));
 
+export default function Playlist({id, name, image, rating}) {
+  // Extract the current path
   const { path } = useRouteMatch();
 
   const classes = useStyles();
