@@ -6,6 +6,7 @@ export default function Playlists({playlists}) {
   const playlist = playlists.map((playlist) => {
     return <Playlist 
               key={playlist.playlistId}
+              id={playlist.playlistId}
               name={playlist.playlistName}
               image={playlist.playlistPhoto}
               rating={playlist.playlistRating}>
