@@ -29,6 +29,9 @@ const getSongsByPlaylists = (usersSongs) => {
     if (!songsByPlaylists[song.playlist_id]) {
       songsByPlaylists[song.playlist_id] = {
         playlistId: song.playlist_id,
+        playlistName: song.playlist_name,
+        playlistPhoto: song.image_url,
+        playlistRating: song.rating,
         songs: [],
       };
     }
@@ -43,7 +46,7 @@ const getSongsByPlaylists = (usersSongs) => {
     });
   }
 
-  return songsByPlaylists;
+  return Object.values(songsByPlaylists);
 };
 
 module.exports = {
