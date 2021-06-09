@@ -1,6 +1,6 @@
 import React from 'react';
 import './MusicPlayer.scss';
-import LoadingRound from './LoadingRound/LoadingRound';
+// import LoadingRound from './LoadingRound/LoadingRound';
 import RoundUnknown from './RoundUnknown/RoundUnknown';
 import RoundKnown from './RoundKnown/RoundKnown';
 
@@ -18,7 +18,7 @@ export default function MusicPlayer({ playlist }) {
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
       {/* When the current round for a song has just started - this is stretch */}
-      {!roundStart && <LoadingRound />}
+      {/* {!roundStart && <LoadingRound />} */}
 
       {/* When the current song is unknown (hasn't been guessed) */}
       {roundStart && !roundEnd && <RoundUnknown />}

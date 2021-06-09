@@ -22,6 +22,10 @@ export default function Game({playlist}) {
   const numberOfRounds = playlist ? playlist.songs.length : 0;
   console.log("Number of rounds", numberOfRounds);
 
+  if (round > numberOfRounds) {
+    setIsFinished(true);
+  }
+
   return (
     <div className="game">
       <h1>I am a Game page</h1>
@@ -33,7 +37,7 @@ export default function Game({playlist}) {
         <>
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
-          <MusicPlayer playlist={playlist}/>
+          <MusicPlayer playlist={playlist} round={round} setRound ={setRound}/>
           <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
         </>
       )}
