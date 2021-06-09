@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import './Game.scss';
 
@@ -11,7 +11,6 @@ import Result from "./Result/Result";
 
 
 export default function Game({playlist}) {
-
   const [isActive, setIsActive] = useState(false);
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
