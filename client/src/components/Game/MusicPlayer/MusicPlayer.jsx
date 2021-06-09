@@ -8,7 +8,9 @@ import RoundKnown from './RoundKnown/RoundKnown';
 const roundStart = true;
 const roundEnd = true;
 
-export default function MusicPlayer({ playlists }) {
+export default function MusicPlayer({ playlist }) {
+  console.log("playlist in music player", playlist);
+
   return (
     <div className="music-player">
       <h2>Music player is here</h2>

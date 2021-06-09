@@ -22,6 +22,10 @@ function App () {
   const { state, dispatch } = useApplicationData();
   // const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
 
+  // Get currently selected playlist
+  const currentPlaylist = state.playlists.find(playlist => playlist.playlistId === state.playlist);
+  console.log(currentPlaylist);
+
   return (
     <Router>
       <div className="App" >
@@ -47,7 +51,7 @@ function App () {
           </Route>
 
           <Route path="/game" exact>
-            <Game playlists={state.playlists} />
+            <Game playlist={currentPlaylist} />
           </Route>
 
           <Route path="*">

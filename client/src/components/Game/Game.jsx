@@ -10,13 +10,17 @@ import TrackList from "./TrackList/TrackList";
 import Result from "./Result/Result"; 
 
 
-export default function Game({playlists, name, emoji}) {
+export default function Game({playlist}) {
 
   const [isActive, setIsActive] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);
+
+  // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
+  const numberOfRounds = playlist.songs.length;
+  console.log("Number of rounds", numberOfRounds);
 
   return (
     <div className="game">
@@ -28,7 +32,7 @@ export default function Game({playlists, name, emoji}) {
         <>
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
-          <MusicPlayer playlists={playlists}/>
+          <MusicPlayer playlist={playlist}/>
           <TrackList setRound={setRound} isFinished={isFinished}/>
         </>
       )}
