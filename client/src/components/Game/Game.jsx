@@ -17,6 +17,7 @@ export default function Game({playlist}) {
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);
+  const [currentSong, setCurrentSong] = useState(0) //can be song index when it is mapping through aray one by one
 
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const numberOfRounds = playlist ? playlist.songs.length : 0;
@@ -38,7 +39,7 @@ export default function Game({playlist}) {
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
           <MusicPlayer playlist={playlist} round={round} setRound ={setRound}/>
-          <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
+          <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs} setCurrentSong={setCurrentSong}/>
         </>
       )}
 
