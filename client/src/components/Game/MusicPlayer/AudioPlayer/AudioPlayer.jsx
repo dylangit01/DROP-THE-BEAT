@@ -3,7 +3,7 @@ import React from 'react';
 // Styling
 import './AudioPlayer.scss';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Button from '@material-ui/core/Button';
 
@@ -28,7 +28,7 @@ export default function AudioPlayer({song, nextRound}) {
       {/* Audio plays automatically on load, remove controls*/}
       <audio
         autoPlay
-        controls
+        // controls
         src={song.previewUrl}>
       </audio>
 
