@@ -14,7 +14,6 @@ export default function MusicPlayer({ song, nextRound, roundStatus }) {
 
   return (
     <div className="music-player">
-      <h2>Music player is here</h2>
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
