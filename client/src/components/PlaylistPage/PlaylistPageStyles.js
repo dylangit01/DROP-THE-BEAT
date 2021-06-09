@@ -7,6 +7,10 @@ export default makeStyles((theme) => ({
   cover: {
     height: 400,
     width: 400,
+    backgroundColor: 'transparent',
   },
+  card: {
+    marginTop:100,
+  }
 }))
 
