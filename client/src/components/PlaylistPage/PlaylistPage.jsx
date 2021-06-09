@@ -1,5 +1,7 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { SET_PLAYLIST } from '../../reducer/data_reducer';
+
 
 // Styling
 import './PlaylistPage.scss';
@@ -18,12 +20,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({playlists}) {
+
+export default function PlaylistPage({playlists, dispatch}) {
   const classes = useStyles();
+  const history = useHistory();
 
   const { id } = useParams();
-  const playlist = playlists.find(playlist => playlist.playlistId == id); // How to fix this to ===?
+  const idNum = Number(id);
+  const playlist = playlists.find(playlist => playlist.playlistId === idNum); // How to fix this to ===?
 
+  const handleClick = () => {
+    dispatch({ type: SET_PLAYLIST, playlist: idNum });
+    history.push(`/game`);
+  }
   // map through the songs 
 
   return (
@@ -45,7 +54,8 @@ export default function PlaylistPage({playlists}) {
           <p>Difficulty:</p>
           <p>Songs:</p>
           <p>Code:</p>
-          <Link to="/game">Start game</Link>
+          {/* <Link to="/game">Start game</Link> */}
+          <button onClick={handleClick}>START GAME - UPDATE STATE WITH PLAYLIST ID</button>
         </div>
       )}
     </>
