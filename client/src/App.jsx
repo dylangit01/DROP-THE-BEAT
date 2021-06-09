@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 // Hooks
@@ -21,15 +20,16 @@ import Game from "./components/Game/Game";
 function App () {
 
   const { state, dispatch } = useApplicationData();
-  const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
+  // const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
 
   return (
     <Router>
       <div className="App" >
+        {/* Navbar */}
         <Navbar />
         
+        {/* Navigation Routes */}
         <Switch>
-
           <Route path="/" exact>
             <Home />
           </Route>

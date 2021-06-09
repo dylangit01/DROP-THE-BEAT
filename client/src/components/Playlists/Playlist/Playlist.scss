@@ -1,4 +1,11 @@
-.album-cover {
-  max-width: 100px;
-  height: auto;
+.playlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .playlist-footer {
+    margin-top: 1rem;
+    width: 200px;
+  }
 }
