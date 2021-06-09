@@ -4,7 +4,7 @@ import { SET_PLAYLIST } from '../../reducer/data_reducer';
 
 // Styling
 import './PlaylistPage.scss';
-import { Typography, Card, CardMedia } from '@material-ui/core'
+import { Typography, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core'
 import useStyles from './PlaylistPageStyles'
 
 // Need a handleClick function that will store the current playlist ID in the state
@@ -24,7 +24,8 @@ export default function PlaylistPage({ playlists, dispatch }) {
   // map through the songs 
 
   return (
-    <> 
+    <>
+      <CssBaseline />
       {playlist && (
         <div className="playlist-page">
           <Typography variant="h3">{playlist.playlistName}</Typography>
