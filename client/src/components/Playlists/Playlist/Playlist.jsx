@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 // Styling
 import './Playlist.scss';
@@ -41,16 +41,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Playlist({id, name, image, rating}) {
   // Extract the current path
-  // history
-  const history = useHistory();
   const { path } = useRouteMatch();
 
   const classes = useStyles();
 
-  const handleClick = () => {
-    // Add logic to store current id in the state before redirecting
-    history.push(`${path}/${id}`);
-  }
+
 
   return (
     <div className="playlist">
@@ -70,7 +65,7 @@ export default function Playlist({id, name, image, rating}) {
         </Link>
       </Card>
       <div className="playlist-footer">
-        <Button className={classes.button} onClick={handleClick}>
+        <Button className={classes.button}>
           <Link to={`${path}/${id}`}>Select</Link>
         </Button>
         {/* <Box component="fieldset" mb={3} borderColor="transparent">
