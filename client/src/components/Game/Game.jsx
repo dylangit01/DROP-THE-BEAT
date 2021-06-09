@@ -19,7 +19,7 @@ export default function Game({playlist}) {
   const [round, setRound] = useState(0);
 
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
-  const numberOfRounds = playlist ? playlist.songs.length : 0;
+  const numberOfRounds = playlist.songs.length;
   console.log("Number of rounds", numberOfRounds);
 
   if (round > numberOfRounds) {
