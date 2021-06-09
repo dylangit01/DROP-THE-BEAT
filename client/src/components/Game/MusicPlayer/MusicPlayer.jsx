@@ -25,7 +25,7 @@ export default function MusicPlayer({ song, nextRound }) {
       {roundStart && !roundEnd && <RoundUnknown />}
 
       {/* When a song has been guessed correctly or it's the end of the round */}
-      {roundEnd && <RoundKnown />}
+      {roundEnd && <RoundKnown song={song}/>}
 
       {/* Audio playing music here and the next song button */}
       <AudioPlayer song={song} nextRound={nextRound}/>

@@ -3,10 +3,8 @@ import React, { useMemo, useState } from 'react';
 import './Game.scss';
 
 import Lobby from "./Lobby/Lobby";
-import Chat from "./Chat/Chat";
-import Score from "./Score/Score";
-import MusicPlayer from "./MusicPlayer/MusicPlayer";
-import TrackList from "./TrackList/TrackList";
+import GameInProgress from "./GameInProgress/GameInProgress";
+
 import Result from "./Result/Result"; 
 
 
@@ -24,6 +22,7 @@ export default function Game({playlist}) {
   const isFinished = useMemo(() => {
     // Last round
     if (round === numberOfRounds) {
+      // check highest score for winner and set winner
       return true;
     }
 
@@ -43,19 +42,21 @@ export default function Game({playlist}) {
 
   return (
     <div className="game">
-      <h1>{playlist.playlistName} Playlist</h1>
+      <h2>{playlist.playlistName} Playlist</h2>
 
       {!isActive && <Lobby setIsActive={setIsActive} />}
 
       {/* Might want to make a GameInProgress component that has all these 4 components */}
-      {isActive && !isFinished && (
-        <>
-          <Chat />
-          <Score setScore={setScore} setWinner={setWinner}/>
-          <MusicPlayer playlist={playlist} song={songs[round]} nextRound={() => nextRound()}/>
-          <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
-        </>
-      )}
+      {isActive && !isFinished &&
+        <GameInProgress 
+          setScore={setScore}
+          setWinner={setWinner}
+          setPlaylist={playlist}
+          nextRound={nextRound}
+          playlist={playlist}
+          song={songs[round]}
+        />
+      }
 
       {isFinished && <Result score={score} winner={winner} />}
 

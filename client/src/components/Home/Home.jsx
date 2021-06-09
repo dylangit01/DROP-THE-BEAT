@@ -32,7 +32,6 @@ export default function Home() {
             <Button variant="contained" className={classes.button} endIcon={<ExitToAppOutlinedIcon />}><Link to="/join">Join A Game</Link></Button>
           </div>
         </div>
-
     </div>
   );
 };
