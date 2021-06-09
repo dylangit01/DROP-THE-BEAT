@@ -41,11 +41,11 @@ export default function Game({playlist}) {
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
-      console.log("initialized");
+      console.log("Socket io connection initialized");
 
       // On start game
       conn.on('START_GAME', (msg) => {
-        console.log(msg);
+        console.log('msg received from the server on START_GAME: ', msg);
         setIsActive(true);
         setCurrentSong(msg.song);
       })
@@ -63,7 +63,7 @@ export default function Game({playlist}) {
 
   // SEND MSG TO SERVER
   const sendMessage = (type, msg) => {
-    console.log(msg);
+    console.log('Msg sent to backend: ', msg);
     conn.emit(type, msg);
   };
 

@@ -6,7 +6,7 @@ export default function Lobby({setIsActive, sendMessage, songs}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // setIsActive(true);
-    console.log("inside handleSubmit");
+    console.log("'START_GAME' and list of songs are sent to backend");
     
     sendMessage('START_GAME', {songs});
   }
