@@ -15,10 +15,14 @@ export default function MusicPlayer({ playlists }) {
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
+      {/* When the current round for a song has just started - this is stretch */}
       {!roundStart && <LoadingRound />}
+
+      {/* When the current song is unknown (hasn't been guessed) */}
       {roundStart && !roundEnd && <RoundUnknown />}
+
+      {/* When a song has been guessed correctly or it's the end of the round */}
       {roundEnd && <RoundKnown />}
-      
 
       {/* Audio playing music here and the next song button */}
       <div className="music-player-footer">
