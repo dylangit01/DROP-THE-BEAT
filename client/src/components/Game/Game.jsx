@@ -20,7 +20,7 @@ export default function Game({playlist}) {
 
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const numberOfRounds = playlist.songs.length;
-  console.log("Number of rounds", numberOfRounds);
+  const songs = playlist.songs;
 
   if (round > numberOfRounds) {
     setIsFinished(true);
@@ -28,7 +28,7 @@ export default function Game({playlist}) {
 
   return (
     <div className="game">
-      <h1>I am a Game page</h1>
+      <h1>{playlist.playlistName} Playlist</h1>
 
       {!isActive && <Lobby setIsActive={setIsActive} />}
 
@@ -37,7 +37,7 @@ export default function Game({playlist}) {
         <>
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
-          <MusicPlayer playlist={playlist} round={round} setRound ={setRound}/>
+          <MusicPlayer playlist={playlist} song={songs[round]} setRound={setRound}/>
           <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
         </>
       )}

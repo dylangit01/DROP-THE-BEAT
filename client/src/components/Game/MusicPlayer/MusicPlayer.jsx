@@ -9,8 +9,8 @@ import AudioPlayer from './AudioPlayer/AudioPlayer';
 const roundStart = true;
 const roundEnd = true;
 
-export default function MusicPlayer({ playlist }) {
-  console.log("playlist in music player", playlist);
+export default function MusicPlayer({ song, setRound }) {
+  console.log("song in music player", song);
 
   return (
     <div className="music-player">
@@ -28,7 +28,7 @@ export default function MusicPlayer({ playlist }) {
       {roundEnd && <RoundKnown />}
 
       {/* Audio playing music here and the next song button */}
-      <AudioPlayer />
+      <AudioPlayer song={song} setRound={setRound}/>
 
     </div>
   );
