@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import './Game.scss';
 
@@ -13,18 +13,38 @@ import Result from "./Result/Result";
 export default function Game({playlist}) {
 
   const [isActive, setIsActive] = useState(false);
-  const [isFinished, setIsFinished] = useState(false);
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);
-
+  
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const numberOfRounds = playlist.songs.length;
   const songs = playlist.songs;
+  
+  // isFinished is not state but computed based on state (similar to useEffect but it returns a value)
+  const isFinished = useMemo(() => {
+    if (round === numberOfRounds) {
+      console.log("LAST ROUND");
+      return true;
+    }
 
-  if (round === numberOfRounds) {
-    setIsFinished(true);
-  }
+    return false;
+  }, [numberOfRounds, round]);
+
+
+  // useEffect(() => {
+  //   if (round === numberOfRounds) {
+  //     console.log("LAST ROUND");
+  //   }
+  // }, [numberOfRounds, round]);
+
+
+  console.log("Round:", round);
+  console.log("Game Finished", isFinished);
+
+  const handleClick = () => {
+    setRound(prev => prev + 1);
+  };
 
   return (
     <div className="game">
@@ -37,7 +57,7 @@ export default function Game({playlist}) {
         <>
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
-          <MusicPlayer playlist={playlist} song={songs[round]} setRound={setRound}/>
+          <MusicPlayer playlist={playlist} song={songs[round]} nextRound={() => handleClick()}/>
           <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
         </>
       )}

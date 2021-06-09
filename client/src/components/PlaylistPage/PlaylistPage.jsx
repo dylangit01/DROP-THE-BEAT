@@ -41,14 +41,14 @@ export default function PlaylistPage({playlists, dispatch}) {
         <div className="playlist-page">
           <Typography variant="h3">{playlist.playlistName}</Typography>
 
-          <Card className={classes.root}>
+          {/* <Card className={classes.root}>
             
             <CardMedia
               className={classes.cover}
               image={playlist.playlistPhoto}
               title={playlist.playlistName}
             />
-          </Card>
+          </Card> */}
 
           <img className="album-cover" src={playlist.playlistPhoto} alt="cover"></img>
           <p>Difficulty:</p>

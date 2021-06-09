@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AudioPlayer({song, setRound}) {
+export default function AudioPlayer({song, nextRound}) {
   const classes = useStyles();
 
   return (
@@ -23,7 +23,7 @@ export default function AudioPlayer({song, setRound}) {
         controls
         src={song.previewUrl}>
       </audio>
-      <IconButton aria-label="delete" className={classes.margin} >
+      <IconButton aria-label="next-song" className={classes.margin} onClick={nextRound}>
           <PlayCircleFilledIcon fontSize="large" />
       </IconButton>
     </div>
