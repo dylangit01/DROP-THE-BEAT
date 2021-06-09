@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
     width: 400
   }
 }));
-
+// Need a handleClick function that will store the current playlist ID in the state
 
 export default function PlaylistPage({playlists}) {
   const classes = useStyles();
 
   const { id } = useParams();
-  const playlist = playlists.find(playlist => playlist.playlistId == id);
+  const playlist = playlists.find(playlist => playlist.playlistId == id); // How to fix this to ===?
 
   // map through the songs 
 

@@ -5,6 +5,7 @@ import axios from 'axios';
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
     users: [],
+    playlist: null,
     playlists: [],
     loading: true,
   });
@@ -23,6 +24,5 @@ const useApplicationData = () => {
     dispatch,
   };
 };
-
 
 export default useApplicationData;
