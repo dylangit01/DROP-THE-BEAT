@@ -28,6 +28,7 @@ export default function Game({playlist}) {
 
       {!isActive && <Lobby setIsActive={setIsActive} />}
 
+      {/* Might want to make a GameInProgress component that has all these 4 components */}
       {isActive && !isFinished && (
         <>
           <Chat />
