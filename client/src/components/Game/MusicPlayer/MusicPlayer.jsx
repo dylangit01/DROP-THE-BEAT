@@ -3,6 +3,7 @@ import './MusicPlayer.scss';
 // import LoadingRound from './LoadingRound/LoadingRound';
 import RoundUnknown from './RoundUnknown/RoundUnknown';
 import RoundKnown from './RoundKnown/RoundKnown';
+import AudioPlayer from './AudioPlayer/AudioPlayer';
 
 // Hard-coded data for now
 const roundStart = true;
@@ -27,10 +28,8 @@ export default function MusicPlayer({ playlist }) {
       {roundEnd && <RoundKnown />}
 
       {/* Audio playing music here and the next song button */}
-      <div className="music-player-footer">
-        <h6>Audio bar with next song button is here</h6>
-        <button>Next</button>
-      </div>
+      <AudioPlayer />
+
     </div>
   );
 }
