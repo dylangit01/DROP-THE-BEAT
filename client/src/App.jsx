@@ -47,7 +47,7 @@ function App () {
           </Route>
 
           <Route path="/game" exact>
-            <Game playlists={state.playlists} />
+            <Game playlists={state.playlists} isActive={false} isFinished={false} />
           </Route>
 
           <Route path="*">
