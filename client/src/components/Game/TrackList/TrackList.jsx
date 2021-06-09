@@ -1,7 +1,8 @@
 import React from 'react';
 import './TrackList.scss';
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
 
-export default function TrackList({setRound, isFinished, songs}) {
+export default function TrackList({setCurrentSong, setRound, isFinished, songs}) {
 
   // setRound(10)
   const round = 10;
@@ -9,11 +10,35 @@ export default function TrackList({setRound, isFinished, songs}) {
     isFinished =true
   }
 
-  console.log(songs);
+  const albumCovers = songs.map((song) => {
+
+    // get song's index
+    const index = songs.indexOf(song);
+    const currentSong = 3;
+
+    const isCurrent = () => {
+      if (index === currentSong) {
+        return "tracklist-album-cover--current"
+      } else if (index > currentSong) {
+        return "tracklist-album-cover--next"
+      } else {
+        return "tracklist-album-cover--prev"
+      }
+    }
+
+
+    return (
+      <div className={`tracklist-album-cover ${isCurrent()}`}>
+        <img src={song.albumPhoto} alt="cover"></img>
+        <HelpOutlineOutlinedIcon className="question-mark"/>
+      </div>
+    )
+  })
+
   
   return (
-    <div className="TrackList">
-      <h6>The list of track is down here</h6>
+    <div className="tracklist">
+      {albumCovers}
     </div>
-  )
+  );
 }
