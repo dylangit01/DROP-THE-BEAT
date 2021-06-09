@@ -26,10 +26,10 @@ export default function Game({playlists, name, emoji}) {
 
       {isActive && !isFinished && (
         <>
-        <Chat />
-        <Score setScore={setScore} setWinner={setWinner}/>
-        <MusicPlayer playlists={playlists}/>
-        <TrackList setRound={setRound} isFinished={isFinished}/>
+          <Chat />
+          <Score setScore={setScore} setWinner={setWinner}/>
+          <MusicPlayer playlists={playlists}/>
+          <TrackList setRound={setRound} isFinished={isFinished}/>
         </>
       )}
 
