@@ -22,7 +22,7 @@ export default function Game({playlist}) {
   const numberOfRounds = playlist.songs.length;
   const songs = playlist.songs;
 
-  if (round > numberOfRounds) {
+  if (round === numberOfRounds) {
     setIsFinished(true);
   }
 
