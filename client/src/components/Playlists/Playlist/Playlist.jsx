@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Link,
-  useRouteMatch
-} from "react-router-dom";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
 // Styling
 import './Playlist.scss';
@@ -11,7 +8,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 // import Rating from '@material-ui/core/Rating'; // HAVE TO INSTALL SOMETHING ELSE FOR RATING - leave as stretch
 // import Box from '@material-ui/core/Box';
 
@@ -23,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
     color: "white",
+    width: 200
   },
   overlay: {
     position: 'absolute',
@@ -43,14 +41,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Playlist({id, name, image, rating}) {
   // Extract the current path
+  const history = useHistory();
   const { path } = useRouteMatch();
 
   const classes = useStyles();
 
+  const handleClick = () => {
+    // Add logic to store current id in the state before redirecting
+    // dispatch SET_PLAYLIST_ID????
+    history.push(`${path}/${id}`);
+  }
+
   return (
     <div className="playlist">
       <Card className={classes.root}>
-        <Link to={`${path}/${id}`}>
+        {/* <Link to={`${path}/${id}`}> */}
           <CardActionArea>
             <CardMedia
               className={classes.cover}
@@ -62,12 +67,10 @@ export default function Playlist({id, name, image, rating}) {
             </div>
             
           </CardActionArea>
-        </Link>
+        {/* </Link> */}
       </Card>
       <div className="playlist-footer">
-        {/* <Button className={classes.button} >
-          <Link to={`${path}/${id}`}>Select</Link>
-        </Button> */}
+        <Button className={classes.button} onClick={handleClick}>Select</Button>
         {/* <Box component="fieldset" mb={3} borderColor="transparent">
           <Rating name="read-only" value={rating} readOnly />
         </Box> */}
