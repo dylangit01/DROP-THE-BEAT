@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Playlist({id, name, image, rating}) {
   // Extract the current path
+  // history
   const history = useHistory();
   const { path } = useRouteMatch();
 
@@ -48,14 +49,13 @@ export default function Playlist({id, name, image, rating}) {
 
   const handleClick = () => {
     // Add logic to store current id in the state before redirecting
-    // dispatch SET_PLAYLIST_ID????
     history.push(`${path}/${id}`);
   }
 
   return (
     <div className="playlist">
       <Card className={classes.root}>
-        {/* <Link to={`${path}/${id}`}> */}
+        <Link to={`${path}/${id}`}>
           <CardActionArea>
             <CardMedia
               className={classes.cover}
@@ -67,10 +67,12 @@ export default function Playlist({id, name, image, rating}) {
             </div>
             
           </CardActionArea>
-        {/* </Link> */}
+        </Link>
       </Card>
       <div className="playlist-footer">
-        <Button className={classes.button} onClick={handleClick}>Select</Button>
+        <Button className={classes.button} onClick={handleClick}>
+          <Link to={`${path}/${id}`}>Select</Link>
+        </Button>
         {/* <Box component="fieldset" mb={3} borderColor="transparent">
           <Rating name="read-only" value={rating} readOnly />
         </Box> */}
