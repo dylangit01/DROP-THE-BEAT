@@ -19,16 +19,15 @@ export default function Playlists({playlists}) {
 
   const playlist = playlists.map((playlist) => {
     return (
-      <Grid item xs={12} sm={6} md={3}>
-        < Playlist 
-            key={playlist.playlistId}
-            id={playlist.playlistId}
-            name={playlist.playlistName}
-            image={playlist.playlistPhoto}
-            rating={playlist.playlistRating}
-        />
-      </Grid>
-    );
+			<Grid key={playlist.playlistId} item xs={12} sm={6} md={3}>
+				<Playlist
+					id={playlist.playlistId}
+					name={playlist.playlistName}
+					image={playlist.playlistPhoto}
+					rating={playlist.playlistRating}
+				/>
+			</Grid>
+		);
   })
 
   return (
