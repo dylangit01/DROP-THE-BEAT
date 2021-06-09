@@ -5,8 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   cover: {
-    height: 400,
-    width: 400
+    height: 250,
+    width: 250
   }
 }));
 
