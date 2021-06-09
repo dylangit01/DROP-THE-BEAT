@@ -9,7 +9,7 @@ import AudioPlayer from './AudioPlayer/AudioPlayer';
 const roundStart = true;
 const roundEnd = true;
 
-export default function MusicPlayer({ song, nextRound }) {
+export default function MusicPlayer({ song, nextRound, roundStatus }) {
   // console.log("song in music player", song);
 
   return (
