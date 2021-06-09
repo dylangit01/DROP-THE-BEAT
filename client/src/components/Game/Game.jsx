@@ -33,7 +33,7 @@ export default function Game({playlist}) {
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
           <MusicPlayer playlist={playlist}/>
-          <TrackList setRound={setRound} isFinished={isFinished}/>
+          <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
         </>
       )}
 
