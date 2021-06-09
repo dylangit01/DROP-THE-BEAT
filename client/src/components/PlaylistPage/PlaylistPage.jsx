@@ -2,26 +2,14 @@ import React from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { SET_PLAYLIST } from '../../reducer/data_reducer';
 
-
 // Styling
 import './PlaylistPage.scss';
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from '@material-ui/core/Typography';
-import Card from "@material-ui/core/Card";
-import CardMedia from '@material-ui/core/CardMedia';
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width:'fit-content',
-  },
-  cover: {
-    height: 400,
-    width: 400
-  }
-}));
+import { Typography, Card, CardMedia } from '@material-ui/core'
+import useStyles from './PlaylistPageStyles'
+
 // Need a handleClick function that will store the current playlist ID in the state
 
-
-export default function PlaylistPage({playlists, dispatch}) {
+export default function PlaylistPage({ playlists, dispatch }) {
   const classes = useStyles();
   const history = useHistory();
 
