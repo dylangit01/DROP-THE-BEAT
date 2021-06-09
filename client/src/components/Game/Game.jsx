@@ -23,8 +23,8 @@ export default function Game({playlist}) {
   
   // isFinished is not state but computed based on state (similar to useEffect but it returns a value)
   const isFinished = useMemo(() => {
+    // Last round
     if (round === numberOfRounds) {
-      console.log("LAST ROUND");
       return true;
     }
 
@@ -38,11 +38,7 @@ export default function Game({playlist}) {
   //   }
   // }, [numberOfRounds, round]);
 
-
-  console.log("Round:", round);
-  console.log("Game Finished", isFinished);
-
-  const handleClick = () => {
+  const nextRound = () => {
     setRound(prev => prev + 1);
   };
 
@@ -57,7 +53,7 @@ export default function Game({playlist}) {
         <>
           <Chat />
           <Score setScore={setScore} setWinner={setWinner}/>
-          <MusicPlayer playlist={playlist} song={songs[round]} nextRound={() => handleClick()}/>
+          <MusicPlayer playlist={playlist} song={songs[round]} nextRound={() => nextRound()}/>
           <TrackList setRound={setRound} isFinished={isFinished} songs={playlist.songs}/>
         </>
       )}
