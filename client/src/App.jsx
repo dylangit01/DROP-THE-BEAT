@@ -51,7 +51,7 @@ function App () {
           </Route>
 
           <Route path="/game" exact>
-            {currentPlaylist && <Game playlist={currentPlaylist} />}
+            {currentPlaylist && <Game playlist={currentPlaylist} /> }
           </Route>
 
           <Route path="*">
