@@ -29,7 +29,7 @@ export default function PlaylistPage({playlists, dispatch}) {
   const idNum = Number(id);
   const playlist = playlists.find(playlist => playlist.playlistId === idNum); // How to fix this to ===?
 
-  const handleClick = () => {
+  const handleClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
     history.push(`/game`);
   }
@@ -55,7 +55,7 @@ export default function PlaylistPage({playlists, dispatch}) {
           <p>Songs:</p>
           <p>Code:</p>
           {/* <Link to="/game">Start game</Link> */}
-          <button onClick={handleClick}>START GAME - UPDATE STATE WITH PLAYLIST ID</button>
+          <button onClick={(event) => handleClick(event)}>START GAME - UPDATE STATE WITH PLAYLIST ID</button>
         </div>
       )}
     </>
