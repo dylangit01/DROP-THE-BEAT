@@ -24,7 +24,7 @@ export default function Game({playlists, name, emoji}) {
 
       {!isActive && <Lobby setIsActive={setIsActive} />}
 
-      {isActive && (
+      {isActive && !isFinished && (
         <>
         <Chat />
         <Score setScore={setScore} setWinner={setWinner}/>
