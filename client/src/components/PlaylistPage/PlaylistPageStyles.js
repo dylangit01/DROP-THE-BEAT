@@ -37,23 +37,22 @@ export default makeStyles((theme) => ({
     width: 500,
     borderRadius: 10,
     padding: 20,
-    color: 'white',
   },
   title: {
     marginTop: 20,
     marginBottom: 50,
   },
   songs: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems:'center',
-    width: 500,
-    background: 'rgba(0, 0, 0, 0.5)',
     marginTop: 20,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     marginLeft: 150,
+    background: 'rgba(0, 0, 0, 0.5)',
+    width: 500,
     borderRadius: 10,
-    paddingLeft: 20,
-    paddingRight: 20
+    padding: 20,
+  
   },
 }));
 

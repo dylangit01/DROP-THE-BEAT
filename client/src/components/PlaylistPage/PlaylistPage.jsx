@@ -4,33 +4,25 @@ import { SET_PLAYLIST } from '../../reducer/data_reducer';
 
 // Styling
 import './PlaylistPage.scss';
-import {
-  Typography,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  CssBaseline,
-  Grid,
-  Toolbar,
-  Container,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@material-ui/core';
+import { Typography, Card, CardActions, CardMedia, CssBaseline, Grid, Toolbar, Container, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, MoreVertIcon } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 
 // Need a handleClick function that will store the current playlist ID in the state
+
+// const songs = playlists
 
 export default function PlaylistPage({ playlists, dispatch }) {
   const classes = useStyles();
   const history = useHistory();
 
+// for 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
   const { id } = useParams();
   const idNum = Number(id);
-  const playlist = playlists.find((playlist) => playlist.playlistId === idNum); // How to fix this to ===?
+  const playlist = playlists.find((playlist) => playlist.playlistId === idNum); 
+  const songs = playlists[idNum]?.songs
 
   const handleClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
@@ -52,7 +44,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
             </div>
             <div>
               <div className={classes.options}>
-                <Typography className={classes.difficulty} variant='h6'>
+                <Typography  variant='h6'>
                   Difficulty
                 </Typography>
                 <div>
@@ -67,11 +59,12 @@ export default function PlaylistPage({ playlists, dispatch }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography className={classes.difficulty} variant='h6'>
-                  Difficulty
+              
+                <Typography variant='h6'>
+                  Songs
                 </Typography>
                 <div>
-                 xxxxx
+                 
                 </div>
               </div>
             </div>
