@@ -31,12 +31,14 @@ const io = socketio(server, {
 
 let answer = 0;
 
-// Socket connection
+/**
+ * Socket Connection
+ */
 io.on('connection', (socket) => {
-  console.log('someone connected!');
+  console.log('New user connected!');
 
   socket.on('START_GAME', (msg) => {
-    console.log('game started!');
+    console.log('Game started!');
     console.log('msg', msg);
 
     answer = Math.floor(Math.random() * msg.songs.length);
