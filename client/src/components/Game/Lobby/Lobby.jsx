@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SET_PLAYLIST } from '../../../reducer/data_reducer';
+import Ruby from '../../../assets/Ruby_logo.png'
 
 // Styling
 import {
@@ -55,11 +56,6 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
   const classes = useStyles();
 
   console.log(numberOfSongs);
-  // For Difficult control:
-  const [difficult, setDifficult] = useState('easy');
-  const handleDifficulty = (event) => {
-    setDifficult(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -99,8 +95,13 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
             </div>
 
             <div className={classes.players}>
-              <Typography variant='h5'>RubyOffTheRails</Typography>
-              <Typography variant='h5'>NellyCuteAsBtn</Typography>
+              <Typography variant='h6'>Players:</Typography>
+              <Typography variant='h5'>
+                <img style={{ width: '20px' }} src={Ruby} alt='' /> RubyOffTheRails
+              </Typography>
+              <Typography variant='h5'>
+                <img style={{ width: '20px' }} src={Ruby} alt='' /> NellyCuteAsBtn
+              </Typography>
             </div>
 
             <div>
