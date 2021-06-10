@@ -69,7 +69,7 @@ export default function Game({playlist}) {
         setGameStatus((prev) => {
           return {...prev, started: true}
         });
-        setCurrentSong(msg.song);
+        // setCurrentSong(msg.song);
       })
 
       conn.on('CORRECT_GUESS', (msg) => {
