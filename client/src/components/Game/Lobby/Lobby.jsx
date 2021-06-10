@@ -42,6 +42,7 @@ const StyledCodeBtnTwo = withStyles({
 
 export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, playlistName }) {
   const classes = useStyles();
+    const [difficulty, setDifficulty] = useState('medium');
 
   // For songs dropdown menu:
   const ITEM_HEIGHT = 48;
@@ -67,7 +68,6 @@ export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, p
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setIsActive(true);
     console.log("'START_GAME' and list of songs are sent to backend");
     sendMessage('START_GAME', { songs });
   };
@@ -77,7 +77,10 @@ export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, p
       <Container className={classes.root}>
         <div className={classes.img_playOption}>
           <div>
-            <Typography className={classes.title} variant='h3'></Typography>
+            <Typography className={classes.title} variant='h3'>
+              {' '}
+              {playlist.playlistName}{' '}
+            </Typography>
             <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
           </div>
           <div>
@@ -85,8 +88,8 @@ export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, p
               <Typography variant='h6'>Difficulty</Typography>
               <div>
                 <FormControl component='fieldset'>
-                  <RadioGroup aria-label='difficulty' name='difficulty' value={difficult} onChange={handleDifficulty}>
-                    <FormControlLabel value='medium' control={<Radio selected />} label='Medium (20 sec)' />
+                  <RadioGroup aria-label='difficulty' name='difficulty' value={difficulty} onChange={handleDifficulty}>
+                    <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
                   </RadioGroup>
                 </FormControl>
               </div>
@@ -94,33 +97,6 @@ export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, p
 
             <div className={classes.songs}>
               <Typography variant='h6'>Songs</Typography>
-              <div>
-                <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-                  <ArrowDropDownCircleTwoToneIcon className={classes.dropdown} />
-                </IconButton>
-                <Menu
-                  id='long-menu'
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={open}
-                  onClose={handleClose}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.0,
-                      width: '30ch',
-                      backgroundColor: '#666',
-                      color: '#fff',
-                      lineHeight: 0,
-                    },
-                  }}
-                >
-                  {/* {songs.map((song) => (
-                      <MenuItem key={song.id} value={song.title} onClick={handleClose}>
-                        {`${song.id}. ${song.title} - ${song.artist}`}
-                      </MenuItem>
-                    ))} */}
-                </Menu>
-              </div>
             </div>
 
             <div className={classes.songs}>
