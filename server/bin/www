@@ -29,11 +29,12 @@ const io = socketio(server, {
   },
 });
 
-let answer = 0;
-
 /**
  * Socket Connection
  */
+
+let answer = 0;
+
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
