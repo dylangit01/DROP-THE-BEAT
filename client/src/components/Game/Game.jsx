@@ -11,7 +11,6 @@ import Result from "./Result/Result";
 export default function Game({playlist}) {
   const [conn, setConn] = useState(undefined);
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
-  // const [isActive, setIsActive] = useState(false);
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
   const [guesses, setGuesses] = useState([]);
@@ -22,7 +21,6 @@ export default function Game({playlist}) {
   // Update score function -> just a function affecting state
     // Checking winner, sending relevant messages to all users
   const [score, setScore] = useState(0);
-  // const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);  // Might need to change this to an object of rounds
   const [currentSong, setCurrentSong] = useState({});
   
@@ -58,7 +56,6 @@ export default function Game({playlist}) {
         setGameStatus((prev) => {
           return {...prev, started: true}
         });
-        setCurrentSong(msg.song);
       })
 
       conn.on('CORRECT_GUESS', (msg) => {
