@@ -7,7 +7,6 @@ module.exports = ({ getPlaylistsSongs }) => {
     // Currently this gets all the songs for user 1 hardcoded
     getPlaylistsSongs(1)
       .then((playlistsSongs) => {
-        console.log(playlistsSongs);
         const formattedSongs = getSongsByPlaylists(playlistsSongs);
         res.json(formattedSongs);
       })

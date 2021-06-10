@@ -1,35 +1,41 @@
 import React from 'react';
 import './TrackList.scss';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import Tooltip from '@material-ui/core/Tooltip';
 
-export default function TrackList({setCurrentSong, setRound, isFinished, songs}) {
+
+export default function TrackList({round, songs}) {
 
   // setRound(10)
-  const round = 10;
-  if (round === 10) {
-    isFinished =true
-  }
+  // const round = 10;
+  // if (round === numberOfRounds) {
+  //   isFinished =true
+  // }
 
   const albumCovers = songs.map((song) => {
 
     // get song's index
     const index = songs.indexOf(song);
-    const currentSong = 3;
+    // const currentSong = 3;
 
     const isCurrent = () => {
-      if (index === currentSong) {
+      if (index === round) {
         return "tracklist-album-cover--current"
-      } else if (index > currentSong) {
+      } else if (index > round) {
         return "tracklist-album-cover--next"
       } else {
         return "tracklist-album-cover--prev"
       }
     }
 
-
+    // HAVE TO FIND A WAY TO NOT SHOW TOOLTIP FOR SONGS NOT YET PLAYED
     return (
-      <div className={`tracklist-album-cover ${isCurrent()}`}>
-        <img src={song.albumPhoto} alt="cover"></img>
+      <div key={song.id} className={`tracklist-album-cover ${isCurrent()}`}>
+        <Tooltip 
+          title={<div><strong>{song.title}</strong><br />{song.artist}</div>}
+        >
+          <img src={song.albumPhoto} alt="cover"></img>
+        </Tooltip>
         <HelpOutlineOutlinedIcon className="question-mark"/>
       </div>
     )

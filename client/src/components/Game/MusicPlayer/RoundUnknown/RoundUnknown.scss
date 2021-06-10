@@ -1,0 +1,12 @@
+.round-unknown {
+  display: flex;
+  justify-content: center;
+
+  div {
+    background-color: grey;
+    opacity: 75%;
+    height: 400px;
+    width: 400px;
+    border-radius: 12px;
+  }
+}

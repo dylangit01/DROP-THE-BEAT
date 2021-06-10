@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-// import { SET_PLAYLIST } from '../../../reducer/data_reducer';
+import { useParams, useHistory } from 'react-router-dom';
+import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
@@ -40,7 +41,11 @@ const StyledCodeBtnTwo = withStyles({
   },
 })(Button);
 
-export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, playlistName }) {
+// Need a handleClick function that will store the current playlist ID in the state
+
+// const songs = playlists
+
+export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
   const classes = useStyles();
     const [difficulty, setDifficulty] = useState('medium');
 
@@ -48,7 +53,14 @@ export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, p
   const ITEM_HEIGHT = 48;
   // const [selectedSong, setSelectedSong] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
+  const [code, setCode] = useState('');
 
+  // Handle selected Song
+  // const handleSelectedSong = (e) => {
+  //   setSelectedSong(e.target.value);
+  //   console.log(e.target);
+  // }
+  console.log(numberOfSongs);
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
   const handleDifficulty = (event) => {
@@ -102,9 +114,9 @@ export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, p
             <div className={classes.songs}>
               <Typography>{'xxx'}</Typography>
               {/* <CopyToClipboard text={'xxxx'}> */}
-              <div>
-                <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
-              </div>
+                <div>
+                  <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
+                </div>
               {/* </CopyToClipboard> */}
             </div>
 

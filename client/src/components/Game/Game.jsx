@@ -11,10 +11,14 @@ import Result from "./Result/Result";
 
 export default function Game({playlist}) {
   const [conn, setConn] = useState(undefined);
-  const [isActive, setIsActive] = useState(false);
+  const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
+  // const [isActive, setIsActive] = useState(false);
+  const [user, setUser] = useState({}); // Specific to person using website
+  const [users, setUsers] = useState([]); // All users connected through socket
+
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(0);  // Might need to change this to an object of rounds
   const [currentSong, setCurrentSong] = useState({});
   
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
@@ -32,21 +36,33 @@ export default function Game({playlist}) {
     return false;
   }, [numberOfRounds, round]);
 
+  // useEffect(() => {
+  //   if (round === numberOfRounds) {
+  //     // check highest score for winner and set winner
+  //     setGameStatus((prev) => {
+  //       return {...prev, finished: true}
+  //     });
+  //   }
+  // }, [numberOfRounds, round])
+
+  // On initial socket connection
   useEffect(() => {
     const connection = io('http://localhost:3001');
     setConn(connection);
   }, []);
 
-  // When something changes in the conn
+  // RECEIVING MESSAGES FROM THE SERVER
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       console.log("Socket io connection initialized");
 
-      // On start game
+      // On start game message from the server
       conn.on('START_GAME', (msg) => {
-        console.log('msg received from the server on START_GAME: ', msg);
-        setIsActive(true);
+        console.log(msg);
+        setGameStatus((prev) => {
+          return {...prev, started: true}
+        });
         setCurrentSong(msg.song);
       })
       
@@ -67,26 +83,32 @@ export default function Game({playlist}) {
     conn.emit(type, msg);
   };
 
+  // Move to the next round by incrementing the round number
   const nextRound = () => {
     setRound(prev => prev + 1);
   };
 
   return (
     <div className="game">
-      {!isActive && <Lobby playlist={playlist} setIsActive={setIsActive} sendMessage={sendMessage} songs={songs} playlistName={playlist.playlistName}/>}
+      {/* PRE-GAME LOBBY */}
+      {!gameStatus.started && <Lobby playlist={playlist} sendMessage={sendMessage} songs={songs} numberOfSongs={numberOfRounds} playlistName={playlist.playlistName}/>}
 
-      {/* Might want to make a GameInProgress component that has all these 4 components */}
-      {isActive && !isFinished &&
+      {/* GAME IN PROGRESS */}
+      {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
+      {gameStatus.started && !isFinished &&
         <GameInProgress 
           setScore={setScore}
           setWinner={setWinner}
           setPlaylist={playlist}
           nextRound={nextRound}
+          round={round}
+          numberOfRounds={numberOfRounds}
           playlist={playlist}
-          song={currentSong}
+          song={songs[round]}
         />
       }
 
+      {/* GAME-END RESULT */}
       {isFinished && <Result score={score} winner={winner} playlistName={playlist.playlistName} />}
 
     </div>

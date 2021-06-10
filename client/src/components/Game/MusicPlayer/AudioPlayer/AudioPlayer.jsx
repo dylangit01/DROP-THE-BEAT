@@ -27,8 +27,10 @@ export default function AudioPlayer({song, nextRound}) {
     <div className="audio-player">
       {/* Audio plays automatically on load, remove controls*/}
       <audio
+        id="song-audio"
         autoPlay
         controls
+        // volume={0.5}
         src={song.previewUrl}>
       </audio>
 
