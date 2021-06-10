@@ -14,6 +14,11 @@ import {
   Grid,
   Toolbar,
   Container,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@material-ui/core'
 import useStyles from './PlaylistPageStyles'
 
@@ -37,21 +42,26 @@ export default function PlaylistPage({ playlists, dispatch }) {
     <>
       {/* <CssBaseline /> */}
       {playlist && (
-        <div>
-          <Container maxWidth='sm'>
-            <Typography variant='h3' align='center'>
-              {playlist.playlistName}
-            </Typography>
-          </Container>
-          <Container className={classes.cardGrid} maxWidth='md'>
-            <Grid container spacing={5}>
-              <Grid item>
-                <Card className={classes.card}>
-                  <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
-                </Card>
-              </Grid>
-            </Grid>
-          </Container>
+        <div className={classes.root}>
+          <div className={classes.img_playOption}>
+            <div>
+              <Typography variant='h3'>{playlist.playlistName}</Typography>
+              <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
+            </div>
+
+            <div className={classes.options}>
+              <div className={classes.difficulty}>Difficulty</div>
+              <div>
+                <FormControl component='fieldset'>
+                  <RadioGroup aria-label='gender' name='gender1' >
+                    <FormControlLabel value='female' control={<Radio />} label='Female' />
+                    <FormControlLabel value='male' control={<Radio />} label='Male' />
+                    <FormControlLabel value='other' control={<Radio />} label='Other' />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+            </div>
+          </div>
         </div>
 
         // <div className="playlist-page">
