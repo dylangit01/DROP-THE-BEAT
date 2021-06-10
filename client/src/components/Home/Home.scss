@@ -19,6 +19,7 @@
   }
 }
 
+// Also used for trophy animation
 @keyframes beat {
   0%,
   50%,
@@ -29,5 +30,6 @@
   30%,
   80% {
     transform: scale(0.92, 0.95);
+    opacity: 80%;
   }
 }

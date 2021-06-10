@@ -1,0 +1,13 @@
+.result {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .trophy {
+    width: 50vmin;
+    // opacity: 80%;
+    animation: 1.5s ease 0s infinite beat;
+  }
+}
