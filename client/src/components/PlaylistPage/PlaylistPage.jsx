@@ -106,6 +106,34 @@ export default function PlaylistPage({ playlists, dispatch }) {
                   </Menu>
                 </div>
               </div>
+
+              <div className={classes.songs}>
+                <Typography variant='h6'>Songs</Typography>
+                <div>
+                  <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
+                    <ArrowDropDownCircleIcon className={classes.dropdown} />
+                  </IconButton>
+                  <Menu
+                    id='long-menu'
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 4.5,
+                        width: '20ch',
+                      },
+                    }}
+                  >
+                    {songs.map((song) => (
+                      <MenuItem MenuProps={{ classes: { paper: classes.select } }} key={song.id} onClick={handleClose}>
+                        {song.title}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </div>
+              </div>
             </div>
           </div>
         </div>
