@@ -13,9 +13,12 @@ export default function Game({playlist}) {
   const [conn, setConn] = useState(undefined);
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   // const [isActive, setIsActive] = useState(false);
+  const [user, setUser] = useState({}); // Specific to person using website
+  const [users, setUsers] = useState([]); // All users connected through socket
+
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(0);  // Might need to change this to an object of rounds
   const [currentSong, setCurrentSong] = useState({});
   
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
