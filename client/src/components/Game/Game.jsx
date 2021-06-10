@@ -74,6 +74,7 @@ export default function Game({playlist}) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update / reveal song cover & title
+        // Update winner's score
         // setWinner for round
         // setMessages (with a different color or something)
       })
