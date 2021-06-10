@@ -30,6 +30,7 @@ export default function AudioPlayer({song, nextRound}) {
         id="song-audio"
         autoPlay
         controls
+        // onEnded={} //disable guessing, reveal song if not revealed
         // volume={0.5}
         src={song.previewUrl}>
       </audio>

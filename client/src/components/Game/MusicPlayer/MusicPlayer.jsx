@@ -39,6 +39,7 @@ export default function MusicPlayer({ song, nextRound, roundStatus, playlist }) 
 
       {/* Audio playing music here and the next song button */}
       <AudioPlayer song={song} nextRound={nextRound}/>
+      
 
     </div>
   );

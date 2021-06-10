@@ -8,14 +8,19 @@ import Lobby from "./Lobby/Lobby";
 import GameInProgress from "./GameInProgress/GameInProgress";
 import Result from "./Result/Result"; 
 
-
 export default function Game({playlist}) {
   const [conn, setConn] = useState(undefined);
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   // const [isActive, setIsActive] = useState(false);
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
+  const [guesses, setGuesses] = useState([]);
+  
+  // USERS OBJECT
+  // {name, score, emoji}
 
+  // Update score function -> just a function affecting state
+    // Checking winner, sending relevant messages to all users
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);  // Might need to change this to an object of rounds
@@ -26,24 +31,25 @@ export default function Game({playlist}) {
   const songs = playlist.songs;
   
   // isFinished is not state but computed based on state (similar to useEffect but it returns a value)
-  const isFinished = useMemo(() => {
-    // Last round
-    if (round === numberOfRounds) {
-      // check highest score for winner and set winner
-      return true;
-    }
-
-    return false;
-  }, [numberOfRounds, round]);
-
-  // useEffect(() => {
+  // const isFinished = useMemo(() => {
+  //   // Last round
   //   if (round === numberOfRounds) {
   //     // check highest score for winner and set winner
-  //     setGameStatus((prev) => {
-  //       return {...prev, finished: true}
-  //     });
+  //     return true;
   //   }
-  // }, [numberOfRounds, round])
+
+  //   return false;
+  // }, [numberOfRounds, round]);
+
+  useEffect(() => {
+    // Checking for the end of the game
+    if (round === numberOfRounds) {
+      // check highest score for winner and set winner
+      setGameStatus((prev) => {
+        return {...prev, finished: true}
+      });
+    }
+  }, [numberOfRounds, round])
 
   // On initial socket connection
   useEffect(() => {
@@ -65,9 +71,15 @@ export default function Game({playlist}) {
         });
         setCurrentSong(msg.song);
       })
-      
-      conn.on('GUESS', () => {
 
+      conn.on('CORRECT_GUESS', (msg) => {
+        // Update / reveal song cover & title
+        // setWinner for round
+        // setMessages (with a different color or something)
+      })
+
+      conn.on('INCORRECT_GUESS', (msg) => {
+        //setMessages
       })
 
       conn.on('END_GAME', () => {
@@ -86,6 +98,9 @@ export default function Game({playlist}) {
   // Move to the next round by incrementing the round number
   const nextRound = () => {
     setRound(prev => prev + 1);
+    const currentSongName = songs[round].name;
+    sendMessage('NEXT_ROUND', currentSongName);
+    //sendmessage to server that it's a new round with the new song title
   };
 
   return (
@@ -95,7 +110,7 @@ export default function Game({playlist}) {
 
       {/* GAME IN PROGRESS */}
       {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
-      {gameStatus.started && !isFinished &&
+      {gameStatus.started && !gameStatus.finished &&
         <GameInProgress 
           setScore={setScore}
           setWinner={setWinner}
@@ -109,7 +124,7 @@ export default function Game({playlist}) {
       }
 
       {/* GAME-END RESULT */}
-      {isFinished && <Result score={score} winner={winner} playlistName={playlist.playlistName} />}
+      {gameStatus.finished && <Result score={score} winner={winner} playlistName={playlist.playlistName} />}
 
     </div>
 

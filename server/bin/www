@@ -34,6 +34,7 @@ const io = socketio(server, {
  */
 
 let answer = 0;
+let currentSongName = '';
 
 io.on('connection', (socket) => {
   console.log('New user connected!');
@@ -42,14 +43,28 @@ io.on('connection', (socket) => {
     console.log('Game started!');
     console.log('msg', msg);
 
-    answer = Math.floor(Math.random() * msg.songs.length);
-    console.log(answer);
-    console.log(msg.songs[answer]);
+    // answer = Math.floor(Math.random() * msg.songs.length);
+    // console.log(answer);
+    // console.log(msg.songs[answer]);
     // Send to front end
     io.emit('START_GAME', { song: msg.songs[answer] });
   });
 
-  socket.on('GUESS', (msg) => {});
+  // Will be from the host
+  socket.on('NEXT_SONG', (msg) => {
+    // set currentSongName = currentSongName
+    currentSongName = msg;
+  });
+
+  // Will be from players
+  socket.on('GUESS', (msg) => {
+    if (msg.guess === currentSongName) {
+      io.emit('CORRECT_GUESS', { msg });
+      currentSongName = '';
+    } else {
+      io.emit('INCORRECT_GUESS', { msg });
+    }
+  });
 });
 
 /**
