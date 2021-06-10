@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles'
 export default makeStyles((theme) => ({
   spacing: 8,
   root: {
-    width: 'fit-content',
-    margin: 100,
-    marginLeft: 150,
+    // width: 'fit-content',
+    // margin: 100,
+    // marginLeft: 150,
     display: 'flex',
   },
   cover: {
@@ -66,13 +66,4 @@ export default makeStyles((theme) => ({
     width: 150,
     borderRadius: 20,
   },
-  bottomBtn: {
-    marginTop: 50,
-    marginLeft: 400,
-    display: 'flex',
-    justifyContent: 'center',
-    width: 130,
-  },
-
-
 }));

@@ -14,10 +14,29 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Button
+  Button,
+  Container
 } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
+import { withStyles } from '@material-ui/core/styles';
+
+const StyledButton = withStyles({
+  root: {
+    background: 'linear-gradient(45deg, #867ae9 30%, #fb3640 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    marginTop: 50,
+    marginLeft: 180,
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+})(Button);
 
 // Need a handleClick function that will store the current playlist ID in the state
 
@@ -57,7 +76,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
     <>
       {/* <CssBaseline /> */}
       {playlist && (
-        <div className={classes.root}>
+        <Container className={classes.root}>
           <div className={classes.img_playOption}>
             <div>
               <Typography className={classes.title} variant='h3'>
@@ -116,16 +135,14 @@ export default function PlaylistPage({ playlists, dispatch }) {
                 </div>
               </div>
 
-              <div className={classes.bottomBtn} >
+              <div >
                 <div className={classes.btnControl}>
-                  <Button className={classes.codeBtn} variant='contained'>
-                    START LOBBY
-                  </Button>
+                  <StyledButton>classes shorthand</StyledButton>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </Container>
 
         // <div className="playlist-page">
         //
