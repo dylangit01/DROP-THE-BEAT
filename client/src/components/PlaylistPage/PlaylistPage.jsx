@@ -14,6 +14,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Button
 } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
@@ -98,7 +99,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     }}
                   >
                     {songs.map((song) => (
-                      <MenuItem  key={song.id} onClick={handleClose}>
+                      <MenuItem key={song.id} onClick={handleClose}>
                         {song.title}
                       </MenuItem>
                     ))}
@@ -108,29 +109,19 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
               <div className={classes.songs}>
                 <Typography variant='h6'>ASDFFFF</Typography>
-                <div>
-                  <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-                    <ArrowDropDownCircleTwoToneIcon className={classes.dropdown} />
-                  </IconButton>
-                  <Menu
-                    id='long-menu'
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    PaperProps={{
-                      style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '20ch',
-                      },
-                    }}
-                  >
-                    {songs.map((song) => (
-                      <MenuItem key={song.id} onClick={handleClose}>
-                        {song.title}
-                      </MenuItem>
-                    ))}
-                  </Menu>
+                <div className={classes.btnControl}>
+                  <Button className={classes.codeBtn} variant='contained'>
+                    CODE
+                  </Button>
+                </div>
+              </div>
+
+              <div className={classes.songs}>
+                <Typography variant='h6'>ASDFFFF</Typography>
+                <div className={classes.btnControl}>
+                  <Button className={classes.codeBtn} variant='contained'>
+                    CODE
+                  </Button>
                 </div>
               </div>
             </div>

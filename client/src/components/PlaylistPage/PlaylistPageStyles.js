@@ -50,14 +50,26 @@ export default makeStyles((theme) => ({
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
     width: 440,
-    height: 30,
+    height: 20,
     borderRadius: 10,
     padding: 20,
     paddingLeft: 80,
   },
   dropdown: {
     color: '#fff',
-    marginLeft:160,
+    marginLeft: 160,
   },
+  codeBtn: {
+    color: '#ff96ad',
+    background: 'rgba(189, 195, 199, .8)',
+    height: 60,
+    width: 150,
+    borderRadius: 20,
+    
+  },
+
+  // btnControl: {
+  //   rightPad: ;
+  // }
 }));
 
