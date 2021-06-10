@@ -1,16 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
+  spacing: 8,
   root: {
     width: 'fit-content',
     margin: 100,
     marginLeft: 150,
-    display:'flex'
+    display: 'flex',
   },
   cover: {
     height: 500,
     width: 500,
     backgroundColor: 'transparent',
+    borderRadius: 10,
   },
   card: {
     display: 'flex',
@@ -26,7 +28,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
   },
   options: {
-    marginTop: 80,
+    marginTop: 120,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -38,12 +40,9 @@ export default makeStyles((theme) => ({
     padding: 20,
     color: 'white',
   },
-  difficulty: {},
-  radio: {
-    '&$checked': {
-      color: '#fff',
-    },
-  },
-  checked: {},
-}))
+  title: {
+    marginTop: 20,
+    marginBottom: 50
+  }
+}));
 

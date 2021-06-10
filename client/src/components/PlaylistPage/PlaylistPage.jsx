@@ -45,7 +45,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
         <div className={classes.root}>
           <div className={classes.img_playOption}>
             <div>
-              <Typography variant='h3'>{playlist.playlistName}</Typography>
+              <Typography className={classes.title} variant='h3'>{playlist.playlistName}</Typography>
               <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
             </div>
 
@@ -54,9 +54,9 @@ export default function PlaylistPage({ playlists, dispatch }) {
               <div>
                 <FormControl component='fieldset'>
                   <RadioGroup aria-label='gender' name='gender1'>
-                    <FormControlLabel value='female' control={<Radio />} label='Female' />
-                    <FormControlLabel value='male' control={<Radio />} label='Male' />
-                    <FormControlLabel value='other' control={<Radio />} label='Other' />
+                    <FormControlLabel value='female' control={<Radio />} label='Easy (10 sec)' />
+                    <FormControlLabel value='male' control={<Radio />} label='Medium (20 sec)' />
+                    <FormControlLabel value='other' control={<Radio />} label='Difficult (30 sec)' />
                   </RadioGroup>
                 </FormControl>
               </div>
