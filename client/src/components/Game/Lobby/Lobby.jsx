@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 import Ruby from '../../../assets/Ruby_logo.png'
 
@@ -35,12 +35,16 @@ const StyledCodeBtnTwo = withStyles({
 export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
   const classes = useStyles();
 
+  const [name1, setName1] = useState('');
+  const [name2, setName2] = useState('');
+  // const [room, setRoom] = useState('')
+
   console.log(numberOfSongs);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, name1, name2) => {
     event.preventDefault();
     console.log("'START_GAME' and list of songs are sent to backend");
-    sendMessage('START_GAME', { songs });
+    sendMessage('START_GAME', { songs, name1, name2 });
   };
 
   return (
@@ -77,16 +81,16 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
               <Typography variant='h5'>
-                <img style={{ width: '20px' }} src={Ruby} alt='' /> RubyOffTheRails
+                <img style={{ width: '20px' }} src={Ruby} alt='' value={'RubyOffTheRails'} onChange={(e)=>setName1(e.target.value)} /> RubyOffTheRails
               </Typography>
               <Typography variant='h5'>
-                <img style={{ width: '20px' }} src={Ruby} alt='' /> NellyCuteAsBtn
+                <img style={{ width: '20px' }} src={Ruby} alt='' value={'NellyCuteAsBtn'} onChange={(e)=>setName2(e.target.value)}/> NellyCuteAsBtn
               </Typography>
             </div>
 
             <div>
               <div className={classes.btnControl}>
-                <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event)}>
+                <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event, name1, name2)}>
                   Start game
                 </StyledCodeBtnTwo>
               </div>

@@ -67,7 +67,7 @@ export default function Game({playlist}) {
       })
       
       conn.on('GUESS', () => {
-          
+
       })
 
       conn.on('END_GAME', () => {
@@ -92,7 +92,7 @@ export default function Game({playlist}) {
     <div className="game">
       {/* PRE-GAME LOBBY */}
       {!gameStatus.started && <Lobby playlist={playlist} sendMessage={sendMessage} songs={songs} numberOfSongs={numberOfRounds} playlistName={playlist.playlistName}/>}
-
+      
       {/* GAME IN PROGRESS */}
       {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
       {gameStatus.started && !isFinished &&
