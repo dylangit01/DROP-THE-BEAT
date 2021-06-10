@@ -49,7 +49,9 @@ io.on('connection', (socket) => {
     io.emit('START_GAME', { song: msg.songs[answer] });
   });
 
-  socket.on('GUESS', (msg) => {});
+  socket.on('GUESS', (msg) => {
+    
+  });
 });
 
 /**

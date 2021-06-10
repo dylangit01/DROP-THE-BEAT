@@ -32,10 +32,6 @@ const StyledCodeBtnTwo = withStyles({
   },
 })(Button);
 
-// Need a handleClick function that will store the current playlist ID in the state
-
-// const songs = playlists
-
 export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
   const classes = useStyles();
 

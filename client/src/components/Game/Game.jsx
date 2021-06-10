@@ -67,7 +67,7 @@ export default function Game({playlist}) {
       })
       
       conn.on('GUESS', () => {
-
+        
       })
 
       conn.on('END_GAME', () => {
