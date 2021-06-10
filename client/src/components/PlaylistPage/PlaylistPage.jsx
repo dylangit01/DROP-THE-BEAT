@@ -5,20 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
 import './PlaylistPage.scss';
-import {
-  Typography,
-  CardMedia,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  IconButton,
-  Menu,
-  MenuItem,
-  Button,
-  Container,
-  TextField,
-} from '@material-ui/core';
+import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, TextField, Select} from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
@@ -70,13 +57,18 @@ export default function PlaylistPage({ playlists, dispatch }) {
   // For songs dropdown menu:
   const songs = playlists[idNum]?.songs;
   const ITEM_HEIGHT = 48;
-
+  const [selectedSong, setSelectedSong] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [code, setCode] = useState('');
 
+  // Handle selected Song
+  const handleSelectedSong = (e) => {
+    setSelectedSong(e.target.value);
+    console.log(e.target);
+  }
+
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
-
   const handleDifficulty = (event) => {
     setDifficult(event.target.value);
   };
@@ -146,7 +138,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     }}
                   >
                     {songs.map((song) => (
-                      <MenuItem key={song.id} onClick={handleClose}>
+                      <MenuItem key={song.id} value={song.title} onChange={handleSelectedSong} onClick={handleClose}>
                         {`${song.id}. ${song.title} - ${song.artist}`}
                       </MenuItem>
                     ))}
