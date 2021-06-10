@@ -7,7 +7,7 @@ import TrackList from "../TrackList/TrackList";
 
 import './GameInProgress.scss';
 
-export default function GameInProgress({setScore, setWinner, playlist, nextRound, song}) {
+export default function GameInProgress({setScore, setWinner, playlist, nextRound, song, round, numberOfRounds}) {
 
   const [roundStatus, setRoundStatus] = useState("not started");
 
@@ -17,8 +17,8 @@ export default function GameInProgress({setScore, setWinner, playlist, nextRound
       <h6>GAME IS IN PROGRESS</h6>
       <Chat />
       <Score setScore={setScore} setWinner={setWinner}/>
-      <MusicPlayer roundStatus={roundStatus} playlist={playlist} song={song} nextRound={() => nextRound()}/>
-      <TrackList songs={playlist.songs}/>
+      <MusicPlayer roundStatus={roundStatus}playlist={playlist} song={song} nextRound={() => nextRound()}/>
+      <TrackList round={round} songs={playlist.songs}/>
     </div>
   )
 }

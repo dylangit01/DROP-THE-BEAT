@@ -84,6 +84,8 @@ export default function Game({playlist}) {
           setWinner={setWinner}
           setPlaylist={playlist}
           nextRound={nextRound}
+          round={round}
+          numberOfRounds={numberOfRounds}
           playlist={playlist}
           song={currentSong}
         />
