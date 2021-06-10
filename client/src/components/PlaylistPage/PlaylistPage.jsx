@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { SET_PLAYLIST } from '../../reducer/data_reducer';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
 import './PlaylistPage.scss';
@@ -15,7 +16,8 @@ import {
   Menu,
   MenuItem,
   Button,
-  Container
+  Container,
+  TextField,
 } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
@@ -46,7 +48,7 @@ const StyledCodeBtnTwo = withStyles({
     height: 58,
     padding: '0 30px',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    marginLeft:70
+    marginLeft: 70,
   },
   label: {
     textTransform: 'capitalize',
@@ -69,16 +71,25 @@ export default function PlaylistPage({ playlists, dispatch }) {
   const songs = playlists[idNum]?.songs;
   const ITEM_HEIGHT = 48;
 
- const [anchorEl, setAnchorEl] = useState(null);
- const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [code, setCode] = useState('');
 
- const handleClick = (event) => {
-   setAnchorEl(event.currentTarget);
- };
+  // For Difficult control:
+  const [difficult, setDifficult] = useState('easy');
 
- const handleClose = () => {
-   setAnchorEl(null);
- };
+  const handleDifficulty = (event) => {
+    setDifficult(event.target.value);
+  };
+
+  // For dropdown menu control:
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
@@ -103,10 +114,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
                 <Typography variant='h6'>Difficulty</Typography>
                 <div>
                   <FormControl component='fieldset'>
-                    <RadioGroup aria-label='gender' name='gender1'>
-                      <FormControlLabel value='female' control={<Radio />} label='Easy (10 sec)' />
-                      <FormControlLabel value='male' control={<Radio />} label='Medium (20 sec)' />
-                      <FormControlLabel value='other' control={<Radio />} label='Difficult (30 sec)' />
+                    <RadioGroup aria-label='difficulty' name='difficulty' value={difficult} onChange={handleDifficulty}>
+                      <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
+                      <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
+                      <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
                     </RadioGroup>
                   </FormControl>
                 </div>
@@ -130,13 +141,13 @@ export default function PlaylistPage({ playlists, dispatch }) {
                         width: '30ch',
                         backgroundColor: '#666',
                         color: '#fff',
-                        lineHeight:0
+                        lineHeight: 0,
                       },
                     }}
                   >
                     {songs.map((song) => (
                       <MenuItem key={song.id} onClick={handleClose}>
-                        {`${song.id} ${song.title}-${song.artist}`}
+                        {`${song.id}. ${song.title} - ${song.artist}`}
                       </MenuItem>
                     ))}
                   </Menu>
@@ -144,11 +155,14 @@ export default function PlaylistPage({ playlists, dispatch }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>ASDFFFF</Typography>
-                <div>
-                  <StyledLobbyBtnOne>CODE</StyledLobbyBtnOne>
-                </div>
+                <Typography>{'xxx'}</Typography>
+                <CopyToClipboard text={'xxxx'}>
+                  <div>
+                    <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
+                  </div>
+                </CopyToClipboard>
               </div>
+              <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
 
               <div>
                 <div className={classes.btnControl}>
