@@ -127,8 +127,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     onClose={handleClose}
                     PaperProps={{
                       style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
+                        maxHeight: ITEM_HEIGHT * 4.0,
                         width: '20ch',
+                        backgroundColor: '#666',
+                        color: '#fff'
                       },
                     }}
                   >
@@ -143,7 +145,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
               <div className={classes.songs}>
                 <Typography variant='h6'>ASDFFFF</Typography>
-                <div >
+                <div>
                   <StyledLobbyBtnOne>CODE</StyledLobbyBtnOne>
                 </div>
               </div>
