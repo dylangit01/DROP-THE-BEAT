@@ -52,7 +52,10 @@ export default makeStyles((theme) => ({
     width: 500,
     borderRadius: 10,
     padding: 20,
-  
   },
+  dropdown: {
+    color: '#fff',
+    marginLeft:160,
+  }
 }));
 
