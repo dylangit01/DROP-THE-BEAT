@@ -1,0 +1,57 @@
+.tracklist {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tracklist-album-cover {
+  display: flex;
+  position: relative;
+  margin: 0.5vw;
+  border: 1px solid white;
+  border-radius: 12px;
+  width: 4vw;
+  height: auto;
+  overflow: hidden;
+  
+  img {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    z-index:1;
+  }
+
+  .question-mark {
+    position: absolute;
+    z-index: 2;
+    top: 20%;
+    left: 20%;
+    opacity: 0;
+  }
+
+  
+    &--current {
+      @extend .tracklist-album-cover;
+        border-width: 3px;
+        width: 7vw;
+        height: auto;
+    }
+  
+    // &--prev {
+    //   @extend .tracklist-album-cover;
+    // }
+  
+    &--next {
+      @extend .tracklist-album-cover;
+      background-color: gray;
+      img {
+        opacity: 0;
+      }
+      .question-mark {
+          opacity: 100;
+      }
+    }
+
+
+}

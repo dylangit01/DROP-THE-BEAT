@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams,  useHistory } from 'react-router-dom';
 import { SET_PLAYLIST, SET_DIFFICULT, SET_SELECTED_SONG } from '../../reducer/data_reducer';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+// import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
 import './PlaylistPage.scss';
@@ -151,11 +151,11 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
               <div className={classes.songs}>
                 <Typography>{'xxx'}</Typography>
-                <CopyToClipboard text={'xxxx'}>
+                {/* <CopyToClipboard text={'xxxx'}> */}
                   <div>
                     <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                   </div>
-                </CopyToClipboard>
+                {/* </CopyToClipboard> */}
               </div>
               <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
 

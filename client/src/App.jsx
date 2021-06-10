@@ -24,7 +24,7 @@ function App () {
 
   // Get currently selected playlist
   const currentPlaylist = state.playlists.find(playlist => playlist.playlistId === state.playlist);
-  console.log(currentPlaylist);
+  console.log('Current playlist from app.jsx: ', currentPlaylist);
 
   return (
     <Router>
@@ -51,7 +51,7 @@ function App () {
           </Route>
 
           <Route path="/game" exact>
-            <Game playlist={currentPlaylist} />
+            {currentPlaylist && <Game playlist={currentPlaylist} /> }
           </Route>
 
           <Route path="*">

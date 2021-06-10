@@ -1,11 +1,23 @@
 import React from 'react';
 import './RoundKnown.scss';
 
-export default function RoundKnown() {
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  cover: {
+    width: "25vw",
+    height: "auto"
+  }
+}));
+
+
+export default function RoundKnown({song}) {
+  const classes = useStyles();
+
   return (
     <div className="round-known">
       {/* For now, assume someone will always guess song */}
-      <h6>SONG - KNOW When a song is guessed or no one guesses (display album and details)</h6>
+      <img className={classes.cover} src={song.albumPhoto} alt="cover"></img>
     </div>
   );
 };

@@ -3,17 +3,18 @@ import './MusicPlayer.scss';
 // import LoadingRound from './LoadingRound/LoadingRound';
 import RoundUnknown from './RoundUnknown/RoundUnknown';
 import RoundKnown from './RoundKnown/RoundKnown';
+import AudioPlayer from './AudioPlayer/AudioPlayer';
 
 // Hard-coded data for now
 const roundStart = true;
 const roundEnd = true;
 
-export default function MusicPlayer({ playlist }) {
-  console.log("playlist in music player", playlist);
+export default function MusicPlayer({ song, nextRound, roundStatus, playlist }) {
+  // console.log("song in music player", song);
 
   return (
     <div className="music-player">
-      <h2>Music player is here</h2>
+      <h3>{playlist.playlistName} playlist</h3>
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
@@ -24,13 +25,11 @@ export default function MusicPlayer({ playlist }) {
       {roundStart && !roundEnd && <RoundUnknown />}
 
       {/* When a song has been guessed correctly or it's the end of the round */}
-      {roundEnd && <RoundKnown />}
+      {roundEnd && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
-      <div className="music-player-footer">
-        <h6>Audio bar with next song button is here</h6>
-        <button>Next</button>
-      </div>
+      <AudioPlayer song={song} nextRound={nextRound}/>
+
     </div>
   );
 }

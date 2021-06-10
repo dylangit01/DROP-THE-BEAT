@@ -1,16 +1,12 @@
-// import React from 'react';
-// import './Lobby.scss';
 
-// export default function Lobby({setIsActive}) {
+// export default function Lobby({ setIsActive, sendMessage, songs, playlistName}) {
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     setIsActive(true);
-//   }
+
 
 //   return (
 //     <div className="chat">
-//       <h6>Lobby is here</h6>
+//       <h6>Hello, Players!</h6>
+//       <p> we are about to play with {playlistName} playlist!</p>
 //       <button type='submit' onClick={(event) => handleSubmit(event)}>Start game</button>
 //     </div>
 //   )
@@ -63,7 +59,7 @@ const StyledCodeBtnTwo = withStyles({
 
 // const songs = playlists
 
-export default function PlaylistPage({ playlist, dispatch }) {
+export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMessage, songs, playlistName }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -101,85 +97,93 @@ export default function PlaylistPage({ playlist, dispatch }) {
     console.log(e.target.value);
   };
 
-  const handlePlaylistClick = (event) => {
-    dispatch({ type: SET_PLAYLIST, playlist: idNum });
-    history.push(`/game`);
+  // const handlePlaylistClick = (event) => {
+  //   dispatch({ type: SET_PLAYLIST, playlist: idNum });
+  //   history.push(`/game`);
+  // };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // setIsActive(true);
+    console.log("'START_GAME' and list of songs are sent to backend");
+
+    sendMessage('START_GAME', { songs });
   };
-  // map through the songs
 
   return (
     <>
-        <Container className={classes.root}>
-          <div className={classes.img_playOption}>
-            <div>
-              <Typography className={classes.title} variant='h3'>
-                
-              </Typography>
-              <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
-            </div>
-            <div>
-              <div className={classes.options}>
-                <Typography variant='h6'>Difficulty</Typography>
-                <div>
-                  <FormControl component='fieldset'>
-                    <RadioGroup aria-label='difficulty' name='difficulty' value={difficult} onChange={handleDifficulty}>
-                      <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
-                      <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
-                      <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
-                    </RadioGroup>
-                  </FormControl>
-                </div>
+      <Container className={classes.root}>
+        <div className={classes.img_playOption}>
+          <div>
+            <Typography className={classes.title} variant='h3'></Typography>
+            <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
+          </div>
+          <div>
+            <div className={classes.options}>
+              <Typography variant='h6'>Difficulty</Typography>
+              <div>
+                <FormControl component='fieldset'>
+                  <RadioGroup aria-label='difficulty' name='difficulty' value={difficult} onChange={handleDifficulty}>
+                    <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
+                    <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
+                    <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
+                  </RadioGroup>
+                </FormControl>
               </div>
+            </div>
 
-              <div className={classes.songs}>
-                <Typography variant='h6'>Songs</Typography>
-                <div>
-                  <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-                    <ArrowDropDownCircleTwoToneIcon className={classes.dropdown} />
-                  </IconButton>
-                  <Menu
-                    id='long-menu'
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    PaperProps={{
-                      style: {
-                        maxHeight: ITEM_HEIGHT * 4.0,
-                        width: '30ch',
-                        backgroundColor: '#666',
-                        color: '#fff',
-                        lineHeight: 0,
-                      },
-                    }}
-                  >
-                    {/* {songs.map((song) => (
+            <div className={classes.songs}>
+              <Typography variant='h6'>Songs</Typography>
+              <div>
+                <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
+                  <ArrowDropDownCircleTwoToneIcon className={classes.dropdown} />
+                </IconButton>
+                <Menu
+                  id='long-menu'
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  PaperProps={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.0,
+                      width: '30ch',
+                      backgroundColor: '#666',
+                      color: '#fff',
+                      lineHeight: 0,
+                    },
+                  }}
+                >
+                  {/* {songs.map((song) => (
                       <MenuItem key={song.id} value={song.title} onClick={handleClose}>
                         {`${song.id}. ${song.title} - ${song.artist}`}
                       </MenuItem>
                     ))} */}
-                  </Menu>
-                </div>
+                </Menu>
               </div>
+            </div>
 
-              <div className={classes.songs}>
-                <Typography>{'xxx'}</Typography>
-                <CopyToClipboard text={'xxxx'}>
-                  <div>
-                    <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
-                  </div>
-                </CopyToClipboard>
-              </div>
-              <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
-
-              <div>
-                <div className={classes.btnControl}>
-                  <StyledCodeBtnTwo onClick={handlePlaylistClick}>START LOBBY</StyledCodeBtnTwo>
+            <div className={classes.songs}>
+              <Typography>{'xxx'}</Typography>
+              <CopyToClipboard text={'xxxx'}>
+                <div>
+                  <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>
+              </CopyToClipboard>
+            </div>
+            <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
+
+            <div>
+              <div className={classes.btnControl}>
+                {/* <StyledCodeBtnTwo onClick={handlePlaylistClick}>START LOBBY</StyledCodeBtnTwo> */}
+                <button type='submit' onClick={(event) => handleSubmit(event)}>
+                  Start game
+                </button>
               </div>
             </div>
           </div>
-        </Container>
+        </div>
+      </Container>
     </>
   );
 }
