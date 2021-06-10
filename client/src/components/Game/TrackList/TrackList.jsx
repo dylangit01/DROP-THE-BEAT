@@ -1,6 +1,8 @@
 import React from 'react';
 import './TrackList.scss';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 export default function TrackList({round, songs}) {
 
@@ -26,10 +28,14 @@ export default function TrackList({round, songs}) {
       }
     }
 
-
+    // HAVE TO FIND A WAY TO NOT SHOW TOOLTIP FOR SONGS NOT YET PLAYED
     return (
       <div key={song.id} className={`tracklist-album-cover ${isCurrent()}`}>
-        <img src={song.albumPhoto} alt="cover"></img>
+        <Tooltip 
+          title={<div><strong>{song.title}</strong><br />{song.artist}</div>}
+        >
+          <img src={song.albumPhoto} alt="cover"></img>
+        </Tooltip>
         <HelpOutlineOutlinedIcon className="question-mark"/>
       </div>
     )

@@ -20,12 +20,12 @@
     position: relative;
     width: inherit;
     height: inherit;
-    z-index: 1;
+    // z-index: 1;
   }
 
   .question-mark {
     position: absolute;
-    z-index: 2;
+    // z-index: 2;
     top: 25%;
     left: 25%;
     opacity: 0;
