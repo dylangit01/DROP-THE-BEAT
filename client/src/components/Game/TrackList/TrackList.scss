@@ -9,17 +9,17 @@
   display: flex;
   position: relative;
   margin: 10px;
-  border: 1px solid white;
-  border-radius: 12px;
+  // border: 1px solid white;
+  border-radius: 8px;
   width: 50px;
   height: 50px;
   overflow: hidden;
-  
+
   img {
     position: relative;
     width: inherit;
     height: inherit;
-    z-index:1;
+    z-index: 1;
   }
 
   .question-mark {
@@ -30,28 +30,25 @@
     opacity: 0;
   }
 
-  
-    &--current {
-      @extend .tracklist-album-cover;
-        border-width: 3px;
-        width: 100px;
-        height: 100px;
-    }
-  
-    // &--prev {
-    //   @extend .tracklist-album-cover;
-    // }
-  
-    &--next {
-      @extend .tracklist-album-cover;
-      background-color: gray;
-      img {
-        opacity: 0;
-      }
-      .question-mark {
-          opacity: 100;
-      }
-    }
+  &--current {
+    @extend .tracklist-album-cover;
+    // border-width: 3px;
+    width: 75px;
+    height: 75px;
+  }
 
+  // &--prev {
+  //   @extend .tracklist-album-cover;
+  // }
 
+  &--next {
+    @extend .tracklist-album-cover;
+    background-color: gray;
+    img {
+      opacity: 0;
+    }
+    .question-mark {
+      opacity: 100;
+    }
+  }
 }

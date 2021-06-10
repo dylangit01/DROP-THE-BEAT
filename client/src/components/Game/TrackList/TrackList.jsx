@@ -2,7 +2,7 @@ import React from 'react';
 import './TrackList.scss';
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
 
-export default function TrackList({setCurrentSong, setRound, isFinished, songs}) {
+export default function TrackList({isFinished, songs}) {
 
   // setRound(10)
   const round = 10;
