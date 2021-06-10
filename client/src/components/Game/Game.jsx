@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Game.scss';
 
@@ -29,17 +29,6 @@ export default function Game({playlist}) {
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const numberOfRounds = playlist.songs.length;
   const songs = playlist.songs;
-  
-  // isFinished is not state but computed based on state (similar to useEffect but it returns a value)
-  // const isFinished = useMemo(() => {
-  //   // Last round
-  //   if (round === numberOfRounds) {
-  //     // check highest score for winner and set winner
-  //     return true;
-  //   }
-
-  //   return false;
-  // }, [numberOfRounds, round]);
 
   useEffect(() => {
     // Checking for the end of the game
