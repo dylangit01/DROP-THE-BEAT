@@ -56,6 +56,6 @@ export default makeStyles((theme) => ({
   dropdown: {
     color: '#fff',
     marginLeft:160,
-  }
+  },
 }));
 

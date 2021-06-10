@@ -99,7 +99,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     }}
                   >
                     {songs.map((song) => (
-                      <MenuItem key={song.id} onClick={handleClose}>
+                      <MenuItem MenuProps={{ classes: { paper: classes.select } }} key={song.id} onClick={handleClose}>
                         {song.title}
                       </MenuItem>
                     ))}
