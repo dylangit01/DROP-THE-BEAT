@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useParams,  useHistory } from 'react-router-dom';
-import { SET_PLAYLIST, SET_DIFFICULT, SET_SELECTED_SONG } from '../../reducer/data_reducer';
+import { SET_PLAYLIST, SET_DIFFICULT } from '../../reducer/data_reducer';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
 import './PlaylistPage.scss';
-import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, TextField, } from '@material-ui/core';
+import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
@@ -56,7 +56,6 @@ export default function PlaylistPage({ playlists, dispatch }) {
   const songs = playlist.songs;
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = useState(null);
-  const [code, setCode] = useState('');
 
   // For Difficult control:
   const [difficulty, setDifficulty] = useState('easy');
@@ -140,14 +139,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
               <div className={classes.songs}>
                 <Typography>{'xxx'}</Typography>
-                {/* <CopyToClipboard text={'xxxx'}> */}
                   <div>
                     <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                   </div>
-                {/* </CopyToClipboard> */}
               </div>
-              {/* <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth /> */}
-
               <div>
                 <div className={classes.btnControl}>
                   <StyledCodeBtnTwo onClick={handlePlaylistClick}>START LOBBY</StyledCodeBtnTwo>

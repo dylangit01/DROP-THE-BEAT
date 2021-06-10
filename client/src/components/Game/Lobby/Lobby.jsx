@@ -1,16 +1,4 @@
-// export default function Lobby({ setIsActive, sendMessage, songs, playlistName}) {
-
-//   return (
-//     <div className="chat">
-//       <h6>Hello, Players!</h6>
-//       <p> we are about to play with {playlistName} playlist!</p>
-//       <button type='submit' onClick={(event) => handleSubmit(event)}>Start game</button>
-//     </div>
-//   )
-// }
-
 import React, { useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
 // import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -52,24 +40,13 @@ const StyledCodeBtnTwo = withStyles({
   },
 })(Button);
 
-// Need a handleClick function that will store the current playlist ID in the state
-
-// const songs = playlists
-
-export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMessage, songs, playlistName }) {
+export default function PlaylistPage({ playlist, dispatch, sendMessage, songs, playlistName }) {
   const classes = useStyles();
-  const history = useHistory();
-
-  const { id } = useParams();
-  const idNum = Number(id);
-  // const playlist = playlists.find((playlist) => playlist.playlistId === idNum);
 
   // For songs dropdown menu:
-  // const songs = playlists[idNum]?.songs;
   const ITEM_HEIGHT = 48;
   // const [selectedSong, setSelectedSong] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
-  const [code, setCode] = useState('');
 
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
@@ -92,7 +69,6 @@ export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMess
     event.preventDefault();
     // setIsActive(true);
     console.log("'START_GAME' and list of songs are sent to backend");
-
     sendMessage('START_GAME', { songs });
   };
 

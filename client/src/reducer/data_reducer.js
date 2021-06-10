@@ -2,7 +2,6 @@
 export const SET_PLAYLISTS = 'SET_PLAYLISTS';
 export const SET_PLAYLIST = 'SET_SONGS';
 export const SET_DIFFICULT = 'SET_DIFFICULT';
-export const SET_SELECTED_SONG = 'SET_SELECTED_SONG';
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -15,9 +14,6 @@ const dataReducer = (state, action) => {
     
     case SET_DIFFICULT:
       return { ...state, difficulty: action.difficulty };
-    
-    case SET_SELECTED_SONG:
-      return {...state, selectedSong: action.selectedSong}
       
     default:
       return state;
