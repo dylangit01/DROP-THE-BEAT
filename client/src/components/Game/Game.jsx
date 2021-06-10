@@ -22,7 +22,7 @@ export default function Game({playlist}) {
   // Update score function -> just a function affecting state
     // Checking winner, sending relevant messages to all users
   const [score, setScore] = useState(0);
-  const [winner, setWinner] = useState("");
+  // const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);  // Might need to change this to an object of rounds
   const [currentSong, setCurrentSong] = useState({});
   
@@ -35,7 +35,7 @@ export default function Game({playlist}) {
     if (round === numberOfRounds) {
       // check highest score for winner and set winner
       setGameStatus((prev) => {
-        return {...prev, finished: true}
+        return {...prev, finished: true, winner: "Nelly"}
       });
     }
   }, [numberOfRounds, round])
@@ -103,7 +103,6 @@ export default function Game({playlist}) {
       {gameStatus.started && !gameStatus.finished &&
         <GameInProgress 
           setScore={setScore}
-          setWinner={setWinner}
           setPlaylist={playlist}
           nextRound={nextRound}
           round={round}
@@ -114,7 +113,7 @@ export default function Game({playlist}) {
       }
 
       {/* GAME-END RESULT */}
-      {gameStatus.finished && <Result score={score} winner={winner} playlistName={playlist.playlistName} />}
+      {gameStatus.finished && <Result score={score} winner={gameStatus.winner} playlistName={playlist.playlistName} />}
 
     </div>
 
