@@ -9,9 +9,8 @@
   display: flex;
   position: relative;
   margin: 0.5vw;
-  // border: 1px solid white;
   border-radius: 12px;
-  width: 4vw;
+  width: 3.5vw;
   height: auto;
   overflow: hidden;
   opacity: 0.75;
@@ -20,12 +19,10 @@
     position: relative;
     width: inherit;
     height: inherit;
-    // z-index: 1;
   }
 
   .question-mark {
     position: absolute;
-    // z-index: 2;
     top: 25%;
     left: 25%;
     opacity: 0;
@@ -34,7 +31,7 @@
   &--current {
     @extend .tracklist-album-cover;
     // border-width: 3px;
-    width: 7vw;
+    width: 6vw;
     height: auto;
     opacity: 1;
   }

@@ -1,20 +1,30 @@
 import React from 'react';
-import './MusicPlayer.scss';
 // import LoadingRound from './LoadingRound/LoadingRound';
 import RoundUnknown from './RoundUnknown/RoundUnknown';
 import RoundKnown from './RoundKnown/RoundKnown';
 import AudioPlayer from './AudioPlayer/AudioPlayer';
+
+// Styles
+import './MusicPlayer.scss';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    margin: "1rem",
+  }
+}));
 
 // Hard-coded data for now
 const roundStart = true;
 const roundEnd = true;
 
 export default function MusicPlayer({ song, nextRound, roundStatus, playlist }) {
-  // console.log("song in music player", song);
+  const classes = useStyles();
 
   return (
     <div className="music-player">
-      <h3>{playlist.playlistName} playlist</h3>
+      <Typography variant="h3" className={classes.title}>{playlist.playlistName} Playlist</Typography>
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
