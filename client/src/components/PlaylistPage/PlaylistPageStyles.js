@@ -45,14 +45,15 @@ export default makeStyles((theme) => ({
   songs: {
     marginTop: 50,
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
-    width: 500,
+    width: 440,
     height: 30,
     borderRadius: 10,
     padding: 20,
+    paddingLeft: 80,
   },
   dropdown: {
     color: '#fff',

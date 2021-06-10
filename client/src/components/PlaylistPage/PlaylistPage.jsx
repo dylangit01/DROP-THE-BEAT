@@ -16,8 +16,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import ArrowDropDownCircleIcon from '@material-ui/icons/ArrowDropDownCircle';
+import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 
 // Need a handleClick function that will store the current playlist ID in the state
 
@@ -83,7 +82,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                 <Typography variant='h6'>Songs</Typography>
                 <div>
                   <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-                    <ArrowDropDownCircleIcon className={classes.dropdown} />
+                    <ArrowDropDownCircleTwoToneIcon className={classes.dropdown} />
                   </IconButton>
                   <Menu
                     id='long-menu'
@@ -99,7 +98,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     }}
                   >
                     {songs.map((song) => (
-                      <MenuItem MenuProps={{ classes: { paper: classes.select } }} key={song.id} onClick={handleClose}>
+                      <MenuItem  key={song.id} onClick={handleClose}>
                         {song.title}
                       </MenuItem>
                     ))}
@@ -108,10 +107,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>Songs</Typography>
+                <Typography variant='h6'>ASDFFFF</Typography>
                 <div>
                   <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-                    <ArrowDropDownCircleIcon className={classes.dropdown} />
+                    <ArrowDropDownCircleTwoToneIcon className={classes.dropdown} />
                   </IconButton>
                   <Menu
                     id='long-menu'
@@ -127,7 +126,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     }}
                   >
                     {songs.map((song) => (
-                      <MenuItem MenuProps={{ classes: { paper: classes.select } }} key={song.id} onClick={handleClose}>
+                      <MenuItem key={song.id} onClick={handleClose}>
                         {song.title}
                       </MenuItem>
                     ))}
