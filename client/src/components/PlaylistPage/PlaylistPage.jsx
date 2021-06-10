@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams,  useHistory } from 'react-router-dom';
-import { SET_PLAYLIST } from '../../reducer/data_reducer';
+import { SET_PLAYLIST, SET_DIFFICULT, SET_SELECTED_SONG } from '../../reducer/data_reducer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
@@ -68,9 +68,9 @@ export default function PlaylistPage({ playlists, dispatch }) {
   // }
 
   // For Difficult control:
-  const [difficult, setDifficult] = useState('easy');
+  const [difficulty, setDifficulty] = useState('easy');
   const handleDifficulty = (event) => {
-    setDifficult(event.target.value);
+    setDifficulty(event.target.value);
   };
 
   // For dropdown menu control:
@@ -86,6 +86,8 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
+    dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
+    console.log(difficulty);
     history.push(`/game`);
   };
   // map through the songs
@@ -107,7 +109,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                 <Typography variant='h6'>Difficulty</Typography>
                 <div>
                   <FormControl component='fieldset'>
-                    <RadioGroup aria-label='difficulty' name='difficulty' value={difficult} onChange={handleDifficulty}>
+                    <RadioGroup aria-label='difficulty' name='difficulty' value={difficulty} onChange={handleDifficulty}>
                       <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
                       <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
                       <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />

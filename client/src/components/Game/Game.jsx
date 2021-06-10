@@ -30,7 +30,7 @@ export default function Game({playlist}) {
     <div className="game">
       <h1>I am a Game page</h1>
 
-      {!isActive && <Lobby setIsActive={setIsActive} />}
+      {!isActive && <Lobby playlist={playlist} setIsActive={ setIsActive} />}
 
       {/* Might want to make a GameInProgress component that has all these 4 components */}
       {isActive && !isFinished && (

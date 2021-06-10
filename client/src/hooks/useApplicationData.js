@@ -8,6 +8,8 @@ const useApplicationData = () => {
     playlist: null,
     playlists: [],
     loading: true,
+    difficulty: 'easy',
+    selectedSong: ''
   });
 
   useEffect(() => {
