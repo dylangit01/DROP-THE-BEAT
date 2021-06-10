@@ -11,7 +11,8 @@ import Result from "./Result/Result";
 
 export default function Game({playlist}) {
   const [conn, setConn] = useState(undefined);
-  const [isActive, setIsActive] = useState(false);
+  const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
+  // const [isActive, setIsActive] = useState(false);
   const [score, setScore] = useState(0);
   const [winner, setWinner] = useState("");
   const [round, setRound] = useState(0);
@@ -32,12 +33,22 @@ export default function Game({playlist}) {
     return false;
   }, [numberOfRounds, round]);
 
+  // useEffect(() => {
+  //   if (round === numberOfRounds) {
+  //     // check highest score for winner and set winner
+  //     setGameStatus((prev) => {
+  //       return {...prev, finished: true}
+  //     });
+  //   }
+  // }, [numberOfRounds, round])
+
+  // On initial socket connection
   useEffect(() => {
     const connection = io('http://localhost:3001');
     setConn(connection);
   }, []);
 
-  // When something changes in the conn
+  // RECEIVING MESSAGES FROM THE SERVER
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
@@ -46,7 +57,9 @@ export default function Game({playlist}) {
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
         console.log(msg);
-        setIsActive(true);
+        setGameStatus((prev) => {
+          return {...prev, started: true}
+        });
         setCurrentSong(msg.song);
       })
       
@@ -67,6 +80,7 @@ export default function Game({playlist}) {
     conn.emit(type, msg);
   };
 
+  // Move to the next round by incrementing the round number
   const nextRound = () => {
     setRound(prev => prev + 1);
   };
@@ -76,11 +90,11 @@ export default function Game({playlist}) {
       <h2>{playlist.playlistName} Playlist</h2>
 
       {/* PRE-GAME LOBBY */}
-      {!isActive && <Lobby sendMessage={sendMessage} songs={songs} />}
+      {!gameStatus.started && <Lobby sendMessage={sendMessage} songs={songs} />}
 
       {/* GAME IN PROGRESS */}
       {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
-      {isActive && !isFinished &&
+      {gameStatus.started && !isFinished &&
         <GameInProgress 
           setScore={setScore}
           setWinner={setWinner}
