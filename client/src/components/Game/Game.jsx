@@ -43,7 +43,7 @@ export default function Game({playlist}) {
     if (conn) {
       console.log("initialized");
 
-      // On start game
+      // On start game message from the server
       conn.on('START_GAME', (msg) => {
         console.log(msg);
         setIsActive(true);
@@ -76,7 +76,7 @@ export default function Game({playlist}) {
       <h2>{playlist.playlistName} Playlist</h2>
 
       {/* PRE-GAME LOBBY */}
-      {!isActive && <Lobby setIsActive={setIsActive} sendMessage={sendMessage} songs={songs} />}
+      {!isActive && <Lobby sendMessage={sendMessage} songs={songs} />}
 
       {/* GAME IN PROGRESS */}
       {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}

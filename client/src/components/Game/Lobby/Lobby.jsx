@@ -1,7 +1,7 @@
 import React from 'react';
 import './Lobby.scss';
 
-export default function Lobby({setIsActive, sendMessage, songs}) {
+export default function Lobby({sendMessage, songs}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
