@@ -49,10 +49,9 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
-    width: 440,
-    height: 15,
+    width: 460,
+    height: 50,
     borderRadius: 10,
-    padding: 20,
     paddingLeft: 80,
   },
   dropdown: {
