@@ -116,11 +116,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
                 </div>
               </div>
 
-              <div className={classes.songs}>
-                <Typography variant='h6'>ASDFFFF</Typography>
+              <div className={classes.bottomBtn} >
                 <div className={classes.btnControl}>
                   <Button className={classes.codeBtn} variant='contained'>
-                    CODE
+                    START LOBBY
                   </Button>
                 </div>
               </div>

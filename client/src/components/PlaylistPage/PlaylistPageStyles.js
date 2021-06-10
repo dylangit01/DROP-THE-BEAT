@@ -50,7 +50,7 @@ export default makeStyles((theme) => ({
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
     width: 440,
-    height: 20,
+    height: 15,
     borderRadius: 10,
     padding: 20,
     paddingLeft: 80,
@@ -65,11 +65,14 @@ export default makeStyles((theme) => ({
     height: 60,
     width: 150,
     borderRadius: 20,
-    
+  },
+  bottomBtn: {
+    marginTop: 50,
+    marginLeft: 400,
+    display: 'flex',
+    justifyContent: 'center',
+    width: 130,
   },
 
-  // btnControl: {
-  //   rightPad: ;
-  // }
-}));
 
+}));
