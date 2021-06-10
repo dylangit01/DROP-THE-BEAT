@@ -128,15 +128,16 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     PaperProps={{
                       style: {
                         maxHeight: ITEM_HEIGHT * 4.0,
-                        width: '20ch',
+                        width: '30ch',
                         backgroundColor: '#666',
-                        color: '#fff'
+                        color: '#fff',
+                        lineHeight:0
                       },
                     }}
                   >
                     {songs.map((song) => (
                       <MenuItem key={song.id} onClick={handleClose}>
-                        {song.title}
+                        {`${song.id} ${song.title}-${song.artist}`}
                       </MenuItem>
                     ))}
                   </Menu>

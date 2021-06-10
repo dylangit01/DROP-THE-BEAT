@@ -71,5 +71,5 @@ export default makeStyles((theme) => ({
     marginLeft: 100,
     display: 'center',
     marginBottom: 100,
-  }
+  },
 }));
