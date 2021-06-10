@@ -21,10 +21,10 @@ import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
 
-const StyledButton = withStyles({
+const StyledLobbyBtnOne = withStyles({
   root: {
     background: 'linear-gradient(45deg, #867ae9 30%, #f25287 90%)',
-    borderRadius: 3,
+    borderRadius: 5,
     border: 0,
     color: 'white',
     height: 58,
@@ -32,6 +32,22 @@ const StyledButton = withStyles({
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     marginTop: 50,
     marginLeft: 180,
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+})(Button);
+
+const StyledCodeBtnTwo = withStyles({
+  root: {
+    background: 'linear-gradient(45deg, #867ae9 30%, #f25287 90%)',
+    borderRadius: 5,
+    border: 0,
+    color: 'white',
+    height: 58,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    
   },
   label: {
     textTransform: 'capitalize',
@@ -64,7 +80,6 @@ export default function PlaylistPage({ playlists, dispatch }) {
  const handleClose = () => {
    setAnchorEl(null);
  };
-
 
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
@@ -128,16 +143,14 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
               <div className={classes.songs}>
                 <Typography variant='h6'>ASDFFFF</Typography>
-                <div className={classes.btnControl}>
-                  <Button className={classes.codeBtn} variant='contained'>
-                    CODE
-                  </Button>
+                <div >
+                  <StyledLobbyBtnOne>CODE</StyledLobbyBtnOne>
                 </div>
               </div>
 
-              <div >
+              <div>
                 <div className={classes.btnControl}>
-                  <StyledButton>START LOBBY</StyledButton>
+                  <StyledCodeBtnTwo>START LOBBY</StyledCodeBtnTwo>
                 </div>
               </div>
             </div>

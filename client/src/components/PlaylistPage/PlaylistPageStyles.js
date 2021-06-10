@@ -66,4 +66,10 @@ export default makeStyles((theme) => ({
     width: 150,
     borderRadius: 20,
   },
+  btnControl: {
+    marginTop: 50,
+    marginLeft: 100,
+    display: 'center',
+    marginBottom: 100,
+  }
 }));
