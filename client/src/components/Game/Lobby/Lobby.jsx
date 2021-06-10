@@ -15,7 +15,7 @@
 import React, { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { SET_PLAYLIST } from '../../../reducer/data_reducer';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+// import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
 import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, TextField, } from '@material-ui/core';
@@ -165,11 +165,11 @@ export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMess
 
             <div className={classes.songs}>
               <Typography>{'xxx'}</Typography>
-              <CopyToClipboard text={'xxxx'}>
+              {/* <CopyToClipboard text={'xxxx'}> */}
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>
-              </CopyToClipboard>
+              {/* </CopyToClipboard> */}
             </div>
             <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
 
