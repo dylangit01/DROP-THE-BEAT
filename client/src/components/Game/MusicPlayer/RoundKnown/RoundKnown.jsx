@@ -18,7 +18,7 @@ export default function RoundKnown({song}) {
     <div className="round-known">
       {/* For now, assume someone will always guess song */}
       <h6>SONG - KNOW When a song is guessed or no one guesses (display album and details)</h6>
-      <img className={classes.cover} src={song.albumPhoto} alt="cover"></img>
+      <img src={song.albumPhoto} alt="cover" />
 
     </div>
   );

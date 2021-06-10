@@ -5,8 +5,9 @@ import './RoundUnknown.scss';
 export default function RoundUnknown() {
   return (
     <div className="round-unknown">
-      <h6>SONG UNKNOWN - from when song begins to when a player guesses song or when the round ends</h6>
-
+      <div>
+        <h6>SONG UNKNOWN</h6>
+      </div>
     </div>
   );
 };
