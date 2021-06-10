@@ -130,7 +130,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                   >
                     {songs.map((song) => (
                       <MenuItem key={song.id} value={song.title} onClick={handleClose}>
-                        {`${song.id}. ${song.title} - ${song.artist}`}
+                        {`${song.title} - ${song.artist}`}
                       </MenuItem>
                     ))}
                   </Menu>
@@ -138,10 +138,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography>{'xxx'}</Typography>
-                  <div>
-                    <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
-                  </div>
+                <Typography variant='h6'>{12345}</Typography>
+                <div>
+                  <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
+                </div>
               </div>
               <div>
                 <div className={classes.btnControl}>

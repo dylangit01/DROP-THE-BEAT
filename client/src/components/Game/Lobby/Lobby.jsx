@@ -91,15 +91,15 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
             </div>
 
             <div className={classes.songs}>
-              <Typography variant='h5'>Host: DJ Dylan</Typography>
+              <Typography variant='h6'>Host: DJ Dylan</Typography>
             </div>
 
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
-              <Typography variant='h5'>
+              <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' /> RubyOffTheRails
               </Typography>
-              <Typography variant='h5'>
+              <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' /> NellyCuteAsBtn
               </Typography>
             </div>
