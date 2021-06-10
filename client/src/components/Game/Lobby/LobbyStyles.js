@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
     // width: 'fit-content',
     // margin: 100,
     // marginLeft: 150,
-    display: 'flex',
+		display: 'flex',
   },
   cover: {
     height: 500,

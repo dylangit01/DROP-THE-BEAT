@@ -1,7 +1,4 @@
-
 // export default function Lobby({ setIsActive, sendMessage, songs, playlistName}) {
-
-
 
 //   return (
 //     <div className="chat">
@@ -14,11 +11,11 @@
 
 import React, { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { SET_PLAYLIST } from '../../../reducer/data_reducer';
+// import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
-import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, TextField, } from '@material-ui/core';
+import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, Container, Button, } from '@material-ui/core';
 import useStyles from './LobbyStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
@@ -74,12 +71,6 @@ export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMess
   const [anchorEl, setAnchorEl] = useState(null);
   const [code, setCode] = useState('');
 
-  // Handle selected Song
-  // const handleSelectedSong = (e) => {
-  //   setSelectedSong(e.target.value);
-  //   console.log(e.target);
-  // }
-
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
   const handleDifficulty = (event) => {
@@ -96,11 +87,6 @@ export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMess
     setAnchorEl(null);
     console.log(e.target.value);
   };
-
-  // const handlePlaylistClick = (event) => {
-  //   dispatch({ type: SET_PLAYLIST, playlist: idNum });
-  //   history.push(`/game`);
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -124,9 +110,7 @@ export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMess
               <div>
                 <FormControl component='fieldset'>
                   <RadioGroup aria-label='difficulty' name='difficulty' value={difficult} onChange={handleDifficulty}>
-                    <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
-                    <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
-                    <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
+                    <FormControlLabel value='medium' control={<Radio selected />} label='Medium (20 sec)' />
                   </RadioGroup>
                 </FormControl>
               </div>
@@ -166,19 +150,17 @@ export default function PlaylistPage({ playlist, dispatch, setIsActive, sendMess
             <div className={classes.songs}>
               <Typography>{'xxx'}</Typography>
               {/* <CopyToClipboard text={'xxxx'}> */}
-                <div>
-                  <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
-                </div>
+              <div>
+                <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
+              </div>
               {/* </CopyToClipboard> */}
             </div>
-            <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
 
             <div>
               <div className={classes.btnControl}>
-                {/* <StyledCodeBtnTwo onClick={handlePlaylistClick}>START LOBBY</StyledCodeBtnTwo> */}
-                <button type='submit' onClick={(event) => handleSubmit(event)}>
+                <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event)}>
                   Start game
-                </button>
+                </StyledCodeBtnTwo>
               </div>
             </div>
           </div>

@@ -44,8 +44,6 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-// const songs = playlists
-
 export default function PlaylistPage({ playlists, dispatch }) {
   const classes = useStyles();
   const history = useHistory();
@@ -55,17 +53,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
   const playlist = playlists.find((playlist) => playlist.playlistId === idNum);
 
   // For songs dropdown menu:
-  const songs = playlists[idNum]?.songs;
+  const songs = playlist.songs;
   const ITEM_HEIGHT = 48;
-  // const [selectedSong, setSelectedSong] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [code, setCode] = useState('');
-
-  // Handle selected Song
-  // const handleSelectedSong = (e) => {
-  //   setSelectedSong(e.target.value);
-  //   console.log(e.target);
-  // }
 
   // For Difficult control:
   const [difficulty, setDifficulty] = useState('easy');
@@ -87,10 +78,8 @@ export default function PlaylistPage({ playlists, dispatch }) {
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
     dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
-    console.log(difficulty);
     history.push(`/game`);
   };
-  // map through the songs
 
   return (
     <>
@@ -157,7 +146,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                   </div>
                 {/* </CopyToClipboard> */}
               </div>
-              <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth />
+              {/* <TextField label='CODE' value={code} onChange={(e) => setCode(e.target.value)} fullWidth /> */}
 
               <div>
                 <div className={classes.btnControl}>
