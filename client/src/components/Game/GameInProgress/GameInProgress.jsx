@@ -19,8 +19,8 @@ export default function GameInProgress({setScore, setWinner, playlist, nextRound
         <TrackList songs={playlist.songs}/>
       </div>
       <div className="right-side">
-        <Chat />
         <Score setScore={setScore} setWinner={setWinner}/>
+        <Chat />
       </div>
     </div>
   )

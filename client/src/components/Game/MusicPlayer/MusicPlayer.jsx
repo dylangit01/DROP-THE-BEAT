@@ -9,11 +9,12 @@ import AudioPlayer from './AudioPlayer/AudioPlayer';
 const roundStart = true;
 const roundEnd = true;
 
-export default function MusicPlayer({ song, nextRound, roundStatus }) {
+export default function MusicPlayer({ song, nextRound, roundStatus, playlist }) {
   // console.log("song in music player", song);
 
   return (
     <div className="music-player">
+      <h3>{playlist.playlistName} playlist</h3>
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
@@ -24,7 +25,7 @@ export default function MusicPlayer({ song, nextRound, roundStatus }) {
       {roundStart && !roundEnd && <RoundUnknown />}
 
       {/* When a song has been guessed correctly or it's the end of the round */}
-      {roundEnd && <RoundKnown song={song}/>}
+      {roundEnd && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
       <AudioPlayer song={song} nextRound={nextRound}/>

@@ -1,12 +1,13 @@
 .game-in-progress {
   display: flex;
-  justify-content: row;
+  justify-content: space-around;
 
   .right-side {
-    justify-content: column;
+    position: relative;
+
   }
 
-  .right-side {
+  .left-side {
     justify-content: column;
   }
 

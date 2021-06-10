@@ -73,9 +73,8 @@ export default function Game({playlist}) {
 
   return (
     <div className="game">
-      <h2>{playlist.playlistName} Playlist</h2>
 
-      {!isActive && <Lobby setIsActive={setIsActive} sendMessage={sendMessage} songs={songs} />}
+      {!isActive && <Lobby setIsActive={setIsActive} sendMessage={sendMessage} songs={songs} playlistName={playlist.playlistName}/>}
 
       {/* Might want to make a GameInProgress component that has all these 4 components */}
       {isActive && !isFinished &&
@@ -89,7 +88,7 @@ export default function Game({playlist}) {
         />
       }
 
-      {isFinished && <Result score={score} winner={winner} />}
+      {isFinished && <Result score={score} winner={winner} playlistName={playlist.playlistName} />}
 
     </div>
 
