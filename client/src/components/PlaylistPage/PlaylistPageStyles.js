@@ -5,6 +5,7 @@ export default makeStyles((theme) => ({
     width: 'fit-content',
     margin: 100,
     marginLeft: 150,
+    display:'flex'
   },
   cover: {
     height: 500,
@@ -31,13 +32,18 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
-    height: 200,
+    height: 150,
     width: 500,
     borderRadius: 10,
-    padding: 20
+    padding: 20,
+    color: 'white',
   },
-  difficulty: {
-
-  }
+  difficulty: {},
+  radio: {
+    '&$checked': {
+      color: '#fff',
+    },
+  },
+  checked: {},
 }))
 

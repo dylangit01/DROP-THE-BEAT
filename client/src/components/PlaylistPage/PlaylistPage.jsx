@@ -1,9 +1,9 @@
-import React from 'react'
-import { useParams, Link, useHistory } from 'react-router-dom'
-import { SET_PLAYLIST } from '../../reducer/data_reducer'
+import React from 'react';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { SET_PLAYLIST } from '../../reducer/data_reducer';
 
 // Styling
-import './PlaylistPage.scss'
+import './PlaylistPage.scss';
 import {
   Typography,
   Card,
@@ -19,23 +19,23 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-} from '@material-ui/core'
-import useStyles from './PlaylistPageStyles'
+} from '@material-ui/core';
+import useStyles from './PlaylistPageStyles';
 
 // Need a handleClick function that will store the current playlist ID in the state
 
 export default function PlaylistPage({ playlists, dispatch }) {
-  const classes = useStyles()
-  const history = useHistory()
+  const classes = useStyles();
+  const history = useHistory();
 
-  const { id } = useParams()
-  const idNum = Number(id)
-  const playlist = playlists.find((playlist) => playlist.playlistId === idNum) // How to fix this to ===?
+  const { id } = useParams();
+  const idNum = Number(id);
+  const playlist = playlists.find((playlist) => playlist.playlistId === idNum); // How to fix this to ===?
 
   const handleClick = (event) => {
-    dispatch({ type: SET_PLAYLIST, playlist: idNum })
-    history.push(`/game`)
-  }
+    dispatch({ type: SET_PLAYLIST, playlist: idNum });
+    history.push(`/game`);
+  };
   // map through the songs
 
   return (
@@ -53,7 +53,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
               <div className={classes.difficulty}>Difficulty</div>
               <div>
                 <FormControl component='fieldset'>
-                  <RadioGroup aria-label='gender' name='gender1' >
+                  <RadioGroup aria-label='gender' name='gender1'>
                     <FormControlLabel value='female' control={<Radio />} label='Female' />
                     <FormControlLabel value='male' control={<Radio />} label='Male' />
                     <FormControlLabel value='other' control={<Radio />} label='Other' />
@@ -85,5 +85,5 @@ export default function PlaylistPage({ playlists, dispatch }) {
         // </div>
       )}
     </>
-  )
+  );
 }
