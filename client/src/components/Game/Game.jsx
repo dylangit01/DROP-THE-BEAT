@@ -55,7 +55,7 @@ export default function Game({playlist}) {
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
-      console.log("initialized");
+      console.log("Socket io connection initialized");
 
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
@@ -79,7 +79,7 @@ export default function Game({playlist}) {
 
   // SEND MSG TO SERVER
   const sendMessage = (type, msg) => {
-    console.log(msg);
+    console.log('Msg sent to backend: ', msg);
     conn.emit(type, msg);
   };
 
@@ -90,10 +90,8 @@ export default function Game({playlist}) {
 
   return (
     <div className="game">
-      <h2>{playlist.playlistName} Playlist</h2>
-
       {/* PRE-GAME LOBBY */}
-      {!gameStatus.started && <Lobby sendMessage={sendMessage} songs={songs} />}
+      {!gameStatus.started && <Lobby playlist={playlist} sendMessage={sendMessage} songs={songs} playlistName={playlist.playlistName}/>}
 
       {/* GAME IN PROGRESS */}
       {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
@@ -111,7 +109,7 @@ export default function Game({playlist}) {
       }
 
       {/* GAME-END RESULT */}
-      {isFinished && <Result score={score} winner={winner} />}
+      {isFinished && <Result score={score} winner={winner} playlistName={playlist.playlistName} />}
 
     </div>
 

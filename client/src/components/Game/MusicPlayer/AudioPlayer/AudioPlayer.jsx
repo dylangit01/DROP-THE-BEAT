@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
     color: "white",
-    width: 150,
+    width: 100,
     margin: theme.spacing(1),
   },
 }));
@@ -34,7 +34,7 @@ export default function AudioPlayer({song, nextRound}) {
         src={song.previewUrl}>
       </audio>
 
-      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next Song</Button>
+      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button>
       
     </div>
   );

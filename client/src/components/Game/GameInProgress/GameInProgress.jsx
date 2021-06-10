@@ -14,11 +14,14 @@ export default function GameInProgress({setScore, setWinner, playlist, nextRound
 
   return (
     <div className="game-in-progress">
-      <h6>GAME IS IN PROGRESS</h6>
-      <Chat />
-      <Score setScore={setScore} setWinner={setWinner}/>
-      <MusicPlayer roundStatus={roundStatus}playlist={playlist} song={song} nextRound={() => nextRound()}/>
-      <TrackList round={round} songs={playlist.songs}/>
+      <div className="left-side">
+        <MusicPlayer roundStatus={roundStatus} playlist={playlist} song={song} nextRound={() => nextRound()}/>
+        <TrackList round={round} songs={playlist.songs}/>
+      </div>
+      <div className="right-side">
+        <Score setScore={setScore} setWinner={setWinner}/>
+        <Chat />
+      </div>
     </div>
   )
 }
