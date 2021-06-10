@@ -32,6 +32,17 @@ const io = socketio(server, {
 /**
  * Socket Connection
  */
+const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+// Get all users:
+const getAllUsers = (sockets) => {
+  const users = [];
+  const connections = sockets.values();
+  for (const item of connections) {
+    users.push({ name: item.name, id: item.id, color: item.color });
+  }
+  return users;
+};
 
 let answer = 0;
 
