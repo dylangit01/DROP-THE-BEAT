@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams,  useHistory } from 'react-router-dom';
 import { SET_PLAYLIST } from '../../reducer/data_reducer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -57,15 +57,15 @@ export default function PlaylistPage({ playlists, dispatch }) {
   // For songs dropdown menu:
   const songs = playlists[idNum]?.songs;
   const ITEM_HEIGHT = 48;
-  const [selectedSong, setSelectedSong] = useState('');
+  // const [selectedSong, setSelectedSong] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [code, setCode] = useState('');
 
   // Handle selected Song
-  const handleSelectedSong = (e) => {
-    setSelectedSong(e.target.value);
-    console.log(e.target);
-  }
+  // const handleSelectedSong = (e) => {
+  //   setSelectedSong(e.target.value);
+  //   console.log(e.target);
+  // }
 
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
