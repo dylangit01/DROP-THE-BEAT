@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
 import { SET_PLAYLIST } from '../../../reducer/data_reducer';
-// import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
-import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, Container, Button, } from '@material-ui/core';
+import {
+  Typography,
+  CardMedia,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Container,
+  Button,
+} from '@material-ui/core';
 import useStyles from './LobbyStyles';
-import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
 
 const StyledLobbyBtnOne = withStyles({
@@ -47,35 +53,12 @@ const StyledCodeBtnTwo = withStyles({
 
 export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
   const classes = useStyles();
-    const [difficulty, setDifficulty] = useState('medium');
 
-  // For songs dropdown menu:
-  const ITEM_HEIGHT = 48;
-  // const [selectedSong, setSelectedSong] = useState('');
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [code, setCode] = useState('');
-
-  // Handle selected Song
-  // const handleSelectedSong = (e) => {
-  //   setSelectedSong(e.target.value);
-  //   console.log(e.target);
-  // }
   console.log(numberOfSongs);
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
   const handleDifficulty = (event) => {
     setDifficult(event.target.value);
-  };
-
-  // For dropdown menu control:
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (e) => {
-    setAnchorEl(null);
-    console.log(e.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -100,7 +83,7 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
               <Typography variant='h6'>Difficulty</Typography>
               <div>
                 <FormControl component='fieldset'>
-                  <RadioGroup aria-label='difficulty' name='difficulty' value={difficulty} onChange={handleDifficulty}>
+                  <RadioGroup aria-label='difficulty' name='difficulty' value={'medium'}>
                     <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
                   </RadioGroup>
                 </FormControl>
@@ -108,16 +91,16 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
             </div>
 
             <div className={classes.songs}>
-              <Typography variant='h6'>Songs</Typography>
+              <Typography variant='h6'>Number of Songs: {numberOfSongs}</Typography>
             </div>
 
             <div className={classes.songs}>
-              <Typography>{'xxx'}</Typography>
-              {/* <CopyToClipboard text={'xxxx'}> */}
-                <div>
-                  <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
-                </div>
-              {/* </CopyToClipboard> */}
+              <Typography variant='h5'>Host: DJ Dylan</Typography>
+            </div>
+
+            <div className={classes.players}>
+              <Typography variant='h5'>RubyOffTheRails</Typography>
+              <Typography variant='h5'>NellyCuteAsBtn</Typography>
             </div>
 
             <div>
