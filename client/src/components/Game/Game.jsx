@@ -75,9 +75,11 @@ export default function Game({playlist}) {
     <div className="game">
       <h2>{playlist.playlistName} Playlist</h2>
 
+      {/* PRE-GAME LOBBY */}
       {!isActive && <Lobby setIsActive={setIsActive} sendMessage={sendMessage} songs={songs} />}
 
-      {/* Might want to make a GameInProgress component that has all these 4 components */}
+      {/* GAME IN PROGRESS */}
+      {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
       {isActive && !isFinished &&
         <GameInProgress 
           setScore={setScore}
@@ -87,10 +89,11 @@ export default function Game({playlist}) {
           round={round}
           numberOfRounds={numberOfRounds}
           playlist={playlist}
-          song={currentSong}
+          song={songs[round]}
         />
       }
 
+      {/* GAME-END RESULT */}
       {isFinished && <Result score={score} winner={winner} />}
 
     </div>
