@@ -59,7 +59,7 @@ const StyledCodeBtnTwo = withStyles({
 
 // const songs = playlists
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName }) {
+export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -79,7 +79,7 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
   //   setSelectedSong(e.target.value);
   //   console.log(e.target);
   // }
-
+  console.log(numberOfSongs);
   // For Difficult control:
   const [difficult, setDifficult] = useState('easy');
   const handleDifficulty = (event) => {
