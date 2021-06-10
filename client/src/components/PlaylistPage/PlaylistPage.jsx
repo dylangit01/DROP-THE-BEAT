@@ -5,7 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 // Styling
 import './PlaylistPage.scss';
-import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, TextField, Select} from '@material-ui/core';
+import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, TextField, } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
@@ -79,8 +79,9 @@ export default function PlaylistPage({ playlists, dispatch }) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
     setAnchorEl(null);
+    console.log(e.target.value);  
   };
 
   const handlePlaylistClick = (event) => {
@@ -138,7 +139,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                     }}
                   >
                     {songs.map((song) => (
-                      <MenuItem key={song.id} value={song.title} onChange={handleSelectedSong} onClick={handleClose}>
+                      <MenuItem key={song.id} value={song.title} onClick={handleClose}>
                         {`${song.id}. ${song.title} - ${song.artist}`}
                       </MenuItem>
                     ))}
@@ -158,32 +159,12 @@ export default function PlaylistPage({ playlists, dispatch }) {
 
               <div>
                 <div className={classes.btnControl}>
-                  <StyledCodeBtnTwo>START LOBBY</StyledCodeBtnTwo>
+                  <StyledCodeBtnTwo onClick={handlePlaylistClick}>START LOBBY</StyledCodeBtnTwo>
                 </div>
               </div>
             </div>
           </div>
         </Container>
-
-        // <div className="playlist-page">
-        //
-
-        //   <Card className={classes.root}>
-
-        //     <CardMedia
-        //       className={classes.cover}
-        //       image={playlist.playlistPhoto}
-        //       title={playlist.playlistName}
-        //     />
-        //   </Card>
-
-        //   <img className="album-cover" src={playlist.playlistPhoto} alt="cover"></img>
-        //   <p>Difficulty:</p>
-        //   <p>Songs:</p>
-        //   <p>Code:</p>
-        //   {/* <Link to="/game">Start game</Link> */}
-        //   <button onClick={(event) => handleClick(event)}>START GAME - UPDATE STATE WITH PLAYLIST ID</button>
-        // </div>
       )}
     </>
   );
