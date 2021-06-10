@@ -45,20 +45,34 @@ export default function PlaylistPage({ playlists, dispatch }) {
         <div className={classes.root}>
           <div className={classes.img_playOption}>
             <div>
-              <Typography className={classes.title} variant='h3'>{playlist.playlistName}</Typography>
+              <Typography className={classes.title} variant='h3'>
+                {playlist.playlistName}
+              </Typography>
               <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
             </div>
+            <div>
+              <div className={classes.options}>
+                <Typography className={classes.difficulty} variant='h6'>
+                  Difficulty
+                </Typography>
+                <div>
+                  <FormControl component='fieldset'>
+                    <RadioGroup aria-label='gender' name='gender1'>
+                      <FormControlLabel value='female' control={<Radio />} label='Easy (10 sec)' />
+                      <FormControlLabel value='male' control={<Radio />} label='Medium (20 sec)' />
+                      <FormControlLabel value='other' control={<Radio />} label='Difficult (30 sec)' />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </div>
 
-            <div className={classes.options}>
-              <div className={classes.difficulty}>Difficulty</div>
-              <div>
-                <FormControl component='fieldset'>
-                  <RadioGroup aria-label='gender' name='gender1'>
-                    <FormControlLabel value='female' control={<Radio />} label='Easy (10 sec)' />
-                    <FormControlLabel value='male' control={<Radio />} label='Medium (20 sec)' />
-                    <FormControlLabel value='other' control={<Radio />} label='Difficult (30 sec)' />
-                  </RadioGroup>
-                </FormControl>
+              <div className={classes.songs}>
+                <Typography className={classes.difficulty} variant='h6'>
+                  Difficulty
+                </Typography>
+                <div>
+                 xxxxx
+                </div>
               </div>
             </div>
           </div>

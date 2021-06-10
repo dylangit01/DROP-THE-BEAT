@@ -34,7 +34,6 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
-    height: 150,
     width: 500,
     borderRadius: 10,
     padding: 20,
@@ -42,7 +41,19 @@ export default makeStyles((theme) => ({
   },
   title: {
     marginTop: 20,
-    marginBottom: 50
-  }
+    marginBottom: 50,
+  },
+  songs: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    width: 500,
+    background: 'rgba(0, 0, 0, 0.5)',
+    marginTop: 20,
+    marginLeft: 150,
+    borderRadius: 10,
+    paddingLeft: 20,
+    paddingRight: 20
+  },
 }));
 
