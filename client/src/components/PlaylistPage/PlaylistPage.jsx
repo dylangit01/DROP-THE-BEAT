@@ -4,7 +4,7 @@ import { SET_PLAYLIST } from '../../reducer/data_reducer';
 
 // Styling
 import './PlaylistPage.scss';
-import { Typography, Card, CardActions, CardMedia, CssBaseline, Grid, Toolbar, Container, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, MoreVertIcon } from '@material-ui/core';
+import { Typography,  CardMedia,  FormControl,  RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 
 // Need a handleClick function that will store the current playlist ID in the state
@@ -15,9 +15,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
   const classes = useStyles();
   const history = useHistory();
 
-// for 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+
 
   const { id } = useParams();
   const idNum = Number(id);
