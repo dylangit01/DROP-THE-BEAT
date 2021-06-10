@@ -14,37 +14,40 @@ export default function Game({playlist}) {
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
   const [guesses, setGuesses] = useState([]);
+  const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
   
-  // USERS OBJECT
-  // {name, score, emoji}
-
-  // Update score function -> just a function affecting state
-    // Checking winner, sending relevant messages to all users
-  const [score, setScore] = useState(0);
-  const [round, setRound] = useState(0);  // Might need to change this to an object of rounds
-  const [currentSong, setCurrentSong] = useState({});
+  // USER & USERS OBJECT
+  // {name, score, emoji?, color?}
   
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const numberOfRounds = playlist.songs.length;
   const songs = playlist.songs;
 
+  ////////////////////////////////////////////////////
+  // CHECK FOR GAME STATUS AT THE END OF EVERY ROUND
+  ////////////////////////////////////////////////////
   useEffect(() => {
-    // Checking for the end of the game
-    if (round === numberOfRounds) {
+    // Checking if it's the last round
+    if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
+      // const winner = getWinner();
       setGameStatus((prev) => {
         return {...prev, finished: true, winner: "Nelly"}
       });
     }
   }, [numberOfRounds, round])
 
-  // On initial socket connection
+  ////////////////////////////////////////
+  // ON INITIAL SOCKET CONNECTION
+  ////////////////////////////////////////
   useEffect(() => {
     const connection = io('http://localhost:3001');
     setConn(connection);
   }, []);
 
+  ////////////////////////////////////////
   // RECEIVING MESSAGES FROM THE SERVER
+  ////////////////////////////////////////
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
@@ -61,8 +64,9 @@ export default function Game({playlist}) {
       conn.on('CORRECT_GUESS', (msg) => {
         // Update / reveal song cover & title
         // Update winner's score
-        // setWinner for round
         // setMessages (with a different color or something)
+        setRound(prev => {return {...prev, finished: true}})
+        // updateScore(user);
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
@@ -76,19 +80,47 @@ export default function Game({playlist}) {
     }
   }, [conn]);
 
-  // SEND MSG TO SERVER
+  ////////////////////////////////////////
+  // SEND MESSAGE TO SERVER
+  ////////////////////////////////////////
   const sendMessage = (type, msg) => {
     console.log('Msg sent to backend: ', msg);
     conn.emit(type, msg);
   };
 
-  // Move to the next round by incrementing the round number
+  ////////////////////////////////////////
+  // NEW ROUND FUNCTION 
+  ////////////////////////////////////////
   const nextRound = () => {
-    setRound(prev => prev + 1);
-    const currentSongName = songs[round].name;
+    // Update round object by incrementing the round number and resetting the round status to false
+    setRound(prev => {
+      return {...prev, number: prev.number + 1, finished: false};
+    });
+
+    // Send the name of the current song to the server
+    const currentSongName = songs[round.number].name;
     sendMessage('NEXT_ROUND', currentSongName);
-    //sendmessage to server that it's a new round with the new song title
   };
+
+
+  ////////////////////////////////////////
+  // UPDATE SCORE FUNCTION 
+  ////////////////////////////////////////
+  const updateScore = (user) => {
+    // Update score function -> just a function affecting state
+    // Checking winner, sending relevant messages to all users
+    // Update score of user who scored
+    // setUsers(...prev, user.score ++)
+
+  }
+
+  ////////////////////////////////////////
+  // GET WINNER FUNCTION 
+  ////////////////////////////////////////
+  const winner = () => {
+    // Loop through users and return user with highest score
+  }
+
 
   return (
     <div className="game">
@@ -99,18 +131,17 @@ export default function Game({playlist}) {
       {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
       {gameStatus.started && !gameStatus.finished &&
         <GameInProgress 
-          setScore={setScore}
-          setPlaylist={playlist}
           nextRound={nextRound}
           round={round}
+          setRound={setRound}
           numberOfRounds={numberOfRounds}
           playlist={playlist}
-          song={songs[round]}
+          song={songs[round.number]}
         />
       }
 
       {/* GAME-END RESULT */}
-      {gameStatus.finished && <Result score={score} winner={gameStatus.winner} playlistName={playlist.playlistName} />}
+      {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
 
     </div>
 

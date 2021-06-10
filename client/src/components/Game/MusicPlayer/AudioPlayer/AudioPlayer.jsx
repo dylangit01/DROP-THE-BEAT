@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AudioPlayer({song, nextRound}) {
+export default function AudioPlayer({song, nextRound, setRound}) {
   const classes = useStyles();
 
   return (
@@ -30,7 +30,7 @@ export default function AudioPlayer({song, nextRound}) {
         id="song-audio"
         autoPlay
         controls
-        // onEnded={} //disable guessing, reveal song if not revealed
+        onEnded={() => setRound(prev => {return {...prev, finished: true}})} //disable guessing, reveal song if not revealed
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
