@@ -4,7 +4,6 @@ import { Link, useRouteMatch } from "react-router-dom";
 // Styling
 import './Playlist.scss';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from "@material-ui/core/Card";
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +14,8 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
   cover: {
     height: 200,
-    width: 200
+    width: 200,
+    borderRadius: '12px'
   },
   button: {
     background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     right: 0,
+    borderRadius: '12px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
@@ -49,21 +50,19 @@ export default function Playlist({id, name, image, rating}) {
 
   return (
     <div className="playlist">
-      <Card className={classes.root}>
-        <Link to={`${path}/${id}`}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.cover}
-              image={image}
-              title={name}
-            />
-            <div className={classes.overlay}>
-              <Typography variant="subtitle1" className={classes.playlistName}>{name}</Typography>
-            </div>
-            
-          </CardActionArea>
-        </Link>
-      </Card>
+      <Link to={`${path}/${id}`}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.cover}
+            image={image}
+            title={name}
+          />
+          <div className={classes.overlay}>
+            <Typography variant="subtitle1" className={classes.playlistName}>{name}</Typography>
+          </div>
+          
+        </CardActionArea>
+      </Link>
       <div className="playlist-footer">
         {/* <Button className={classes.button}>
           <Link to={`${path}/${id}`}>Select</Link>
