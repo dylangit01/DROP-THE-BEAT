@@ -25,7 +25,7 @@ export default function Game({ playlist }) {
   const numberOfRounds = songs.length;
 
   ////////////////////////////////////////////////////
-  // CHECK FOR GAME STATUS AT THE END OF EVERY ROUND
+  // UPDATES AT THE END OF EVERY ROUND
   ////////////////////////////////////////////////////
   useEffect(() => {
     // Checking if it's the last round
@@ -35,6 +35,14 @@ export default function Game({ playlist }) {
       setGameStatus((prev) => {
         return {...prev, finished: true, winner}
       });
+    }
+
+    // Get the current song name if it exists (new JS syntax)
+    const currentSongName = song?.title;
+
+    // If there's a connection and a current song
+    if (conn && currentSongName && !round.finished) {
+      sendMessage('NEXT_ROUND', currentSongName);
     }
   }, [numberOfRounds, round]);
 
@@ -53,7 +61,7 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
-        console.log(msg);
+        // console.log(msg);
         const { name, color, users } = msg;
         setUser({ name, color });
         setUsers([...users]);
@@ -70,19 +78,25 @@ export default function Game({ playlist }) {
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
         setGameStatus((prev) => ({ ...prev, started: true }));
-        // setCurrentSong(msg.song);
       });
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update / reveal song cover & title
         // Update winner's score
-        // setMessages (with a different color or something)
-        setRound(prev => {return {...prev, finished: true}})
+        // setMessages()
+        // nextRound();
+        setRound(prev => ({...prev, finished: true}));
+        // setMessages()
+        // Okay to do multiple setState calls as long as they don't affect each other
         // updateScore(user);
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
         //setMessages
+      });
+
+      conn.on('NEXT_ROUND', (msg) => {
+        // nextRound();
       });
 
       conn.on('END_GAME', (msg) => {
@@ -116,17 +130,11 @@ export default function Game({ playlist }) {
   // NEW ROUND FUNCTION 
   ////////////////////////////////////////
   const nextRound = () => {
-    // Update round object by incrementing the round number and resetting the round status to false
-    console.log('Round before setRound', round.number);
+    // Update round object by incrementing the round number and resetting the round finished status to false
+    // sendMessage to back end
     setRound(prev => {
       return {...prev, number: prev.number + 1, finished: false};
     });
-
-    console.log('Round after setRound', round.number);
-
-    // Send the name of the current song to the server
-    const currentSongName = songs[round.number].title;
-    sendMessage('NEXT_ROUND', currentSongName);
   };
 
   ////////////////////////////////////////
@@ -156,7 +164,6 @@ export default function Game({ playlist }) {
     // })
     return winner;
   }
-
 
   return (
     <div className='game'>

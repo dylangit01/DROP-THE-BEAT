@@ -47,31 +47,36 @@ const getAllUsers = (sockets) => {
   return users;
 };
 
-let currentSongName = '';
-let guessSongName = '';
-
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
+  let currentSongName = '';
+  let guessSongName = '';
+
   const name = 'Ruby';
   const color = randomColor();
+  const score = 0;
 
   socket.name = name;
   socket.color = color;
-  const users = getAllUsers(io.sockets.sockets);
-  socket.emit('INITIAL_CONNECTION', { name, color, users });
+  socket.score = score;
 
-  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color });
+  const users = getAllUsers(io.sockets.sockets);
+  socket.emit('INITIAL_CONNECTION', { name, color, score, users });
+
+  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color, score });
 
   socket.on('SEND_MESSAGE', (msg) => {
-    io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' });
+    io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess
     guessSongName = msg.msg.toLowerCase();
     console.log('guessss', guessSongName);
 
     if (guessSongName === currentSongName) {
       console.log('right answer');
+      console.log('before reset', currentSongName);
+      currentSongName = ''; // This isn't resetting
+      console.log(currentSongName);
       io.emit('CORRECT_GUESS', { msg });
-      currentSongName = '';
     } else {
       io.emit('INCORRECT_GUESS', { msg });
       console.log('wrong answer');
@@ -84,24 +89,26 @@ io.on('connection', (socket) => {
     // Send to front end
     io.emit('START_GAME', { msg });
     currentSongName = msg.msg.song.toLowerCase();
+    console.log('92', currentSongName);
   });
 
   // Will be from the host
   socket.on('NEXT_ROUND', ({ msg }) => {
     // set currentSongName = currentSongName
     currentSongName = msg.toLowerCase();
-    // io.emit('END_GAME', {msg});
+    console.log('96', currentSongName);
+    io.emit('NEXT_ROUND', { msg });
   });
 
   // Will be from players
-  socket.on('GUESS', (msg) => {
-    if (msg.guess === currentSongName) {
-      io.emit('CORRECT_GUESS', { msg });
-      currentSongName = '';
-    } else {
-      io.emit('INCORRECT_GUESS', { msg });
-    }
-  });
+  // socket.on('GUESS', (msg) => {
+  //   if (msg.guess === currentSongName) {
+  //     io.emit('CORRECT_GUESS', { msg });
+  //     currentSongName = '';
+  //   } else {
+  //     io.emit('INCORRECT_GUESS', { msg });
+  //   }
+  // });
 
   socket.on('disconnect', () => {
     io.emit('DISCONNECT_USER', { name: socket.name, id: socket.id });
