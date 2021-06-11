@@ -117,7 +117,7 @@ export default function Game({playlist}) {
   ////////////////////////////////////////
   // GET WINNER FUNCTION 
   ////////////////////////////////////////
-  const winner = () => {
+  const getWinner = () => {
     // Loop through users and return user with highest score
   }
 
@@ -125,10 +125,16 @@ export default function Game({playlist}) {
   return (
     <div className="game">
       {/* PRE-GAME LOBBY */}
-      {!gameStatus.started && <Lobby playlist={playlist} sendMessage={sendMessage} songs={songs} numberOfSongs={numberOfRounds} playlistName={playlist.playlistName}/>}
+      {!gameStatus.started && 
+        <Lobby 
+          playlist={playlist} 
+          sendMessage={sendMessage} 
+          songs={songs} 
+          numberOfSongs={numberOfRounds} 
+          playlistName={playlist.playlistName}
+        />}
 
       {/* GAME IN PROGRESS */}
-      {/* song={currentSong} <----- this was what Vasily was passing down to props but using another method for now*/}
       {gameStatus.started && !gameStatus.finished &&
         <GameInProgress 
           nextRound={nextRound}
@@ -141,8 +147,11 @@ export default function Game({playlist}) {
       }
 
       {/* GAME-END RESULT */}
-      {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
-
+      {gameStatus.finished && 
+        <Result 
+          winner={gameStatus.winner} 
+          playlistName={playlist.playlistName} 
+        />}
     </div>
 
   );
