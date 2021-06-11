@@ -49,7 +49,7 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
-    width: 460,
+    width: 500,
     height: 50,
     borderRadius: 10,
     paddingLeft: 80,

@@ -79,6 +79,8 @@ io.on('connection', (socket) => {
     // console.log(msg.songs[answer]);
     // Send to front end
     io.emit('START_GAME', { song: msg.msg.song, name1: msg.msg.name1, name2: msg.msg.name2 });
+    lastSongName = msg.msg.song;
+    console.log(lastSongName);
   });
 
   // Will be from the host
@@ -86,6 +88,9 @@ io.on('connection', (socket) => {
     // set currentSongName = currentSongName
     currentSongName = msg;
     console.log(currentSongName);
+    if (currentSongName === lastSongName) {
+      io.emit('END_GAME', {msg});
+    }
   });
 
   // Will be from players

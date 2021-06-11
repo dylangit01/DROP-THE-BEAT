@@ -95,7 +95,7 @@ export default function Game({ playlist }) {
       });
 
       conn.on('END_GAME', (msg) => {
-        
+        console.log(msg);
       });
 
       conn.on('DISCONNECT_USER', (msg) => {
