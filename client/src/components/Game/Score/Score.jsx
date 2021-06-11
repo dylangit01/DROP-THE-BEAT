@@ -15,6 +15,7 @@ export default function Score({setScore, setWinner}) {
 
   return (
     <div className="score-box">
+      <h2>Scores:</h2>
       <h1 className="score-numbers"> 3 / 2 </h1>
     </div>
   )

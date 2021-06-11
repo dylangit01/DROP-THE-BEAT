@@ -1,16 +1,17 @@
 .score-box {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   position: relative;
   height: 15vh;
-  width: 25vw;
-  background-color: black;
-  opacity: 40%;
+  width: 42.5vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  // opacity: 40%;
   border-radius: 15px;
   margin-bottom: 3vh;
+  color: #fff;
 
   .score-numbers {
-    position: absolute;
+    // position: absolute;
   }
 }
