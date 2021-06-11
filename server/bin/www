@@ -71,10 +71,12 @@ io.on('connection', (socket) => {
     guessSongName = msg.msg;
 
     if (guessSongName === currentSongName) {
+      console.log('111111111111111');
       io.emit('CORRECT_GUESS', { msg });
       currentSongName = '';
     } else {
       io.emit('INCORRECT_GUESS', { msg });
+      console.log('2222222222222222222');
     }
     
   });
