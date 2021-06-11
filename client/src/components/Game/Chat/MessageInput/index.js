@@ -12,10 +12,11 @@ const MessageInput = (props) => {
     button: {
       background: 'linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)',
       color: 'white',
-      width: 100,
+      width: 120,
       height: 40,
       position: 'absolute',
       right: 0,
+      borderRadius: '10'
     },
     input: {
       color: '#fff',

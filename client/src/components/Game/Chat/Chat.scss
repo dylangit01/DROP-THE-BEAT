@@ -24,7 +24,7 @@
   height: 55vh;
   width: 30vw;
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
+  border-radius: 10px;
 
   .message-list {
     display: flex;
@@ -42,7 +42,7 @@
     width: 20vw;
     background-color: white;
     opacity: 100%;
-    border-radius: 15px;
+    border-radius: 10px;
 
     .chat-input {
       border-color: transparent;
