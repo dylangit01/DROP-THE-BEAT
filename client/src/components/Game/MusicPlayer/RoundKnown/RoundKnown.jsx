@@ -18,8 +18,6 @@ export default function RoundKnown({song}) {
 
   return (
     <div className="round-known">
-      {/* <img src={song.albumPhoto} alt="cover" /> */}
-      {/* For now, assume someone will always guess song */}
       <img className={classes.cover} src={song.albumPhoto} alt="cover"></img>
     </div>
   );
