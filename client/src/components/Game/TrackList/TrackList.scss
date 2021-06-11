@@ -38,7 +38,7 @@
 
   &--current {
     @extend .tracklist-album-cover;
-    background-color: #505050;
+    background-color: #101010;
     img {
       opacity: 0;
     }
@@ -60,7 +60,7 @@
 
   &--next {
     @extend .tracklist-album-cover;
-    background-color: #505050;
+    background-color: #101010;
     opacity: 60%;
 
     img {
