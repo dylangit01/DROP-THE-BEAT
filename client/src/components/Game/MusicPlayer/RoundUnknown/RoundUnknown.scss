@@ -3,10 +3,19 @@
   justify-content: center;
 
   div {
+    position: relative;
     background-color: grey;
     opacity: 75%;
     height: 30vw;
     width: 30vw;
     border-radius: 12px;
+
+    .question-mark {
+      position: absolute;
+      font-size: 15rem;
+      top: 23%;
+      left: 23%;
+      opacity: 1;
+    }
   }
 }
