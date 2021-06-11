@@ -15,11 +15,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// Hard-coded data for now
-const roundStart = true;
-const roundEnd = true;
-
-export default function MusicPlayer({ song, nextRound, roundStatus, playlist }) {
+export default function MusicPlayer({ song, nextRound, round, setRound, playlist }) {
   const classes = useStyles();
 
   return (
@@ -32,13 +28,13 @@ export default function MusicPlayer({ song, nextRound, roundStatus, playlist }) 
       {/* {!roundStart && <LoadingRound />} */}
 
       {/* When the current song is unknown (hasn't been guessed) */}
-      {roundStart && !roundEnd && <RoundUnknown />}
+      {!round.finished && <RoundUnknown />}
 
       {/* When a song has been guessed correctly or it's the end of the round */}
-      {roundEnd && <RoundKnown song={song} />}
+      {round.finished  && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
-      <AudioPlayer song={song} nextRound={nextRound}/>
+      <AudioPlayer song={song} nextRound={nextRound} setRound={setRound} />
       
 
     </div>

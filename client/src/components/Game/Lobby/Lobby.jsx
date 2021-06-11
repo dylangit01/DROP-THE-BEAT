@@ -16,20 +16,30 @@ import {
 import useStyles from './LobbyStyles';
 import { withStyles } from '@material-ui/core/styles';
 
+const StyledLobbyBtnOne = withStyles({
+  root: {
+    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
+    borderRadius: 5,
+    border: 0,
+    color: 'white',
+    height: 50,
+    padding: '0 30px',
+    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    marginLeft: 180,
+  }
+})(Button);
+
 const StyledCodeBtnTwo = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #867ae9 30%, #f25287 90%)',
+    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
     borderRadius: 5,
     border: 0,
     color: 'white',
     height: 58,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     marginLeft: 70,
-  },
-  label: {
-    textTransform: 'capitalize',
-  },
+  }
 })(Button);
 
 export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
@@ -52,8 +62,8 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
       <Container className={classes.root}>
         <div className={classes.img_playOption}>
           <div>
-            <Typography className={classes.title} variant='h3'>
-              {playlist.playlistName}
+            <Typography className={classes.title} variant='h4'>
+              {playlist.playlistName} Playlist
             </Typography>
             <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
           </div>
@@ -74,15 +84,15 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
             </div>
 
             <div className={classes.songs}>
-              <Typography variant='h5'>Host: DJ Dylan</Typography>
+              <Typography variant='h6'>Host: DJ Dylan</Typography>
             </div>
 
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
-              <Typography variant='h5'>
+              <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' value={'RubyOffTheRails'} onChange={(e)=>setName1(e.target.value)} /> RubyOffTheRails
               </Typography>
-              <Typography variant='h5'>
+              <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' value={'NellyCuteAsBtn'} onChange={(e)=>setName2(e.target.value)}/> NellyCuteAsBtn
               </Typography>
             </div>

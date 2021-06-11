@@ -20,7 +20,7 @@ export default function Playlists({playlists}) {
   const playlist = playlists.map((playlist) => {
     return (
       <Grid key={playlist.playlistId} item xs={12} sm={6} md={3}>
-        < Playlist 
+        <Playlist 
             key={playlist.playlistId}
             id={playlist.playlistId}
             name={playlist.playlistName}
@@ -36,7 +36,7 @@ export default function Playlists({playlists}) {
       <Typography variant="h3">Select a Playlist!</Typography>
       <Grid
         container
-        spacing={4}
+        // spacing={4}
         className={classes.gridContainer}
         justify="center"
       >

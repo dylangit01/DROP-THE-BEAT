@@ -6,27 +6,60 @@ import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import TrackList from "../TrackList/TrackList";
 import './GameInProgress.scss';
 import MessageInput from '../Chat/MessageInput/index'
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
 
-export default function GameInProgress({setScore, setWinner, playlist, nextRound, song, round, numberOfRounds, user, users, messages, sendMessage}) {
+// import MuiAlert from '@material-ui/lab/Alert';
 
-  // roundFinished state -> false
-  const [roundStatus, setRoundStatus] = useState("not started");
+// function Alert(props) {
+  //   return <MuiAlert elevation={6} variant="filled" {...props} />;
+  // }
+  function TransitionDown(props) {
+    return <Slide {...props} direction="down" />;
+  }
+  
+export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage}) {
+  const [open, setOpen] = useState(false);
+  const [transition, setTransition] = useState(undefined);
 
-  // set to true when audio is done in music player
+  const handleClick = (Transition) => () => {
+    setTransition(() => Transition);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <div className='game-in-progress'>
-      <div className='left-side'>
-        {song && (
-          <MusicPlayer roundStatus={roundStatus} playlist={playlist} song={song} nextRound={() => nextRound()} />
-        )}
-        <TrackList round={round} songs={playlist.songs} />
+    <div className="game-in-progress">
+      <div className="left-side">
+        {song && <MusicPlayer 
+          round={round}
+          setRound={setRound}
+          playlist={playlist} 
+          song={song} 
+          nextRound={() => nextRound()}/>}
+        <TrackList round={round} songs={playlist.songs}/>
+
+            {/* THIS IS TEMPORARY, JUST TRYING TO PLAY AROUND WITH NOTIFICATIONS :)  */}
+            {/* Displaying winner notification for the round */}
+            <button onClick={handleClick(TransitionDown)}>Down</button>
+
+            <Snackbar
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={transition}
+              message="I love snacks"
+            />
       </div>
-      <div className='right-side'>
-        <Score setScore={setScore} setWinner={setWinner} />
-        <Chat {...{ user, users, messages }} />
-        <MessageInput onSubmit={sendMessage} />
+      <div className="right-side">
+        <Score />
+            <Chat {...{ user, users, messages }} />
+             <MessageInput onSubmit={sendMessage} />
       </div>
+
+
     </div>
   );
 }

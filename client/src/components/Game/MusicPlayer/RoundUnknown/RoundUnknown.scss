@@ -1,12 +1,38 @@
 .round-unknown {
   display: flex;
   justify-content: center;
+  position: relative;
 
   div {
-    background-color: grey;
+    position: relative;
+    // background-color: #505050;
     opacity: 75%;
-    height: 400px;
-    width: 400px;
-    border-radius: 12px;
+    height: 30vw;
+    width: 30vw;
+    border-radius: 16px;
+
+    .disc {
+      width: inherit;
+      animation: 2s linear 0s infinite spin;
+      // animation: 1.5s linear 0s infinite beat;
+    }
+
+    // .question-mark {
+    //   position: absolute;
+    //   font-size: 15vw;
+    //   top: 25%;
+    //   left: 25%;
+    //   opacity: 0;
+    //   color: black;
+    // }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

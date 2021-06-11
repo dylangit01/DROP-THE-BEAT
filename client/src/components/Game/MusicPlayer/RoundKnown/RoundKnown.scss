@@ -1,10 +1,13 @@
-// .round-known img {
-//   height: 400px;
-//   width: 400px;
-//   border-radius: 12px;
-// }
 .round-known {
   display: flex;
   justify-content: center;
-  padding-bottom: 5vh;
+  align-items: center;
+  position: relative;
+  // padding-bottom: 5vh;
+
+  img {
+    height: 30vw;
+    width: 30vw;
+    border-radius: 16px;
+  }
 }

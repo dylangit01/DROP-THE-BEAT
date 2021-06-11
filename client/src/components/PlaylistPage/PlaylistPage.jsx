@@ -12,13 +12,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 const StyledLobbyBtnOne = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #867ae9 30%, #f25287 90%)',
+    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
     borderRadius: 5,
     border: 0,
     color: 'white',
     height: 50,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     marginLeft: 180,
   },
   label: {
@@ -28,13 +28,13 @@ const StyledLobbyBtnOne = withStyles({
 
 const StyledCodeBtnTwo = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #867ae9 30%, #f25287 90%)',
+    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
     borderRadius: 5,
     border: 0,
     color: 'white',
     height: 58,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     marginLeft: 70,
   },
   label: {
@@ -87,8 +87,8 @@ export default function PlaylistPage({ playlists, dispatch }) {
         <Container className={classes.root}>
           <div className={classes.img_playOption}>
             <div>
-              <Typography className={classes.title} variant='h3'>
-                {playlist.playlistName}
+              <Typography className={classes.title} variant='h4'>
+                {playlist.playlistName} Playlist
               </Typography>
               <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
             </div>
@@ -130,7 +130,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
                   >
                     {songs.map((song) => (
                       <MenuItem key={song.id} value={song.title} onClick={handleClose}>
-                        {`${song.id}. ${song.title} - ${song.artist}`}
+                        {`${song.title} - ${song.artist}`}
                       </MenuItem>
                     ))}
                   </Menu>
@@ -138,10 +138,10 @@ export default function PlaylistPage({ playlists, dispatch }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography>{'xxx'}</Typography>
-                  <div>
-                    <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
-                  </div>
+                <Typography variant='h6'>{12345}</Typography>
+                <div>
+                  <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
+                </div>
               </div>
               <div>
                 <div className={classes.btnControl}>
