@@ -19,9 +19,13 @@ export default function TrackList({round, songs}) {
     // const currentSong = 3;
 
     const isCurrent = () => {
-      if (index === round) {
-        return "tracklist-album-cover--current"
-      } else if (index > round) {
+      if (index === round.number) {
+        if (round.finished) {
+          return "tracklist-album-cover--finished"
+        } else {
+          return "tracklist-album-cover--current"
+        }
+      } else if (index > round.number) {
         return "tracklist-album-cover--next"
       } else {
         return "tracklist-album-cover--prev"

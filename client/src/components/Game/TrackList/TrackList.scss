@@ -28,7 +28,7 @@
     opacity: 0;
   }
 
-  &--current {
+  &--finished {
     @extend .tracklist-album-cover;
     // border-width: 3px;
     width: 6vw;
@@ -36,6 +36,24 @@
     opacity: 1;
   }
 
+  &--current {
+    @extend .tracklist-album-cover;
+    background-color: gray;
+    img {
+      opacity: 0;
+    }
+    .question-mark {
+      position: absolute;
+      font-size: 3rem;
+      top: 23%;
+      left: 23%;
+      opacity: 1;
+    }
+    // border-width: 3px;
+    width: 6vw;
+    height: auto;
+    opacity: 1;
+  }
   // &--prev {
   //   @extend .tracklist-album-cover;
   // }

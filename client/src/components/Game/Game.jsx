@@ -102,7 +102,6 @@ export default function Game({playlist}) {
     sendMessage('NEXT_ROUND', currentSongName);
   };
 
-
   ////////////////////////////////////////
   // UPDATE SCORE FUNCTION 
   ////////////////////////////////////////

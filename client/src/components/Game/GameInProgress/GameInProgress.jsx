@@ -18,7 +18,7 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
           playlist={playlist} 
           song={song} 
           nextRound={() => nextRound()}/>}
-        <TrackList round={round.number} songs={playlist.songs}/>
+        <TrackList round={round} songs={playlist.songs}/>
       </div>
       <div className="right-side">
         <Score />
