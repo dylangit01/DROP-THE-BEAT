@@ -26,10 +26,7 @@ const StyledLobbyBtnOne = withStyles({
     padding: '0 30px',
     // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     marginLeft: 180,
-  },
-  label: {
-    textTransform: 'capitalize',
-  },
+  }
 })(Button);
 
 const StyledCodeBtnTwo = withStyles({
@@ -42,10 +39,7 @@ const StyledCodeBtnTwo = withStyles({
     padding: '0 30px',
     // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     marginLeft: 70,
-  },
-  label: {
-    textTransform: 'capitalize',
-  },
+  }
 })(Button);
 
 // Need a handleClick function that will store the current playlist ID in the state
@@ -68,9 +62,8 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
       <Container className={classes.root}>
         <div className={classes.img_playOption}>
           <div>
-            <Typography className={classes.title} variant='h3'>
-              {' '}
-              {playlist.playlistName}{' '}
+            <Typography className={classes.title} variant='h4'>
+              {playlist.playlistName} Playlist
             </Typography>
             <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
           </div>

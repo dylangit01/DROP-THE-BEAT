@@ -87,8 +87,8 @@ export default function PlaylistPage({ playlists, dispatch }) {
         <Container className={classes.root}>
           <div className={classes.img_playOption}>
             <div>
-              <Typography className={classes.title} variant='h3'>
-                {playlist.playlistName}
+              <Typography className={classes.title} variant='h4'>
+                {playlist.playlistName} Playlist
               </Typography>
               <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
             </div>
