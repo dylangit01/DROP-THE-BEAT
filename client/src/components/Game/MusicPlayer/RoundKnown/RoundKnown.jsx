@@ -4,11 +4,11 @@ import './RoundKnown.scss';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  cover: {
-    width: "30vw",
-    height: "auto",
-    borderRadius: "12px"
-  }
+  // cover: {
+  //   width: "30vw",
+  //   height: "auto",
+  //   borderRadius: "12px"
+  // }
 }));
 
 
