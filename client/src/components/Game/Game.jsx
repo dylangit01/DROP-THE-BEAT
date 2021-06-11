@@ -31,9 +31,9 @@ export default function Game({ playlist }) {
     // Checking if it's the last round
     if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
-      // const winner = getWinner();
+      const winner = getWinner();
       setGameStatus((prev) => {
-        return {...prev, finished: true, winner: "Nelly"}
+        return {...prev, finished: true, winner}
       });
     }
   }, [numberOfRounds, round]);
@@ -117,9 +117,13 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   const nextRound = () => {
     // Update round object by incrementing the round number and resetting the round status to false
+    console.log('Round before setRound', round.number);
     setRound(prev => {
       return {...prev, number: prev.number + 1, finished: false};
     });
+
+    console.log('Round after setRound', round.number);
+
     // Send the name of the current song to the server
     const currentSongName = songs[round.number].title;
     sendMessage('NEXT_ROUND', currentSongName);
@@ -140,7 +144,17 @@ export default function Game({ playlist }) {
   // GET WINNER FUNCTION 
   ////////////////////////////////////////
   const getWinner = () => {
-    // Loop through users and return user with highest score
+    const winner = "NellyCuteAsABtn";
+    const highestScore = 0;
+
+    // For now, just 2 players
+    // users.forEach(user => {
+    //   if (user.score > highestScore) {
+    //     winner = user.name;
+    //     highestScore = user.score;
+    //   }
+    // })
+    return winner;
   }
 
 

@@ -34,8 +34,8 @@ const io = socketio(server, {
  */
 // Random color:
 const randomColor = () => {
-   return '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+};
 
 // Get all users:
 const getAllUsers = (sockets) => {
@@ -48,24 +48,24 @@ const getAllUsers = (sockets) => {
 };
 
 let currentSongName = '';
-let guessSongName = ''
+let guessSongName = '';
 
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
-  const name = 'Dylan(Host)';
+  const name = 'Ruby';
   const color = randomColor();
 
   socket.name = name;
   socket.color = color;
   const users = getAllUsers(io.sockets.sockets);
   socket.emit('INITIAL_CONNECTION', { name, color, users });
-  
+
   socket.broadcast.emit('NEW_USER', { name, id: socket.id, color });
 
   socket.on('SEND_MESSAGE', (msg) => {
     io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' });
-    guessSongName = msg.msg.toLowerCase()
+    guessSongName = msg.msg.toLowerCase();
     console.log('guessss', guessSongName);
 
     if (guessSongName === currentSongName) {
@@ -76,22 +76,21 @@ io.on('connection', (socket) => {
       io.emit('INCORRECT_GUESS', { msg });
       console.log('wrong answer');
     }
-    
   });
 
   socket.on('START_GAME', (msg) => {
     console.log('Game started!');
 
     // Send to front end
-    io.emit('START_GAME', { msg});
+    io.emit('START_GAME', { msg });
     currentSongName = msg.msg.song.toLowerCase();
   });
 
   // Will be from the host
-  socket.on('NEXT_ROUND', ({msg}) => {
+  socket.on('NEXT_ROUND', ({ msg }) => {
     // set currentSongName = currentSongName
-    currentSongName = msg.toLowerCase()
-      // io.emit('END_GAME', {msg});
+    currentSongName = msg.toLowerCase();
+    // io.emit('END_GAME', {msg});
   });
 
   // Will be from players
