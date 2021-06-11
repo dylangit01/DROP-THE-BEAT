@@ -40,10 +40,6 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
           song={song} 
           nextRound={() => nextRound()}/>}
         <TrackList round={round} songs={playlist.songs}/>
-      </div>
-      <div className="right-side">
-        <Score />
-        <Chat />
 
             {/* THIS IS TEMPORARY, JUST TRYING TO PLAY AROUND WITH NOTIFICATIONS :)  */}
             {/* Displaying winner notification for the round */}
@@ -55,6 +51,10 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
               TransitionComponent={transition}
               message="I love snacks"
             />
+      </div>
+      <div className="right-side">
+        <Score />
+        <Chat />
       </div>
 
 
