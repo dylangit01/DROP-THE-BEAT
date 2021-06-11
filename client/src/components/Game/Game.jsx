@@ -152,6 +152,7 @@ export default function Game({playlist}) {
           winner={gameStatus.winner} 
           playlistName={playlist.playlistName} 
         />}
+
     </div>
 
   );
