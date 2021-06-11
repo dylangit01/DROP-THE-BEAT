@@ -25,17 +25,25 @@ export default function Game({ playlist }) {
   const numberOfRounds = songs.length;
 
   ////////////////////////////////////////////////////
-  // CHECK FOR GAME STATUS AT THE END OF EVERY ROUND
+  // UPDATES AT THE END OF EVERY ROUND
   ////////////////////////////////////////////////////
   useEffect(() => {
     // Checking if it's the last round
     if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
-      // const winner = getWinner();
+      const winner = getWinner();
       setGameStatus((prev) => {
-        return {...prev, finished: true, winner: "Nelly"}
+        return {...prev, finished: true, winner}
       });
     }
+
+    // Get the current song name if it exists (new JS syntax)
+    // const currentSongName = song?.title;
+
+    // // If there's a connection and a current song
+    // if (conn && currentSongName && !round.finished) {
+    //   sendMessage('NEXT_ROUND', currentSongName);
+    // }
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -53,9 +61,8 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
-        console.log(msg);
-        const { name, color, users } = msg;
-        setUser({ name, color });
+        const { name, color, score, users } = msg;
+        setUser({ name, color, score });
         setUsers([...users]);
       });
 
@@ -70,14 +77,15 @@ export default function Game({ playlist }) {
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
         setGameStatus((prev) => ({ ...prev, started: true }));
-        // setCurrentSong(msg.song);
       });
 
       conn.on('CORRECT_GUESS', (msg) => {
-        // Update / reveal song cover & title
         // Update winner's score
-        // setMessages (with a different color or something)
-        setRound(prev => {return {...prev, finished: true}})
+        // setMessages()
+        // nextRound();
+        setRound(prev => ({...prev, finished: true}));
+        // setMessages()
+        // Okay to do multiple setState calls as long as they don't affect each other
         // updateScore(user);
       })
 
@@ -86,8 +94,14 @@ export default function Game({ playlist }) {
       });
 
       conn.on('NEXT_ROUND', (msg) => {
-        console.log('???????????',msg);
-        // nextRound();
+        // Update round state to next round and set the round finished status to false
+        setRound(prev => {
+          return {...prev, number: prev.number + 1, finished: false};
+        });
+      });
+
+      conn.on('END_GAME', (msg) => {
+
       });
 
       conn.on('DISCONNECT_USER', (msg) => {
@@ -117,18 +131,16 @@ export default function Game({ playlist }) {
   // NEW ROUND FUNCTION 
   ////////////////////////////////////////
   const nextRound = () => {
-    // Update round object by incrementing the round number and resetting the round status to false
-    if (round.number <= songs.length) {
-      setRound(prev => {
-      return {...prev, number: prev.number + 1, finished: false};
-    });
-    // Send the name of the current song to the server
-    let currentSongName = songs[round.number].title;
-    sendMessage('NEXT_ROUND', (round.number + 1));
-    } else {
-      return
-    }
-      
+    // Update round object by incrementing the round number and resetting the round finished status to false
+    // sendMessage to back end
+
+
+    // Get the current song name if it exists (new JS syntax)
+    const nextRound = round.number + 1;
+    const currentSongName = songs[nextRound]?.title;
+    console.log("song to server", currentSongName);
+
+    sendMessage('NEXT_ROUND', currentSongName);
   };
 
   ////////////////////////////////////////
@@ -146,9 +158,18 @@ export default function Game({ playlist }) {
   // GET WINNER FUNCTION 
   ////////////////////////////////////////
   const getWinner = () => {
-    // Loop through users and return user with highest score
-  }
+    const winner = "NellyCuteAsABtn";
+    const highestScore = 0;
 
+    // For now, just 2 players
+    // users.forEach(user => {
+    //   if (user.score > highestScore) {
+    //     winner = user.name;
+    //     highestScore = user.score;
+    //   }
+    // })
+    return winner;
+  }
 
   return (
     <div className='game'>
