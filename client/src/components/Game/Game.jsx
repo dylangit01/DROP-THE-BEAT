@@ -13,7 +13,7 @@ export default function Game({ playlist }) {
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
-  const [guesses, setGuesses] = useState([]);
+  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
   const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
   
   // USER & USERS OBJECT
@@ -63,6 +63,12 @@ export default function Game({ playlist }) {
         setUsers((prev) => [...prev, msg]);
       });
 
+      conn.on('CHANGE_NAME', (msg) => {
+        const { name, users } = msg;
+        setUser((prev) => [...prev, name]);
+        setUsers([...users]);
+      });
+
       conn.on('SEND_MESSAGE', (msg) => {
         setGuesses((prev) => [...prev, msg]);
       });
@@ -76,7 +82,7 @@ export default function Game({ playlist }) {
       conn.on('CORRECT_GUESS', (msg) => {
         // Update / reveal song cover & title
         // Update winner's score
-        // setMessages (with a different color or something)
+        // setGuess (with a different color or something)
         setRound(prev => {return {...prev, finished: true}})
         // updateScore(user);
       })
@@ -111,6 +117,9 @@ export default function Game({ playlist }) {
     const payload = { ...user, msg };
     conn.emit(type, payload);
   };
+
+  // sendMessage("CHANGE_NAME", name) // onClick button change name
+
 
   ////////////////////////////////////////
   // NEW ROUND FUNCTION 

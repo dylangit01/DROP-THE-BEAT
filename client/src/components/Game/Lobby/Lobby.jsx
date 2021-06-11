@@ -49,7 +49,6 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
   const [name2, setName2] = useState('NellyCuteAsBtn');
   // const [room, setRoom] = useState('')
 
-  // console.log(numberOfSongs);
 
   const handleSubmit = (event, name1, name2) => {
     event.preventDefault();

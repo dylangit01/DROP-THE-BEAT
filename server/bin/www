@@ -32,6 +32,7 @@ const io = socketio(server, {
 /**
  * Socket Connection
  */
+
 // Random color:
 const randomColor = () => {
    return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -51,17 +52,44 @@ let currentSongName = '';
 let guessSongName = ''
 
 io.on('connection', (socket) => {
+
+  // socket.join('main room')
+  console.log('Socket id', socket.id) // Socket id Y_ABUpfRZK5EFw1wAAAD
+  // host initialized the connection
+  // extracts socket id
+  // send ID to front end PLAYLIST PAGE before start lobby btn
+  // generate a path (react hook) and append to the link and display it in the lobby page for host to share with players
+  // the link to game will look like: /game/${socketID}
+  // 'start lobby btn' will be linked to that custom link
+  // players will get to the LOBBY page via the link
+  // default names will be player1 and player2 => placeholders in input for real names
+  // will input names that will be passed down to backend(change name)
+  
   console.log('New user connected!');
-
-  const name = 'Dylan(Host)';
+  
+  // const name = 'Dylan(Host)';
   const color = randomColor();
-
+  
+  const name = 'PLAYER' + "random unique gibberish"; 
+  
   socket.name = name;
   socket.color = color;
   const users = getAllUsers(io.sockets.sockets);
+  
+  
   socket.emit('INITIAL_CONNECTION', { name, color, users });
   
   socket.broadcast.emit('NEW_USER', { name, id: socket.id, color });
+  
+  socket.on ('CHANGE_NAME', ({ name }) => {
+
+    // user = users.find((id) => id === user.id);
+    // user.name = name;
+
+    // reset the users array?
+
+    io.emit('CHANGE_NAME', { name, users });
+  })
 
   socket.on('SEND_MESSAGE', (msg) => {
     io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' });
@@ -70,6 +98,7 @@ io.on('connection', (socket) => {
 
     if (guessSongName === currentSongName) {
       console.log('right answer');
+      // msg.correct = true;
       io.emit('CORRECT_GUESS', { msg });
       currentSongName = '';
     } else {
