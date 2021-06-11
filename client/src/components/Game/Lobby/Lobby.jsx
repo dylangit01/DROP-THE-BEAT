@@ -42,7 +42,7 @@ const StyledCodeBtnTwo = withStyles({
   }
 })(Button);
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
+export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs }) {
   const classes = useStyles();
 
   const [name1, setName1] = useState('RubyOffTheRails');

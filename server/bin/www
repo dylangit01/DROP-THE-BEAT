@@ -100,7 +100,7 @@ io.on('connection', (socket) => {
       return;
     }
     currentSongName = songs[msg].title.toLowerCase();
-    io.emit('NEXT_ROUND', { msg });
+    // io.emit('NEXT_ROUND', { msg });
   });
 
   // Will be from players
