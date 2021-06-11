@@ -61,9 +61,8 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
-        // console.log(msg);
-        const { name, color, users } = msg;
-        setUser({ name, color });
+        const { name, color, score, users } = msg;
+        setUser({ name, color, score });
         setUsers([...users]);
       });
 
@@ -81,7 +80,6 @@ export default function Game({ playlist }) {
       });
 
       conn.on('CORRECT_GUESS', (msg) => {
-        // Update / reveal song cover & title
         // Update winner's score
         // setMessages()
         // nextRound();
@@ -96,7 +94,7 @@ export default function Game({ playlist }) {
       });
 
       conn.on('NEXT_ROUND', (msg) => {
-        // nextRound();
+        // Update round state to next round and set the round finished status to false
         setRound(prev => {
           return {...prev, number: prev.number + 1, finished: false};
         });
