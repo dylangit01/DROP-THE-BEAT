@@ -65,9 +65,9 @@ export default function Playlist({id, name, image, rating}) {
         </Link>
       </Card>
       <div className="playlist-footer">
-        <Button className={classes.button}>
+        {/* <Button className={classes.button}>
           <Link to={`${path}/${id}`}>Select</Link>
-        </Button>
+        </Button> */}
         {/* <Box component="fieldset" mb={3} borderColor="transparent">
           <Rating name="read-only" value={rating} readOnly />
         </Box> */}
