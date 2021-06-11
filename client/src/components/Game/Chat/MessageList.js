@@ -1,9 +1,11 @@
+import './Chat.scss'
+
 const MessageList = (props) => {
   return (
     <ul className='message-list'>
-      {props.messages.map((msg) => (
-        <li className='message-list--item' key={msg.id}>
-          <b style={{ color: msg.color }}>{msg.name}:</b>
+      {props.messages.map((msg, idx) => (
+        <li key={idx} className='message-list--item'>
+          <b style={{ color: msg.color }}>{msg.name}: </b>
           {msg.msg}
         </li>
       ))}

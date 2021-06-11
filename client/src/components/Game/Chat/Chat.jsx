@@ -11,7 +11,7 @@ export default function Chat(props) {
         <div className='chat-user'>
           <UserList {...{ user, users }} />
         </div>
-        <div className='chat-box'>
+        <div className='chat-msg'>
           <MessageList messages={messages} />
         </div>
       </div>

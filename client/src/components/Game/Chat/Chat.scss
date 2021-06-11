@@ -15,19 +15,22 @@
   margin-right: 10px;
 }
 
-.chat-box {
+.chat-msg {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
+  align-items:flex-end;
   position: relative;
   height: 50vh;
   width: 30vw;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
 
-  .chat-msg {
-    background-color: rgba(173, 17, 160, 0.5);
+  .message-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
   }
 
   .chat-input-box {
