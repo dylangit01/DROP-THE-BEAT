@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './index.scss'
 const MessageInput = (props) => {
   const onSubmit = (evt) => {

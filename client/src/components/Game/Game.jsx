@@ -61,26 +61,25 @@ export default function Game({ playlist }) {
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
-      conn.on('INITIAL_CONNECTION', msg => {
+      conn.on('INITIAL_CONNECTION', (msg) => {
         console.log(msg);
         const { name, color, users } = msg;
         setUser({ name, color });
         setUsers([...users]);
-      })
+      });
 
-        conn.on('NEW_USER', (msg) => {
-          setUsers((prev) => [...prev, msg]);
-        });
+      conn.on('NEW_USER', (msg) => {
+        setUsers((prev) => [...prev, msg]);
+      });
 
-        conn.on('SEND_MESSAGE', (msg) => {
-          setMessages((prev) => [...prev, msg]);
-        });
+      conn.on('SEND_MESSAGE', (msg) => {
+        setMessages((prev) => [...prev, msg]);
+      });
 
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
         console.log(msg);
-        setGameStatus((prev) =>  ({...prev, started: true })
-        );
+        setGameStatus((prev) => ({ ...prev, started: true }));
         // setCurrentSong(msg.song);
       });
 
@@ -95,28 +94,40 @@ export default function Game({ playlist }) {
         //setMessages
       });
 
-      conn.on('END_GAME', () => {});
-    };
+      conn.on('END_GAME', (msg) => {
+        
+      });
 
-
-
-
-
+      conn.on('DISCONNECT_USER', (msg) => {
+        setUsers((prev) => {
+          const copy = [...prev];
+          const names = copy.map((user) => user.name);
+          const index = names.indexOf(msg.name);
+          if (index !== -1)
+            // if found
+            copy.splice(index, 1);
+          return copy;
+        });
+      });
+    }
   }, [conn]);
 
   // SEND MSG TO SERVER
   const sendMessage = (type, msg) => {
     console.log('Msg sent to backend: ', msg);
-    const payload = {...user, msg}
+    const payload = { ...user, msg };
     conn.emit(type, payload);
   };
 
   // Move to the next round by incrementing the round number
   const nextRound = () => {
     setRound((prev) => prev + 1);
-    const currentSongName = songs[round].name;
-    sendMessage('NEXT_ROUND', currentSongName);
+    console.log(round);
+    const currentSongName = songs[round].title;
+    console.log(currentSongName);
+    sendMessage('NEXT_ROUND', {currentSongName});
     //sendmessage to server that it's a new round with the new song title
+
   };
 
   return (
