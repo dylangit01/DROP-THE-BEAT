@@ -9,11 +9,6 @@ import './GameInProgress.scss';
 
 export default function GameInProgress({ playlist, nextRound, song, round, setRound}) {
 
-  // roundFinished state -> false
-  const [roundStatus, setRoundStatus] = useState(false);
-
-  // set to true when audio is done in music player
-
   return (
     <div className="game-in-progress">
       <div className="left-side">
