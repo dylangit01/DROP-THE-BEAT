@@ -4,17 +4,17 @@
 
   div {
     position: relative;
-    background-color: grey;
-    opacity: 75%;
+    background-color: #505050;
+    opacity: 60%;
     height: 30vw;
     width: 30vw;
     border-radius: 12px;
 
     .question-mark {
       position: absolute;
-      font-size: 15rem;
-      top: 23%;
-      left: 23%;
+      font-size: 15vw;
+      top: 25%;
+      left: 25%;
       opacity: 1;
     }
   }

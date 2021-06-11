@@ -38,7 +38,7 @@
 
   &--current {
     @extend .tracklist-album-cover;
-    background-color: gray;
+    background-color: #505050;
     img {
       opacity: 0;
     }
@@ -52,7 +52,7 @@
     // border-width: 3px;
     width: 6vw;
     height: auto;
-    opacity: 1;
+    opacity: 60%;
   }
   // &--prev {
   //   @extend .tracklist-album-cover;
@@ -60,7 +60,9 @@
 
   &--next {
     @extend .tracklist-album-cover;
-    background-color: gray;
+    background-color: #505050;
+    opacity: 60%;
+
     img {
       opacity: 0;
     }
