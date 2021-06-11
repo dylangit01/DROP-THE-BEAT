@@ -47,7 +47,9 @@ const getAllUsers = (sockets) => {
   return users;
 };
 
+let songs = '';
 let currentSongName = '';
+let currentIdx = 0;
 let guessSongName = ''
 
 io.on('connection', (socket) => {
@@ -83,15 +85,22 @@ io.on('connection', (socket) => {
     console.log('Game started!');
 
     // Send to front end
-    io.emit('START_GAME', { msg});
-    currentSongName = msg.msg.song.toLowerCase();
+    io.emit('START_GAME',  (msg) );
+    // currentSongName = msg.msg.song.toLowerCase();
+    songs = msg.msg.songs
+    currentSongName = msg.msg.songs[currentIdx].title.toLowerCase();
   });
 
   // Will be from the host
-  socket.on('NEXT_ROUND', ({msg}) => {
+  socket.on('NEXT_ROUND',  ({msg}) => {
+    console.log('curentSong',msg);
     // set currentSongName = currentSongName
-    currentSongName = msg.toLowerCase()
+    // currentSongName = msg.msg.toLowerCase()
       // io.emit('END_GAME', {msg});
+    if (msg === songs.length) {
+      return
+    }
+    currentSongName = songs[msg].title.toLowerCase();
   });
 
   // Will be from players

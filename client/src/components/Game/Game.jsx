@@ -121,8 +121,8 @@ export default function Game({ playlist }) {
       return {...prev, number: prev.number + 1, finished: false};
     });
     // Send the name of the current song to the server
-    const currentSongName = songs[round.number].title;
-    sendMessage('NEXT_ROUND', currentSongName);
+    let currentSongName = songs[round.number].title;
+    sendMessage('NEXT_ROUND', (round.number + 1));
   };
 
   ////////////////////////////////////////

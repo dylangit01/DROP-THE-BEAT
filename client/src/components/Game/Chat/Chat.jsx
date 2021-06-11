@@ -5,7 +5,7 @@ import UserList from './UserList';
 
 export default function Chat(props) {
   const { user, users, messages } = props;
-    console.log(users);
+    // console.log(users);
   return (
     <>
       <div className='chat-layout'>
