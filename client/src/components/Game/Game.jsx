@@ -85,8 +85,9 @@ export default function Game({ playlist }) {
         //setMessages
       });
 
-      conn.on('END_GAME', (msg) => {
-
+      conn.on('NEXT_ROUND', (msg) => {
+        console.log('???????????',msg);
+        // nextRound();
       });
 
       conn.on('DISCONNECT_USER', (msg) => {
@@ -117,12 +118,17 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   const nextRound = () => {
     // Update round object by incrementing the round number and resetting the round status to false
-    setRound(prev => {
+    if (round.number <= songs.length) {
+      setRound(prev => {
       return {...prev, number: prev.number + 1, finished: false};
     });
     // Send the name of the current song to the server
     let currentSongName = songs[round.number].title;
     sendMessage('NEXT_ROUND', (round.number + 1));
+    } else {
+      return
+    }
+      
   };
 
   ////////////////////////////////////////

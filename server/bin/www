@@ -93,14 +93,14 @@ io.on('connection', (socket) => {
 
   // Will be from the host
   socket.on('NEXT_ROUND',  ({msg}) => {
-    console.log('curentSong',msg);
+    console.log('curentSong', msg);
     // set currentSongName = currentSongName
     // currentSongName = msg.msg.toLowerCase()
-      // io.emit('END_GAME', {msg});
     if (msg === songs.length) {
-      return
+      return;
     }
     currentSongName = songs[msg].title.toLowerCase();
+    io.emit('NEXT_ROUND', { msg });
   });
 
   // Will be from players
