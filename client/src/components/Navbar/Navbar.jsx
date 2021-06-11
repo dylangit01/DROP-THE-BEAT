@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
 // Styles
@@ -29,6 +29,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
+  
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  let displayLogin = "";
+  if(!loggedIn){
+    displayLogin =
+    <div className="rightNavbarGroup">
+      <Button color="inherit" type="button" onClick={(e) => setLoggedIn(true)}>Login</Button>
+      <Button color="inherit"><ToggleOnIcon /></Button>
+    </div>;
+  } else {  //User is logged in
+    displayLogin =
+    <div className="rightNavbarGroup">
+      <p className="greeting">Hello, DJ Dylan!</p>
+      <Button color="inherit" onClick={(e) => setLoggedIn(false)}>Logout</Button>
+      <Button color="inherit"><ToggleOnIcon /></Button>
+    </div>
+  }
 
   return (
     <div className={classes.root}>
@@ -48,10 +66,9 @@ export default function Navbar() {
               </div>
 
               {/* Right Navbar Group */}
-              <div className="rightNavbarGroup">
-                <Button color="inherit"><Link to="/login">Login</Link></Button>
-                <Button color="inherit"><ToggleOnIcon /></Button>
-              </div>
+
+              {displayLogin}
+              
             </div>
           </Toolbar>
         </AppBar>
