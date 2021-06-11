@@ -4,7 +4,8 @@ import './index.scss'
 const MessageInput = (props) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
-    props.onSubmit('SEND_MESSAGE',evt.target.message.value);
+    props.onSubmit('SEND_MESSAGE', evt.target.message.value);
+    console.log(evt.target.message.value);
     evt.target.message.value = '';
   };
 

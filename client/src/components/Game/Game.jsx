@@ -88,6 +88,8 @@ export default function Game({ playlist }) {
         // Update winner's score
         // setWinner for round
         // setMessages (with a different color or something)
+
+
       });
 
       conn.on('INCORRECT_GUESS', (msg) => {
@@ -125,7 +127,6 @@ export default function Game({ playlist }) {
     const currentSongName = songs[round].title;
     sendMessage('NEXT_ROUND', currentSongName);
     //sendmessage to server that it's a new round with the new song title
-
   };
 
   return (
