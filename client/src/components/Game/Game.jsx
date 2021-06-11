@@ -20,8 +20,9 @@ export default function Game({playlist}) {
   // {name, score, emoji?, color?}
   
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
-  const numberOfRounds = playlist.songs.length;
   const songs = playlist.songs;
+  const song = songs[round.number];
+  const numberOfRounds = songs.length;
 
   ////////////////////////////////////////////////////
   // CHECK FOR GAME STATUS AT THE END OF EVERY ROUND
@@ -135,7 +136,7 @@ export default function Game({playlist}) {
           setRound={setRound}
           numberOfRounds={numberOfRounds}
           playlist={playlist}
-          song={songs[round.number]}
+          song={song}
         />
       }
 
