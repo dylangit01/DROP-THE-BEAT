@@ -96,13 +96,19 @@ export default function Game({ playlist }) {
       });
 
       conn.on('END_GAME', () => {});
-    }
+    };
+
+
+
+
+
   }, [conn]);
 
   // SEND MSG TO SERVER
   const sendMessage = (type, msg) => {
     console.log('Msg sent to backend: ', msg);
-    conn.emit(type, msg);
+    const payload = {...user, msg}
+    conn.emit(type, payload);
   };
 
   // Move to the next round by incrementing the round number

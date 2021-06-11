@@ -64,7 +64,7 @@ io.on('connection', (socket) => {
   socket.broadcast.emit('NEW_USER', { name, id: socket.id, color });
 
   socket.on('SEND_MESSAGE', (msg) => {
-    io.emit('SEND_MESSAGE', { ...msg });
+    io.emit('SEND_MESSAGE', { ...msg, id:'xxx' });
   });
 
   socket.on('START_GAME', (msg) => {
