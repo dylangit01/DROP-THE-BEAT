@@ -47,11 +47,11 @@ const getAllUsers = (sockets) => {
   return users;
 };
 
+let currentSongName = '';
+let guessSongName = '';
+
 io.on('connection', (socket) => {
   console.log('New user connected!');
-
-  let currentSongName = '';
-  let guessSongName = '';
 
   const name = 'Ruby';
   const color = randomColor();
@@ -72,10 +72,8 @@ io.on('connection', (socket) => {
     console.log('guessss', guessSongName);
 
     if (guessSongName === currentSongName) {
-      console.log('right answer');
-      console.log('before reset', currentSongName);
-      currentSongName = ''; // This isn't resetting
-      console.log(currentSongName);
+      console.log('right answer', currentSongName);
+      currentSongName = '';
       io.emit('CORRECT_GUESS', { msg });
     } else {
       io.emit('INCORRECT_GUESS', { msg });
@@ -89,14 +87,12 @@ io.on('connection', (socket) => {
     // Send to front end
     io.emit('START_GAME', { msg });
     currentSongName = msg.msg.song.toLowerCase();
-    console.log('92', currentSongName);
+    console.log('first song', currentSongName);
   });
 
   // Will be from the host
   socket.on('NEXT_ROUND', ({ msg }) => {
-    // set currentSongName = currentSongName
-    currentSongName = msg.toLowerCase();
-    console.log('96', currentSongName);
+    currentSongName = msg?.toLowerCase();
     io.emit('NEXT_ROUND', { msg });
   });
 

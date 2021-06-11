@@ -38,12 +38,12 @@ export default function Game({ playlist }) {
     }
 
     // Get the current song name if it exists (new JS syntax)
-    const currentSongName = song?.title;
+    // const currentSongName = song?.title;
 
-    // If there's a connection and a current song
-    if (conn && currentSongName && !round.finished) {
-      sendMessage('NEXT_ROUND', currentSongName);
-    }
+    // // If there's a connection and a current song
+    // if (conn && currentSongName && !round.finished) {
+    //   sendMessage('NEXT_ROUND', currentSongName);
+    // }
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -97,6 +97,9 @@ export default function Game({ playlist }) {
 
       conn.on('NEXT_ROUND', (msg) => {
         // nextRound();
+        setRound(prev => {
+          return {...prev, number: prev.number + 1, finished: false};
+        });
       });
 
       conn.on('END_GAME', (msg) => {
@@ -132,9 +135,14 @@ export default function Game({ playlist }) {
   const nextRound = () => {
     // Update round object by incrementing the round number and resetting the round finished status to false
     // sendMessage to back end
-    setRound(prev => {
-      return {...prev, number: prev.number + 1, finished: false};
-    });
+
+
+    // Get the current song name if it exists (new JS syntax)
+    const nextRound = round.number + 1;
+    const currentSongName = songs[nextRound]?.title;
+    console.log("song to server", currentSongName);
+
+    sendMessage('NEXT_ROUND', currentSongName);
   };
 
   ////////////////////////////////////////
