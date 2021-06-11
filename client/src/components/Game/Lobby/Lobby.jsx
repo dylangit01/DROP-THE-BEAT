@@ -39,7 +39,7 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
   const [name2, setName2] = useState('NellyCuteAsBtn');
   // const [room, setRoom] = useState('')
 
-  console.log(numberOfSongs);
+  // console.log(numberOfSongs);
 
   const handleSubmit = (event, name1, name2) => {
     event.preventDefault();
@@ -53,8 +53,7 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
         <div className={classes.img_playOption}>
           <div>
             <Typography className={classes.title} variant='h3'>
-              {' '}
-              {playlist.playlistName}{' '}
+              {playlist.playlistName}
             </Typography>
             <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
           </div>

@@ -33,7 +33,9 @@ const io = socketio(server, {
  * Socket Connection
  */
 // Random color:
-const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+const randomColor = () => {
+   return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
 
 // Get all users:
 const getAllUsers = (sockets) => {
@@ -51,17 +53,31 @@ let currentSongName = '';
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
+  const name = 'Dylan';
+  const color = randomColor();
+
+  socket.name = name;
+  socket.color = color;
+  const users = getAllUsers(io.sockets.sockets);
+  socket.emit('INITIAL_CONNECTION', { name, color, users });
+  
+  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color });
+
+  socket.on('SEND_MESSAGE', (msg) => {
+    io.emit('SEND_MESSAGE', { ...msg });
+  });
+
   socket.on('START_GAME', (msg) => {
     console.log('Game started!');
     console.log('msg', msg.song);
     console.log('msg', msg.name1);
     console.log('msg', msg.name2);
-    
+
     // answer = Math.floor(Math.random() * msg.songs.length);
     // console.log(answer);
     // console.log(msg.songs[answer]);
     // Send to front end
-    io.emit('START_GAME', { song: msg.song, name1:msg.name1, name2:msg.name2 });
+    io.emit('START_GAME', { song: msg.song, name1: msg.name1, name2: msg.name2 });
   });
 
   // Will be from the host
@@ -78,6 +94,10 @@ io.on('connection', (socket) => {
     } else {
       io.emit('INCORRECT_GUESS', { msg });
     }
+  });
+
+  socket.on('disconnect', () => {
+    io.emit('DISCONNECT_USER', { name: socket.name, id: socket.id });
   });
 });
 

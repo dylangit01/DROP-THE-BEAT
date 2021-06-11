@@ -1,13 +1,20 @@
 import React from 'react';
 import './Chat.scss';
+import MessageList from './MessageList';
+import UserList from './UserList';
 
-export default function Chat() {
-  return(
-    <div className="chat-box">
-      <h6>Chat box is here</h6>
-      <div className="chat-input-box">
-        <input className="chat-input" type="text" placeholder="Type your message"></input>
+export default function Chat(props) {
+  const { user, users, messages } = props;
+  return (
+    <>
+      <div className='chat-layout'>
+        <div className='chat-user'>
+          <UserList {...{ user, users }} />
+        </div>
+        <div className='chat-box'>
+          <MessageList messages={messages} />
+        </div>
       </div>
-    </div>
-  )
+    </>
+  );
 }
