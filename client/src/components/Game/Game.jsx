@@ -122,10 +122,8 @@ export default function Game({ playlist }) {
   // Move to the next round by incrementing the round number
   const nextRound = () => {
     setRound((prev) => prev + 1);
-    console.log(round);
     const currentSongName = songs[round].title;
-    console.log(currentSongName);
-    sendMessage('NEXT_ROUND', {currentSongName});
+    sendMessage('NEXT_ROUND', currentSongName);
     //sendmessage to server that it's a new round with the new song title
 
   };

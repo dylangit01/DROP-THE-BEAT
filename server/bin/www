@@ -49,6 +49,7 @@ const getAllUsers = (sockets) => {
 
 let answer = 0;
 let currentSongName = '';
+let lastSongName = ''
 
 io.on('connection', (socket) => {
   console.log('New user connected!');
@@ -69,15 +70,15 @@ io.on('connection', (socket) => {
 
   socket.on('START_GAME', (msg) => {
     console.log('Game started!');
-    console.log('msg', msg.song);
-    console.log('msg', msg.name1);
-    console.log('msg', msg.name2);
+    console.log('msg', msg.msg.song);
+    console.log('msg', msg.msg.name1);
+    console.log('msg', msg.msg.name2);
 
     // answer = Math.floor(Math.random() * msg.songs.length);
     // console.log(answer);
     // console.log(msg.songs[answer]);
     // Send to front end
-    io.emit('START_GAME', { song: msg.song, name1: msg.name1, name2: msg.name2 });
+    io.emit('START_GAME', { song: msg.msg.song, name1: msg.msg.name1, name2: msg.msg.name2 });
   });
 
   // Will be from the host
