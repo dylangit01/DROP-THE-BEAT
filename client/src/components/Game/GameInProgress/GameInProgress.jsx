@@ -34,12 +34,15 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
   return (
     <div className="game-in-progress">
       <div className="left-side">
-        {song && <MusicPlayer 
-          round={round}
-          setRound={setRound}
-          playlist={playlist} 
-          song={song} 
-          nextRound={() => nextRound()}/>}
+        {song && 
+          <MusicPlayer 
+            round={round}
+            setRound={setRound}
+            playlist={playlist} 
+            song={song} 
+            nextRound={() => nextRound()}
+            sendMessage={sendMessage}
+          />}
         <TrackList round={round} songs={playlist.songs}/>
 
             {/* THIS IS TEMPORARY, JUST TRYING TO PLAY AROUND WITH NOTIFICATIONS :)  */}
@@ -55,8 +58,8 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
       </div>
       <div className="right-side">
         <Score />
-            <Chat {...{ user, users, messages }} />
-             <MessageInput onSubmit={sendMessage} />
+        <Chat {...{ user, users, messages }} />
+        <MessageInput onSubmit={sendMessage} />
       </div>
 
 

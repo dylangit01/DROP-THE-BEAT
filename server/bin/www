@@ -89,6 +89,12 @@ io.on('connection', (socket) => {
     io.emit('NEXT_ROUND', { msg });
   });
 
+  // WHEN ROUND HAS FINISHED AND NO ONE GUESSED
+  // socket.on('ROUND_FINISHED', ({ msg }) => {
+  //   // Send to front end the round has finised
+  //   io.emit('ROUND_FINISHED', { msg });
+  // });
+
   // WHEN USERS GUESS SONG NAME
   socket.on('SEND_MESSAGE', (msg) => {
     io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess

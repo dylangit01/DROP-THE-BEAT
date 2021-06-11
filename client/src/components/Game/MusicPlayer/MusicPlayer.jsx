@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MusicPlayer({ song, nextRound, round, setRound, playlist }) {
+export default function MusicPlayer({ song, nextRound, round, setRound, playlist, sendMessage }) {
   const classes = useStyles();
 
   return (
@@ -34,7 +34,7 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
       {round.finished  && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
-      <AudioPlayer song={song} nextRound={nextRound} setRound={setRound} />
+      <AudioPlayer song={song} nextRound={nextRound} sendMessage={sendMessage} setRound={setRound} />
       
 
     </div>
