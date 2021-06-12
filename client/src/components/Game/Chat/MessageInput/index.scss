@@ -31,11 +31,11 @@
   border-radius: 20px;
 
   .chat-input {
-    border-color: transparent;
     border: none;
     margin: 5%;
     color: #fff;
     background-color: transparent;
+    width: 80%;
     &:focus{
       outline:none
     }
