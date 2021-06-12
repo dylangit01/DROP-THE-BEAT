@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
 
   // WHEN ROUND HAS FINISHED AND NO ONE GUESSED
   // socket.on('ROUND_FINISHED', ({ msg }) => {
-  //   // Send to front end the round has finised
+  //   // Send to front end the round has finished
   //   io.emit('ROUND_FINISHED', { msg });
   // });
 
