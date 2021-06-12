@@ -38,7 +38,7 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
       {/* Audio plays automatically on load, remove controls*/}
       <audio
         id="song-audio"
-        autoPlay
+        // autoPlay
         // controls
         onEnded={handleSongEnd} //disable guessing, reveal song if not revealed
         // volume={0.5}

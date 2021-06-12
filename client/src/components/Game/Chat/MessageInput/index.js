@@ -9,7 +9,6 @@ const MessageInput = (props) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
     const guess = evt.target.message.value.trim();
-    console.log('guess input:', guess);
 
     // Only send guess/message to the back if it's not an empty input
     guess && props.onSubmit('SEND_MESSAGE', guess);
@@ -27,6 +26,7 @@ const MessageInput = (props) => {
       position: 'absolute',
       right: 0,
       borderRadius: '10',
+      display: 'none',
     },
     input: {
       color: '#fff',

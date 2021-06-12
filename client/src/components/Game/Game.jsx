@@ -13,11 +13,8 @@ export default function Game({ playlist }) {
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
-  const [guesses, setGuesses] = useState([]);
+  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
   const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
-  
-  // USER & USERS OBJECT
-  // {name, score, emoji?, color?}
   
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
@@ -32,9 +29,7 @@ export default function Game({ playlist }) {
     if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
       const winner = getWinner();
-      setGameStatus((prev) => {
-        return {...prev, finished: true, winner}
-      });
+      setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
 
     // Get the current song name if it exists (new JS syntax)
@@ -61,16 +56,33 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
-        const { name, color, score, users } = msg;
-        setUser({ name, color, score });
+        const { id, name, color, score, users } = msg;
+        console.log("initial connection msg", msg)
+        setUser({ id, name, color, score });
         setUsers([...users]);
       });
 
       conn.on('NEW_USER', (msg) => {
+        console.log('new user msg ', msg)
         setUsers((prev) => [...prev, msg]);
       });
 
+      conn.on('CHANGE_NAME', (msg) => {
+        const { name, id, users } = msg;
+        console.log('Frontend change name values: ', msg)
+        // make specific for the current user 
+        // currUser = users.find(user => user.id === id)
+        console.log('user.id ', user.id)
+        console.log('id ', id)
+        console.log('user: ', user)
+
+        // BUGUGGUUGUGUG
+        setUser((prev) => ({...prev, name}));
+        setUsers([...users]);
+      });
+
       conn.on('SEND_MESSAGE', (msg) => {
+        console.log(msg)
         setGuesses((prev) => [...prev, msg]);
       });
 
@@ -81,16 +93,18 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
-        // setMessages()
-        // nextRound();
+        console.log(msg);
+        setGuesses((prev) => [...prev, msg]);
+        setUser(prev => ({ ...prev, score: msg.score }))
+        // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
+         setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true}));
-        // setMessages()
         // Okay to do multiple setState calls as long as they don't affect each other
-        // updateScore(user);
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
-        //setMessages
+        setGuesses((prev) => [...prev, msg]);
+        // setUser((prev) => [...prev, msg.score]);
       });
 
       conn.on('NEXT_ROUND', (msg) => {
@@ -122,10 +136,11 @@ export default function Game({ playlist }) {
   // SEND MESSAGE TO SERVER
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
-    console.log('Msg sent to backend: ', msg);
     const payload = { ...user, msg };
+    console.log("payload ", payload)
     conn.emit(type, payload);
   };
+
 
   ////////////////////////////////////////
   // NEW ROUND FUNCTION 
@@ -147,6 +162,7 @@ export default function Game({ playlist }) {
   // UPDATE SCORE FUNCTION 
   ////////////////////////////////////////
   const updateScore = (user) => {
+    console.log('here is users info...', user, users);
     // Update score function -> just a function affecting state
     // Checking winner, sending relevant messages to all users
     // Update score of user who scored
@@ -181,6 +197,8 @@ export default function Game({ playlist }) {
           songs={songs}
           numberOfSongs={numberOfRounds}
           playlistName={playlist.playlistName}
+          user={user}
+          users={users}
         />
       )}
 
