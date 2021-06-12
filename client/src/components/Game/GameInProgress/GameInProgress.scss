@@ -1,4 +1,6 @@
 .game-in-progress {
+  // margin-top: 0;
+  // height: 100vh;
   display: flex;
   justify-content: space-around;
 
@@ -12,7 +14,7 @@
     height: 85vh;
     background-color: rgba(0, 0, 0, .5);
     border-radius: 10px;
-
+    margin-top: 2rem;
 
   }
 
