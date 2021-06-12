@@ -55,31 +55,30 @@ export default function Game({ playlist }) {
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
+      // Received only by one user on connecting to socket
       conn.on('INITIAL_CONNECTION', (msg) => {
         const { id, name, color, score, users } = msg;
-        console.log("initial connection msg", msg)
+        // console.log("initial connection msg", msg)
         setUser({ id, name, color, score });
         setUsers([...users]);
       });
 
+      // Received by all users except user who connected
       conn.on('NEW_USER', (msg) => {
-        console.log('new user msg ', msg)
+        // console.log('new user msg ', msg)
         setUsers((prev) => [...prev, msg]);
       });
 
+      // Received only by one user who requested name change
       conn.on('CHANGE_NAME', (msg) => {
-        const { name, id, users } = msg;
-        console.log('Frontend change name values: ', msg)
-        // make specific for the current user 
-        console.log('user.id ', user.id)
-        console.log('id ', id)
-        console.log('user: ', user)
+        const { name, users } = msg;
+        setUser((prev) => ({...prev, name})); 
+        setUsers([...users]);
+      });
 
-        // BUGUGGUUGUGUG, CAN'T ACCESS USER IN HERE
-        // if (user.id === id) {
-        //   setUser((prev) => ({...prev, name}));
-        // }
-        setUser((prev) => ({...prev, name})); // This currently updates the user name for all the users (BUG!!!!)
+      // Received by all users except user who requested name change
+      conn.on('USER_NAME_CHANGE', (msg) => {
+        const { users } = msg;
         setUsers([...users]);
       });
 
