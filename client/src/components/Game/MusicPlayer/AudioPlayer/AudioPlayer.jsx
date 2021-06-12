@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     width: 100,
     margin: theme.spacing(1),
   },
+  next: {
+    color: "white",
+    background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
+    opacity: "0.75"
+  }
 }));
 
 export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
@@ -39,7 +44,7 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
-      <IconButton><SkipNextIcon/></IconButton>
+      <IconButton className={classes.next} ><SkipNextIcon fontSize="large"/></IconButton>
       <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button>
       
     </div>
