@@ -1,11 +1,20 @@
 import { makeStyles } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
+import IconButton from '@material-ui/core/IconButton';
+
 import './index.scss';
+
 const MessageInput = (props) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
-    props.onSubmit('SEND_MESSAGE', evt.target.message.value);
-    console.log(evt.target.message.value);
+    const guess = evt.target.message.value.trim();
+    console.log('guess input:', guess);
+
+    // Only send guess/message to the back if it's not an empty input
+    guess && props.onSubmit('SEND_MESSAGE', guess);
+
+    // Reset guess/message field
     evt.target.message.value = '';
   };
 
@@ -21,6 +30,9 @@ const MessageInput = (props) => {
     },
     input: {
       color: '#fff',
+    },
+    send: {
+      color: 'white',
     },
   }));
 
@@ -39,11 +51,14 @@ const MessageInput = (props) => {
           className="chat-input"
           type="text"
           name="message"
-          placeholder="Type your message"
+          placeholder="Type your guess/message"
         />
         <Button className={classes.button} type="submit">
           Send!
         </Button>
+        <IconButton className={classes.send} aria-label="send">
+          <SendIcon />
+        </IconButton>
       </div>
     </form>
   );
