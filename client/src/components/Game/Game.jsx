@@ -31,14 +31,6 @@ export default function Game({ playlist }) {
       const winner = getWinner();
       setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
-
-    // Get the current song name if it exists (new JS syntax)
-    // const currentSongName = song?.title;
-
-    // // If there's a connection and a current song
-    // if (conn && currentSongName && !round.finished) {
-    //   sendMessage('NEXT_ROUND', currentSongName);
-    // }
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -82,10 +74,9 @@ export default function Game({ playlist }) {
         setUsers([...users]);
       });
 
-      conn.on('SEND_MESSAGE', (msg) => {
-        // console.log(msg)
-        setGuesses((prev) => [...prev, msg]);
-      });
+      ////////////////////////////////////////
+      // EVENTS RECIEVED BY ALL USERS
+      ////////////////////////////////////////
 
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
@@ -94,12 +85,12 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
-        console.log(msg);
         setGuesses((prev) => [...prev, msg]);
         setUser(prev => ({ ...prev, score: msg.score }))
         // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
-         setUsers([...msg.users]);
+        setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true}));
+        // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
       })
 
@@ -146,29 +137,13 @@ export default function Game({ playlist }) {
   // NEW ROUND FUNCTION 
   ////////////////////////////////////////
   const nextRound = () => {
-    // Update round object by incrementing the round number and resetting the round finished status to false
-    // sendMessage to back end
-
-
     // Get the current song name if it exists (new JS syntax)
     const nextRound = round.number + 1;
     const currentSongName = songs[nextRound]?.title;
-    console.log("song to server", currentSongName);
 
+    // Send message to socket to notify all users it's the next round and update the next song name
     sendMessage('NEXT_ROUND', currentSongName);
   };
-
-  ////////////////////////////////////////
-  // UPDATE SCORE FUNCTION 
-  ////////////////////////////////////////
-  const updateScore = (user) => {
-    console.log('here is users info...', user, users);
-    // Update score function -> just a function affecting state
-    // Checking winner, sending relevant messages to all users
-    // Update score of user who scored
-    // setUsers(...prev, user.score ++)
-    // ADD SNACKBAR NOTIFICATION
-  }
 
   ////////////////////////////////////////
   // GET WINNER FUNCTION 
