@@ -40,7 +40,7 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
         src={song.previewUrl}>
       </audio>
       <IconButton><SkipNextIcon/></IconButton>
-      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}></Button>
+      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button>
       
     </div>
   );

@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  loggedIn: {
+    marginRight: theme.spacing(2),
+  }
 }));
 
 export default function Navbar() {
@@ -42,8 +45,9 @@ export default function Navbar() {
   } else {  //User is logged in
     displayLogin =
     <div className="rightNavbarGroup">
-      <p className="greeting">Hello, DJ Dylan!</p>
-      <Button color="inherit" onClick={(e) => setLoggedIn(false)}>Logout</Button>
+      {/* <p className="greeting">Hello, DJ Dylan!</p> */}
+      <Typography variant="h6" className={classes.loggedIn}>HELLO, DJ DYLAN!</Typography>
+      <Button color="inherit" type="button" onClick={(e) => setLoggedIn(false)}>Logout</Button>
       <Button color="inherit"><ToggleOnIcon /></Button>
     </div>
   }
@@ -57,7 +61,7 @@ export default function Navbar() {
               <div className="leftNavbarGroup">
                 <MusicNoteIcon fontSize="large" />
                 <Button>
-                  <Typography variant="h6" className={classes.title}>
+                  <Typography variant="h5" className={classes.title}>
                     <Link to="/">DROP THE BEAT</Link>
                   </Typography>
                 </Button>
