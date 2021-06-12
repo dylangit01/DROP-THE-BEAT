@@ -174,16 +174,18 @@ export default function Game({ playlist }) {
   // GET WINNER FUNCTION 
   ////////////////////////////////////////
   const getWinner = () => {
-    const winner = "NellyCuteAsABtn";
-    const highestScore = 0;
+    let winner = "";
+    let highestScore = 0;
 
-    // For now, just 2 players
-    // users.forEach(user => {
-    //   if (user.score > highestScore) {
-    //     winner = user.name;
-    //     highestScore = user.score;
-    //   }
-    // })
+    // Assume only 2 players
+    users.forEach(user => {
+      if (user.score > highestScore) {
+        winner = user.name;
+        highestScore = user.score;
+      } else if (user.score === highestScore) {
+        winner = ""; // this means it's a tie or no one scored
+      }
+    })
     return winner;
   }
 
