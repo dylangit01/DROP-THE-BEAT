@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
 export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
   const classes = useStyles();
 
-  // const handleSongEnd = () => {
-  //   // () => setRound(prev => {return {...prev, finished: true}})
-  //   sendMessage('ROUND_FINISHED', 'song has finished playing')
-  // };
+  const handleSongEnd = () => {
+    setRound(prev => {return {...prev, finished: true}});
+    sendMessage('SONG_FINISHED', 'song has finished playing')
+  };
 
   return (
     <div className="audio-player">
@@ -40,7 +40,7 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
         id="song-audio"
         autoPlay
         controls
-        onEnded={() => setRound(prev => {return {...prev, finished: true}})} //disable guessing, reveal song if not revealed
+        onEnded={handleSongEnd} //disable guessing, reveal song if not revealed
         // volume={0.5}
         src={song.previewUrl}>
       </audio>

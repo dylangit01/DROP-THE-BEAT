@@ -83,17 +83,19 @@ io.on('connection', (socket) => {
 
   // WHEN A HOST CLICKS NEXT ROUND
   socket.on('NEXT_ROUND', ({ msg }) => {
-    currentSongName = msg?.toLowerCase();
+    if (msg) {
+      currentSongName = msg.toLowerCase();
+    }
 
     // Send to front end it's the next round
     io.emit('NEXT_ROUND', { msg });
   });
 
-  // WHEN ROUND HAS FINISHED AND NO ONE GUESSED
-  // socket.on('ROUND_FINISHED', ({ msg }) => {
-  //   // Send to front end the round has finised
-  //   io.emit('ROUND_FINISHED', { msg });
-  // });
+  // WHEN ROUND HAS FINISHED AND NO ONE HAS GUESSED THE SONG
+  socket.on('SONG_FINISHED', ({ msg }) => {
+    // Reset song name so that no one can get correct answer after the song is revealed
+    currentSongName = '';
+  });
 
   // WHEN USERS GUESS SONG NAME
   socket.on('SEND_MESSAGE', (msg) => {
