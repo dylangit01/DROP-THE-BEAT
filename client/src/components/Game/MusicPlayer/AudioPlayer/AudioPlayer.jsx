@@ -39,13 +39,13 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
       <audio
         id="song-audio"
         autoPlay
-        controls
+        // controls
         onEnded={handleSongEnd} //disable guessing, reveal song if not revealed
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
-      <IconButton className={classes.next} ><SkipNextIcon fontSize="large"/></IconButton>
-      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button>
+      <IconButton className={classes.next} onClick={nextRound}><SkipNextIcon fontSize="large"/></IconButton>
+      {/* <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button> */}
       
     </div>
   );
