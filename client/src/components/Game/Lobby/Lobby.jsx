@@ -94,6 +94,11 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
               </Typography>
               <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' value={'NellyCuteAsBtn'} onChange={(e)=>setName2(e.target.value)}/> NellyCuteAsBtn
+                {/* <div>
+                  <input type="color" id="head" name="head"
+                        value="#e66465" />
+                  <label for="head">Head</label>
+                </div> */}
               </Typography>
             </div>
 
