@@ -51,18 +51,20 @@ let guessSongName = '';
 io.on('connection', (socket) => {
   console.log('New user connected!');
 
+  const id = socket.id;
   const name = 'Ruby';
   const color = randomColor();
-  let score = 0;
+ const score = 0;
 
   socket.name = name;
   socket.color = color;
   socket.score = score;
+  socket.host = true;
 
   const users = getAllUsers(io.sockets.sockets);
-  socket.emit('INITIAL_CONNECTION', { name, color, score, users });
+  socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, host });
 
-  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color, score });
+  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color, score, host });
 
   // WHEN A HOST CLICKS START GAME
   socket.on('START_GAME', (msg) => {
@@ -97,9 +99,10 @@ io.on('connection', (socket) => {
     // Send to front end there's a correct guess
     if (guessSongName === currentSongName) {
       console.log('right answer', currentSongName);
-      score += 1;
+      socket.score += 1;
+      const users = getAllUsers(io.sockets.sockets);
       currentSongName = ''; // reset so that no one else guessing after will get it
-      io.emit('CORRECT_GUESS', { ...msg, score });
+      io.emit('CORRECT_GUESS', { ...msg, score:socket.score, users });
     } else {
       // Send to front end there's an incorrect guess
       console.log('wrong answer');

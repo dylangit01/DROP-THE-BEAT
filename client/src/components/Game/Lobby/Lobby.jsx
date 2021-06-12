@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 // import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 import Ruby from '../../../assets/Ruby_logo.png'
+import UserList from '../Chat/UserList';
 
 // Styling
 import {
@@ -42,7 +43,7 @@ const StyledCodeBtnTwo = withStyles({
   }
 })(Button);
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs }) {
+export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users }) {
   const classes = useStyles();
 
   const [name1, setName1] = useState('RubyOffTheRails');
@@ -87,13 +88,31 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
               <Typography variant='h6'>Host: DJ Dylan</Typography>
             </div>
 
+            <div className='chat-user'>
+          <UserList {...{ user, users }} />
+        </div>
+
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
               <Typography variant='h6'>
-                <img style={{ width: '20px' }} src={Ruby} alt='' value={'RubyOffTheRails'} onChange={(e)=>setName1(e.target.value)} /> RubyOffTheRails
+                <img
+                  style={{ width: '20px' }}
+                  src={Ruby}
+                  alt=''
+                  value={'RubyOffTheRails'}
+                  onChange={(e) => setName1(e.target.value)}
+                />{' '}
+                RubyOffTheRails
               </Typography>
               <Typography variant='h6'>
-                <img style={{ width: '20px' }} src={Ruby} alt='' value={'NellyCuteAsBtn'} onChange={(e)=>setName2(e.target.value)}/> NellyCuteAsBtn
+                <img
+                  style={{ width: '20px' }}
+                  src={Ruby}
+                  alt=''
+                  value={'NellyCuteAsBtn'}
+                  onChange={(e) => setName2(e.target.value)}
+                />{' '}
+                NellyCuteAsBtn
               </Typography>
             </div>
 

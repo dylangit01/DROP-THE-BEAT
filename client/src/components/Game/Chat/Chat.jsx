@@ -8,10 +8,9 @@ export default function Chat(props) {
   return (
     <>
       <div className='chat-layout'>
-        {/* <div className='chat-user'> */}
-          {/* <UserList {...{ user, users }} /> */}
-          
-        {/* </div> */}
+        {/* <div className='chat-user'>
+          <UserList {...{ user, users }} />
+        </div> */}
         <div className='chat-msg'>
           <MessageList messages={messages} />
         </div>

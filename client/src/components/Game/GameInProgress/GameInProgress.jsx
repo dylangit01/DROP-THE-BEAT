@@ -32,37 +32,31 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
   };
 
   return (
-    <div className="game-in-progress">
-      <div className="left-side">
-        {song && 
-          <MusicPlayer 
+    <div className='game-in-progress'>
+      <div className='left-side'>
+        {song && (
+          <MusicPlayer
             round={round}
             setRound={setRound}
-            playlist={playlist} 
-            song={song} 
+            playlist={playlist}
+            song={song}
             nextRound={() => nextRound()}
             sendMessage={sendMessage}
-          />}
-        <TrackList round={round} songs={playlist.songs}/>
+          />
+        )}
+        <TrackList round={round} songs={playlist.songs} />
 
-            {/* THIS IS TEMPORARY, JUST TRYING TO PLAY AROUND WITH NOTIFICATIONS :)  */}
-            {/* Displaying winner notification for the round */}
-            <button onClick={handleClick(TransitionDown)}>Down</button>
+        {/* THIS IS TEMPORARY, JUST TRYING TO PLAY AROUND WITH NOTIFICATIONS :)  */}
+        {/* Displaying winner notification for the round */}
+        <button onClick={handleClick(TransitionDown)}>Down</button>
 
-            <Snackbar
-              open={open}
-              onClose={handleClose}
-              TransitionComponent={transition}
-              message="I love snacks"
-            />
+        <Snackbar open={open} onClose={handleClose} TransitionComponent={transition} message='I love snacks' />
       </div>
-      <div className="right-side">
-        <Score  {...messages}/>
+      <div className='right-side'>
+        <Score {...{ user, users, messages }} />
         <Chat {...{ user, users, messages }} />
         <MessageInput onSubmit={sendMessage} />
       </div>
-
-
     </div>
   );
 }

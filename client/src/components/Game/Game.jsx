@@ -59,8 +59,8 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
-        const { name, color, score, users } = msg;
-        setUser({ name, color, score });
+        const { id, name, color, score, users } = msg;
+        setUser({ id, name, color, score });
         setUsers([...users]);
       });
 
@@ -79,15 +79,18 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
+        console.log(msg);
         setGuesses((prev) => [...prev, msg]);
-        // nextRound();
+        setUser(prev => ({ ...prev, score: msg.score }))
+        // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
+         setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true}));
         // Okay to do multiple setState calls as long as they don't affect each other
-        // updateScore(user);
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
+        // setUser((prev) => [...prev, msg.score]);
       });
 
       conn.on('NEXT_ROUND', (msg) => {
@@ -119,7 +122,7 @@ export default function Game({ playlist }) {
   // SEND MESSAGE TO SERVER
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
-    console.log('Msg sent to backend: ', msg);
+    // console.log('Msg sent to backend: ', msg);
     const payload = { ...user, msg };
     conn.emit(type, payload);
   };
@@ -144,6 +147,7 @@ export default function Game({ playlist }) {
   // UPDATE SCORE FUNCTION 
   ////////////////////////////////////////
   const updateScore = (user) => {
+    console.log('here is users info...', user, users);
     // Update score function -> just a function affecting state
     // Checking winner, sending relevant messages to all users
     // Update score of user who scored
@@ -178,6 +182,8 @@ export default function Game({ playlist }) {
           songs={songs}
           numberOfSongs={numberOfRounds}
           playlistName={playlist.playlistName}
+          user={user}
+          users={users}
         />
       )}
 
