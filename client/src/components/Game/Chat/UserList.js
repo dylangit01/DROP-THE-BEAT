@@ -10,7 +10,7 @@ const UserList = (props) => {
           <img style={{ width: '2vw', height:'3vh', marginRight:'5px' }} src={Ruby} alt='' />
           <li style={{ listStyleType: 'none' }} key={user.id}>
             {user.name}
-            {user.name === props.user.name && <span>(You)</span>}
+            {user.id === props.user.id && <span>(You)</span>}
             <span style={{ backgroundColor: user.color }}>_</span>
           </li>
         </div>
