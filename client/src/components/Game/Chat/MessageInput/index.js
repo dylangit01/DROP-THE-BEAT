@@ -56,6 +56,8 @@ const MessageInput = (props) => {
         <Button className={classes.button} type="submit">
           Send!
         </Button>
+
+        {/* Can we please change the send button to this one? */}
         <IconButton className={classes.send} aria-label="send">
           <SendIcon />
         </IconButton>
