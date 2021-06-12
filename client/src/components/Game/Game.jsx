@@ -137,7 +137,7 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
     const payload = { ...user, msg };
-    console.log("payload ", payload)
+    console.log("payload for changinggggg the user name", payload)
     conn.emit(type, payload);
   };
 

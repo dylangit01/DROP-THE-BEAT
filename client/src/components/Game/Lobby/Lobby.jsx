@@ -33,7 +33,6 @@ const StyledCodeBtnTwo = withStyles({
 export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users }) {
   const classes = useStyles();
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("'START_GAME' and list of songs are sent to backend");

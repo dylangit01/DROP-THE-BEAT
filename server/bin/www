@@ -77,13 +77,7 @@ io.on('connection', (socket) => {
   console.log('USERS: ', users);
 
   socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost });
-  socket.broadcast.emit('NEW_USER', {
-    name,
-    id: socket.id,
-    color,
-    score,
-    isHost,
-  });
+  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color, score, isHost, });
 
   // WHEN A PLAYER CLICKS CHANGE NAME
   socket.on('CHANGE_NAME', ({ name, color, msg }) => {
@@ -92,6 +86,7 @@ io.on('connection', (socket) => {
     // reset the users array
     const users = getAllUsers(io.sockets.sockets);
     io.emit('CHANGE_NAME', { name: socket.name, id: socket.id, users });
+    // io.emit('SEND_MESSAGE', { msg });
   });
 
   // WHEN A HOST CLICKS START GAME
