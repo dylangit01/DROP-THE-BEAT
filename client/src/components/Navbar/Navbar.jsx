@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 // Styles
@@ -35,6 +35,7 @@ export default function Navbar() {
   
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // Login user for demo purposes
   let displayLogin = "";
   if(!loggedIn){
     displayLogin =
