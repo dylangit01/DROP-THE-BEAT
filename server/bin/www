@@ -41,14 +41,7 @@ const randomColor = () => {
 const getAllUsers = (sockets) => {
   const users = [];
   const connections = sockets.values();
-  for (const item of connections) {
-    users.push({
-      name: item.name,
-      id: item.id,
-      color: item.color,
-      score: item.score,
-    });
-  }
+  for (const item of connections) { users.push({ name: item.name, id: item.id, color: item.color, score: item.score, }); }
   return users;
 };
 
@@ -60,7 +53,7 @@ io.on('connection', (socket) => {
 
   const name = 'Ruby';
   const color = randomColor();
-  const score = 0;
+  let score = 0;
 
   socket.name = name;
   socket.color = color;
@@ -104,8 +97,9 @@ io.on('connection', (socket) => {
     // Send to front end there's a correct guess
     if (guessSongName === currentSongName) {
       console.log('right answer', currentSongName);
+      score += 1;
       currentSongName = ''; // reset so that no one else guessing after will get it
-      io.emit('CORRECT_GUESS', { ...msg });
+      io.emit('CORRECT_GUESS', { ...msg, score });
     } else {
       // Send to front end there's an incorrect guess
       console.log('wrong answer');

@@ -6,7 +6,7 @@ const MessageList = (props) => {
       {props.messages.map((msg, idx) => (
         <li key={idx} className='message-list--item'>
           <b style={{ color: msg.color }}>{msg.name}: </b>
-          {msg.msg}
+          {msg.msg} ------- score {msg.score}
         </li>
       ))}
     </ul>

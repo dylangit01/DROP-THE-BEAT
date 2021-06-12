@@ -81,7 +81,7 @@ export default function Game({ playlist }) {
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
         setGuesses((prev) => [...prev, msg]);
-        
+        setScore(prev => ({ score: prev + 1 }))
         // nextRound();
         setRound(prev => ({...prev, finished: true}));
         // Okay to do multiple setState calls as long as they don't affect each other
