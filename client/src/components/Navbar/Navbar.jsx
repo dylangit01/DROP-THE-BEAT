@@ -48,7 +48,6 @@ export default function Navbar() {
   } else {  //User is logged in
     displayLogin =
     <div className="rightNavbarGroup">
-      {/* <p className="greeting">Hello, DJ Dylan!</p> */}
       <Typography variant="h6" className={classes.loggedIn}>HELLO, DJ DYLAN!</Typography>
       <Button color="inherit" type="button" onClick={(e) => setLoggedIn(false)}>Logout</Button>
       <IconButton color="inherit"><WbSunnyIcon /></IconButton>
