@@ -86,7 +86,7 @@ export default function Game({ playlist }) {
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
         setGuesses((prev) => [...prev, msg]);
-        setUser(prev => ({ ...prev, score: msg.score }))
+        setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
         // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
         setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true}));
