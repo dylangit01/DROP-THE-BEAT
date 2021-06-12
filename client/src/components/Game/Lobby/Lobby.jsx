@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 // import { SET_PLAYLIST } from '../../../reducer/data_reducer';
-import Ruby from '../../../assets/Ruby_logo.png'
+// import Ruby from '../../../assets/Ruby_logo.png'
 import UserList from '../Chat/UserList';
 
 // Styling
@@ -16,19 +16,6 @@ import {
 } from '@material-ui/core';
 import useStyles from './LobbyStyles';
 import { withStyles } from '@material-ui/core/styles';
-
-const StyledLobbyBtnOne = withStyles({
-  root: {
-    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
-    borderRadius: 5,
-    border: 0,
-    color: 'white',
-    height: 50,
-    padding: '0 30px',
-    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    marginLeft: 180,
-  }
-})(Button);
 
 const StyledCodeBtnTwo = withStyles({
   root: {

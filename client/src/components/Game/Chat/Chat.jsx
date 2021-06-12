@@ -1,7 +1,7 @@
 import React from 'react';
 import './Chat.scss';
 import MessageList from './MessageList';
-import UserList from './UserList';
+// import UserList from './UserList';
 
 export default function Chat(props) {
   const { user, users, messages } = props;
