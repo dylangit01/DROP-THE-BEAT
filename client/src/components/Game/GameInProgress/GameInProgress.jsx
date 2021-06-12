@@ -57,7 +57,7 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
             />
       </div>
       <div className="right-side">
-        <Score />
+        <Score  {...messages}/>
         <Chat {...{ user, users, messages }} />
         <MessageInput onSubmit={sendMessage} />
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Score.scss';
 
-export default function Score({setScore, setWinner}) {
+export default function Score({setScore, setWinner, messages}) {
 
   // setScore(3)
   // let score = 0;
@@ -14,6 +14,7 @@ export default function Score({setScore, setWinner}) {
   // }
 
   return (
+    
     <div className="score-box">
       <h2>Scores:</h2>
       <h1 className="score-numbers"> 3 / 2 </h1>
