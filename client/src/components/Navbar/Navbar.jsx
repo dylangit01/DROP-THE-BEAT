@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
+import IconButton from '@material-ui/core/IconButton';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +43,7 @@ export default function Navbar() {
     displayLogin =
     <div className="rightNavbarGroup">
       <Button color="inherit" type="button" onClick={(e) => setLoggedIn(true)}>Login</Button>
-      <Button color="inherit"><ToggleOnIcon /></Button>
+      <IconButton color="inherit"><WbSunnyIcon /></IconButton>
     </div>;
   } else {  //User is logged in
     displayLogin =
@@ -49,7 +51,7 @@ export default function Navbar() {
       {/* <p className="greeting">Hello, DJ Dylan!</p> */}
       <Typography variant="h6" className={classes.loggedIn}>HELLO, DJ DYLAN!</Typography>
       <Button color="inherit" type="button" onClick={(e) => setLoggedIn(false)}>Logout</Button>
-      <Button color="inherit"><ToggleOnIcon /></Button>
+      <IconButton color="inherit"><WbSunnyIcon /></IconButton>
     </div>
   }
 
