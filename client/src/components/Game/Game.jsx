@@ -31,14 +31,6 @@ export default function Game({ playlist }) {
       const winner = getWinner();
       setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
-
-    // Get the current song name if it exists (new JS syntax)
-    // const currentSongName = song?.title;
-
-    // // If there's a connection and a current song
-    // if (conn && currentSongName && !round.finished) {
-    //   sendMessage('NEXT_ROUND', currentSongName);
-    // }
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -55,36 +47,36 @@ export default function Game({ playlist }) {
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
+      // Received only by one user on connecting to socket
       conn.on('INITIAL_CONNECTION', (msg) => {
         const { id, name, color, score, users } = msg;
-        console.log("initial connection msg", msg)
+        // console.log("initial connection msg", msg)
         setUser({ id, name, color, score });
         setUsers([...users]);
       });
 
+      // Received by all users except user who connected
       conn.on('NEW_USER', (msg) => {
-        console.log('new user msg ', msg)
+        // console.log('new user msg ', msg)
         setUsers((prev) => [...prev, msg]);
       });
 
+      // Received only by one user who requested name change
       conn.on('CHANGE_NAME', (msg) => {
-        const { name, id, users } = msg;
-        console.log('Frontend change name values: ', msg)
-        // make specific for the current user 
-        // currUser = users.find(user => user.id === id)
-        console.log('user.id ', user.id)
-        console.log('id ', id)
-        console.log('user: ', user)
-
-        // BUGUGGUUGUGUG
-        setUser((prev) => ({...prev, name}));
+        const { name, users } = msg;
+        setUser((prev) => ({...prev, name})); 
         setUsers([...users]);
       });
 
-      conn.on('SEND_MESSAGE', (msg) => {
-        console.log(msg)
-        setGuesses((prev) => [...prev, msg]);
+      // Received by all users except user who requested name change
+      conn.on('USER_NAME_CHANGE', (msg) => {
+        const { users } = msg;
+        setUsers([...users]);
       });
+
+      ////////////////////////////////////////
+      // EVENTS RECIEVED BY ALL USERS
+      ////////////////////////////////////////
 
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
@@ -93,18 +85,17 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
-        console.log(msg);
         setGuesses((prev) => [...prev, msg]);
         setUser(prev => ({ ...prev, score: msg.score }))
         // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
-         setUsers([...msg.users]);
+        setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true}));
+        // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
-        // setUser((prev) => [...prev, msg.score]);
       });
 
       conn.on('NEXT_ROUND', (msg) => {
@@ -146,44 +137,30 @@ export default function Game({ playlist }) {
   // NEW ROUND FUNCTION 
   ////////////////////////////////////////
   const nextRound = () => {
-    // Update round object by incrementing the round number and resetting the round finished status to false
-    // sendMessage to back end
-
-
     // Get the current song name if it exists (new JS syntax)
     const nextRound = round.number + 1;
     const currentSongName = songs[nextRound]?.title;
-    console.log("song to server", currentSongName);
 
+    // Send message to socket to notify all users it's the next round and update the next song name
     sendMessage('NEXT_ROUND', currentSongName);
   };
-
-  ////////////////////////////////////////
-  // UPDATE SCORE FUNCTION 
-  ////////////////////////////////////////
-  // const updateScore = (user) => {
-  //   console.log('here is users info...', user, users);
-    // Update score function -> just a function affecting state
-    // Checking winner, sending relevant messages to all users
-    // Update score of user who scored
-    // setUsers(...prev, user.score ++)
-    // ADD SNACKBAR NOTIFICATION
-  // }
 
   ////////////////////////////////////////
   // GET WINNER FUNCTION 
   ////////////////////////////////////////
   const getWinner = () => {
-    const winner = "NellyCuteAsABtn";
-    const highestScore = 0;
+    let winner = "";
+    let highestScore = 0;
 
-    // For now, just 2 players
-    // users.forEach(user => {
-    //   if (user.score > highestScore) {
-    //     winner = user.name;
-    //     highestScore = user.score;
-    //   }
-    // })
+    // Assume only 2 players
+    users.forEach(user => {
+      if (user.score > highestScore) {
+        winner = user.name;
+        highestScore = user.score;
+      } else if (user.score === highestScore) {
+        winner = ""; // this means it's a tie or no one scored
+      }
+    })
     return winner;
   }
 

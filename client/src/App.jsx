@@ -24,10 +24,8 @@ function App () {
   const { state, dispatch } = useApplicationData();
   const history = useHistory();
 
-  // Get currently selected playlist
+  // Get currently selected playlist if it exists
   const currentPlaylist = state.playlists.find(playlist => playlist.playlistId === state.playlist);
-  // console.log('Current playlist from app.jsx: ', currentPlaylist);
-  // console.log(history);
 
   return (
     <Router>
@@ -46,7 +44,7 @@ function App () {
           </Route>
 
           <Route path="/playlists/:id" exact>
-            <PlaylistPage playlists={state.playlists} dispatch={dispatch} />
+            {currentPlaylist && <PlaylistPage playlists={state.playlists} dispatch={dispatch} />}
           </Route>
 
           <Route path="/join" exact>
@@ -56,7 +54,7 @@ function App () {
           <Route path="/game" exact>
             {currentPlaylist && <Game playlist={currentPlaylist} />}
             {/* {!currentPlaylist && history.push(`/`)} */}
-            {/* ABOVE DOESN'T WORK?! */}
+            {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
           </Route>
 
           <Route path="*">
