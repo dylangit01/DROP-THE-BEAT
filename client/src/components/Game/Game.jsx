@@ -71,18 +71,20 @@ export default function Game({ playlist }) {
         const { name, id, users } = msg;
         console.log('Frontend change name values: ', msg)
         // make specific for the current user 
-        // currUser = users.find(user => user.id === id)
         console.log('user.id ', user.id)
         console.log('id ', id)
         console.log('user: ', user)
 
-        // BUGUGGUUGUGUG
-        setUser((prev) => ({...prev, name}));
+        // BUGUGGUUGUGUG, CAN'T ACCESS USER IN HERE
+        // if (user.id === id) {
+        //   setUser((prev) => ({...prev, name}));
+        // }
+        setUser((prev) => ({...prev, name})); // This currently updates the user name for all the users (BUG!!!!)
         setUsers([...users]);
       });
 
       conn.on('SEND_MESSAGE', (msg) => {
-        console.log(msg)
+        // console.log(msg)
         setGuesses((prev) => [...prev, msg]);
       });
 
@@ -104,7 +106,6 @@ export default function Game({ playlist }) {
 
       conn.on('INCORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
-        // setUser((prev) => [...prev, msg.score]);
       });
 
       conn.on('NEXT_ROUND', (msg) => {
