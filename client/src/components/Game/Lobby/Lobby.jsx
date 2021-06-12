@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import Ruby from '../../../assets/Ruby_logo.png'
 import UserList from '../Chat/UserList';
 
+
 // Styling
 import {
   Typography,
@@ -16,6 +17,7 @@ import {
 } from '@material-ui/core';
 import useStyles from './LobbyStyles';
 import { withStyles } from '@material-ui/core/styles';
+import './Lobby.scss';
 
 const StyledLobbyBtnOne = withStyles({
   root: {
@@ -23,10 +25,10 @@ const StyledLobbyBtnOne = withStyles({
     borderRadius: 5,
     border: 0,
     color: 'white',
-    height: 50,
+    height: 30,
     padding: '0 30px',
     // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    marginLeft: 180,
+    marginLeft: 320,
   }
 })(Button);
 
@@ -56,19 +58,22 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
   const changeName = (e) => {
     e.preventDefault();
     const newName = e.target.name.value;
-    sendMessage("CHANGE_NAME", newName)
+    sendMessage("CHANGE_NAME", newName);
+    e.target.name.value = '';
   }
 
   return (
     <>
       <Container className={classes.root}>
         <div className={classes.img_playOption}>
+
           <div>
             <Typography className={classes.title} variant='h4'>
               {playlist.playlistName} Playlist
             </Typography>
             <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
           </div>
+
           <div>
             <div className={classes.options}>
               <Typography variant='h6'>Difficulty</Typography>
@@ -89,23 +94,21 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
               <Typography variant='h6'>Host: DJ Dylan</Typography>
             </div>
 
-            <div className='chat-user'>
-          <UserList {...{ user, users }} />
-        </div>
-
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
-              {/* <Typography variant='h6'>
-                <img style={{ width: '20px' }} src={Ruby} alt='' value={'RubyOffTheRails'} onChange={(e)=>setName1(e.target.value)} /> RubyOffTheRails
-              </Typography>
-              <Typography variant='h6'>
-                <img style={{ width: '20px' }} src={Ruby} alt='' value={'NellyCuteAsBtn'} onChange={(e)=>setName2(e.target.value)}/> NellyCuteAsBtn
-              </Typography> */}
+              <UserList {...{ user, users }} />
+            </div>
 
-              <form onSubmit={(e) => changeName(e)}>
-                <input type="text" name="name" placeholder="Type your name for game"></input>
-                <button type="submit">Change name</button>
-              </form>
+            <div className={classes.changeName}>
+
+              <Typography variant='h6'>Change your name:</Typography>
+
+                <form className="change-name-form" onSubmit={(e) => changeName(e)}>
+                  <input className="name-input" type="text" name="name" placeholder="Type your name here"></input>
+                  <StyledLobbyBtnOne type='submit' className="change-btn" onSubmit={(event) => changeName(event)}>
+                    Change
+                  </StyledLobbyBtnOne>
+                </form>
 
             </div>
 
@@ -116,7 +119,11 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
                 </StyledCodeBtnTwo>
               </div>
             </div>
-          </div>
+          </div>    
+
+
+
+
         </div>
       </Container>
     </>

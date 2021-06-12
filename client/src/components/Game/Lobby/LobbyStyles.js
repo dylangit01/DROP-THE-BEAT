@@ -67,6 +67,20 @@ export default makeStyles((theme) => ({
     borderRadius: 10,
     paddingLeft: 80,
   },
+  changeName: {
+    //position: 'relative',
+    marginTop: 50,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'start',
+    marginLeft: 150,
+    background: 'rgba(0, 0, 0, 0.5)',
+    width: 500,
+    height: 150,
+    borderRadius: 10,
+    paddingLeft: 80,
+  },
   dropdown: {
     color: '#fff',
     marginLeft: 160,
@@ -84,4 +98,5 @@ export default makeStyles((theme) => ({
     display: 'center',
     marginBottom: 100,
   },
+
 }));

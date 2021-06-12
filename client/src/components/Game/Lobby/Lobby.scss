@@ -1,0 +1,20 @@
+.change-name-form {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  .name-input {
+      display: flex;
+      border: none;
+      color: #fff;
+      background-color: transparent;
+      &:focus {
+        outline: none;
+      }
+  }
+
+  .change-btn {
+    position: absolute;
+
+  }
+}
