@@ -44,7 +44,7 @@ function App () {
           </Route>
 
           <Route path="/playlists/:id" exact>
-            {currentPlaylist && <PlaylistPage playlists={state.playlists} dispatch={dispatch} />}
+            { <PlaylistPage playlists={state.playlists} dispatch={dispatch} />}
           </Route>
 
           <Route path="/join" exact>
