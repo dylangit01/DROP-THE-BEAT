@@ -45,16 +45,18 @@ const StyledCodeBtnTwo = withStyles({
 export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
   const classes = useStyles();
 
-  const [name1, setName1] = useState('RubyOffTheRails');
-  const [name2, setName2] = useState('NellyCuteAsBtn');
-  // const [room, setRoom] = useState('')
 
-
-  const handleSubmit = (event, name1, name2) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log("'START_GAME' and list of songs are sent to backend");
-    sendMessage('START_GAME', { song: songs[0].title, name1, name2 });
+    sendMessage('START_GAME', { song: songs[0].title});
   };
+
+  const changeName = (e) => {
+    e.preventDefault();
+    const newName = e.target.name.value;
+    sendMessage("CHANGE_NAME", newName)
+  }
 
   return (
     <>
@@ -88,17 +90,23 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
 
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
-              <Typography variant='h6'>
+              {/* <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' value={'RubyOffTheRails'} onChange={(e)=>setName1(e.target.value)} /> RubyOffTheRails
               </Typography>
               <Typography variant='h6'>
                 <img style={{ width: '20px' }} src={Ruby} alt='' value={'NellyCuteAsBtn'} onChange={(e)=>setName2(e.target.value)}/> NellyCuteAsBtn
-              </Typography>
+              </Typography> */}
+
+              <form onSubmit={(e) => changeName(e)}>
+                <input type="text" name="name" placeholder="Type your name for game"></input>
+                <button type="submit">Change name</button>
+              </form>
+
             </div>
 
             <div>
               <div className={classes.btnControl}>
-                <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event, name1, name2)}>
+                <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event)}>
                   Start game
                 </StyledCodeBtnTwo>
               </div>

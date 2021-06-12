@@ -16,9 +16,6 @@ export default function Game({ playlist }) {
   const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
   const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
   
-  // USER & USERS OBJECT
-  // {name, score, emoji?, color?}
-  
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
   const song = songs[round.number];
@@ -53,19 +50,20 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
-        console.log(msg);
+        console.log('initial connetion on frontend: name, color, users: ', msg);
         const { name, color, users } = msg;
         setUser({ name, color });
         setUsers([...users]);
       });
 
-      conn.on('NEW_USER', (msg) => {
+      conn.on('NEW_USER-', (msg) => {
         setUsers((prev) => [...prev, msg]);
       });
 
       conn.on('CHANGE_NAME', (msg) => {
         const { name, users } = msg;
-        setUser((prev) => [...prev, name]);
+        console.log('Frontend change name values: ', msg)
+        setUser((prev) => ({...prev, name}));
         setUsers([...users]);
       });
 
@@ -76,7 +74,6 @@ export default function Game({ playlist }) {
       // On start game message from the server
       conn.on('START_GAME', (msg) => {
         setGameStatus((prev) => ({ ...prev, started: true }));
-        // setCurrentSong(msg.song);
       });
 
       conn.on('CORRECT_GUESS', (msg) => {
@@ -113,12 +110,9 @@ export default function Game({ playlist }) {
   // SEND MESSAGE TO SERVER
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
-    console.log('Msg sent to backend: ', msg);
     const payload = { ...user, msg };
     conn.emit(type, payload);
   };
-
-  // sendMessage("CHANGE_NAME", name) // onClick button change name
 
 
   ////////////////////////////////////////
