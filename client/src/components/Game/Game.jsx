@@ -14,7 +14,8 @@ export default function Game({ playlist }) {
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
   const [guesses, setGuesses] = useState([]);
-  const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
+  const [round, setRound] = useState({ number: 0, finished: false });  // Might need to change this to an object of rounds
+  const [score, setScore] = useState(0)
   
   // USER & USERS OBJECT
   // {name, score, emoji?, color?}
@@ -32,9 +33,7 @@ export default function Game({ playlist }) {
     if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
       const winner = getWinner();
-      setGameStatus((prev) => {
-        return {...prev, finished: true, winner}
-      });
+      setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
 
     // Get the current song name if it exists (new JS syntax)
@@ -81,16 +80,16 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         // Update winner's score
-        // setMessages()
+        setGuesses((prev) => [...prev, msg]);
+        
         // nextRound();
         setRound(prev => ({...prev, finished: true}));
-        // setMessages()
         // Okay to do multiple setState calls as long as they don't affect each other
         // updateScore(user);
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
-        //setMessages
+        setGuesses((prev) => [...prev, msg]);
       });
 
       conn.on('NEXT_ROUND', (msg) => {

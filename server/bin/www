@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
 
   // WHEN A HOST CLICKS NEXT ROUND
   socket.on('NEXT_ROUND', ({ msg }) => {
-    currentSongName = msg?.toLowerCase();
+    currentSongName = msg && msg.toLowerCase();
 
     // Send to front end it's the next round
     io.emit('NEXT_ROUND', { msg });
@@ -97,19 +97,19 @@ io.on('connection', (socket) => {
 
   // WHEN USERS GUESS SONG NAME
   socket.on('SEND_MESSAGE', (msg) => {
-    io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess
+    // io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess
     guessSongName = msg.msg.toLowerCase();
-    console.log('guessss', guessSongName);
+    console.log('guessed song:', guessSongName);
 
     // Send to front end there's a correct guess
     if (guessSongName === currentSongName) {
       console.log('right answer', currentSongName);
       currentSongName = ''; // reset so that no one else guessing after will get it
-      io.emit('CORRECT_GUESS', { msg });
+      io.emit('CORRECT_GUESS', { ...msg });
     } else {
       // Send to front end there's an incorrect guess
       console.log('wrong answer');
-      io.emit('INCORRECT_GUESS', { msg });
+      io.emit('INCORRECT_GUESS', { ...msg });
     }
   });
 
