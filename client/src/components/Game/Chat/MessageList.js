@@ -1,7 +1,8 @@
 import './Chat.scss'
 
-const MessageList = ({ user, users, messages }) => {
-  console.log(user, users);
+const MessageList = ({ messages, users, user }) => {
+  console.log('messages: ', messages);
+  console.log('users: ', users);
   return (
     <ul className='message-list'>
       {messages.map((msg, idx) => (

@@ -44,13 +44,14 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ playlists, dispatch }) {
+export default function PlaylistPage({ playlists, dispatch, gameLink }) {
   const classes = useStyles();
   const history = useHistory();
 
   const { id } = useParams();
   const idNum = Number(id);
   const playlist = playlists.find((playlist) => playlist.playlistId === idNum);
+
 
   // For songs dropdown menu:
   const songs = playlist.songs;
@@ -77,7 +78,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
     dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
-    history.push(`/game`);
+    history.push("/game");
   };
 
   return (
@@ -138,7 +139,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>{12345}</Typography>
+                <Typography variant='h6'>{gameLink}</Typography>
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>

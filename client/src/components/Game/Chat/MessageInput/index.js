@@ -1,10 +1,19 @@
 import { makeStyles } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
+import IconButton from '@material-ui/core/IconButton';
+
 import './index.scss';
+
 const MessageInput = (props) => {
   const onSubmit = (evt) => {
     evt.preventDefault();
-    props.onSubmit('SEND_MESSAGE', evt.target.message.value);
+    const guess = evt.target.message.value.trim();
+
+    // Only send guess/message to the back if it's not an empty input
+    guess && props.onSubmit('SEND_MESSAGE', guess);
+
+    // Reset guess/message field
     evt.target.message.value = '';
   };
 
@@ -17,10 +26,13 @@ const MessageInput = (props) => {
       position: 'absolute',
       right: 0,
       borderRadius: '10',
-      display:'none',
+      display: 'none',
     },
     input: {
       color: '#fff',
+    },
+    send: {
+      color: 'white',
     },
   }));
 
@@ -28,12 +40,27 @@ const MessageInput = (props) => {
 
   // can we disable send option if it's an empty input?
   return (
-    <form onSubmit={onSubmit} noValidate autoComplete="off" className="messageInput" >
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      autoComplete="off"
+      className="messageInput"
+    >
       <div className="chat-input-box">
-        <input className="chat-input" type="text" name="message" placeholder="Type your message" />
+        <input
+          className="chat-input"
+          type="text"
+          name="message"
+          placeholder="Type your guess/message"
+        />
         <Button className={classes.button} type="submit">
           Send!
         </Button>
+
+        {/* Can we please change the send button to this one? */}
+        <IconButton className={classes.send} aria-label="send">
+          <SendIcon />
+        </IconButton>
       </div>
     </form>
   );

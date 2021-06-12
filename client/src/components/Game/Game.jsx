@@ -13,11 +13,8 @@ export default function Game({ playlist }) {
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
-  const [guesses, setGuesses] = useState([]);
-  const [round, setRound] = useState({ number: 0, finished: false });  // Might need to change this to an object of rounds
-  
-  // USER & USERS OBJECT
-  // {name, score, emoji?, color?}
+  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
+  const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
   
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
@@ -60,15 +57,32 @@ export default function Game({ playlist }) {
     if (conn) {
       conn.on('INITIAL_CONNECTION', (msg) => {
         const { id, name, color, score, users } = msg;
+        console.log("initial connection msg", msg)
         setUser({ id, name, color, score });
         setUsers([...users]);
       });
 
       conn.on('NEW_USER', (msg) => {
+        console.log('new user msg ', msg)
         setUsers((prev) => [...prev, msg]);
       });
 
+      conn.on('CHANGE_NAME', (msg) => {
+        const { name, id, users } = msg;
+        console.log('Frontend change name values: ', msg)
+        // make specific for the current user 
+        // currUser = users.find(user => user.id === id)
+        console.log('user.id ', user.id)
+        console.log('id ', id)
+        console.log('user: ', user)
+
+        // BUGUGGUUGUGUG
+        setUser((prev) => ({...prev, name}));
+        setUsers([...users]);
+      });
+
       conn.on('SEND_MESSAGE', (msg) => {
+        console.log(msg)
         setGuesses((prev) => [...prev, msg]);
       });
 
@@ -122,10 +136,11 @@ export default function Game({ playlist }) {
   // SEND MESSAGE TO SERVER
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
-    // console.log('Msg sent to backend: ', msg);
     const payload = { ...user, msg };
+    console.log("payload ", payload)
     conn.emit(type, payload);
   };
+
 
   ////////////////////////////////////////
   // NEW ROUND FUNCTION 

@@ -3,11 +3,21 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  animation: fade-in 5s;
   // padding-bottom: 5vh;
 
   img {
     height: 30vw;
     width: 30vw;
     border-radius: 16px;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

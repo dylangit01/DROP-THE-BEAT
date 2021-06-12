@@ -7,9 +7,10 @@
     position: relative;
     // background-color: #505050;
     opacity: 75%;
-    height: 25vw;
-    width: 25vw;
+    height: 30vw;
+    width: 30vw;
     border-radius: 16px;
+    animation: fade-in 3s;
 
     .disc {
       width: inherit;

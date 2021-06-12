@@ -18,15 +18,20 @@ const useStyles = makeStyles((theme) => ({
     width: 100,
     margin: theme.spacing(1),
   },
+  next: {
+    color: "white",
+    background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
+    opacity: "0.75"
+  }
 }));
 
 export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
   const classes = useStyles();
 
-  // const handleSongEnd = () => {
-  //   // () => setRound(prev => {return {...prev, finished: true}})
-  //   sendMessage('ROUND_FINISHED', 'song has finished playing')
-  // };
+  const handleSongEnd = () => {
+    setRound(prev => {return {...prev, finished: true}});
+    sendMessage('SONG_FINISHED', 'song has finished playing')
+  };
 
   return (
     <div className="audio-player">
@@ -34,13 +39,13 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
       <audio
         id="song-audio"
         // autoPlay
-        controls
-        onEnded={() => setRound(prev => {return {...prev, finished: true}})} //disable guessing, reveal song if not revealed
+        // controls
+        onEnded={handleSongEnd} //disable guessing, reveal song if not revealed
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
-      <IconButton><SkipNextIcon/></IconButton>
-      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}></Button>
+      <IconButton className={classes.next} onClick={nextRound}><SkipNextIcon fontSize="large"/></IconButton>
+      {/* <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button> */}
       
     </div>
   );

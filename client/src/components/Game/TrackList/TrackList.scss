@@ -33,7 +33,7 @@
     // border-width: 3px;
     width: 6vw;
     height: auto;
-    opacity: 1;
+    animation: fade-in 5s;
   }
 
   &--current {

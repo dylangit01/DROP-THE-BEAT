@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  useHistory
 } from "react-router-dom";
 
 // Hooks
@@ -13,6 +14,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 import Home from "./components/Home/Home";
 import Playlists from "./components/Playlists/Playlists";
+
 import PlaylistPage from "./components/PlaylistPage/PlaylistPage";
 import Join from "./components/Join/Join";
 import Game from "./components/Game/Game";
@@ -20,11 +22,12 @@ import Game from "./components/Game/Game";
 function App () {
 
   const { state, dispatch } = useApplicationData();
-  // const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>));
+  const history = useHistory();
 
   // Get currently selected playlist
   const currentPlaylist = state.playlists.find(playlist => playlist.playlistId === state.playlist);
-  // console.log('Current playlist from app.jsx: ', currentPlaylist);
+  console.log('Current playlist from app.jsx: ', currentPlaylist);
+  console.log(history);
 
   return (
     <Router>
@@ -51,7 +54,9 @@ function App () {
           </Route>
 
           <Route path="/game" exact>
-            {currentPlaylist && <Game playlist={currentPlaylist} /> }
+            {currentPlaylist && <Game playlist={currentPlaylist} />}
+            {/* {!currentPlaylist && history.push(`/`)} */}
+            {/* ABOVE DOESN'T WORK?! */}
           </Route>
 
           <Route path="*">

@@ -4,9 +4,9 @@
 }
 
 .messageInput {
-//  margin-left: 30px;
-//  position: absolute;
-//  right:0;
+  //  margin-left: 30px;
+  //  position: absolute;
+  //  right:0;
 }
 
 .messageInput button {
@@ -15,7 +15,7 @@
 }
 
 .messageInput input {
-  font-size: 24px;
+  font-size: 16px;
   padding: 3px;
 }
 
@@ -27,17 +27,18 @@
   // margin: 8vh 0 1vh 0;
   height: 5vh;
   width: 35vw;
-  background-color: rgba(191, 191, 191, .2);
+  background-color: rgba(191, 191, 191, 0.2);
   border-radius: 20px;
 
   .chat-input {
     border: none;
     margin: 5%;
     color: #fff;
+    width: 60%;
     background-color: transparent;
     width: 80%;
-    &:focus{
-      outline:none
+    &:focus {
+      outline: none;
     }
     // &::placeholder{
     //   color:#fff;
