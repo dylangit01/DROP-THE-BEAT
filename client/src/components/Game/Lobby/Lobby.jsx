@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 // import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 import Ruby from '../../../assets/Ruby_logo.png'
+import UserList from '../Chat/UserList';
 
 // Styling
 import {
@@ -42,7 +43,7 @@ const StyledCodeBtnTwo = withStyles({
   }
 })(Button);
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, playlistName, numberOfSongs }) {
+export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users }) {
   const classes = useStyles();
 
 
@@ -87,6 +88,10 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, playlist
             <div className={classes.songs}>
               <Typography variant='h6'>Host: DJ Dylan</Typography>
             </div>
+
+            <div className='chat-user'>
+          <UserList {...{ user, users }} />
+        </div>
 
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>

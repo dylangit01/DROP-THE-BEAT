@@ -35,21 +35,19 @@ const io = socketio(server, {
 
 // Random color:
 const randomColor = () => {
-   return '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+};
 
 // Get all users:
 const getAllUsers = (sockets) => {
   const users = [];
   const connections = sockets.values();
-  for (const item of connections) {
-    users.push({ name: item.name, id: item.id, color: item.color });
-  }
+  for (const item of connections) { users.push({ name: item.name, id: item.id, color: item.color, score: item.score, }); }
   return users;
 };
 
 let currentSongName = '';
-let guessSongName = ''
+let guessSongName = '';
 
 io.on('connection', (socket) => {
   
@@ -57,73 +55,80 @@ io.on('connection', (socket) => {
   
   // set up default name for user
   const randomNumber = Math.floor(Math.random() * 16777215).toString(16);
-  let name = 'USER' + randomNumber; 
+  const name = 'USER' + randomNumber; 
   const color = randomColor();
-  
+  const id = socket.id;
+  const score = 0;
+  const isHost = false;
+
   socket.name = name;
   socket.color = color;
+  socket.score = score;
+  socket.isHost = isHost;
+
   const users = getAllUsers(io.sockets.sockets);
 
   console.log('USERS: ', users)
-  
-  socket.emit('INITIAL_CONNECTION', { name, color, users });
-  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color });
-  
 
-
+  
+  socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost });
+  socket.broadcast.emit('NEW_USER', { name, id: socket.id, color, score, isHost });
+  
+  // WHEN A PLAYER CLICKS CHANGE NAME
   socket.on ('CHANGE_NAME', ({name, color, msg}) => {
-
-    // get the new name from the input
+    // get the new name from the input  
     socket.name = msg;
-
     // reset the users array
     const users = getAllUsers(io.sockets.sockets);
-
-    io.emit('CHANGE_NAME', { name: socket.name, users });
+    io.emit('CHANGE_NAME', { name: socket.name, id: socket.id, users });
   })
 
-  socket.on('SEND_MESSAGE', (msg) => {
-    io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' });
-    guessSongName = msg.msg.toLowerCase()
-    console.log('guessss', guessSongName);
 
-    if (guessSongName === currentSongName) {
-      console.log('right answer');
-      // msg.correct = true;
-      io.emit('CORRECT_GUESS', { msg });
-      currentSongName = '';
-    } else {
-      io.emit('INCORRECT_GUESS', { msg });
-      console.log('wrong answer');
-    }
-    
-  });
-
+  // WHEN A HOST CLICKS START GAME
   socket.on('START_GAME', (msg) => {
     console.log('Game started!');
 
-    // Send to front end
-    io.emit('START_GAME', { msg});
+    // Send to front end the game has started
+    io.emit('START_GAME', { msg });
     currentSongName = msg.msg.song.toLowerCase();
+    console.log('first song', currentSongName);
   });
 
-  // Will be from the host
-  socket.on('NEXT_ROUND', ({msg}) => {
-    // set currentSongName = currentSongName
-    currentSongName = msg.toLowerCase()
-      // io.emit('END_GAME', {msg});
+  // WHEN A HOST CLICKS NEXT ROUND
+  socket.on('NEXT_ROUND', ({ msg }) => {
+    currentSongName = msg && msg.toLowerCase();
+
+    // Send to front end it's the next round
+    io.emit('NEXT_ROUND', { msg });
   });
 
-  // Will be from players
-  socket.on('GUESS', (msg) => {
-    if (msg.guess === currentSongName) {
-      io.emit('CORRECT_GUESS', { msg });
-      currentSongName = '';
+  // WHEN ROUND HAS FINISHED AND NO ONE GUESSED
+  // socket.on('ROUND_FINISHED', ({ msg }) => {
+  //   // Send to front end the round has finised
+  //   io.emit('ROUND_FINISHED', { msg });
+  // });
+
+  // WHEN USERS GUESS SONG NAME
+  socket.on('SEND_MESSAGE', (msg) => {
+    // io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess
+    guessSongName = msg.msg.toLowerCase();
+    console.log('guessed song:', guessSongName);
+
+    // Send to front end there's a correct guess
+    if (guessSongName === currentSongName) {
+      console.log('right answer', currentSongName);
+      socket.score += 1;
+      const users = getAllUsers(io.sockets.sockets);
+      currentSongName = ''; // reset so that no one else guessing after will get it
+      io.emit('CORRECT_GUESS', { ...msg, score:socket.score, users });
     } else {
-      io.emit('INCORRECT_GUESS', { msg });
+      // Send to front end there's an incorrect guess
+      console.log('wrong answer');
+      io.emit('INCORRECT_GUESS', { ...msg });
     }
   });
 
+  // WHEN A USER DISCONNECTS
   socket.on('disconnect', () => {
     io.emit('DISCONNECT_USER', { name: socket.name, id: socket.id });
   });

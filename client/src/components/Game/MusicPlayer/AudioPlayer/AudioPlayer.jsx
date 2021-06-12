@@ -3,7 +3,7 @@ import React from 'react';
 // Styling
 import './AudioPlayer.scss';
 import { makeStyles } from '@material-ui/core/styles';
-// import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Button from '@material-ui/core/Button';
 
@@ -20,8 +20,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AudioPlayer({song, nextRound, setRound}) {
+export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
   const classes = useStyles();
+
+  // const handleSongEnd = () => {
+  //   // () => setRound(prev => {return {...prev, finished: true}})
+  //   sendMessage('ROUND_FINISHED', 'song has finished playing')
+  // };
 
   return (
     <div className="audio-player">
@@ -34,8 +39,8 @@ export default function AudioPlayer({song, nextRound, setRound}) {
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
-
-      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button>
+      <IconButton><SkipNextIcon/></IconButton>
+      <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}></Button>
       
     </div>
   );

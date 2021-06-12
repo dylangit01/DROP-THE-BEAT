@@ -5,8 +5,8 @@
 
 .messageInput {
 //  margin-left: 30px;
- position: absolute;
- right:0;
+//  position: absolute;
+//  right:0;
 }
 
 .messageInput button {
@@ -24,18 +24,18 @@
   justify-content: space-between;
   align-items: center;
   // position: absolute;
-  margin: 1vh 0 2vh 0;
-  height: 7vh;
-  width: 30vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  // margin: 8vh 0 1vh 0;
+  height: 5vh;
+  width: 35vw;
+  background-color: rgba(191, 191, 191, .2);
+  border-radius: 20px;
 
   .chat-input {
-    border-color: transparent;
     border: none;
     margin: 5%;
     color: #fff;
     background-color: transparent;
+    width: 80%;
     &:focus{
       outline:none
     }

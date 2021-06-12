@@ -1,9 +1,21 @@
 .game-in-progress {
+  // margin-top: 0;
+  // height: 100vh;
   display: flex;
   justify-content: space-around;
 
   .right-side {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
     position: relative;
+    width: 38vw;
+    height: 80vh;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    margin-top: 2rem;
+
   }
 
   .left-side {
