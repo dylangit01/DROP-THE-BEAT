@@ -35,11 +35,17 @@ export default function TrackList({round, songs}) {
     // HAVE TO FIND A WAY TO NOT SHOW TOOLTIP FOR SONGS NOT YET PLAYED
     return (
       <div key={song.id} className={`tracklist-album-cover ${isCurrent()}`}>
-        <Tooltip 
-          title={<div><strong>{song.title}</strong><br />{song.artist}</div>}
-        >
+
+        {isCurrent() === "tracklist-album-cover--prev" && (
+        <Tooltip title={<div><strong>{song.title}</strong><br />{song.artist}</div>} >
           <img src={song.albumPhoto} alt="cover"></img>
         </Tooltip>
+        )}
+
+        {isCurrent() !== "tracklist-album-cover--prev" && (
+            <img src={song.albumPhoto} alt="cover"></img>
+        )}
+
         <HelpOutlineOutlinedIcon className="question-mark"/>
       </div>
     )
