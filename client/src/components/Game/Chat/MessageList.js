@@ -1,8 +1,8 @@
 import './Chat.scss';
 
 const MessageList = ({ messages, users }) => {
-  console.log('messages: ', messages);
-  console.log('users: ', users);
+  // console.log('messages: ', messages);
+  // console.log('users: ', users);
 
   const getUsernameForMsg = (users, msg) => {
     //   if (users.id === messages.id) {

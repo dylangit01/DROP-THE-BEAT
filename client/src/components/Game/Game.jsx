@@ -8,6 +8,13 @@ import Lobby from './Lobby/Lobby';
 import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
+
+function TransitionDown(props) {
+  return <Slide {...props} direction="down" />;
+}
+
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
@@ -16,6 +23,22 @@ export default function Game({ playlist }) {
   const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
   const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
   
+  ////////////////////////////////////////////////////
+  // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
+  ////////////////////////////////////////////////////
+  const [open, setOpen] = useState(false);
+  const [transition, setTransition] = useState(undefined);
+
+  const handleClick = (Transition) => () => {
+    // console.log('handleClick');
+    setTransition(() => Transition);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
   const song = songs[round.number];
@@ -87,7 +110,6 @@ export default function Game({ playlist }) {
         // Update winner's score
         setGuesses((prev) => [...prev, msg]);
         setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
-        // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
         setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true}));
         // ADD SNACKBAR NOTIFICATION
@@ -105,9 +127,9 @@ export default function Game({ playlist }) {
         });
       });
 
-      conn.on('END_GAME', (msg) => {
+      // conn.on('END_GAME', (msg) => {
 
-      });
+      // });
 
       conn.on('DISCONNECT_USER', (msg) => {
         setUsers((prev) => {
@@ -197,6 +219,9 @@ export default function Game({ playlist }) {
 
       {/* GAME-END RESULT */}
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
+
+      {/* <Snackbar open={open} onClose={handleClose} TransitionComponent={transition} message={'Round winner!'} /> */}
+
     </div>
   );
 }

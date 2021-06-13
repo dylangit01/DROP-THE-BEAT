@@ -50,7 +50,7 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("'START_GAME' and list of songs are sent to backend");
+    // console.log("'START_GAME' and list of songs are sent to backend");
     sendMessage('START_GAME', { song: songs[0].title});
   };
 
