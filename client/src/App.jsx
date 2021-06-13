@@ -22,6 +22,7 @@ import Game from "./components/Game/Game";
 function App () {
 
   const { state, dispatch } = useApplicationData();
+  console.log(state);
   const history = useHistory();
 
   // Get currently selected playlist if it exists
