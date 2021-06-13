@@ -10,11 +10,6 @@ import Result from './Result/Result';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from "@material-ui/core/SnackbarContent";
-// import Slide from '@material-ui/core/Slide';
-
-// function TransitionDown(props) {
-//   return <Slide {...props} direction="down" />;
-// }
 
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
