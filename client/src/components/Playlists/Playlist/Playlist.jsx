@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useRouteMatch, useHistory, useParams} from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 // Styling
 import './Playlist.scss';
@@ -40,25 +40,18 @@ const useStyles = makeStyles((theme) => ({
  }
 }));
 
-const handleSongList = (id) => {
-  history.push(`/`)
-}
-
-
-
-export default function Playlist({ name, image, rating}) {
+export default function Playlist({id, name, image, rating}) {
   // Extract the current path
   const { path } = useRouteMatch();
 
   const classes = useStyles();
 
-  let history = useHistory();
-  const { id } = useParams();
+
 
   return (
     <div className="playlist">
       <Link to={`${path}/${id}`}>
-        <CardActionArea onClick={()=> handleSongList(playlist.id)}>
+        <CardActionArea>
           <CardMedia
             className={classes.cover}
             image={image}

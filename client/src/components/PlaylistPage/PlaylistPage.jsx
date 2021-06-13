@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams,  useHistory } from 'react-router-dom';
-import { SET_PLAYLIST, SET_DIFFICULT } from '../../reducer/data_reducer';
-// import { CopyToClipboard } from 'react-copy-to-clipboard';
+import useApplicationData from '../../hooks/useApplicationData';
+import axios from 'axios';
+import { SET_PLAYLISTS } from '../../reducer/data_reducer';
 
 // Styling
 import './PlaylistPage.scss';
@@ -44,17 +45,29 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ playlists, dispatch, gameLink }) {
+export default function PlaylistPage({ gameLink }) {
+  const { state, dispatch } = useApplicationData();
+
+  useEffect(() => {
+    axios({ method: 'GET', url: '/api/playlists' })
+      .then(({ data }) => {
+        console.log('????????????', data);
+        dispatch({ type: SET_PLAYLISTS, playlists: data });
+      })
+      .catch((err) => console.log(err));
+  }, [dispatch]);
+
   const classes = useStyles();
   const history = useHistory();
 
   const { id } = useParams();
   const idNum = Number(id);
-  const playlist = playlists.find((playlist) => playlist.playlistId === idNum);
-
+  const playlist = state.playlists[idNum - 1];
+  console.log(state.playlists[idNum]?.songs);
 
   // For songs dropdown menu:
-  const songs = playlist.songs;
+  const songs = state.playlists[idNum]?.songs;
+  console.log(songs);
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -72,15 +85,12 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
 
   const handleClose = (e) => {
     setAnchorEl(null);
-    console.log(e.target.value);  
+    console.log(e.target.value);
   };
-
   const handlePlaylistClick = (event) => {
-    dispatch({ type: SET_PLAYLIST, playlist: idNum });
-    dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
-    history.push("/game");
-  };
 
+    history.push('/game');
+  };
   return (
     <>
       {/* <CssBaseline /> */}
@@ -98,7 +108,12 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
                 <Typography variant='h6'>Difficulty</Typography>
                 <div>
                   <FormControl component='fieldset'>
-                    <RadioGroup aria-label='difficulty' name='difficulty' value={difficulty} onChange={handleDifficulty}>
+                    <RadioGroup
+                      aria-label='difficulty'
+                      name='difficulty'
+                      value={difficulty}
+                      onChange={handleDifficulty}
+                    >
                       <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
                       <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
                       <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
