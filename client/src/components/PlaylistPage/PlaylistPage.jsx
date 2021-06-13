@@ -55,7 +55,7 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ playlists, dispatch }) {
+export default function PlaylistPage({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -89,7 +89,7 @@ export default function PlaylistPage({ playlists, dispatch }) {
   };
 
   const handlePlaylistClick = (event) => {
-    history.push('/game/12345')
+    history.push('/game/epicbattle')
   };
 
   return (
