@@ -11,8 +11,8 @@ export default function Score({ setScore, setWinner, user, users, messages }) {
   //     console.log('We have a winner')
   //   }
   // }
-  console.log('user info here', users);
-  console.log(user);
+  // console.log('user info here', users);
+  // console.log(user);
   return (
     <div className='score-box'>
       {

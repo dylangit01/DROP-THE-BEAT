@@ -21,19 +21,12 @@ export default function Game({ playlist }) {
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
   const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
-  const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
+  const [round, setRound] = useState({number: 0, finished: false, winner: null});
   
   ////////////////////////////////////////////////////
   // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
   ////////////////////////////////////////////////////
   const [open, setOpen] = useState(false);
-  const [transition, setTransition] = useState(undefined);
-
-  const handleClick = (Transition) => () => {
-    // console.log('handleClick');
-    setTransition(() => Transition);
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -54,6 +47,7 @@ export default function Game({ playlist }) {
       const winner = getWinner();
       setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
+
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -111,7 +105,8 @@ export default function Game({ playlist }) {
         setGuesses((prev) => [...prev, msg]);
         setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
         setUsers([...msg.users]);
-        setRound(prev => ({...prev, finished: true}));
+        setRound(prev => ({...prev, finished: true, winner: msg.name}));
+        setOpen(true);
         // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
       })
@@ -123,7 +118,7 @@ export default function Game({ playlist }) {
       conn.on('NEXT_ROUND', (msg) => {
         // Update round state to next round and set the round finished status to false
         setRound(prev => {
-          return {...prev, number: prev.number + 1, finished: false};
+          return {...prev, number: prev.number + 1, finished: false, winner: null};
         });
       });
 
@@ -150,7 +145,6 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
     const payload = { ...user, msg };
-    console.log("payload for changinggggg the user name", payload)
     conn.emit(type, payload);
   };
 
@@ -220,7 +214,8 @@ export default function Game({ playlist }) {
       {/* GAME-END RESULT */}
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
 
-      {/* <Snackbar open={open} onClose={handleClose} TransitionComponent={transition} message={'Round winner!'} /> */}
+      {/* {round.winner && handleClick(TransitionDown)} */}
+      <Snackbar open={open} onClose={handleClose} message={round.winner + ' got it!'} />
 
     </div>
   );
