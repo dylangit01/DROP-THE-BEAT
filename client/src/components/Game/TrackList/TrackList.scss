@@ -7,6 +7,8 @@
 
 .tracklist-album-cover {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 0.5vw;
   border-radius: 8px;
@@ -23,14 +25,14 @@
 
   .question-mark {
     position: absolute;
-    top: 25%;
-    left: 25%;
+    align-self: center;
+    justify-self: center;
+    font-size: 1.5rem;
     opacity: 0;
   }
 
   &--finished {
     @extend .tracklist-album-cover;
-    // border-width: 3px;
     width: 6vw;
     height: auto;
     animation: fade-in 5s;
@@ -38,34 +40,34 @@
 
   &--current {
     @extend .tracklist-album-cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #101010;
     img {
       opacity: 0;
     }
     .question-mark {
-      position: absolute;
       font-size: 3rem;
-      top: 23%;
-      left: 23%;
       opacity: 1;
     }
-    // border-width: 3px;
     width: 6vw;
     height: auto;
     opacity: 60%;
   }
-  // &--prev {
-  //   @extend .tracklist-album-cover;
-  // }
 
   &--next {
     @extend .tracklist-album-cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #101010;
     opacity: 60%;
 
     img {
       opacity: 0;
     }
+
     .question-mark {
       opacity: 100;
     }

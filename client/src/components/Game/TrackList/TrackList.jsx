@@ -46,7 +46,8 @@ export default function TrackList({round, songs}) {
             <img src={song.albumPhoto} alt="cover"></img>
         )}
 
-        <HelpOutlineOutlinedIcon className="question-mark"/>
+        <span className="question-mark">?</span>
+
       </div>
     )
   })
