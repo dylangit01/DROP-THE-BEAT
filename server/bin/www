@@ -159,7 +159,7 @@ io.on('connection', (socket) => {
     // io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess
     guessSongName = msg.msg.toLowerCase();
 
-    // Send to front end there's a correct guess
+    // Send to front end if there's a correct guess
     if (guessSongName === currentSongName) {
       // Reset local current song so that no one else guessing after will get it
       currentSongName = '';
@@ -175,8 +175,7 @@ io.on('connection', (socket) => {
         users,
       });
     } else {
-      // Send to front end there's an incorrect guess
-      // console.log('wrong answer');
+      // Send to front end if there's an incorrect guess
       socket.msgColor = '#fff';
       io.emit('INCORRECT_GUESS', { ...msg, msgColor: socket.msgColor });
     }
