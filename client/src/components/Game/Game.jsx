@@ -86,7 +86,7 @@ export default function Game({ playlist }) {
       });
 
       ////////////////////////////////////////
-      // EVENTS RECIEVED BY ALL USERS
+      // EVENTS RECEIVED BY ALL USERS
       ////////////////////////////////////////
 
       // On start game message from the server
@@ -134,7 +134,7 @@ export default function Game({ playlist }) {
         });
       });
     }
-  }, [conn]);
+  }, [conn, guesses]);
 
   ////////////////////////////////////////
   // SEND MESSAGE TO SERVER

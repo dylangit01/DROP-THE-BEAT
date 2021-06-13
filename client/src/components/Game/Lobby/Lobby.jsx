@@ -43,7 +43,7 @@ const StyledCodeBtnTwo = withStyles({
   },
 })(Button);
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users, host, players }) {
+export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, host, players }) {
   const classes = useStyles();
 
   const handleSubmit = (event) => {

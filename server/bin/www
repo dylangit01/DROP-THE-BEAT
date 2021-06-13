@@ -49,10 +49,9 @@ const randomColor = () => {
     '#7868e6',
     '#f7fd04',
     '#ff0004',
-    '#2978b5',
+    '#033fff',
   ];
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-
+  return  randomColorArr[Math.floor(Math.random() * randomColorArr.length)]
 };
 
 // Get all users:
