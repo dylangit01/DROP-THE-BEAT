@@ -28,5 +28,6 @@ VALUES
   ('Turn Down For What', 'DJ Snake', '67awxiNHNyjMXhVgsHuIrs', 'https://i.scdn.co/image/ab67616d0000b273d905e78cad304de028db39b7', 'https://p.scdn.co/mp3-preview/fde5f6c570eb2ecaca797c0984a247a47d3fdc21?cid=774b29d4f13844c495f206cafdad9c86'),
   ('All I Do is Win', 'DJ Khaled', '12PNcnMsjsZ3eHm62t8hiy', 'https://i.scdn.co/image/ab67616d0000b2735de048eb9ca94916178afb20', 'https://p.scdn.co/mp3-preview/047bd65c02b96672dc8cfed3e7f8ecf527bc7eba?cid=774b29d4f13844c495f206cafdad9c86'),
   ('Yeah!', 'Usher', '5rb9QrpfcKFHM1EUbSIurX', 'https://i.scdn.co/image/ab67616d0000b273365b3fb800c19f7ff72602da', 'https://p.scdn.co/mp3-preview/8a5e4f8dce6b1a957e235185a4677841fcaafe90?cid=774b29d4f13844c495f206cafdad9c86'),
-  ('We Are the Champions', 'Queen (Glee Version)', '3WGfXp3Lf4l1Sp3oUPByDr', 'https://i.scdn.co/image/ab67616d0000b2732287ff3269a4c1fe1a1335c0', 'https://p.scdn.co/mp3-preview/617680b64b1d81328d2735ad299631a8f1ad8094?cid=774b29d4f13844c495f206cafdad9c86');
+  ('We Are the Champions', 'Queen (Glee Version)', '3WGfXp3Lf4l1Sp3oUPByDr', 'https://i.scdn.co/image/ab67616d0000b2732287ff3269a4c1fe1a1335c0', 'https://p.scdn.co/mp3-preview/617680b64b1d81328d2735ad299631a8f1ad8094?cid=774b29d4f13844c495f206cafdad9c86'),
+  ('Just the Way You Are', 'Bruno Mars', '7BqBn9nzAq8spo5e7cZ0dJ', 'https://i.scdn.co/image/ab67616d0000b27378c6c624a95d1bd02ba1fa02', 'https://p.scdn.co/mp3-preview/07c6c33d6426d61ffd2e93d4c06ca599f7761b46?cid=774b29d4f13844c495f206cafdad9c86');
   
