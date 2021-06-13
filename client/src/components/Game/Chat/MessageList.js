@@ -13,7 +13,7 @@ const MessageList = ({ messages, users }) => {
       {messages.map((msg, idx) => (
         <li key={idx} className='message-list--item'>
           <b style={{ color: msg.color }}>{getUsernameForMsg(users, msg)}: </b>
-          {msg.msg} ------- score {msg.score}
+          <b>{msg.msg}</b> ------- score {msg.score}
         </li>
       ))}
     </ul>

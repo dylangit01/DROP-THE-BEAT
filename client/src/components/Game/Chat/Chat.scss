@@ -34,7 +34,11 @@
     width: 35vw;
     height: 54vh;
     overflow: hidden;
+     line-height:1.5rem;
     // overflow-y:scroll;     // not showing the scroll??
+    &--item {
+      list-style-type: none;
+    }
   }
 
   .chat-input-box {

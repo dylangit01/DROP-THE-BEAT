@@ -92,6 +92,8 @@ export default function Game({ playlist }) {
         setRound(prev => ({...prev, finished: true}));
         // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
+        console.log(msg, guesses);
+
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
