@@ -2,7 +2,6 @@ body {
   background-image: url(https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/public/images/backgrounds/starry-night.jpg?raw=true);
   background-size: cover;
   color: white;
-  /* height: 90vh; */
   margin-top: 10vh;
 }
 
@@ -13,24 +12,6 @@ a {
 
 .App {
   text-align: center;
-  height: 100%;
-}
-
-.App-logo {
-  /* height: 40vmin; */
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  min-height: 90vh;
+  /* height: 100%; */
 }
