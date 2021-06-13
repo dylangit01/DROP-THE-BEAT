@@ -168,6 +168,8 @@ io.on('connection', (socket) => {
       socket.score += 1;
       socket.msgColor = '#54e346';
       const users = getAllUsers(io.sockets.sockets);
+
+      socket.emit('UPDATE_USER_SCORE', { score: socket.score }); // Emit update only to user that sent it
       io.emit('CORRECT_GUESS', {
         ...msg,
         score: socket.score,

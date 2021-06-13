@@ -85,6 +85,12 @@ export default function Game({ playlist }) {
         setUsers([...users]);
       });
 
+      // Received only by one user who got correct score
+      conn.on('UPDATE_USER_SCORE', (msg) => {
+        const { score } = msg;
+        setUser((prev) => ({...prev, score})); 
+      });
+
       ////////////////////////////////////////
       // EVENTS RECIEVED BY ALL USERS
       ////////////////////////////////////////
@@ -96,14 +102,11 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
-        setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
+        // setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
         setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true, winner: msg.name}));
         setOpen(true);
-        // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
-        console.log(msg, guesses);
-          conn.on('find the correct answer', )
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
