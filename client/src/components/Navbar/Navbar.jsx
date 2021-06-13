@@ -68,7 +68,7 @@ export default function Navbar() {
                   </Typography>
                 </Button>
                 <Button color="inherit"><Link to="/playlists">Playlists</Link></Button>
-                <Button color="inherit"><Link to="/join">Join A Game</Link></Button>
+                <Button color="inherit">Join A Game</Button>
               </div>
 
               {/* Right Navbar Group */}

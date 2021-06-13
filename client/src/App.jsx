@@ -12,7 +12,7 @@ import Home from './components/Home/Home';
 import Playlists from './components/Playlists/Playlists';
 
 import PlaylistPage from './components/PlaylistPage/PlaylistPage';
-import Join from './components/Join/Join';
+// import Join from './components/Join/Join';
 import Game from './components/Game/Game';
 import { useEffect, useContext } from 'react';
 import { DTBContext } from './contextAPI/DTBContext';
@@ -58,9 +58,9 @@ function App() {
             <PlaylistPage playlists={playlists} />
           </Route>
 
-          <Route path='/join' exact>
+          {/* <Route path='/join' exact>
             <Join />
-          </Route>
+          </Route> */}
 
           <Route path='/game/:id' exact>
             {playlist && <Game playlist={playlist} />}

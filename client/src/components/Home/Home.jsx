@@ -30,7 +30,7 @@ export default function Home() {
           </div>
           <div>
             <p>Have a game code?</p>
-            <Button variant="contained" className={classes.button} endIcon={<ExitToAppOutlinedIcon />}><Link to="/join">Join A Game</Link></Button>
+            <Button variant="contained" className={classes.button} endIcon={<ExitToAppOutlinedIcon />}>Join A Game</Button>
           </div>
         </div>
     </div>
