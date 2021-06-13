@@ -84,7 +84,6 @@ export default function Game({ playlist }) {
       });
 
       conn.on('CORRECT_GUESS', (msg) => {
-        // Update winner's score
         setGuesses((prev) => [...prev, msg]);
         setUser(prev => ({ ...prev, score: msg.score }))
         // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))

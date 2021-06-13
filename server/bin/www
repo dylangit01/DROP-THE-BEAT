@@ -66,16 +66,18 @@ io.on('connection', (socket) => {
   const id = socket.id;
   const score = 0;
   const isHost = false;
+  const msgColor = ''
 
   socket.name = name;
   socket.color = color;
   socket.score = score;
   socket.isHost = isHost;
+  socket.msgColor = msgColor;
 
   const users = getAllUsers(io.sockets.sockets);
 
   // Emit to connected user only
-  socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost }); // Only emits to connected user
+  socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost, msgColor }); // Only emits to connected user
 
   // Emit to all user
   socket.broadcast.emit('NEW_USER', {
@@ -84,6 +86,7 @@ io.on('connection', (socket) => {
     color,
     score,
     isHost,
+    msgColor,
   });
 
   // WHEN A PLAYER CLICKS CHANGE NAME
@@ -127,19 +130,20 @@ io.on('connection', (socket) => {
   socket.on('SEND_MESSAGE', (msg) => {
     // io.emit('SEND_MESSAGE', { ...msg, id: 'xxx' }); // This might need to be moved to be included in correct_guess/incorrect_guess
     guessSongName = msg.msg.toLowerCase();
-    // console.log('guessed song:', guessSongName);
 
     // Send to front end there's a correct guess
     if (guessSongName === currentSongName) {
       // console.log('right answer', currentSongName);
       socket.score += 1;
+      socket.msgColor = '#54e346';
       const users = getAllUsers(io.sockets.sockets);
       currentSongName = ''; // reset so that no one else guessing after will get it
-      io.emit('CORRECT_GUESS', { ...msg, score: socket.score, users });
+      io.emit('CORRECT_GUESS', { ...msg, score: socket.score, msgColor: socket.msgColor, users });
     } else {
       // Send to front end there's an incorrect guess
       // console.log('wrong answer');
-      io.emit('INCORRECT_GUESS', { ...msg });
+      socket.msgColor = '#fff';
+      io.emit('INCORRECT_GUESS', { ...msg, msgColor: socket.msgColor });
     }
   });
 
