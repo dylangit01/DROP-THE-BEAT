@@ -115,9 +115,9 @@ export default function PlaylistPage({ dispatch, gameLink }) {
                       value={difficulty}
                       onChange={handleDifficulty}
                     >
-                      <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
+                      <FormControlLabel value='easy' control={<Radio selected />} label='Easy (30 sec)' />
                       <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
-                      <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
+                      <FormControlLabel value='difficult' control={<Radio />} label='Difficult (10 sec)' />
                     </RadioGroup>
                   </FormControl>
                 </div>
