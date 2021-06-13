@@ -27,14 +27,13 @@ function App() {
     const fetchPlayLists = async () => {
       try {
         const res = await axios({ method: 'GET', url: '/api/playlists' });
-        console.log(res);
         setPlayLists(res.data);
       } catch (e) {
         console.log(e);
       }
     };
     fetchPlayLists();
-  }, []);
+  }, [setPlayLists]);
 
   // Get currently selected playlist if it exists
   // const currentPlaylist = playLists.find((playlist) => playlist.playlistId === state.playlist);
