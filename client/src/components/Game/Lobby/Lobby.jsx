@@ -45,7 +45,7 @@ const StyledCodeBtnTwo = withStyles({
   }
 })(Button);
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users }) {
+export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users, host, players }) {
   const classes = useStyles();
 
   const handleSubmit = (event) => {
@@ -89,14 +89,29 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
               <Typography variant='h6'>Number of Songs: {numberOfSongs}</Typography>
             </div>
 
+          {host && 
+          <>
             <div className={classes.songs}>
-              <Typography variant='h6'>Host: DJ Dylan</Typography>
+              <Typography variant='h6'>Host: DJ {host.name}</Typography>
             </div>
-
+            <div className={classes.players}>
+              <Typography variant='h6'>Players:</Typography>
+              <UserList { ...{players} } />
+            </div>
+            </>
+          }
+          {!host &&
+            <>
+            <div className={classes.songs}>
+              <Typography variant='h6'>Host: DJ Host</Typography>
+            </div>
             <div className={classes.players}>
               <Typography variant='h6'>Players:</Typography>
               <UserList {...{ user, users }} />
             </div>
+            </>
+          }
+
 
             <div className={classes.changeName}>
 
