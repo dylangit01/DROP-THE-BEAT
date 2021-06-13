@@ -45,9 +45,7 @@ export default function Playlist({id, name, image, rating}) {
   const { path } = useRouteMatch();
 
   const classes = useStyles();
-
-
-
+  
   return (
     <div className="playlist">
       <Link to={`${path}/${id}`}>
