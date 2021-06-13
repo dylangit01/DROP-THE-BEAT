@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import './Game.scss';
 
@@ -9,16 +9,17 @@ import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from "@material-ui/core/SnackbarContent";
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import { DTBContext } from '../../contextAPI/DTBContext';
 
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
-  const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
+  const [gameStatus, setGameStatus] = useState({ started: false, finished: false, winner: null }); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
-  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
-  const [round, setRound] = useState({number: 0, finished: false, winner: null});
-  
+  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false
+  const [round, setRound] = useState({ number: 0, finished: false, winner: null });
+
   ////////////////////////////////////////////////////
   // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
   ////////////////////////////////////////////////////
@@ -41,9 +42,8 @@ export default function Game({ playlist }) {
     if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
       const winner = getWinner();
-      setGameStatus((prev) =>  ({...prev, finished: true, winner}));
+      setGameStatus((prev) => ({ ...prev, finished: true, winner }));
     }
-
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -75,7 +75,7 @@ export default function Game({ playlist }) {
       // Received only by one user who requested name change
       conn.on('CHANGE_NAME', (msg) => {
         const { name, users } = msg;
-        setUser((prev) => ({...prev, name})); 
+        setUser((prev) => ({ ...prev, name }));
         setUsers([...users]);
       });
 
@@ -96,15 +96,15 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
-        setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
+        setUser((prev) => ({ ...prev, score: msg.score })); // THERE'S A BUG HERE AGAIN -> this updates score for all users
         setUsers([...msg.users]);
-        setRound(prev => ({...prev, finished: true, winner: msg.name}));
+        setRound((prev) => ({ ...prev, finished: true, winner: msg.name }));
         setOpen(true);
         // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
         console.log(msg, guesses);
-          conn.on('find the correct answer', )
-      })
+        conn.on('find the correct answer');
+      });
 
       conn.on('INCORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
@@ -113,8 +113,8 @@ export default function Game({ playlist }) {
       conn.on('NEXT_ROUND', (msg) => {
         // Update round state to next round and set the round finished status to false
         setOpen(false);
-        setRound(prev => {
-          return {...prev, number: prev.number + 1, finished: false, winner: null};
+        setRound((prev) => {
+          return { ...prev, number: prev.number + 1, finished: false, winner: null };
         });
       });
 
@@ -145,9 +145,8 @@ export default function Game({ playlist }) {
     conn.emit(type, payload);
   };
 
-
   ////////////////////////////////////////
-  // NEW ROUND FUNCTION 
+  // NEW ROUND FUNCTION
   ////////////////////////////////////////
   const nextRound = () => {
     // Get the current song name if it exists (new JS syntax)
@@ -159,38 +158,40 @@ export default function Game({ playlist }) {
   };
 
   ////////////////////////////////////////
-  // GET WINNER FUNCTION 
+  // GET WINNER FUNCTION
   ////////////////////////////////////////
   const getWinner = () => {
-    let winner = "";
+    let winner = '';
     let highestScore = 0;
 
     // Assume only 2 players
-    users.forEach(user => {
+    users.forEach((user) => {
       if (user.score > highestScore) {
         winner = user.name;
         highestScore = user.score;
       } else if (user.score === highestScore) {
-        winner = ""; // this means it's a tie or no one scored
+        winner = ''; // this means it's a tie or no one scored
       }
-    })
+    });
     return winner;
-  }
+  };
 
   // find a host
   const host = users.find((user) => user.isHost === true) || {};
 
   // array of only players excluding the host
-  let players = users.slice(1);
-  const playersForTwoOnly = (players) => {
-    if (players.length > 2) {
-       return players.slice(0, 2)
-    } 
-    return players;
-  }
-  // playersForTwoOnly(players)
-  console.log(players);
+  const { players, setPlayers } = useContext(DTBContext);
 
+  useEffect(() => {
+    const getPlayers = () => {
+      setPlayers(users.slice(1));
+      if (users.slice(1).length > 2) {
+        setPlayers(users.slice(1, 3));
+      }
+    };
+    getPlayers();
+  }, [setPlayers, users]);
+  
   return (
     <div className='game'>
       {/* PRE-GAME LOBBY */}
@@ -204,7 +205,7 @@ export default function Game({ playlist }) {
           user={user}
           users={users}
           host={host}
-          players={playersForTwoOnly(players)}
+          players={players}
         />
       )}
 
@@ -220,7 +221,7 @@ export default function Game({ playlist }) {
           user={user}
           users={users}
           host={host}
-          players={playersForTwoOnly(players)}
+          players={players}
           messages={guesses}
           sendMessage={sendMessage}
         />

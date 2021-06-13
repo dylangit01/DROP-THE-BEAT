@@ -1,7 +1,6 @@
 import './Chat.scss';
 
 const UserList = ({ players, user }) => {
-  console.log(players);
   return (
     <>
       {players && (
