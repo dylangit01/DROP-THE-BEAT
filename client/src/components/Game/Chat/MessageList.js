@@ -39,9 +39,15 @@ const MessageList = ({ messages, users }) => {
         <li key={idx} className='message-list--item'>
           <MusicNoteRoundedIcon style={{ color: msg.color }} className={classes.musicIcon}></MusicNoteRoundedIcon>
           <b style={{ color: msg.color }}>{getUsernameForMsg(users, msg)}: &nbsp; </b>
-          <b style={{ color: msg.msgColor }} className={ msg.msgColor === '#54e346' &&  classes.bingo}>
-            {msg.msg}
-          </b>
+          {msg.msgColor === '#54e346' ? (
+            <b style={{ color: msg.msgColor }} className={classes.bingo}>
+              {msg.msg}
+            </b>
+          ) : (
+            <b style={{ color: msg.msgColor }}>
+              {msg.msg}
+            </b>
+          )}
         </li>
       ))}
     </ul>

@@ -55,18 +55,18 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ playlists, dispatch, gameLink }) {
+export default function PlaylistPage({ dispatch, gameLink }) {
   const classes = useStyles();
   const history = useHistory();
 
   const { id } = useParams();
   const idNum = Number(id) - 1;
   // Using ContextAPI to set PlayList
-  const { playLists, playList, setPlayList } = useContext(DTBContext);
+  const { playlists, playlist, setPlaylist } = useContext(DTBContext);
 
   useEffect(() => {
-    setPlayList(playLists[idNum]);
-  }, [playLists, idNum, setPlayList]);
+    setPlaylist(playlists[idNum]);
+  }, [playlists, idNum, setPlaylist]);
 
   // For songs dropdown menu:
   const ITEM_HEIGHT = 48;
@@ -95,14 +95,14 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
   return (
     <>
       {/* <CssBaseline /> */}
-      {playList && (
+      {playlist && (
         <Container className={classes.root}>
           <div className={classes.img_playOption}>
             <div>
               <Typography className={classes.title} variant='h4'>
-                {playList.playlistName} Playlist
+                {playlist.playlistName} Playlist
               </Typography>
-              <CardMedia className={classes.cover} image={playList.playlistPhoto} title={playList.playlistName} />
+              <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
             </div>
             <div>
               <div className={classes.options}>
@@ -145,7 +145,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
                       },
                     }}
                   >
-                    {playList.songs.map((song) => (
+                    {playlist.songs.map((song) => (
                       <MenuItem key={song.id} value={song.title} onClick={handleClose}>
                         {`${song.title} - ${song.artist}`}
                       </MenuItem>

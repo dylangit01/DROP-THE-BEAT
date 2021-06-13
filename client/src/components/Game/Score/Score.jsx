@@ -10,6 +10,7 @@ export default function Score({ setScore, setWinner, user, users, messages }) {
 
     player: {
       fontSize: '15px',
+      fontWeight:'30px'
     },
     mIcon: {
       transform: 'scale(1.8)',

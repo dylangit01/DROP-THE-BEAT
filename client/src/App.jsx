@@ -22,18 +22,18 @@ function App() {
   // const history = useHistory();
 
   // USING useEffect & CONTEXT-API TO FETCH PLAYLISTS:
-  const {playList, playLists, setPlayLists } = useContext(DTBContext);
+  const {playlist, playlists, setPlaylists } = useContext(DTBContext);
   useEffect(() => {
     const fetchPlayLists = async () => {
       try {
         const res = await axios({ method: 'GET', url: '/api/playlists' });
-        setPlayLists(res.data);
+        setPlaylists(res.data);
       } catch (e) {
         console.log(e);
       }
     };
     fetchPlayLists();
-  }, [setPlayLists]);
+  }, [setPlaylists]);
 
   // Get currently selected playlist if it exists
   // const currentPlaylist = playLists.find((playlist) => playlist.playlistId === state.playlist);
@@ -51,11 +51,11 @@ function App() {
           </Route>
 
           <Route path='/playlists' exact>
-            <Playlists playlists={playLists} />
+            <Playlists playlists={playlists} />
           </Route>
 
           <Route path='/playlists/:id' exact>
-            <PlaylistPage playlists={playLists} />
+            <PlaylistPage playlists={playlists} />
           </Route>
 
           <Route path='/join' exact>
@@ -63,7 +63,7 @@ function App() {
           </Route>
 
           <Route path='/game' exact>
-            {playList && <Game playlist={playList} />}
+            {playlist && <Game playlist={playlist} />}
             {/* {!currentPlaylist && history.push(`/`)} */}
             {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
           </Route>
