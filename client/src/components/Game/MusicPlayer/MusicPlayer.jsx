@@ -35,10 +35,7 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
       {round.finished  && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
-      {host.id === user.id && 
-      <AudioPlayer song={song} nextRound={nextRound} sendMessage={sendMessage} setRound={setRound} />
-      }
-      
+      <AudioPlayer song={song} nextRound={nextRound} sendMessage={sendMessage} setRound={setRound} host={host} user={user} />
 
     </div>
   );
