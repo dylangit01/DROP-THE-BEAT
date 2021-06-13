@@ -9,7 +9,7 @@ const MessageList = ({ messages, users }) => {
       '0%': {},
       '50%': {},
       '100%': {
-        transform: 'scale(1.2, 1.2)',
+        transform: 'scale(1.3, 1.3)',
       },
       '30%': {},
       '80%': {
@@ -18,7 +18,6 @@ const MessageList = ({ messages, users }) => {
     },
     musicIcon: {
       height: '90%',
-      // color: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)"
     },
     bingo: {
       animation: '$bingo 1s ease 0s infinite',
