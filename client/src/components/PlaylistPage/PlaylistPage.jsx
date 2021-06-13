@@ -78,7 +78,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
     dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
-    history.push("/game");
+    history.push("/game/12345");
   };
 
   return (
@@ -139,7 +139,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>{gameLink}</Typography>
+                <Typography variant='h6'>{gameLink}12345</Typography>
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>
