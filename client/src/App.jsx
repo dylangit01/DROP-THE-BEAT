@@ -55,7 +55,7 @@ function App () {
             </Route>
 
             <Route path='/game' exact>
-              {currentPlaylist && <Game playlist={currentPlaylist} />}
+              {<Game playlist={currentPlaylist} />}
               {/* {!currentPlaylist && history.push(`/`)} */}
               {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
             </Route>

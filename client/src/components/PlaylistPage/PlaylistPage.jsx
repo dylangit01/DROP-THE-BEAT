@@ -47,26 +47,19 @@ const StyledCodeBtnTwo = withStyles({
 
 export default function PlaylistPage({ gameLink }) {
   const { state, dispatch } = useApplicationData();
-
-  useEffect(() => {
-    axios({ method: 'GET', url: '/api/playlists' })
-      .then(({ data }) => {
-        console.log('????????????', data);
-        dispatch({ type: SET_PLAYLISTS, playlists: data });
-      })
-      .catch((err) => console.log(err));
-  }, [dispatch]);
+  console.log(state);
 
   const classes = useStyles();
   const history = useHistory();
+  console.log(state);
 
   const { id } = useParams();
   const idNum = Number(id);
   const playlist = state.playlists[idNum - 1];
-  console.log(state.playlists[idNum]?.songs);
+  console.log(playlist);
 
   // For songs dropdown menu:
-  const songs = state.playlists[idNum]?.songs;
+  const songs = state.playlists[idNum].songs;
   console.log(songs);
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = useState(null);
