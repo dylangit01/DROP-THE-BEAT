@@ -89,7 +89,7 @@ export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOf
             {host && (
               <>
                 <div className={classes.songs}>
-                  <Typography variant='h6'>Host: DJ Dylan</Typography>
+                  <Typography variant='h6'>Host: {host.name}</Typography>
                 </div>
                 <div className={classes.players}>
                   <Typography variant='h6'>Players:</Typography>

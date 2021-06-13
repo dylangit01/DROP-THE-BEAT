@@ -35,11 +35,8 @@ const io = socketio(server, {
 
 // Random color:
 const randomColor = () => {
-  const randomColorArr = [
-    
-  ]
+  const randomColorArr = [];
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
-
 };
 
 // Get all users:
@@ -52,7 +49,7 @@ const getAllUsers = (sockets) => {
       id: item.id,
       color: item.color,
       score: item.score,
-      isHost: item.isHost
+      isHost: item.isHost,
     });
   }
   // set up the first user as a host
@@ -74,7 +71,7 @@ io.on('connection', (socket) => {
   const id = socket.id;
   const score = 0;
   const isHost = false;
-  const msgColor = ''
+  const msgColor = '';
 
   socket.name = name;
   socket.color = color;
@@ -83,9 +80,32 @@ io.on('connection', (socket) => {
   socket.msgColor = msgColor;
 
   const users = getAllUsers(io.sockets.sockets);
+  const numberOfUsers = users.length;
 
   // Emit to connected user only
-  socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost, msgColor }); // Only emits to connected user
+  if (numberOfUsers === 1) {
+    // Emit host properties (hard-coded) if it's the first user
+    socket.emit('INITIAL_CONNECTION', {
+      id,
+      name: 'DJ Dylan',
+      color,
+      score,
+      users,
+      isHost: true,
+      msgColor,
+    }); // Only emits to connected user
+  } else {
+    // Emit player properties if it's not the first user who connects
+    socket.emit('INITIAL_CONNECTION', {
+      id,
+      name,
+      color,
+      score,
+      users,
+      isHost,
+      msgColor,
+    }); // Only emits to connected user
+  }
 
   // Emit to all users except connected user
   socket.broadcast.emit('NEW_USER', {
@@ -146,7 +166,12 @@ io.on('connection', (socket) => {
       socket.msgColor = '#54e346';
       const users = getAllUsers(io.sockets.sockets);
       currentSongName = ''; // reset so that no one else guessing after will get it
-      io.emit('CORRECT_GUESS', { ...msg, score: socket.score, msgColor: socket.msgColor, users });
+      io.emit('CORRECT_GUESS', {
+        ...msg,
+        score: socket.score,
+        msgColor: socket.msgColor,
+        users,
+      });
     } else {
       // Send to front end there's an incorrect guess
       // console.log('wrong answer');
