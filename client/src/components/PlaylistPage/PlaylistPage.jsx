@@ -44,7 +44,7 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ playlists, dispatch, gameLink }) {
+export default function PlaylistPage({ playlists, dispatch }) {
   const classes = useStyles();
   const history = useHistory();
 
@@ -78,7 +78,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
     dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
-    history.push("/game");
+    history.push("/game/epicbattle");
   };
 
   return (
@@ -139,7 +139,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>{gameLink}</Typography>
+                <Typography variant='h6'>https://dropthebeat/game/epicbattle</Typography>
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>

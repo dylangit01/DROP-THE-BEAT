@@ -51,7 +51,7 @@ function App () {
             <Join />
           </Route>
 
-          <Route path="/game" exact>
+          <Route path="/game/epicbattle" exact>
             {currentPlaylist && <Game playlist={currentPlaylist} />}
             {/* {!currentPlaylist && history.push(`/`)} */}
             {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
