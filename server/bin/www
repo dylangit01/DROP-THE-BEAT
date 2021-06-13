@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
 
   // set up default name for user
   const randomNumber = Math.floor(Math.random() * 16777215).toString(16);
-  const name = 'USER' + randomNumber;
+  const name = 'USER_' + randomNumber;
   const color = randomColor();
   const id = socket.id;
   const score = 0;
