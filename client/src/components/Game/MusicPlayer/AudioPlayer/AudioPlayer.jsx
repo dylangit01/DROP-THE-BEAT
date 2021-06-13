@@ -44,9 +44,8 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage, hos
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
-
       {host.id === user.id && 
-      <IconButton className={classes.next} onClick={nextRound}><SkipNextIcon fontSize="large"/></IconButton>
+        <IconButton className={classes.next} onClick={nextRound}><SkipNextIcon fontSize="large"/></IconButton>
       }
       {/* <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button> */}
     </div>

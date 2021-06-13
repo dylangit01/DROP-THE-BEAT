@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
-import { useParams,  useHistory } from 'react-router-dom';
-import { SET_PLAYLIST, SET_DIFFICULT } from '../../reducer/data_reducer';
-// import { CopyToClipboard } from 'react-copy-to-clipboard';
+import React, { useState, useContext, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { DTBContext } from '../../contextAPI/DTBContext';
 
 // Styling
 import './PlaylistPage.scss';
-import { Typography, CardMedia, FormControl, RadioGroup, FormControlLabel, Radio, IconButton, Menu, MenuItem, Button, Container, } from '@material-ui/core';
+import {
+  Typography,
+  CardMedia,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  IconButton,
+  Menu,
+  MenuItem,
+  Button,
+  Container,
+} from '@material-ui/core';
 import useStyles from './PlaylistPageStyles';
 import ArrowDropDownCircleTwoToneIcon from '@material-ui/icons/ArrowDropDownCircleTwoTone';
 import { withStyles } from '@material-ui/core/styles';
@@ -44,17 +55,20 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ playlists, dispatch, gameLink }) {
+export default function PlaylistPage({ dispatch, gameLink }) {
   const classes = useStyles();
   const history = useHistory();
 
   const { id } = useParams();
-  const idNum = Number(id);
-  const playlist = playlists.find((playlist) => playlist.playlistId === idNum);
+  const idNum = Number(id) - 1;
+  // Using ContextAPI to set PlayList
+  const { playlists, playlist, setPlaylist } = useContext(DTBContext);
 
+  useEffect(() => {
+    setPlaylist(playlists[idNum]);
+  }, [playlists, idNum, setPlaylist]);
 
   // For songs dropdown menu:
-  const songs = playlist.songs;
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -72,13 +86,10 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
 
   const handleClose = (e) => {
     setAnchorEl(null);
-    console.log(e.target.value);  
   };
 
   const handlePlaylistClick = (event) => {
-    dispatch({ type: SET_PLAYLIST, playlist: idNum });
-    dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
-    history.push("/game");
+    history.push('/game/12345')
   };
 
   return (
@@ -98,7 +109,12 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
                 <Typography variant='h6'>Difficulty</Typography>
                 <div>
                   <FormControl component='fieldset'>
-                    <RadioGroup aria-label='difficulty' name='difficulty' value={difficulty} onChange={handleDifficulty}>
+                    <RadioGroup
+                      aria-label='difficulty'
+                      name='difficulty'
+                      value={difficulty}
+                      onChange={handleDifficulty}
+                    >
                       <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
                       <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
                       <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
@@ -123,13 +139,13 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
                       style: {
                         maxHeight: ITEM_HEIGHT * 4.0,
                         width: '30ch',
-                        backgroundColor: '#666',
+                        backgroundColor: 'rgba(30, 30, 30, 1)',
                         color: '#fff',
                         lineHeight: 0,
                       },
                     }}
                   >
-                    {songs.map((song) => (
+                    {playlist.songs.map((song) => (
                       <MenuItem key={song.id} value={song.title} onClick={handleClose}>
                         {`${song.title} - ${song.artist}`}
                       </MenuItem>
@@ -139,7 +155,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>{gameLink}</Typography>
+                <Typography variant='h6'>{gameLink}12345</Typography>
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>
