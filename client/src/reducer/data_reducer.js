@@ -7,7 +7,6 @@ const dataReducer = (state, action) => {
   switch (action.type) {
     case SET_PLAYLISTS:
       return { ...state, playlists: action.playlists, loading: false };
-
     // Set the current playlist id
     case SET_PLAYLIST:
       return { ...state, playlist: action.playlist };
