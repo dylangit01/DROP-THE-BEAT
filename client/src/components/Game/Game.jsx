@@ -9,11 +9,12 @@ import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
 import Snackbar from '@material-ui/core/Snackbar';
-import Slide from '@material-ui/core/Slide';
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+// import Slide from '@material-ui/core/Slide';
 
-function TransitionDown(props) {
-  return <Slide {...props} direction="down" />;
-}
+// function TransitionDown(props) {
+//   return <Slide {...props} direction="down" />;
+// }
 
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
@@ -117,6 +118,7 @@ export default function Game({ playlist }) {
 
       conn.on('NEXT_ROUND', (msg) => {
         // Update round state to next round and set the round finished status to false
+        setOpen(false);
         setRound(prev => {
           return {...prev, number: prev.number + 1, finished: false, winner: null};
         });
@@ -218,10 +220,16 @@ export default function Game({ playlist }) {
       <Snackbar 
         open={open} 
         onClose={handleClose} 
-        message={round.winner + ' got it! 🔥🔥🔥'} 
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        // style={{ width: "100%" }}
-      />
+        // message={round.winner + ' got it! 🔥🔥🔥'} 
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        // style={{ height: "100%" }}
+      >
+        <SnackbarContent style={{
+          backgroundColor:'#4caf50',
+        }}
+        message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
+        />
+      </Snackbar>
 
     </div>
   );
