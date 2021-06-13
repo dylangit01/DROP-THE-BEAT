@@ -21,7 +21,7 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
 
   return (
     <div className="music-player">
-      <Typography variant="h3" className={classes.title}>{playlist.playlistName} Playlist</Typography>
+      <Typography variant="h4" className={classes.title}>{playlist.playlistName} Playlist</Typography>
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 
@@ -35,7 +35,6 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
       {round.finished  && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
-      {/* CHECK IF MUSIC PLAYS FOR PLAYERS - might need to move if logic inside audio player */}
       <AudioPlayer song={song} nextRound={nextRound} sendMessage={sendMessage} setRound={setRound} user={user} host={host}/>
 
     </div>

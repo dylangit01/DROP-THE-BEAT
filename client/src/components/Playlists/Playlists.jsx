@@ -33,7 +33,7 @@ export default function Playlists({playlists}) {
 
   return (
     <div className="playlists">
-      <Typography variant="h3">Select a Playlist!</Typography>
+      <Typography variant="h4">Select a Playlist!</Typography>
       <Grid
         container
         // spacing={4}

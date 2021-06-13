@@ -34,8 +34,8 @@ const MessageInput = (props) => {
     send: {
       color: 'white',
       '&:hover': {
-        transform: 'scale(1.2)',
-      }
+        color: 'pink',
+      },
     },
   }));
 
@@ -43,7 +43,12 @@ const MessageInput = (props) => {
 
   // can we disable send option if it's an empty input?
   return (
-    <form onSubmit={onSubmit} noValidate autoComplete="off" className="messageInput" >
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      autoComplete="off"
+      className="messageInput"
+    >
       <div className="chat-input-box">
         <input
           className="chat-input"
@@ -56,7 +61,7 @@ const MessageInput = (props) => {
         </Button>
 
         {/* Can we please change the send button to this one? */}
-        <IconButton type='submit' className={classes.send} aria-label="send">
+        <IconButton type="submit" className={classes.send} aria-label="send">
           <SendIcon />
         </IconButton>
       </div>
