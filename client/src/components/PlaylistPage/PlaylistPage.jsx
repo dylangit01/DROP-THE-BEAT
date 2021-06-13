@@ -77,7 +77,6 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
 
   const handlePlaylistClick = (event) => {
     dispatch({ type: SET_PLAYLIST, playlist: idNum });
-    dispatch({ type: SET_DIFFICULT, difficulty: difficulty });
     history.push("/game");
   };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-// import { SET_PLAYLIST } from '../../../reducer/data_reducer';
 // import Ruby from '../../../assets/Ruby_logo.png'
 import UserList from '../Chat/UserList';
 
