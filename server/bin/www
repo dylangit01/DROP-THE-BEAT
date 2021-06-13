@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
   // Emit to connected user only
   socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost }); // Only emits to connected user
 
-  // Emit to all user
+  // Emit to all users except connected user
   socket.broadcast.emit('NEW_USER', {
     name,
     id: socket.id,
