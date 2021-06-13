@@ -24,7 +24,7 @@ export default function Join() {
       <div className="lobby">
         <h1>Join and players form is here</h1>
         <form onSubmit={(event) => handleSubmit(event)}>
-          <label for="name"> Enter your name:
+          <label htmlFor="name"> Enter your name:
             <input 
             type="text" 
             id="name" 
@@ -34,7 +34,7 @@ export default function Join() {
             onChange={event => setName(event.target.value)}
             />
           </label> <br /> <br />
-          <label for="emoji"> Choose your emoji:
+          <label htmlFor="emoji"> Choose your emoji:
             <select 
             id="emoji" 
             name="emoji" 

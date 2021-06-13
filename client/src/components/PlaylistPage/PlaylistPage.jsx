@@ -60,18 +60,13 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
   const history = useHistory();
 
   const { id } = useParams();
-  const idNum = Number(id);
+  const idNum = Number(id) - 1;
   // Using ContextAPI to set PlayList
   const { playLists, playList, setPlayList } = useContext(DTBContext);
 
   useEffect(() => {
     setPlayList(playLists[idNum]);
   }, [playLists, idNum, setPlayList]);
-
-  // setPlayList(playLists[idNum - 1].songs);
-  // const songs = playLists[idNum - 1].songs;
-  const playlist = playLists.find((playList) => playList.playlistId === idNum);
-  // console.log(playList.songs);
 
   // For songs dropdown menu:
   const ITEM_HEIGHT = 48;
@@ -91,7 +86,6 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
 
   const handleClose = (e) => {
     setAnchorEl(null);
-    console.log(e.target.value);
   };
 
   const handlePlaylistClick = (event) => {
@@ -145,7 +139,7 @@ export default function PlaylistPage({ playlists, dispatch, gameLink }) {
                       style: {
                         maxHeight: ITEM_HEIGHT * 4.0,
                         width: '30ch',
-                        backgroundColor: 'rgba(191, 191, 191, .4)',
+                        backgroundColor: 'rgba(30, 30, 30, 1)',
                         color: '#fff',
                         lineHeight: 0,
                       },
