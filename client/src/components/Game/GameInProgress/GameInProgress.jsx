@@ -18,7 +18,7 @@ import Slide from '@material-ui/core/Slide';
     return <Slide {...props} direction="down" />;
   }
   
-export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage}) {
+export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage, host, players}) {
   const [open, setOpen] = useState(false);
   const [transition, setTransition] = useState(undefined);
 
@@ -42,6 +42,9 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
             song={song}
             nextRound={() => nextRound()}
             sendMessage={sendMessage}
+            user={user}
+            host={host}
+            players={players}
           />
         )}
         <TrackList round={round} songs={playlist.songs} />
@@ -53,7 +56,7 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
         <Snackbar open={open} onClose={handleClose} TransitionComponent={transition} message='I love snacks' />
       </div>
       <div className='right-side'>
-        <Score {...{ user, users, messages }} />
+        <Score {...{ user, players, messages }} />
         <Chat {...{ user, users, messages }} />
         <MessageInput onSubmit={sendMessage} />
       </div>
