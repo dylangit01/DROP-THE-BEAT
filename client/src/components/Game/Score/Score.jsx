@@ -1,7 +1,7 @@
 import React from 'react';
 import './Score.scss';
 
-export default function Score({ setScore, setWinner, user, users, messages }) {
+export default function Score({ setScore, setWinner, user, players, messages }) {
   // setScore(3)
   // let score = 0;
   // const addScore = (e) => {
@@ -11,12 +11,12 @@ export default function Score({ setScore, setWinner, user, users, messages }) {
   //     console.log('We have a winner')
   //   }
   // }
-  console.log('user info here', users);
+  console.log('players info here', players);
   console.log(user);
   return (
     <div className='score-box'>
       {
-        users.map((user, idx) => (
+        players.map((user, idx) => (
           <>
 
             {/* <p>{user.id}</p> */}
