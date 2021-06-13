@@ -162,6 +162,7 @@ export default function Game({ playlist }) {
     return winner;
   }
 
+  // find a host
   const host = users.find((user) => user.isHost === true);
 
   // array of only players excluding the host
