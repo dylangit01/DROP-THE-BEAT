@@ -214,8 +214,14 @@ export default function Game({ playlist }) {
       {/* GAME-END RESULT */}
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
 
-      {/* {round.winner && handleClick(TransitionDown)} */}
-      <Snackbar open={open} onClose={handleClose} message={round.winner + ' got it!'} />
+      {/* NOTIFICATION FOR ROUND WINNER */}
+      <Snackbar 
+        open={open} 
+        onClose={handleClose} 
+        message={round.winner + ' got it! 🔥🔥🔥'} 
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        // style={{ width: "100%" }}
+      />
 
     </div>
   );
