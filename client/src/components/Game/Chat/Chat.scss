@@ -34,10 +34,15 @@
     width: 35vw;
     height: 54vh;
     overflow: hidden;
-     line-height:1.5rem;
+    line-height:1.5rem;
+    padding: 0;
+    font-size: medium;
     // overflow-y:scroll;     // not showing the scroll??
     &--item {
       list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
