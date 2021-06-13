@@ -123,6 +123,7 @@ export default function Game({ playlist }) {
       // });
 
       conn.on('DISCONNECT_USER', (msg) => {
+        console.log(msg);
         setUsers((prev) => {
           const copy = [...prev];
           const names = copy.map((user) => user.name);
@@ -180,7 +181,15 @@ export default function Game({ playlist }) {
   const host = users.find((user) => user.isHost === true) || {};
 
   // array of only players excluding the host
-  const players = users.slice(1);
+  let players = users.slice(1);
+  const playersForTwoOnly = (players) => {
+    if (players.length > 2) {
+       return players.slice(0, 2)
+    } 
+    return players;
+  }
+  // playersForTwoOnly(players)
+  console.log(players);
 
   return (
     <div className='game'>
@@ -195,7 +204,7 @@ export default function Game({ playlist }) {
           user={user}
           users={users}
           host={host}
-          players={players}
+          players={playersForTwoOnly(players)}
         />
       )}
 
@@ -211,7 +220,7 @@ export default function Game({ playlist }) {
           user={user}
           users={users}
           host={host}
-          players={players}
+          players={playersForTwoOnly(players)}
           messages={guesses}
           sendMessage={sendMessage}
         />
@@ -221,20 +230,20 @@ export default function Game({ playlist }) {
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
 
       {/* NOTIFICATION FOR ROUND WINNER */}
-      <Snackbar 
-        open={open} 
-        onClose={handleClose} 
-        // message={round.winner + ' got it! 🔥🔥🔥'} 
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        // message={round.winner + ' got it! 🔥🔥🔥'}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         // style={{ height: "100%" }}
       >
-        <SnackbarContent style={{
-          backgroundColor:'#4caf50',
-        }}
-        message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
+        <SnackbarContent
+          style={{
+            backgroundColor: '#4caf50',
+          }}
+          message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
         />
       </Snackbar>
-
     </div>
   );
 }

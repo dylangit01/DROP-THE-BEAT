@@ -55,7 +55,7 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ dispatch, gameLink }) {
+export default function PlaylistPage({ gameLink }) {
   const classes = useStyles();
   const history = useHistory();
 
