@@ -35,7 +35,11 @@ const io = socketio(server, {
 
 // Random color:
 const randomColor = () => {
+  const randomColorArr = [
+    
+  ]
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
+
 };
 
 // Get all users:
@@ -48,8 +52,12 @@ const getAllUsers = (sockets) => {
       id: item.id,
       color: item.color,
       score: item.score,
+      isHost: item.isHost
     });
   }
+  // set up the first user as a host
+  users[0].isHost = true;
+  users[0].name = 'DJ Dylan';
   return users;
 };
 
@@ -61,7 +69,7 @@ io.on('connection', (socket) => {
 
   // set up default name for user
   const randomNumber = Math.floor(Math.random() * 16777215).toString(16);
-  const name = 'USER' + randomNumber;
+  const name = 'USER_' + randomNumber;
   const color = randomColor();
   const id = socket.id;
   const score = 0;
@@ -79,7 +87,7 @@ io.on('connection', (socket) => {
   // Emit to connected user only
   socket.emit('INITIAL_CONNECTION', { id, name, color, score, users, isHost, msgColor }); // Only emits to connected user
 
-  // Emit to all user
+  // Emit to all users except connected user
   socket.broadcast.emit('NEW_USER', {
     name,
     id: socket.id,

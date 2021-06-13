@@ -8,14 +8,26 @@ import Lobby from './Lobby/Lobby';
 import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
   const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
-  const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
+  const [round, setRound] = useState({number: 0, finished: false, winner: null});
   
+  ////////////////////////////////////////////////////
+  // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
+  ////////////////////////////////////////////////////
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
   const song = songs[round.number];
@@ -31,6 +43,7 @@ export default function Game({ playlist }) {
       const winner = getWinner();
       setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
+
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -49,15 +62,13 @@ export default function Game({ playlist }) {
     if (conn) {
       // Received only by one user on connecting to socket
       conn.on('INITIAL_CONNECTION', (msg) => {
-        const { id, name, color, score, users } = msg;
-        // console.log("initial connection msg", msg)
-        setUser({ id, name, color, score });
+        const { id, name, color, score, users, isHost } = msg;
+        setUser({ id, name, color, score, isHost });
         setUsers([...users]);
       });
 
       // Received by all users except user who connected
       conn.on('NEW_USER', (msg) => {
-        // console.log('new user msg ', msg)
         setUsers((prev) => [...prev, msg]);
       });
 
@@ -85,10 +96,10 @@ export default function Game({ playlist }) {
 
       conn.on('CORRECT_GUESS', (msg) => {
         setGuesses((prev) => [...prev, msg]);
-        setUser(prev => ({ ...prev, score: msg.score }))
-        // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
+        setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
         setUsers([...msg.users]);
-        setRound(prev => ({...prev, finished: true}));
+        setRound(prev => ({...prev, finished: true, winner: msg.name}));
+        setOpen(true);
         // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
         console.log(msg, guesses);
@@ -101,14 +112,15 @@ export default function Game({ playlist }) {
 
       conn.on('NEXT_ROUND', (msg) => {
         // Update round state to next round and set the round finished status to false
+        setOpen(false);
         setRound(prev => {
-          return {...prev, number: prev.number + 1, finished: false};
+          return {...prev, number: prev.number + 1, finished: false, winner: null};
         });
       });
 
-      conn.on('END_GAME', (msg) => {
+      // conn.on('END_GAME', (msg) => {
 
-      });
+      // });
 
       conn.on('DISCONNECT_USER', (msg) => {
         setUsers((prev) => {
@@ -164,6 +176,12 @@ export default function Game({ playlist }) {
     return winner;
   }
 
+  // find a host
+  const host = users.find((user) => user.isHost === true) || {};
+
+  // array of only players excluding the host
+  const players = users.slice(1);
+
   return (
     <div className='game'>
       {/* PRE-GAME LOBBY */}
@@ -176,6 +194,8 @@ export default function Game({ playlist }) {
           playlistName={playlist.playlistName}
           user={user}
           users={users}
+          host={host}
+          players={players}
         />
       )}
 
@@ -190,6 +210,8 @@ export default function Game({ playlist }) {
           song={song}
           user={user}
           users={users}
+          host={host}
+          players={players}
           messages={guesses}
           sendMessage={sendMessage}
         />
@@ -197,6 +219,22 @@ export default function Game({ playlist }) {
 
       {/* GAME-END RESULT */}
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
+
+      {/* NOTIFICATION FOR ROUND WINNER */}
+      <Snackbar 
+        open={open} 
+        onClose={handleClose} 
+        // message={round.winner + ' got it! 🔥🔥🔥'} 
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        // style={{ height: "100%" }}
+      >
+        <SnackbarContent style={{
+          backgroundColor:'#4caf50',
+        }}
+        message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
+        />
+      </Snackbar>
+
     </div>
   );
 }

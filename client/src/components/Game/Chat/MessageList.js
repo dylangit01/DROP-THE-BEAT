@@ -1,5 +1,4 @@
 import './Chat.scss';
-import soundIcon from '../../../assets/music-play.png';
 import MusicNoteRoundedIcon from '@material-ui/icons/MusicNoteRounded';
 import { makeStyles } from '@material-ui/styles';
 

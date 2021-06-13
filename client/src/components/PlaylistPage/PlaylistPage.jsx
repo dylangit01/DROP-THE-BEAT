@@ -89,7 +89,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
   };
 
   const handlePlaylistClick = (event) => {
-    history.push('/game');
+    history.push('/game/12345')
   };
 
   return (
@@ -155,7 +155,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>{gameLink}</Typography>
+                <Typography variant='h6'>{gameLink}12345</Typography>
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>

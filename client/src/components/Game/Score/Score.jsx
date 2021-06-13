@@ -3,11 +3,8 @@ import './Score.scss';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import { makeStyles } from '@material-ui/styles';
 
-export default function Score({ setScore, setWinner, user, users, messages }) {
-  console.log(users);
-
+export default function Score({ setScore, setWinner, user, players, messages }) {
   const useStyles = makeStyles((theme) => ({
-
     player: {
       fontSize: '15px',
       fontWeight:'30px'
@@ -19,9 +16,9 @@ export default function Score({ setScore, setWinner, user, users, messages }) {
 
   const classes = useStyles();
 
-  return (
+ return (
     <div className='score-box'>
-      {users.map((user, idx) => (
+      {players.map((user, idx) => (
         <div key={idx} className='scoreDetail'>
           <div className='iconNum'>
             <MusicNoteIcon className={classes.mIcon} style={{ color: user.color, width: '30px' }}></MusicNoteIcon>
