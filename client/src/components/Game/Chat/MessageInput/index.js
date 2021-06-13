@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import './index.scss';
 
 const MessageInput = (props) => {
-  console.log(props);
   const onSubmit = (evt) => {
     evt.preventDefault();
     const guess = evt.target.message.value.trim();

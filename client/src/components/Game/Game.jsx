@@ -180,18 +180,18 @@ export default function Game({ playlist }) {
   const host = users.find((user) => user.isHost === true) || {};
 
   // array of only players excluding the host
+  // Using context to update players, which messageInput component needs host info:
   const { players, setPlayers } = useContext(DTBContext);
 
+  // FAKE ROOM SETUP: Only two players will show up in the game room,
   useEffect(() => {
     const getPlayers = () => {
       setPlayers(users.slice(1));
-      if (users.slice(1).length > 2) {
-        setPlayers(users.slice(1, 3));
-      }
+      users.slice(1).length > 2 && setPlayers(users.slice(1, 3));
     };
     getPlayers();
   }, [setPlayers, users]);
-  
+
   return (
     <div className='game'>
       {/* PRE-GAME LOBBY */}
