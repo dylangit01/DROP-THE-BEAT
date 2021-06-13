@@ -1,70 +1,80 @@
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 // Hooks
-import useApplicationData from './hooks/useApplicationData';
+// import useApplicationData from './hooks/useApplicationData';
 
 // Components
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from './components/Navbar/Navbar';
 
-import Home from "./components/Home/Home";
-import Playlists from "./components/Playlists/Playlists";
+import Home from './components/Home/Home';
+import Playlists from './components/Playlists/Playlists';
 
-import PlaylistPage from "./components/PlaylistPage/PlaylistPage";
-import Join from "./components/Join/Join";
-import Game from "./components/Game/Game";
+import PlaylistPage from './components/PlaylistPage/PlaylistPage';
+import Join from './components/Join/Join';
+import Game from './components/Game/Game';
+import { useEffect, useContext } from 'react';
+import { DTBContext } from './contextAPI/DTBContext';
 
-function App () {
+function App() {
+  // const { state, dispatch } = useApplicationData();
+  // const history = useHistory();
 
-  const { state, dispatch } = useApplicationData();
-  const history = useHistory();
+  // USING useEffect & CONTEXT-API TO FETCH PLAYLISTS:
+  const {playlist, playlists, setPlaylists } = useContext(DTBContext);
+  useEffect(() => {
+    const fetchPlayLists = async () => {
+      try {
+        const res = await axios({ method: 'GET', url: '/api/playlists' });
+        setPlaylists(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchPlayLists();
+  }, [setPlaylists]);
 
   // Get currently selected playlist if it exists
-  const currentPlaylist = state.playlists.find(playlist => playlist.playlistId === state.playlist);
+  // const currentPlaylist = playLists.find((playlist) => playlist.playlistId === state.playlist);
 
   return (
     <Router>
-      <div className="App" >
+      <div className='App'>
         {/* Navbar */}
         <Navbar />
-        
+
         {/* Navigation Routes */}
         <Switch>
-          <Route path="/" exact>
+          <Route path='/' exact>
             <Home />
           </Route>
 
-          <Route path="/playlists" exact>
-            <Playlists playlists={state.playlists}/>
+          <Route path='/playlists' exact>
+            <Playlists playlists={playlists} />
           </Route>
 
-          <Route path="/playlists/:id" exact>
-            <PlaylistPage playlists={state.playlists} dispatch={dispatch} />
+          <Route path='/playlists/:id' exact>
+            <PlaylistPage playlists={playlists} />
           </Route>
 
-          <Route path="/join" exact>
+          <Route path='/join' exact>
             <Join />
           </Route>
 
           <Route path="/game/epicbattle" exact>
-            {currentPlaylist && <Game playlist={currentPlaylist} />}
+          {playlist && <Game playlist={playlist} />}
             {/* {!currentPlaylist && history.push(`/`)} */}
             {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
           </Route>
 
-          <Route path="*">
+          <Route path='*'>
             <h2>404 - Page Not Found</h2>
           </Route>
-
         </Switch>
-      </div >
+      </div>
     </Router>
   );
-};
+}
 
 export default App;

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
+export default function AudioPlayer({song, nextRound, setRound, sendMessage, host, user}) {
   const classes = useStyles();
 
   const handleSongEnd = () => {
@@ -38,15 +38,16 @@ export default function AudioPlayer({song, nextRound, setRound, sendMessage}) {
       {/* Audio plays automatically on load, remove controls*/}
       <audio
         id="song-audio"
-        // autoPlay
+        autoPlay
         // controls
         onEnded={handleSongEnd} //disable guessing, reveal song if not revealed
         // volume={0.5}
         src={song.previewUrl}>
       </audio>
-      <IconButton className={classes.next} onClick={nextRound}><SkipNextIcon fontSize="large"/></IconButton>
+      {host.id === user.id && 
+        <IconButton className={classes.next} onClick={nextRound}><SkipNextIcon fontSize="large"/></IconButton>
+      }
       {/* <Button className={classes.button} endIcon={<SkipNextIcon/>} onClick={nextRound}>Next</Button> */}
-      
     </div>
   );
 };

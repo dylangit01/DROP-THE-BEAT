@@ -32,9 +32,19 @@
     align-items: flex-start;
     justify-content: flex-end;
     width: 35vw;
-    height: 54vh;
+    height: 58vh;
     overflow: hidden;
+    line-height:1.5rem;
+    padding-left: 10px;
+    font-size: medium;
+    margin-top: 0;
     // overflow-y:scroll;     // not showing the scroll??
+    &--item {
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .chat-input-box {

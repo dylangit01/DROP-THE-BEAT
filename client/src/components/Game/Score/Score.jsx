@@ -1,37 +1,33 @@
 import React from 'react';
 import './Score.scss';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import { makeStyles } from '@material-ui/styles';
 
 export default function Score({ setScore, setWinner, user, players, messages }) {
-  // setScore(3)
-  // let score = 0;
-  // const addScore = (e) => {
-  //   score += 1;
-  //   if (score > 5) {
-  //     setWinner("RubyOffRails")
-  //     console.log('We have a winner')
-  //   }
-  // }
-  console.log('players info here', players);
-  console.log(user);
-  return (
+  const useStyles = makeStyles((theme) => ({
+    player: {
+      fontSize: '15px',
+      fontWeight:'30px'
+    },
+    mIcon: {
+      transform: 'scale(1.8)',
+    },
+  }));
+
+  const classes = useStyles();
+
+ return (
     <div className='score-box'>
-      {
-        players.map((user, idx) => (
-          <>
-
-            {/* <p>{user.id}</p> */}
-            <p>{user.name}</p>
-            <p>{user.score}</p>
-          </>
-        ))
-        // <>
-        // <p>{user.name}</p>
-        //   <p>{user.score}</p>
-        //   </>
-      }
-
-      {/* <h2>Scores:</h2>
-      <h1 className="score-numbers"> 3 / 2 </h1> */}
+      {players.map((user, idx) => (
+        <div key={idx} className='scoreDetail'>
+          <div className='iconNum'>
+            <MusicNoteIcon className={classes.mIcon} style={{ color: user.color, width: '30px' }}></MusicNoteIcon>
+            <p className='scoreNum' style={{color:'#54e346'}} >{user.score}</p>
+          </div>
+          <p className={classes.player}>{user.name}</p>
+          {/* <MusicNoteIcon></MusicNoteIcon> */}
+        </div>
+      ))}
     </div>
   );
 }

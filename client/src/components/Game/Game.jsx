@@ -8,14 +8,26 @@ import Lobby from './Lobby/Lobby';
 import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
   const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
   const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
-  const [round, setRound] = useState({number: 0, finished: false});  // Might need to change this to an object of rounds
+  const [round, setRound] = useState({number: 0, finished: false, winner: null});
   
+  ////////////////////////////////////////////////////
+  // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
+  ////////////////////////////////////////////////////
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
   const song = songs[round.number];
@@ -31,6 +43,7 @@ export default function Game({ playlist }) {
       const winner = getWinner();
       setGameStatus((prev) =>  ({...prev, finished: true, winner}));
     }
+
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
@@ -82,14 +95,15 @@ export default function Game({ playlist }) {
       });
 
       conn.on('CORRECT_GUESS', (msg) => {
-        // Update winner's score
         setGuesses((prev) => [...prev, msg]);
-        setUser(prev => ({ ...prev, score: msg.score }))
-        // setUsers(prev => ([...prev, { name: msg.name, score: msg.score }]))
+        setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
         setUsers([...msg.users]);
-        setRound(prev => ({...prev, finished: true}));
+        setRound(prev => ({...prev, finished: true, winner: msg.name}));
+        setOpen(true);
         // ADD SNACKBAR NOTIFICATION
         // Okay to do multiple setState calls as long as they don't affect each other
+        console.log(msg, guesses);
+          conn.on('find the correct answer', )
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
@@ -98,14 +112,15 @@ export default function Game({ playlist }) {
 
       conn.on('NEXT_ROUND', (msg) => {
         // Update round state to next round and set the round finished status to false
+        setOpen(false);
         setRound(prev => {
-          return {...prev, number: prev.number + 1, finished: false};
+          return {...prev, number: prev.number + 1, finished: false, winner: null};
         });
       });
 
-      conn.on('END_GAME', (msg) => {
+      // conn.on('END_GAME', (msg) => {
 
-      });
+      // });
 
       conn.on('DISCONNECT_USER', (msg) => {
         setUsers((prev) => {
@@ -126,7 +141,6 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   const sendMessage = (type, msg) => {
     const payload = { ...user, msg };
-    console.log("payload for changinggggg the user name", payload)
     conn.emit(type, payload);
   };
 
@@ -163,7 +177,7 @@ export default function Game({ playlist }) {
   }
 
   // find a host
-  const host = users.find((user) => user.isHost === true);
+  const host = users.find((user) => user.isHost === true) || {};
 
   // array of only players excluding the host
   const players = users.slice(1);
@@ -205,6 +219,22 @@ export default function Game({ playlist }) {
 
       {/* GAME-END RESULT */}
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
+
+      {/* NOTIFICATION FOR ROUND WINNER */}
+      <Snackbar 
+        open={open} 
+        onClose={handleClose} 
+        // message={round.winner + ' got it! 🔥🔥🔥'} 
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        // style={{ height: "100%" }}
+      >
+        <SnackbarContent style={{
+          backgroundColor:'#4caf50',
+        }}
+        message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
+        />
+      </Snackbar>
+
     </div>
   );
 }
