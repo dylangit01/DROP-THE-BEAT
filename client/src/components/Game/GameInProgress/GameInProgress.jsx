@@ -8,8 +8,7 @@ import './GameInProgress.scss';
 import MessageInput from '../Chat/MessageInput/index'
 
   
-export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage}) {
-
+export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage, host, players}) {
 
   return (
     <div className='game-in-progress'>
@@ -22,6 +21,9 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
             song={song}
             nextRound={() => nextRound()}
             sendMessage={sendMessage}
+            user={user}
+            host={host}
+            players={players}
           />
         )}
         <TrackList round={round} songs={playlist.songs} />
@@ -29,7 +31,7 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
 
       </div>
       <div className='right-side'>
-        <Score {...{ user, users, messages }} />
+        <Score {...{ user, players, messages }} />
         <Chat {...{ user, users, messages }} />
         <MessageInput onSubmit={sendMessage} />
       </div>

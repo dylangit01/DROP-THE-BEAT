@@ -62,15 +62,13 @@ export default function Game({ playlist }) {
     if (conn) {
       // Received only by one user on connecting to socket
       conn.on('INITIAL_CONNECTION', (msg) => {
-        const { id, name, color, score, users } = msg;
-        // console.log("initial connection msg", msg)
-        setUser({ id, name, color, score });
+        const { id, name, color, score, users, isHost } = msg;
+        setUser({ id, name, color, score, isHost });
         setUsers([...users]);
       });
 
       // Received by all users except user who connected
       conn.on('NEW_USER', (msg) => {
-        // console.log('new user msg ', msg)
         setUsers((prev) => [...prev, msg]);
       });
 
@@ -177,6 +175,12 @@ export default function Game({ playlist }) {
     return winner;
   }
 
+  // find a host
+  const host = users.find((user) => user.isHost === true);
+
+  // array of only players excluding the host
+  const players = users.slice(1);
+
   return (
     <div className='game'>
       {/* PRE-GAME LOBBY */}
@@ -189,6 +193,8 @@ export default function Game({ playlist }) {
           playlistName={playlist.playlistName}
           user={user}
           users={users}
+          host={host}
+          players={players}
         />
       )}
 
@@ -203,6 +209,8 @@ export default function Game({ playlist }) {
           song={song}
           user={user}
           users={users}
+          host={host}
+          players={players}
           messages={guesses}
           sendMessage={sendMessage}
         />

@@ -1,22 +1,12 @@
 import React from 'react';
 import './Score.scss';
 
-export default function Score({ setScore, setWinner, user, users, messages }) {
-  // setScore(3)
-  // let score = 0;
-  // const addScore = (e) => {
-  //   score += 1;
-  //   if (score > 5) {
-  //     setWinner("RubyOffRails")
-  //     console.log('We have a winner')
-  //   }
-  // }
-  // console.log('user info here', users);
-  // console.log(user);
+export default function Score({ setScore, setWinner, user, players, messages }) {
+
   return (
     <div className='score-box'>
       {
-        users.map((user, idx) => (
+        players.map((user, idx) => (
           <>
 
             {/* <p>{user.id}</p> */}

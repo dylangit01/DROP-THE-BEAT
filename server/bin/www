@@ -48,8 +48,11 @@ const getAllUsers = (sockets) => {
       id: item.id,
       color: item.color,
       score: item.score,
+      isHost: item.isHost
     });
   }
+  // set up the first user as a host
+  users[0].isHost = true;
   return users;
 };
 

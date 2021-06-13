@@ -8,6 +8,7 @@ import AudioPlayer from './AudioPlayer/AudioPlayer';
 import './MusicPlayer.scss';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
+//import { host } from '../../../../../server/db';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MusicPlayer({ song, nextRound, round, setRound, playlist, sendMessage }) {
+export default function MusicPlayer({ song, nextRound, round, setRound, playlist, sendMessage, host, user }) {
   const classes = useStyles();
 
   return (
@@ -34,7 +35,9 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
       {round.finished  && <RoundKnown song={song} />}
 
       {/* Audio playing music here and the next song button */}
+      {host.id === user.id && 
       <AudioPlayer song={song} nextRound={nextRound} sendMessage={sendMessage} setRound={setRound} />
+      }
       
 
     </div>
