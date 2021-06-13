@@ -9,7 +9,7 @@ const MessageList = ({ messages, users }) => {
       '0%': {},
       '50%': {},
       '100%': {
-        transform: 'scale(1.3, 1.3)',
+        transform: 'scale(1.2, 1.2)',
       },
       '30%': {},
       '80%': {
@@ -41,7 +41,7 @@ const MessageList = ({ messages, users }) => {
           <b style={{ color: msg.color }}>{getUsernameForMsg(users, msg)}: &nbsp; </b>
           <b style={{ color: msg.msgColor }} className={ msg.msgColor === '#54e346' &&  classes.bingo}>
             {msg.msg}
-          </b>------- score {msg.score}
+          </b>
         </li>
       ))}
     </ul>

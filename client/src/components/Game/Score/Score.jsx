@@ -7,23 +7,7 @@ export default function Score({ setScore, setWinner, user, users, messages }) {
   console.log(users);
 
   const useStyles = makeStyles((theme) => ({
-    // '@keyframes bingo': {
-    //   '0%': {},
-    //   '50%': {},
-    //   '100%': {
-    //     transform: 'scale(1.2, 1.2)',
-    //   },
-    //   '30%': {},
-    //   '80%': {
-    //     transform: 'scale(1, 1)',
-    //   },
-    // },
-    // musicIcon: {
-    //   height: '90%',
-    // },
-    // bingo: {
-    //   animation: '$bingo 1s ease 0s infinite',
-    // },
+
     player: {
       fontSize: '15px',
     },
