@@ -8,11 +8,11 @@ export default function Score({ setScore, setWinner, user, users, messages }) {
   return (
     <div className='score-box'>
       {users.map((user, idx) => (
-        <>
+        <div key={idx}>
           {/* <p>{user.id}</p> */}
           <p>{user.name}</p>
           <p>{user.score}</p>
-        </>
+        </div>
       ))}
     </div>
   );
