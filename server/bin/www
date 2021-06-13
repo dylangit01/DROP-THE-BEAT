@@ -161,11 +161,13 @@ io.on('connection', (socket) => {
 
     // Send to front end there's a correct guess
     if (guessSongName === currentSongName) {
-      // console.log('right answer', currentSongName);
+      // Reset local current song so that no one else guessing after will get it
+      currentSongName = '';
+
+      // Update score and message color for user with correct answer
       socket.score += 1;
       socket.msgColor = '#54e346';
       const users = getAllUsers(io.sockets.sockets);
-      currentSongName = ''; // reset so that no one else guessing after will get it
       io.emit('CORRECT_GUESS', {
         ...msg,
         score: socket.score,
