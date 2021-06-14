@@ -1,4 +1,5 @@
 import React from 'react';
+import PlayerList from './PlayerList';
 
 // Styling
 import './Lobby.scss';
@@ -20,8 +21,8 @@ import IconButton from '@material-ui/core/IconButton';
 import TimelapseIcon from '@material-ui/icons/Timelapse';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LinkIcon from '@material-ui/icons/Link';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PersonIcon from '@material-ui/icons/Person';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 const WhiteRadio = withStyles({
   root: {
@@ -125,18 +126,36 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               </ListItem>
               <Divider variant="middle" component="li" className={classes.divider} />
               
-              {/* Game Code */}
+              {/* Host */}
               <ListItem >
                 <ListItemText>
                   <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><LinkIcon /></Avatar>
+                    <Avatar className={classes.icon}><PersonIcon /></Avatar>
                     <span>Host</span>
                   </Typography>
-                  <div className='host'>
-                  </div>
+                  <Typography variant='subtitle1' className={classes.listItem}>
+                    {host.name}
+                    {user.id === host.id && <span> (You)</span>}
+                  </Typography>
+                </ListItemText>
+              </ListItem>
+              <Divider variant="middle" component="li" className={classes.divider} />
+            
+              {/* Players */}
+              <ListItem >
+                <ListItemText>
+                  <Typography variant='h5' className={classes.mainHeading}>
+                    <Avatar className={classes.icon}><GroupAddIcon /></Avatar>
+                    <span>Players</span>
+                  </Typography>
+                  <Typography variant='subtitle1' className={classes.listItem}>
+                    <PlayerList {...{ players, user }} />
+
+                  </Typography>
                 </ListItemText>
               </ListItem>
             </List>
+
 
             {/* Start Game Button */}
             <Button variant="contained" className={classes.button}>Start Game</Button>
