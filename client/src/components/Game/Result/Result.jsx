@@ -3,6 +3,7 @@ import React from 'react';
 import './Result.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import winnerSound from '../../../assets/winner.mp3';
 
 const useStyles = makeStyles((theme) => ({
   winner: {
@@ -15,6 +16,12 @@ export default function Result({ score, winner }) {
 
   return (
     <div className='result'>
+      <audio
+        id="winner-audio"
+        autoPlay
+        src={winnerSound}
+      >
+      </audio>
       {winner && (
         <Typography variant='h4' gutterBottom>
           Congrats <span className={classes.winner}>{winner}</span>!
