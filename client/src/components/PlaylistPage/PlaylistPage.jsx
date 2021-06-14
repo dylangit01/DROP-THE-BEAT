@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   difficulty: {
-    marginLeft: theme.spacing(5),
+    marginLeft: theme.spacing(6),
   },
   divider: {
     background: 'rgba(255, 255, 255, 0.4)',
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   gameLink: {
     borderRadius: '16px',
     background: 'rgba(255, 255, 255, 0.8)',
-    marginLeft: theme.spacing(5),
+    marginLeft: theme.spacing(6),
     paddingLeft: theme.spacing(1),
     fontSize: theme.spacing(2),
     width: "70%",
