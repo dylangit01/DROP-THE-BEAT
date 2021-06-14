@@ -13,8 +13,10 @@
   }
 
   .playlist-page-left {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
     height: inherit;
     width: 30vw;

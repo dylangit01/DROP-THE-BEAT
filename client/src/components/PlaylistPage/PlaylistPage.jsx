@@ -77,6 +77,19 @@ const useStyles = makeStyles((theme) => ({
   dropdown: {
     color: "white",
   },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    width: '30vw',
+    borderRadius: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    paddingBottom: theme.spacing(0.5),
+    height: '30%',
+    color: 'white',
+    backgroundImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+  },
 }));
 
 export default function PlaylistPage() {
@@ -127,6 +140,9 @@ export default function PlaylistPage() {
             {/* PLAYLIST DETAILS LEFT SIDE */}
             <div className='playlist-page-left'>
               <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
+              <div className={classes.overlay}>
+                <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
+              </div>
             </div>
 
             {/* PLAYLIST DETAILS RIGHT SIDE */}
