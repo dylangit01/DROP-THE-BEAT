@@ -23,6 +23,11 @@
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 16px;
 
+    .songs-section {
+      display: flex;
+      justify-content: space-between;
+    }
+
     .game-code-section {
       display: flex;
       justify-content: space-between;

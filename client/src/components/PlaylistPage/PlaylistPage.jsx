@@ -16,7 +16,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // Icons
 import IconButton from '@material-ui/core/IconButton';
@@ -24,6 +25,7 @@ import TimelapseIcon from '@material-ui/icons/Timelapse';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LinkIcon from '@material-ui/icons/Link';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const WhiteRadio = withStyles({
   root: {
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(5),
   },
   divider: {
-    background: 'rgba(255, 255, 255, 0.5)',
+    background: 'rgba(255, 255, 255, 0.4)',
   },
   gameLink: {
     borderRadius: '16px',
@@ -72,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     marginBottom: theme.spacing(3),
   },
+  dropdown: {
+    color: "white",
+  },
 }));
 
 export default function PlaylistPage({ dispatch, gameLink }) {
@@ -88,12 +93,27 @@ export default function PlaylistPage({ dispatch, gameLink }) {
     setPlaylist(playlists[idNum]);
   }, [playlists, idNum, setPlaylist]);
 
-  // For Difficult control:
+  // For difficulty control
   const [difficulty, setDifficulty] = useState('easy');
   const handleDifficulty = (event) => {
     setDifficulty(event.target.value);
   };
 
+  // For songs dropdown menu:
+  const [anchorEl, setAnchorEl] = useState(null);
+  const ITEM_HEIGHT = 48;
+
+  // For dropdown menu control:
+  const open = Boolean(anchorEl);
+  const handleSongsClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (e) => {
+    setAnchorEl(null);
+  };
+
+  // For starting a game
   const handlePlaylistClick = (event) => {
     history.push('/game/12345')
   };
@@ -137,11 +157,38 @@ export default function PlaylistPage({ dispatch, gameLink }) {
               {/* Songs */}
               <ListItem >
                 <ListItemText>
-                  <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><QueueMusicIcon /></Avatar>
-                    <span>Songs</span>
-                  </Typography>
+                  <div className="songs-section">
+                    <Typography variant='h5' className={classes.mainHeading}>
+                      <Avatar className={classes.icon}><QueueMusicIcon /></Avatar>
+                      <span>Songs</span>
+                    </Typography>
+                    <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleSongsClick}>
+                      <ExpandMoreIcon className={classes.dropdown} />
+                    </IconButton>
+                  </div>
                 </ListItemText>
+                <Menu
+                    id='long-menu'
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 4.0,
+                        width: '30ch',
+                        backgroundColor: 'rgba(30, 30, 30, 1)',
+                        color: '#fff',
+                        lineHeight: 0,
+                      },
+                    }}
+                  >
+                    {playlist.songs.map((song) => (
+                      <MenuItem key={song.id} value={song.title} onClick={handleClose}>
+                        {`${song.title} - ${song.artist}`}
+                      </MenuItem>
+                    ))}
+                  </Menu>
               </ListItem>
               <Divider variant="middle" component="li" className={classes.divider} />
               
