@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     color: 'white',
     background: 'transparent',
+    padding: 0,
   },
   icon: {
     background: 'linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)',
@@ -225,7 +226,7 @@ export default function PlaylistPage() {
               </List>
 
               {/* Start Game Lobby Button */}
-              <Button variant="contained" className={classes.button} onClick={handlePlaylistClick}>Start Lobby</Button>
+              <Button variant="contained" size="small" className={classes.button} onClick={handlePlaylistClick}>Start Lobby</Button>
             </div>
           </div>
         </div>

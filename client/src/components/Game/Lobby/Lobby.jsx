@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     color: 'white',
     background: 'transparent',
+    padding: 0,
   },
   icon: {
     background: 'linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)',
@@ -200,7 +201,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
             </List>
 
             {/* Start Game Button (only for the host)*/}
-            {user.id === host.id && (<Button variant="contained" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>)}
+            {user.id === host.id && (<Button variant="contained" size="small" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>)}
           </div>
           </div>
         </div>
