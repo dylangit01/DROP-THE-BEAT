@@ -58,14 +58,12 @@ function App() {
             <PlaylistPage playlists={playlists} />
           </Route>
 
-          <Route path='/join' exact>
+          {/* <Route path='/join' exact>
             <Join />
-          </Route>
+          </Route> */}
 
           <Route path="/game/epicbattle" exact>
           {playlist && <Game playlist={playlist} />}
-            {/* {!currentPlaylist && history.push(`/`)} */}
-            {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
           </Route>
 
           <Route path='*'>
