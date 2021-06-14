@@ -80,6 +80,19 @@ const useStyles = makeStyles((theme) => ({
   players: {
     marginLeft: theme.spacing(5.5),
   },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    width: '30vw',
+    borderRadius: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    paddingBottom: theme.spacing(0.5),
+    height: '30%',
+    color: 'white',
+    backgroundImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+  },
 }));
 
 export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, host, players }) {
@@ -106,6 +119,9 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
           <div className='lobby-container'>
             <div className='lobby-left'>
               <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
+              <div className={classes.overlay}>
+                <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
+              </div>
             </div>
 
             {/* PLAYLIST DETAILS RIGHT SIDE */}
