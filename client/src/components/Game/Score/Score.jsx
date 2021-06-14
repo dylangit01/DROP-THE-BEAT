@@ -30,7 +30,7 @@ export default function Score({ setScore, setWinner, user, players, messages }) 
       )}
 
       {/* VS */}
-      <Typography variant='h4'>VS</Typography>
+      <Typography variant='h4' className='versus'>VS</Typography>
 
       {/* 2nd player */}
       {players[1] && (

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Quantico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
 .score-box {
   display: flex;
@@ -25,5 +26,9 @@
     justify-content: space-around;
     align-items: center;
     // padding: 0 10px;
+  }
+
+  .versus {
+    font-family: 'Kaushan Script', sans-serif;
   }
 }
