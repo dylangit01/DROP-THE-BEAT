@@ -101,14 +101,15 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
     <>
       {playlist && (
         <div className='lobby'>
+            {/* <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography> */}
           {/* PLAYLIST DETAILS LEFT SIDE */}
-          <div className='lobby-left'>
-            <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
-            <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
-          </div>
+          <div className='lobby-container'>
+            <div className='lobby-left'>
+              <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
+            </div>
 
-          {/* PLAYLIST DETAILS RIGHT SIDE */}
-          <div className='lobby-right'>
+            {/* PLAYLIST DETAILS RIGHT SIDE */}
+            <div className='lobby-right'>
             <List className={classes.root}>
               {/* Difficulty */}
               <ListItem >
@@ -184,6 +185,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
 
             {/* Start Game Button (only for the host)*/}
             {user.id === host.id && (<Button variant="contained" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>)}
+          </div>
           </div>
         </div>
       )}

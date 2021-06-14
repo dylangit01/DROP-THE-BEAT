@@ -122,93 +122,95 @@ export default function PlaylistPage() {
     <>
       {playlist && (
         <div className='playlist-page'>
-          {/* PLAYLIST DETAILS LEFT SIDE */}
-          <div className='playlist-page-left'>
-            <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
-            <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
-          </div>
+          {/* <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography> */}
+          <div className ='playlist-page-container'>
+            {/* PLAYLIST DETAILS LEFT SIDE */}
+            <div className='playlist-page-left'>
+              <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
+            </div>
 
-          {/* PLAYLIST DETAILS RIGHT SIDE */}
-          <div className='playlist-page-right'>
-            <List className={classes.root}>
-              {/* Difficulty */}
-              <ListItem >
-                <ListItemText>
-                  <Typography variant='h5' className={classes.mainHeading}>
-                    {/* <Avatar className={classes.icon}><TimelapseIcon /></Avatar> */}
-                    <span>Difficulty</span>
-                  </Typography>
-                  <FormControl component='fieldset' className={classes.difficulty}>
-                    <RadioGroup
-                      aria-label='difficulty'
-                      name='difficulty'
-                      value={difficulty}
-                      onChange={handleDifficulty}
-                    >
-                      <FormControlLabel value='easy' control={<WhiteRadio />} label='Easy (30 seconds)' />
-                      <FormControlLabel value='medium' control={<WhiteRadio />} label='Medium (20 seconds)' />
-                      <FormControlLabel value='difficult' control={<WhiteRadio />} label='Difficult (10 seconds)' />
-                    </RadioGroup>
-                  </FormControl>
-                </ListItemText>
-              </ListItem>
-              <Divider variant="middle" component="li" className={classes.divider} />
-
-              {/* Songs */}
-              <ListItem >
-                <ListItemText>
-                  <div className="songs-section">
+            {/* PLAYLIST DETAILS RIGHT SIDE */}
+            <div className='playlist-page-right'>
+              <List className={classes.root}>
+                {/* Difficulty */}
+                <ListItem >
+                  <ListItemText>
                     <Typography variant='h5' className={classes.mainHeading}>
-                      {/* <Avatar className={classes.icon}><QueueMusicIcon /></Avatar> */}
-                      <span>Songs</span>
+                      {/* <Avatar className={classes.icon}><TimelapseIcon /></Avatar> */}
+                      <span>Difficulty</span>
                     </Typography>
-                    <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleSongsClick}>
-                      <ExpandMoreIcon className={classes.dropdown} />
-                    </IconButton>
-                  </div>
-                </ListItemText>
-                <Menu
-                    id='long-menu'
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    PaperProps={{
-                      style: {
-                        maxHeight: ITEM_HEIGHT * 4.0,
-                        width: '30ch',
-                        backgroundColor: 'rgba(30, 30, 30, 1)',
-                        color: '#fff',
-                        lineHeight: 0,
-                      },
-                    }}
-                  >
-                    {playlist.songs.map((song) => (
-                      <MenuItem key={song.id} value={song.title} onClick={handleClose}>
-                        {`${song.title} - ${song.artist}`}
-                      </MenuItem>
-                    ))}
-                  </Menu>
-              </ListItem>
-              <Divider variant="middle" component="li" className={classes.divider} />
-              
-              {/* Game Code */}
-              <ListItem >
-                <ListItemText>
-                  <Typography variant='h5' className={classes.mainHeading}>
-                    {/* <Avatar className={classes.icon}><LinkIcon /></Avatar> */}
-                    <span>Game Code</span>
-                  </Typography>
-                  <div className='game-code-section'>
-                    <input type="text" name="gameLink" className={classes.gameLink} value="https://drop-the-beat.com/game/epicbattle"></input>
-                    <IconButton color="inherit" aria-label="copy" component="span"><FileCopyIcon /></IconButton>
-                  </div>
-                </ListItemText>
-              </ListItem>
-            </List>
+                    <FormControl component='fieldset' className={classes.difficulty}>
+                      <RadioGroup
+                        aria-label='difficulty'
+                        name='difficulty'
+                        value={difficulty}
+                        onChange={handleDifficulty}
+                      >
+                        <FormControlLabel value='easy' control={<WhiteRadio />} label='Easy (30 seconds)' />
+                        <FormControlLabel value='medium' control={<WhiteRadio />} label='Medium (20 seconds)' />
+                        <FormControlLabel value='difficult' control={<WhiteRadio />} label='Difficult (10 seconds)' />
+                      </RadioGroup>
+                    </FormControl>
+                  </ListItemText>
+                </ListItem>
+                <Divider variant="middle" component="li" className={classes.divider} />
 
-            {/* Start Game Lobby Button */}
-            <Button variant="contained" className={classes.button} onClick={handlePlaylistClick}>Start Lobby</Button>
+                {/* Songs */}
+                <ListItem >
+                  <ListItemText>
+                    <div className="songs-section">
+                      <Typography variant='h5' className={classes.mainHeading}>
+                        {/* <Avatar className={classes.icon}><QueueMusicIcon /></Avatar> */}
+                        <span>Songs</span>
+                      </Typography>
+                      <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleSongsClick}>
+                        <ExpandMoreIcon className={classes.dropdown} />
+                      </IconButton>
+                    </div>
+                  </ListItemText>
+                  <Menu
+                      id='long-menu'
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={open}
+                      onClose={handleClose}
+                      PaperProps={{
+                        style: {
+                          maxHeight: ITEM_HEIGHT * 4.0,
+                          width: '30ch',
+                          backgroundColor: 'rgba(30, 30, 30, 1)',
+                          color: '#fff',
+                          lineHeight: 0,
+                        },
+                      }}
+                    >
+                      {playlist.songs.map((song) => (
+                        <MenuItem key={song.id} value={song.title} onClick={handleClose}>
+                          {`${song.title} - ${song.artist}`}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                </ListItem>
+                <Divider variant="middle" component="li" className={classes.divider} />
+                
+                {/* Game Code */}
+                <ListItem >
+                  <ListItemText>
+                    <Typography variant='h5' className={classes.mainHeading}>
+                      {/* <Avatar className={classes.icon}><LinkIcon /></Avatar> */}
+                      <span>Game Code</span>
+                    </Typography>
+                    <div className='game-code-section'>
+                      <input type="text" name="gameLink" className={classes.gameLink} value="https://drop-the-beat.com/game/epicbattle"></input>
+                      <IconButton color="inherit" aria-label="copy" component="span"><FileCopyIcon /></IconButton>
+                    </div>
+                  </ListItemText>
+                </ListItem>
+              </List>
+
+              {/* Start Game Lobby Button */}
+              <Button variant="contained" className={classes.button} onClick={handlePlaylistClick}>Start Lobby</Button>
+            </div>
           </div>
         </div>
       )}
