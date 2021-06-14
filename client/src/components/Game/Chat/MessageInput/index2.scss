@@ -1,0 +1,34 @@
+.chat-input-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5vh;
+  width: 90%;
+  background-color: rgba(191, 191, 191, 0.2);
+  border-radius: 20px;
+  
+  .form-input {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    
+    .chat-input {
+      position: absolute;
+      border: none;
+      margin: 5%;
+      color: #fff;
+      width: 60%;
+      background-color: transparent;
+      // width: 80%;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    // .messageInput button {
+    //   margin: 20px;
+    //   padding: 10px;
+    // }
+
+  }
+}
