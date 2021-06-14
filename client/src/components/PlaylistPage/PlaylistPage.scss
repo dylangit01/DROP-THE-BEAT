@@ -6,9 +6,12 @@
   width: 100vw;
 
   .playlist-page-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin-right: 5%;
     width: 25vw;
-    min-height: 60vh;
 
     img {
       width: inherit;

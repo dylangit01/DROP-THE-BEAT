@@ -115,7 +115,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
 
   // For starting a game
   const handlePlaylistClick = (event) => {
-    history.push('/game/12345')
+    history.push('/game/EpicSongBattle');
   };
 
   return (
@@ -200,7 +200,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
                     <span>Game Code</span>
                   </Typography>
                   <div className='game-code-section'>
-                    <input type="text" name="gameLink" className={classes.gameLink} value="12345"></input>
+                    <input type="text" name="gameLink" className={classes.gameLink} value="EpicSongBattle"></input>
                     <IconButton color="inherit" aria-label="copy" component="span"><FileCopyIcon /></IconButton>
                   </div>
                 </ListItemText>
