@@ -135,7 +135,7 @@ export default function Game({ playlist }) {
         });
       });
     }
-  }, [conn, guesses]);
+  }, [conn]);
 
   ////////////////////////////////////////
   // SEND MESSAGE TO SERVER
