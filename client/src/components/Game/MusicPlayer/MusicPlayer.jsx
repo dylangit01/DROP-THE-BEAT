@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   title: {
     margin: '1rem',
+    textShadow: "0px 0px 3px white",
   },
 }));
 
