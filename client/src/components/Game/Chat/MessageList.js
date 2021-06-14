@@ -31,13 +31,35 @@ const MessageList = ({ messages, users }) => {
   };
 
   const classes = useStyles();
-
+  // const randomColorArr = [
+  //   '#e1701a',
+  //   '#98acf8',
+  //   '#a6f6f1',
+  //   '#ffcb74',
+  //   '#ff8474',
+  //   '#00ead3',
+  //   '#77acf1',
+  //   '#efbbcf',
+  //   '#f54748',
+  //   '#7868e6',
+  //   '#f7fd04',
+  //   '#ff0004',
+  //   '#033fff',
+  // ];
   return (
-    <ul className='message-list'>
+    <ul className="message-list">
+      {/* {randomColorArr.map((color, id) => {
+        return <li style={{ color }}>RubyOffTheRails</li>;
+      })} */}
       {messages.map((msg, idx) => (
-        <li key={idx} className='message-list--item'>
-          <MusicNoteRoundedIcon style={{ color: msg.color }} className={classes.musicIcon}></MusicNoteRoundedIcon>
-          <b style={{ color: msg.color }}>{getUsernameForMsg(users, msg)}: &nbsp; </b>
+        <li key={idx} className="message-list--item">
+          <MusicNoteRoundedIcon
+            style={{ color: msg.color }}
+            className={classes.musicIcon}
+          ></MusicNoteRoundedIcon>
+          <b style={{ color: msg.color }}>
+            {getUsernameForMsg(users, msg)}: &nbsp;{' '}
+          </b>
           {msg.msgColor === '#54e346' ? (
             <b style={{ color: msg.msgColor }} className={classes.bingo}>
               {msg.msg}

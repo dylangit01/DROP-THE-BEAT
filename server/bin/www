@@ -39,7 +39,6 @@ const randomColor = () => {
     '#e1701a',
     '#98acf8',
     '#a6f6f1',
-    '#72147e',
     '#ffcb74',
     '#ff8474',
     '#00ead3',
