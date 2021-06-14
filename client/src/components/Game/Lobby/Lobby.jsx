@@ -182,8 +182,8 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               </ListItem>
             </List>
 
-            {/* Start Game Button */}
-            <Button variant="contained" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>
+            {/* Start Game Button (only for the host)*/}
+            {user.id === host.id && (<Button variant="contained" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>)}
           </div>
         </div>
       )}
