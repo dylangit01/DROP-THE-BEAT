@@ -1,0 +1,18 @@
+.playlist-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+
+  .playlist-page-left {
+    img {
+      height: 30vw;
+      width: 30vw;
+      border-radius: 16px;
+    }
+  }
+
+  .playlist-page-right {
+    width: 25vw;
+  }
+}

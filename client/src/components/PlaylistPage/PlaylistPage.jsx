@@ -4,6 +4,7 @@ import { DTBContext } from '../../contextAPI/DTBContext';
 
 // Styling
 import './PlaylistPage.scss';
+import Typography from '@material-ui/core/Typography';
 
 export default function PlaylistPage({ dispatch, gameLink }) {
   // const classes = useStyles();
@@ -19,35 +20,24 @@ export default function PlaylistPage({ dispatch, gameLink }) {
     setPlaylist(playlists[idNum]);
   }, [playlists, idNum, setPlaylist]);
 
-  // For songs dropdown menu:
-  const ITEM_HEIGHT = 48;
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  // For Difficult control:
-  const [difficulty, setDifficulty] = useState('easy');
-  const handleDifficulty = (event) => {
-    setDifficulty(event.target.value);
-  };
-
-  // For dropdown menu control:
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (e) => {
-    setAnchorEl(null);
-  };
-
   const handlePlaylistClick = (event) => {
     history.push('/game/12345')
   };
 
   return (
-    <div className='playlist-page'>
+    <>
       {playlist && (
-        <h1>Hi</h1>
+        <div className='playlist-page'>
+          <div className='playlist-page-left'>
+            <Typography variant='h4'>{playlist.playlistName} Playlist</Typography>
+            <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
+          </div>
+          <div className='playlist-page-right'>
+            <Typography variant='h4'>Right Side</Typography>
+            
+          </div>
+        </div>
       )}
-    </div>
+    </>
   )
 }
