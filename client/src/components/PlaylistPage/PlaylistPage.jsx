@@ -135,7 +135,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
               <ListItem >
                 <ListItemText>
                   <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><TimelapseIcon /></Avatar>
+                    {/* <Avatar className={classes.icon}><TimelapseIcon /></Avatar> */}
                     <span>Difficulty</span>
                   </Typography>
                   <FormControl component='fieldset' className={classes.difficulty}>
@@ -159,7 +159,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
                 <ListItemText>
                   <div className="songs-section">
                     <Typography variant='h5' className={classes.mainHeading}>
-                      <Avatar className={classes.icon}><QueueMusicIcon /></Avatar>
+                      {/* <Avatar className={classes.icon}><QueueMusicIcon /></Avatar> */}
                       <span>Songs</span>
                     </Typography>
                     <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleSongsClick}>
@@ -196,7 +196,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
               <ListItem >
                 <ListItemText>
                   <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><LinkIcon /></Avatar>
+                    {/* <Avatar className={classes.icon}><LinkIcon /></Avatar> */}
                     <span>Game Code</span>
                   </Typography>
                   <div className='game-code-section'>

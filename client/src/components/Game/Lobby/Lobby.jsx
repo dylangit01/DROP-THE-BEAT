@@ -114,7 +114,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               <ListItem >
                 <ListItemText>
                   <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><TimelapseIcon /></Avatar>
+                    {/* <Avatar className={classes.icon}><TimelapseIcon /></Avatar> */}
                     <span>Difficulty</span>
                   </Typography>
                   <FormControl component='fieldset' className={classes.difficulty}>
@@ -135,7 +135,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
                 <ListItemText>
                   <div className="songs-section">
                     <Typography variant='h5' className={classes.mainHeading}>
-                      <Avatar className={classes.icon}><QueueMusicIcon /></Avatar>
+                      {/* <Avatar className={classes.icon}><QueueMusicIcon /></Avatar> */}
                       <span>Songs</span>
                     </Typography>
                     <Typography variant='subtitle1' className={classes.listItem}>Number of Songs: {numberOfSongs}</Typography>
@@ -148,7 +148,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               <ListItem >
                 <ListItemText>
                   <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><PersonIcon /></Avatar>
+                    {/* <Avatar className={classes.icon}><PersonIcon /></Avatar> */}
                     <span>Host</span>
                   </Typography>
                   <Typography variant='subtitle1' className={classes.listItem}>
@@ -163,7 +163,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               <ListItem >
                 <ListItemText>
                   <Typography variant='h5' className={classes.mainHeading}>
-                    <Avatar className={classes.icon}><GroupAddIcon /></Avatar>
+                    {/* <Avatar className={classes.icon}><GroupAddIcon /></Avatar> */}
                     <span>Players</span>
                   </Typography>
                   {/* List of Players */}
