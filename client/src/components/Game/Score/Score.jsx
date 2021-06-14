@@ -24,13 +24,13 @@ export default function Score({ setScore, setWinner, user, players, messages }) 
           <Typography variant='h3'>{players[0].score}</Typography>
           <div className={classes.player} style={{ color: players[0].color }}>
             <MusicNoteIcon />
-            {players[0].name}
+            <strong>{players[0].name}</strong>
           </div>
         </div>
       )}
 
       {/* VS */}
-      <Typography variant='h4' className='versus'>VS</Typography>
+      {players.length >= 2 && (<Typography variant='h4' className='versus'>VS</Typography>)}
 
       {/* 2nd player */}
       {players[1] && (
@@ -38,7 +38,7 @@ export default function Score({ setScore, setWinner, user, players, messages }) 
           <Typography variant='h3'>{players[1].score}</Typography>
           <div className={classes.player} style={{ color: players[1].color }}>
             <MusicNoteIcon />
-            {players[1].name}
+            <strong>{players[1].name}</strong>
           </div>
         </div>
       )}

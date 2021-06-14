@@ -37,14 +37,14 @@ const io = socketio(server, {
 const randomColor = () => {
   const randomColorArr = [
     '#e1701a',
-    '#98acf8',
+    // '#98acf8',
     '#a6f6f1',
     '#ffcb74',
     '#ff8474',
     '#00ead3',
     '#77acf1',
     '#efbbcf',
-    '#f54748',
+    // '#f54748',
     '#7868e6',
     '#f7fd04',
     '#ff0004',
@@ -137,9 +137,15 @@ io.on('connection', (socket) => {
     const newName = msg;
     socket.name = newName;
 
+    // Hard-coded colours for demo purposes
+    if (newName.toLowerCase().includes('ruby')) {
+      socket.color = '#f54748';
+    } else if (newName.toLowerCase().includes('nelly')) {
+      socket.color = '#98acf8';
+    }
     // Get the updated users array
     const users = getAllUsers(io.sockets.sockets);
-    socket.emit('CHANGE_NAME', { name: newName, users }); // Emit update only to user that sent it
+    socket.emit('CHANGE_NAME', { name: newName, color: socket.color, users }); // Emit update only to user that sent it
     socket.broadcast.emit('USER_NAME_CHANGE', { users }); // Emit update to all users
   });
 

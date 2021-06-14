@@ -70,8 +70,8 @@ export default function Game({ playlist }) {
 
         // Received only by one user who requested name change
         conn.on('CHANGE_NAME', (msg) => {
-          const { name, users } = msg;
-          setUser((prev) => ({ ...prev, name }));
+          const { name, color, users } = msg;
+          setUser((prev) => ({ ...prev, name, color }));
           setUsers([...users]);
         });
 
