@@ -193,8 +193,7 @@ export default function Game({ playlist }) {
   // FAKE ROOM SETUP: Only two players will show up in the game room,
   useEffect(() => {
     const getPlayers = () => {
-      setPlayers(users.slice(1));
-      users.slice(1).length > 2 && setPlayers(users.slice(1, 3));
+      setPlayers(users.slice(1, 3));
     };
     getPlayers();
   }, [setPlayers, users]);
