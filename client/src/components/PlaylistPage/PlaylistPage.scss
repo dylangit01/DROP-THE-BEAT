@@ -3,16 +3,24 @@
   justify-content: center;
   align-items: center;
   height: 90vh;
+  width: 100vw;
 
   .playlist-page-left {
+    margin-right: 5%;
+    width: 30vw;
+    height: 60vh;
+
     img {
-      height: 30vw;
-      width: 30vw;
+      width: inherit;
       border-radius: 16px;
     }
   }
 
   .playlist-page-right {
-    width: 25vw;
+    margin-left: 5%;
+    width: 30vw;
+    height: 60vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
   }
 }
