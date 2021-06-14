@@ -12,15 +12,26 @@
     position: relative;
     width: 38vw;
     height: 80vh;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     margin-top: 2rem;
-
   }
 
   .left-side {
-    justify-content: column;
+    display: flex;
+    width: 38vw;
+    flex-direction: column;
+    justify-content: center;
+
+    .countdown {
+      align-self: center;
+      font-size: 10rem;
+      text-shadow: 2px 2px 5px white;
+    }
+
+    // .music-player {
+    //   //padding-bottom: 3vh;
+    // }
+
   }
-
 }
-

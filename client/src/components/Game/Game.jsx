@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import './Game.scss';
 
@@ -8,25 +8,16 @@ import Lobby from './Lobby/Lobby';
 import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
-// import Snackbar from '@material-ui/core/Snackbar';
-// import SnackbarContent from "@material-ui/core/SnackbarContent";
+import { DTBContext } from '../../contextAPI/DTBContext';
 
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
-  const [gameStatus, setGameStatus] = useState({started: false, finished: false, winner: null}); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
+  const [gameStatus, setGameStatus] = useState({ started: false, finished: false, winner: null }); // ASK IF THERE'S A WAY TO STORE STATUS LIKE THIS
   const [user, setUser] = useState({}); // Specific to person using website
   const [users, setUsers] = useState([]); // All users connected through socket
-  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false 
-  const [round, setRound] = useState({number: 0, finished: false, winner: null});
-  
-  ////////////////////////////////////////////////////
-  // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
-  ////////////////////////////////////////////////////
-  // const [open, setOpen] = useState(false);
+  const [guesses, setGuesses] = useState([]); //add boolean correct: true/false
+  const [round, setRound] = useState({ number: 0, finished: false, winner: null });
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
@@ -41,17 +32,20 @@ export default function Game({ playlist }) {
     if (round.number === numberOfRounds) {
       // check highest score for winner and set winner
       const winner = getWinner();
-      setGameStatus((prev) =>  ({...prev, finished: true, winner}));
+      setGameStatus((prev) => ({ ...prev, finished: true, winner }));
     }
-
   }, [numberOfRounds, round]);
 
   ////////////////////////////////////////
   // ON INITIAL SOCKET CONNECTION
   ////////////////////////////////////////
   useEffect(() => {
-    const connection = io('http://localhost:3001');
-    setConn(connection);
+    let mounted = true;
+    if (mounted) {
+      const connection = io('http://localhost:3001');
+      setConn(connection);
+    }
+    return () => (mounted = false);
   }, []);
 
   ////////////////////////////////////////
@@ -59,83 +53,81 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
-    if (conn) {
-      // Received only by one user on connecting to socket
-      conn.on('INITIAL_CONNECTION', (msg) => {
-        const { id, name, color, score, users, isHost } = msg;
-        setUser({ id, name, color, score, isHost });
-        setUsers([...users]);
-      });
-
-      // Received by all users except user who connected
-      conn.on('NEW_USER', (msg) => {
-        setUsers((prev) => [...prev, msg]);
-      });
-
-      // Received only by one user who requested name change
-      conn.on('CHANGE_NAME', (msg) => {
-        const { name, users } = msg;
-        setUser((prev) => ({...prev, name})); 
-        setUsers([...users]);
-      });
-
-      // Received by all users except user who requested name change
-      conn.on('USER_NAME_CHANGE', (msg) => {
-        const { users } = msg;
-        setUsers([...users]);
-      });
-
-      // Received only by one user who got correct score
-      conn.on('UPDATE_USER_SCORE', (msg) => {
-        const { score } = msg;
-        setUser((prev) => ({...prev, score})); 
-      });
-
-      ////////////////////////////////////////
-      // EVENTS RECIEVED BY ALL USERS
-      ////////////////////////////////////////
-
-      // On start game message from the server
-      conn.on('START_GAME', (msg) => {
-        setGameStatus((prev) => ({ ...prev, started: true }));
-      });
-
-      conn.on('CORRECT_GUESS', (msg) => {
-        setGuesses((prev) => [...prev, msg]);
-        // setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
-        setUsers([...msg.users]);
-        setRound(prev => ({...prev, finished: true, winner: msg.name}));
-        // setOpen(true);
-      })
-
-      conn.on('INCORRECT_GUESS', (msg) => {
-        setGuesses((prev) => [...prev, msg]);
-      });
-
-      conn.on('NEXT_ROUND', (msg) => {
-        // Update round state to next round and set the round finished status to false
-        // setOpen(false);
-        setRound(prev => {
-          return {...prev, number: prev.number + 1, finished: false, winner: null};
+    let mounted = true;
+    if (mounted) {
+      if (conn) {
+        // Received only by one user on connecting to socket
+        conn.on('INITIAL_CONNECTION', (msg) => {
+          const { id, name, color, score, users, isHost } = msg;
+          setUser({ id, name, color, score, isHost });
+          setUsers([...users]);
         });
-      });
 
-      // conn.on('END_GAME', (msg) => {
-
-      // });
-
-      conn.on('DISCONNECT_USER', (msg) => {
-        setUsers((prev) => {
-          const copy = [...prev];
-          const names = copy.map((user) => user.name);
-          const index = names.indexOf(msg.name);
-          if (index !== -1)
-            // if found
-            copy.splice(index, 1);
-          return copy;
+        // Received by all users except user who connected
+        conn.on('NEW_USER', (msg) => {
+          setUsers((prev) => [...prev, msg]);
         });
-      });
+
+        // Received only by one user who requested name change
+        conn.on('CHANGE_NAME', (msg) => {
+          const { name, users } = msg;
+          setUser((prev) => ({ ...prev, name }));
+          setUsers([...users]);
+        });
+
+        // Received by all users except user who requested name change
+        conn.on('USER_NAME_CHANGE', (msg) => {
+          const { users } = msg;
+          setUsers([...users]);
+        });
+
+        // Received only by one user who got correct score
+        conn.on('UPDATE_USER_SCORE', (msg) => {
+          const { score } = msg;
+          setUser((prev) => ({...prev, score})); 
+        });
+        ////////////////////////////////////////
+        // EVENTS RECEIVED BY ALL USERS
+        ////////////////////////////////////////
+
+        // On start game message from the server
+        conn.on('START_GAME', (msg) => {
+          setGameStatus((prev) => ({ ...prev, started: true }));
+        });
+
+        conn.on('CORRECT_GUESS', (msg) => {
+          setGuesses((prev) => [...prev, msg]);
+          setUsers([...msg.users]);
+          setRound((prev) => ({ ...prev, finished: true, winner: msg.name }));
+
+        });
+
+        conn.on('INCORRECT_GUESS', (msg) => {
+          setGuesses((prev) => [...prev, msg]);
+        });
+
+        conn.on('NEXT_ROUND', (msg) => {
+          // Update round state to next round and set the round finished status to false
+          setRound((prev) => {
+            return { ...prev, number: prev.number + 1, finished: false, winner: null };
+          });
+        });
+
+        conn.on('DISCONNECT_USER', (msg) => {
+          console.log(msg);
+          setUsers((prev) => {
+            const copy = [...prev];
+            const names = copy.map((user) => user.name);
+            const index = names.indexOf(msg.name);
+            if (index !== -1)
+              // if found
+              copy.splice(index, 1);
+            return copy;
+          });
+        });
+      }
     }
+    return () => (mounted = false);
   }, [conn]);
 
   ////////////////////////////////////////
@@ -146,9 +138,8 @@ export default function Game({ playlist }) {
     conn.emit(type, payload);
   };
 
-
   ////////////////////////////////////////
-  // NEW ROUND FUNCTION 
+  // NEW ROUND FUNCTION
   ////////////////////////////////////////
   const nextRound = () => {
     // Get the current song name if it exists (new JS syntax)
@@ -160,29 +151,38 @@ export default function Game({ playlist }) {
   };
 
   ////////////////////////////////////////
-  // GET WINNER FUNCTION 
+  // GET WINNER FUNCTION
   ////////////////////////////////////////
   const getWinner = () => {
-    let winner = "";
+    let winner = '';
     let highestScore = 0;
 
     // Assume only 2 players
-    users.forEach(user => {
+    users.forEach((user) => {
       if (user.score > highestScore) {
         winner = user.name;
         highestScore = user.score;
       } else if (user.score === highestScore) {
-        winner = ""; // this means it's a tie or no one scored
+        winner = ''; // this means it's a tie or no one scored
       }
-    })
+    });
     return winner;
-  }
+  };
 
   // find a host
   const host = users.find((user) => user.isHost === true) || {};
 
   // array of only players excluding the host
-  const players = users.slice(1);
+  // Using context to update players, which messageInput component needs host info:
+  const { players, setPlayers } = useContext(DTBContext);
+
+  // FAKE ROOM SETUP: Only two players will show up in the game room,
+  useEffect(() => {
+    const getPlayers = () => {
+      setPlayers(users.slice(1, 3));
+    };
+    getPlayers();
+  }, [setPlayers, users]);
 
   return (
     <div className='game'>
@@ -221,21 +221,6 @@ export default function Game({ playlist }) {
 
       {/* GAME-END RESULT */}
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
-
-      {/* NOTIFICATION FOR ROUND WINNER */}
-      {/* <Snackbar 
-        open={open} 
-        onClose={handleClose} 
-        // message={round.winner + ' got it! 🔥🔥🔥'} 
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        // style={{ height: "100%" }}
-      >
-        <SnackbarContent style={{
-          backgroundColor:'#4caf50',
-        }}
-        message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
-        />
-      </Snackbar> */}
 
     </div>
   );

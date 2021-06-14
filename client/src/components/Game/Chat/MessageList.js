@@ -19,7 +19,7 @@ const MessageList = ({ messages, users }) => {
       height: '90%',
     },
     bingo: {
-      animation: '$bingo 1s ease 0s infinite',
+      animation: '$bingo 1s ease 0s 6',
     },
   }));
 
@@ -43,9 +43,7 @@ const MessageList = ({ messages, users }) => {
               {msg.msg}
             </b>
           ) : (
-            <b style={{ color: msg.msgColor }}>
-              {msg.msg}
-            </b>
+            <b style={{ color: msg.msgColor }}>{msg.msg}</b>
           )}
         </li>
       ))}

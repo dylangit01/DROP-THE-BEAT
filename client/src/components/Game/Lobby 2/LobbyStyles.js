@@ -55,10 +55,10 @@ export default makeStyles((theme) => ({
     paddingLeft: 80,
   },
   players: {
-		marginTop: 50,
-		display:'flex',
-		flexDirection:'column',
-		justifyContent: 'space-around',
+    marginTop: 50,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
     alignItems: 'start',
     marginLeft: 150,
     background: 'rgba(0, 0, 0, 0.5)',
@@ -98,5 +98,4 @@ export default makeStyles((theme) => ({
     display: 'center',
     marginBottom: 100,
   },
-
 }));

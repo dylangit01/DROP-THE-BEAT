@@ -1,16 +1,11 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
-// Hooks
-// import useApplicationData from './hooks/useApplicationData';
 
 // Components
 import Navbar from './components/Navbar/Navbar';
-
 import Home from './components/Home/Home';
 import Playlists from './components/Playlists/Playlists';
-
 import PlaylistPage from './components/PlaylistPage/PlaylistPage';
 // import Join from './components/Join/Join';
 import Game from './components/Game/Game';
@@ -18,19 +13,21 @@ import { useEffect, useContext } from 'react';
 import { DTBContext } from './contextAPI/DTBContext';
 
 function App() {
-  // const { state, dispatch } = useApplicationData();
-  // const history = useHistory();
 
   // USING useEffect & CONTEXT-API TO FETCH PLAYLISTS:
-  const {playlist, playlists, setPlaylists } = useContext(DTBContext);
+  const { playlist, playlists, setPlaylists } = useContext(DTBContext);
   useEffect(() => {
+    let mounted = true;
     const fetchPlayLists = async () => {
       try {
-        const res = await axios({ method: 'GET', url: '/api/playlists' });
-        setPlaylists(res.data);
+        if (mounted) {
+          const res = await axios({ method: 'GET', url: '/api/playlists' });
+          setPlaylists(res.data);
+        }
       } catch (e) {
         console.log(e);
       }
+      return () => (mounted = false);
     };
     fetchPlayLists();
   }, [setPlaylists]);
@@ -63,9 +60,13 @@ function App() {
           </Route> */}
 
           <Route path='/game/:id' exact>
-            {playlist && <Game playlist={playlist} />}
-            {/* {!currentPlaylist && history.push(`/`)} */}
-            {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
+            {playlist ? (
+              <Game playlist={playlist} />
+            ) : (
+              <Redirect to='/'>
+                <Home />
+              </Redirect>
+            )}
           </Route>
 
           <Route path='*'>

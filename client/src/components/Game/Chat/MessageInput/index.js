@@ -34,7 +34,7 @@ const MessageInput = (props) => {
     send: {
       color: 'white',
       '&:hover': {
-        color: 'pink',
+        transform: 'scale(1.2)',
       },
     },
   }));
@@ -59,8 +59,6 @@ const MessageInput = (props) => {
         <Button className={classes.button} type="submit">
           Send!
         </Button>
-
-        {/* Can we please change the send button to this one? */}
         <IconButton type="submit" className={classes.send} aria-label="send">
           <SendIcon />
         </IconButton>

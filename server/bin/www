@@ -35,8 +35,23 @@ const io = socketio(server, {
 
 // Random color:
 const randomColor = () => {
-  const randomColorArr = [];
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  const randomColorArr = [
+    '#e1701a',
+    '#98acf8',
+    '#a6f6f1',
+    '#72147e',
+    '#ffcb74',
+    '#ff8474',
+    '#00ead3',
+    '#77acf1',
+    '#efbbcf',
+    '#f54748',
+    '#7868e6',
+    '#f7fd04',
+    '#ff0004',
+    '#033fff',
+  ];
+  return randomColorArr[Math.floor(Math.random() * randomColorArr.length)];
 };
 
 // Get all users:

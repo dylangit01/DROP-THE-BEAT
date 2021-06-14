@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Join.scss';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Game from '../Game/Game';
 
 export default function Join() {

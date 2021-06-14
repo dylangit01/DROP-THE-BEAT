@@ -11,10 +11,10 @@ const dataReducer = (state, action) => {
     // Set the current playlist id
     case SET_PLAYLIST:
       return { ...state, playlist: action.playlist };
-    
+
     case SET_DIFFICULT:
       return { ...state, difficulty: action.difficulty };
-      
+
     default:
       return state;
   }

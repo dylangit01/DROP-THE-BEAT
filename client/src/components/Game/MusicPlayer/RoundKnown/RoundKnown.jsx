@@ -1,7 +1,6 @@
 import React from 'react';
 import './RoundKnown.scss';
-
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,24 +13,22 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     paddingBottom: theme.spacing(0.5),
-    height: "30%",
+    height: '30%',
     color: 'white',
-    backgroundImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
+    backgroundImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
   },
 }));
 
-
-export default function RoundKnown({song}) {
-
+export default function RoundKnown({ song }) {
   const classes = useStyles();
 
   return (
-    <div className="round-known">
-      <img className={classes.cover} src={song.albumPhoto} alt="cover"></img>
+    <div className='round-known'>
+      <img className={classes.cover} src={song.albumPhoto} alt='cover'></img>
       <div className={classes.overlay}>
-        <Typography variant="h4">{song.title}</Typography>
-        <Typography variant="h6">{song.artist}</Typography>
+        <Typography variant='h4'>{song.title}</Typography>
+        <Typography variant='h6'>{song.artist}</Typography>
       </div>
     </div>
   );
-};
+}
