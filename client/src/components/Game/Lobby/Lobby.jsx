@@ -20,7 +20,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import TimelapseIcon from '@material-ui/icons/Timelapse';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
-import LinkIcon from '@material-ui/icons/Link';
 import PersonIcon from '@material-ui/icons/Person';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
@@ -61,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(6),
     paddingLeft: theme.spacing(1),
     fontSize: theme.spacing(2),
-    width: "70%",
+    width: "55%",
     height: '25px',
     outline: 'none',
     border: 'none',
@@ -71,8 +70,15 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     marginBottom: theme.spacing(3),
   },
+  nameButton: {
+    background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
+    color: "white",
+  },
   listItem: {
     marginLeft: theme.spacing(6),
+  },
+  players: {
+    marginLeft: theme.spacing(5.5),
   },
 }));
 
@@ -148,14 +154,18 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
                     <Avatar className={classes.icon}><GroupAddIcon /></Avatar>
                     <span>Players</span>
                   </Typography>
-                  <Typography variant='subtitle1' className={classes.listItem}>
+                  {/* List of Players */}
+                  <Typography variant='subtitle1' className={classes.players}>
                     <PlayerList {...{ players, user }} />
-
                   </Typography>
+                  {/* Form to Change Name (if you're a player) */}
+                  <form className='change-name-form'>
+                    <input type="text" name="name-input" className={classes.gameLink} placeholder='Type your name here'></input>
+                    <Button variant="contained" className={classes.nameButton}>Change</Button>
+                  </form>
                 </ListItemText>
               </ListItem>
             </List>
-
 
             {/* Start Game Button */}
             <Button variant="contained" className={classes.button}>Start Game</Button>
