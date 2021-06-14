@@ -21,7 +21,10 @@ function App() {
     const fetchPlayLists = async () => {
       try {
         if (mounted) {
-          const res = await axios({ method: 'GET', url: '/api/playlists' });
+          // *** notice the "/" at the end!!!
+          const baseURL = 'https://drop-the-beat-app.herokuapp.com';
+          // const res = await axios({ method: 'GET', url: '/api/playlists' });
+          const res = await axios({ method: 'GET', url: `${baseURL}/api/playlists` });
           setPlaylists(res.data);
         }
       } catch (e) {
