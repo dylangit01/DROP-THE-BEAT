@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     background: 'rgba(255, 255, 255, 0.4)',
   },
-  gameLink: {
+  nameChange: {
     borderRadius: '16px',
     background: 'rgba(255, 255, 255, 0.8)',
     marginLeft: theme.spacing(6),
@@ -84,6 +84,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, host, players }) {
   const classes = useStyles();
+
+  const handleStartGame = (event) => {
+    event.preventDefault();
+    sendMessage('START_GAME', { song: songs[0].title });
+  };
+
+  const handleChangeName = (e) => {
+    e.preventDefault();
+    const newName = e.target.name.value;
+    sendMessage('CHANGE_NAME', newName);
+    e.target.name.value = '';
+  };
 
   return (
     <>
@@ -159,16 +171,19 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
                     <PlayerList {...{ players, user }} />
                   </Typography>
                   {/* Form to Change Name (if you're a player) */}
-                  <form className='change-name-form'>
-                    <input type="text" name="name-input" className={classes.gameLink} placeholder='Type your name here'></input>
-                    <Button variant="contained" className={classes.nameButton}>Change</Button>
-                  </form>
+                  {user.id !== host.id && (
+                    <form className='change-name-form' onSubmit={(event) => handleChangeName(event)}>
+                      <input type="text" name="name" className={classes.nameChange} placeholder='Type your updated name here'></input>
+                      <Button variant="contained" type='submit' className={classes.nameButton}>Change</Button>
+                    </form>
+                  )}
+
                 </ListItemText>
               </ListItem>
             </List>
 
             {/* Start Game Button */}
-            <Button variant="contained" className={classes.button}>Start Game</Button>
+            <Button variant="contained" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>
           </div>
         </div>
       )}
