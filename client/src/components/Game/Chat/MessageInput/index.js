@@ -1,7 +1,9 @@
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import IconButton from '@material-ui/core/IconButton';
+import { DTBContext } from '../../../../contextAPI/DTBContext';
 
 import './index.scss';
 
@@ -40,6 +42,7 @@ const MessageInput = (props) => {
   }));
 
   const classes = useStyles();
+const { players  } = useContext(DTBContext);
 
   // can we disable send option if it's an empty input?
   return (

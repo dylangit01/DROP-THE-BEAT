@@ -111,7 +111,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               </div>
             )}
 
-              {host && user.id === host.id && players.length ===2 && (
+              {host && user.id === host.id && (
             <div>
                 <div className={classes.btnControl}>
                 <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event)}>
