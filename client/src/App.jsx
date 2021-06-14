@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 // Hooks
@@ -63,9 +63,13 @@ function App() {
           </Route>
 
           <Route path='/game/:id' exact>
-            {playlist && <Game playlist={playlist} />}
-            {/* {!currentPlaylist && history.push(`/`)} */}
-            {/* ABOVE DOESN'T WORK?! Want to redirect to home page if there's no playlist selected in the state*/}
+            {playlist ? (
+              <Game playlist={playlist} />
+            ) : (
+              <Redirect to='/'>
+                <Home />
+              </Redirect>
+            )}
           </Route>
 
           <Route path='*'>

@@ -40,12 +40,10 @@ const MessageInput = (props) => {
   }));
 
   const classes = useStyles();
-  const { host, user } = props;
 
   // can we disable send option if it's an empty input?
   return (
     <form onSubmit={onSubmit} noValidate autoComplete='off' className='messageInput'>
-      {host.id !== user.id && (
         <div className='chat-input-box'>
           <input className='chat-input' type='text' name='message' placeholder='Type your guess/message' />
           <Button className={classes.button} type='submit'>
@@ -56,7 +54,6 @@ const MessageInput = (props) => {
             <SendIcon />
           </IconButton>
         </div>
-      )}
     </form>
   );
 };

@@ -29,7 +29,9 @@ export default function Score({ setScore, setWinner, user, players, messages }) 
               {players[0].score}
             </p>
           </div>
-          <p className={classes.player}>{players[0].name}</p>
+          <p className={classes.player} style={{ color: players[0].color }}>
+            {players[0].name}
+          </p>
         </div>
       )}
 
@@ -42,7 +44,9 @@ export default function Score({ setScore, setWinner, user, players, messages }) 
             </p>
             <MusicNoteIcon className={classes.mIcon} style={{ color: players[1].color, width: '30px' }}></MusicNoteIcon>
           </div>
-          <p className={classes.player}>{players[1].name}</p>
+          <p className={classes.player} style={{ color: players[1].color }}>
+            {players[1].name}
+          </p>
         </div>
       )}
 
