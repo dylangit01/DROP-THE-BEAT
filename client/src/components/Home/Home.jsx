@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
     color: "white",
     width: 240,
-    opacity: "0.7"
   },
 }));
 
