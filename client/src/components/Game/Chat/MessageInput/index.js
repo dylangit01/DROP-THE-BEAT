@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import IconButton from '@material-ui/core/IconButton';
-import { DTBContext } from '../../../../contextAPI/DTBContext';
 
 import './index.scss';
 
@@ -37,32 +35,28 @@ const MessageInput = (props) => {
       color: 'white',
       '&:hover': {
         transform: 'scale(1.2)',
-      }
+      },
     },
   }));
 
   const classes = useStyles();
-const { players  } = useContext(DTBContext);
+  const { host, user } = props;
 
   // can we disable send option if it's an empty input?
   return (
-    <form onSubmit={onSubmit} noValidate autoComplete="off" className="messageInput" >
-      <div className="chat-input-box">
-        <input
-          className="chat-input"
-          type="text"
-          name="message"
-          placeholder="Type your guess/message"
-        />
-        <Button className={classes.button} type="submit">
-          Send!
-        </Button>
-
-        {/* Can we please change the send button to this one? */}
-        <IconButton type='submit' className={classes.send} aria-label="send">
-          <SendIcon />
-        </IconButton>
-      </div>
+    <form onSubmit={onSubmit} noValidate autoComplete='off' className='messageInput'>
+      {host.id !== user.id && (
+        <div className='chat-input-box'>
+          <input className='chat-input' type='text' name='message' placeholder='Type your guess/message' />
+          <Button className={classes.button} type='submit'>
+            Send!
+          </Button>
+          {/* Can we please change the send button to this one? */}
+          <IconButton type='submit' className={classes.send} aria-label='send'>
+            <SendIcon />
+          </IconButton>
+        </div>
+      )}
     </form>
   );
 };
