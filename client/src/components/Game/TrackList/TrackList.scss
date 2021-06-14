@@ -53,7 +53,7 @@
     }
     width: 6vw;
     height: auto;
-    opacity: 60%;
+    opacity: 0.6;
   }
 
   &--next {
@@ -62,14 +62,14 @@
     justify-content: center;
     align-items: center;
     background-color: #101010;
-    opacity: 60%;
+    opacity: 0.6;
 
     img {
       opacity: 0;
     }
 
     .question-mark {
-      opacity: 100;
+      opacity: 1;
     }
   }
 }
