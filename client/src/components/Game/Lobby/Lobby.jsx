@@ -1,126 +1,148 @@
 import React from 'react';
-// import Ruby from '../../../assets/Ruby_logo.png'
-import UserList from '../Chat/UserList';
 
 // Styling
-import {
-  Typography,
-  CardMedia,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Container,
-  Button,
-} from '@material-ui/core';
-import useStyles from './LobbyStyles';
-import { withStyles } from '@material-ui/core/styles';
 import './Lobby.scss';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
 
-const StyledLobbyBtnOne = withStyles({
+// Icons
+import IconButton from '@material-ui/core/IconButton';
+import TimelapseIcon from '@material-ui/icons/Timelapse';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import LinkIcon from '@material-ui/icons/Link';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const WhiteRadio = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
-    borderRadius: 5,
-    border: 0,
     color: 'white',
-    height: 30,
-    padding: '0 30px',
-    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    marginLeft: 320,
+    '&$checked': {
+      color: 'MediumPurple',
+    },
   },
-})(Button);
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
-const StyledCodeBtnTwo = withStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    background: 'linear-gradient(45deg, #867ae9 30%, #2162f3 90%)',
-    borderRadius: 5,
-    border: 0,
+    width: '100%',
     color: 'white',
-    height: 58,
-    padding: '0 30px',
-    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    marginLeft: 70,
+    background: 'transparent',
   },
-})(Button);
+  icon: {
+    background: 'linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)',
+    marginRight: theme.spacing(1),
+    // background: 'transparent',
+  },
+  mainHeading: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  difficulty: {
+    marginLeft: theme.spacing(6),
+  },
+  divider: {
+    background: 'rgba(255, 255, 255, 0.4)',
+  },
+  gameLink: {
+    borderRadius: '16px',
+    background: 'rgba(255, 255, 255, 0.8)',
+    marginLeft: theme.spacing(6),
+    paddingLeft: theme.spacing(1),
+    fontSize: theme.spacing(2),
+    width: "70%",
+    height: '25px',
+    outline: 'none',
+    border: 'none',
+  },
+  button: {
+    background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",
+    color: "white",
+    marginBottom: theme.spacing(3),
+  },
+  listItem: {
+    marginLeft: theme.spacing(6),
+  },
+}));
 
-export default function Lobby({ playlist, dispatch, sendMessage, songs, numberOfSongs, user, users, host, players }) {
+export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, host, players }) {
   const classes = useStyles();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // console.log("'START_GAME' and list of songs are sent to backend");
-    sendMessage('START_GAME', { song: songs[0].title });
-  };
-
-  const changeName = (e) => {
-    e.preventDefault();
-    const newName = e.target.name.value;
-    sendMessage('CHANGE_NAME', newName);
-    e.target.name.value = '';
-  };
 
   return (
     <>
-      <Container className={classes.root}>
-        <div className={classes.img_playOption}>
-          <div>
-            <Typography className={classes.title} variant='h4'>
-              {playlist.playlistName} Playlist
-            </Typography>
-            <CardMedia className={classes.cover} image={playlist.playlistPhoto} title={playlist.playlistName} />
+      {playlist && (
+        <div className='lobby'>
+          {/* PLAYLIST DETAILS LEFT SIDE */}
+          <div className='lobby-left'>
+            <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
+            <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
           </div>
 
-          <div>
-            <div className={classes.options}>
-              <Typography variant='h6'>Difficulty</Typography>
-              <div>
-                <FormControl component='fieldset'>
-                  <RadioGroup aria-label='difficulty' name='difficulty' value={'easy'}>
-                    <FormControlLabel value='easy' control={<Radio />} label='Easy (30 sec)' />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-            </div>
+          {/* PLAYLIST DETAILS RIGHT SIDE */}
+          <div className='lobby-right'>
+            <List className={classes.root}>
+              {/* Difficulty */}
+              <ListItem >
+                <ListItemText>
+                  <Typography variant='h5' className={classes.mainHeading}>
+                    <Avatar className={classes.icon}><TimelapseIcon /></Avatar>
+                    <span>Difficulty</span>
+                  </Typography>
+                  <FormControl component='fieldset' className={classes.difficulty}>
+                    <RadioGroup
+                      aria-label='difficulty'
+                      name='difficulty'
+                      value={'easy'}
+                    >
+                      <FormControlLabel value='easy' control={<WhiteRadio checked />} label='Easy (30 seconds)' />
+                    </RadioGroup>
+                  </FormControl>
+                </ListItemText>
+              </ListItem>
+              <Divider variant="middle" component="li" className={classes.divider} />
 
-            <div className={classes.songs}>
-              <Typography variant='h6'>Number of Songs: {numberOfSongs}</Typography>
-            </div>
+              {/* Songs */}
+              <ListItem >
+                <ListItemText>
+                  <div className="songs-section">
+                    <Typography variant='h5' className={classes.mainHeading}>
+                      <Avatar className={classes.icon}><QueueMusicIcon /></Avatar>
+                      <span>Songs</span>
+                    </Typography>
+                    <Typography variant='subtitle1' className={classes.listItem}>Number of Songs: {numberOfSongs}</Typography>
+                  </div>
+                </ListItemText>
+              </ListItem>
+              <Divider variant="middle" component="li" className={classes.divider} />
+              
+              {/* Game Code */}
+              <ListItem >
+                <ListItemText>
+                  <Typography variant='h5' className={classes.mainHeading}>
+                    <Avatar className={classes.icon}><LinkIcon /></Avatar>
+                    <span>Host</span>
+                  </Typography>
+                  <div className='host'>
+                  </div>
+                </ListItemText>
+              </ListItem>
+            </List>
 
-            {host && (
-              <>
-                <div className={classes.songs}>
-                  <Typography variant='h6'>Host: {host.name}</Typography>
-                </div>
-                <div className={classes.players}>
-                  <Typography variant='h6'>Players:</Typography>
-                  <UserList {...{ players, user }} />
-                </div>
-              </>
-            )}
-
-            {user.id !== host.id && (
-              <div className={classes.changeName}>
-                <Typography variant='h6'>Change your name:</Typography>
-
-                <form className='change-name-form' onSubmit={(e) => changeName(e)}>
-                  <input className='name-input' type='text' name='name' placeholder='Type your name here'></input>
-                  <StyledLobbyBtnOne type='submit' className='change-btn' onSubmit={(event) => changeName(event)}>
-                    Change
-                  </StyledLobbyBtnOne>
-                </form>
-              </div>
-            )}
-
-            <div>
-              <div className={classes.btnControl}>
-                <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event)}>
-                  Start game
-                </StyledCodeBtnTwo>
-              </div>
-            </div>
+            {/* Start Game Button */}
+            <Button variant="contained" className={classes.button}>Start Game</Button>
           </div>
         </div>
-      </Container>
+      )}
     </>
-  );
+  )
 }

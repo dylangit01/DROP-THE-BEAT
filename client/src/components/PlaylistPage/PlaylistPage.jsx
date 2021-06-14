@@ -145,7 +145,7 @@ export default function PlaylistPage({ dispatch, gameLink }) {
                       value={difficulty}
                       onChange={handleDifficulty}
                     >
-                      <FormControlLabel value='easy' control={<WhiteRadio selected />} label='Easy (30 seconds)' />
+                      <FormControlLabel value='easy' control={<WhiteRadio />} label='Easy (30 seconds)' />
                       <FormControlLabel value='medium' control={<WhiteRadio />} label='Medium (20 seconds)' />
                       <FormControlLabel value='difficult' control={<WhiteRadio />} label='Difficult (10 seconds)' />
                     </RadioGroup>
@@ -207,8 +207,8 @@ export default function PlaylistPage({ dispatch, gameLink }) {
               </ListItem>
             </List>
 
-            {/* Start Game Button */}
-            <Button variant="contained" className={classes.button} onClick={handlePlaylistClick}>Start Game</Button>
+            {/* Start Game Lobby Button */}
+            <Button variant="contained" className={classes.button} onClick={handlePlaylistClick}>Start Lobby</Button>
           </div>
         </div>
       )}

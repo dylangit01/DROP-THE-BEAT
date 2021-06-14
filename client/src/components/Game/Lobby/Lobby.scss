@@ -1,20 +1,40 @@
-.change-name-form {
+.lobby {
   display: flex;
-  flex-direction: row;
-  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;
 
-  .name-input {
-      display: flex;
-      border: none;
-      color: #fff;
-      background-color: transparent;
-      &:focus {
-        outline: none;
-      }
+  .lobby-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 5%;
+    width: 25vw;
+
+    img {
+      width: inherit;
+      border-radius: 16px;
+    }
   }
 
-  .change-btn {
-    position: absolute;
+  .lobby-right {
+    margin-left: 5%;
+    width: 30vw;
+    // min-height: 60vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
 
+    // .songs-section {
+    //   display: flex;
+    //   justify-content: space-between;
+    // }
+
+    // .game-code-section {
+    //   display: flex;
+    //   justify-content: space-between;
+    //   align-items: center;
+    // }
   }
 }
