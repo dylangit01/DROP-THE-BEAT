@@ -24,13 +24,17 @@ function App() {
   // USING useEffect & CONTEXT-API TO FETCH PLAYLISTS:
   const {playlist, playlists, setPlaylists } = useContext(DTBContext);
   useEffect(() => {
+    let mounted = true;
     const fetchPlayLists = async () => {
       try {
-        const res = await axios({ method: 'GET', url: '/api/playlists' });
-        setPlaylists(res.data);
+        if (mounted) {
+          const res = await axios({ method: 'GET', url: '/api/playlists' });
+          setPlaylists(res.data);
+        } 
       } catch (e) {
         console.log(e);
       }
+      return () => mounted = false;
     };
     fetchPlayLists();
   }, [setPlaylists]);

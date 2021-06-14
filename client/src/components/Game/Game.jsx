@@ -50,8 +50,12 @@ export default function Game({ playlist }) {
   // ON INITIAL SOCKET CONNECTION
   ////////////////////////////////////////
   useEffect(() => {
-    const connection = io('http://localhost:3001');
+    let mounted = true;
+    if (mounted) {
+      const connection = io('http://localhost:3001');
     setConn(connection);
+    }
+    return ()=> mounted = false
   }, []);
 
   ////////////////////////////////////////
@@ -59,81 +63,87 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////
   useEffect(() => {
     // BACK FROM SERVER (conn.on = waiting for msg)
-    if (conn) {
-      // Received only by one user on connecting to socket
-      conn.on('INITIAL_CONNECTION', (msg) => {
-        const { id, name, color, score, users, isHost } = msg;
-        setUser({ id, name, color, score, isHost });
-        setUsers([...users]);
-      });
-
-      // Received by all users except user who connected
-      conn.on('NEW_USER', (msg) => {
-        setUsers((prev) => [...prev, msg]);
-      });
-
-      // Received only by one user who requested name change
-      conn.on('CHANGE_NAME', (msg) => {
-        const { name, users } = msg;
-        setUser((prev) => ({ ...prev, name }));
-        setUsers([...users]);
-      });
-
-      // Received by all users except user who requested name change
-      conn.on('USER_NAME_CHANGE', (msg) => {
-        const { users } = msg;
-        setUsers([...users]);
-      });
-
-      ////////////////////////////////////////
-      // EVENTS RECEIVED BY ALL USERS
-      ////////////////////////////////////////
-
-      // On start game message from the server
-      conn.on('START_GAME', (msg) => {
-        setGameStatus((prev) => ({ ...prev, started: true }));
-      });
-
-      conn.on('CORRECT_GUESS', (msg) => {
-        setGuesses((prev) => [...prev, msg]);
-        setUser((prev) => ({ ...prev, score: msg.score })); // THERE'S A BUG HERE AGAIN -> this updates score for all users
-        setUsers([...msg.users]);
-        setRound((prev) => ({ ...prev, finished: true, winner: msg.name }));
-        setOpen(true);
-        // ADD SNACKBAR NOTIFICATION
-        // Okay to do multiple setState calls as long as they don't affect each other
-        conn.on('find the correct answer');
-      });
-
-      conn.on('INCORRECT_GUESS', (msg) => {
-        setGuesses((prev) => [...prev, msg]);
-      });
-
-      conn.on('NEXT_ROUND', (msg) => {
-        // Update round state to next round and set the round finished status to false
-        setOpen(false);
-        setRound((prev) => {
-          return { ...prev, number: prev.number + 1, finished: false, winner: null };
+    let mounted = true;
+    if (mounted) {
+      
+   
+      if (conn) {
+        // Received only by one user on connecting to socket
+        conn.on('INITIAL_CONNECTION', (msg) => {
+          const { id, name, color, score, users, isHost } = msg;
+          setUser({ id, name, color, score, isHost });
+          setUsers([...users]);
         });
-      });
 
-      // conn.on('END_GAME', (msg) => {
-
-      // });
-
-      conn.on('DISCONNECT_USER', (msg) => {
-        console.log(msg);
-        setUsers((prev) => {
-          const copy = [...prev];
-          const names = copy.map((user) => user.name);
-          const index = names.indexOf(msg.name);
-          if (index !== -1)
-            // if found
-            copy.splice(index, 1);
-          return copy;
+        // Received by all users except user who connected
+        conn.on('NEW_USER', (msg) => {
+          setUsers((prev) => [...prev, msg]);
         });
-      });
+
+        // Received only by one user who requested name change
+        conn.on('CHANGE_NAME', (msg) => {
+          const { name, users } = msg;
+          setUser((prev) => ({ ...prev, name }));
+          setUsers([...users]);
+        });
+
+        // Received by all users except user who requested name change
+        conn.on('USER_NAME_CHANGE', (msg) => {
+          const { users } = msg;
+          setUsers([...users]);
+        });
+
+        ////////////////////////////////////////
+        // EVENTS RECEIVED BY ALL USERS
+        ////////////////////////////////////////
+
+        // On start game message from the server
+        conn.on('START_GAME', (msg) => {
+          setGameStatus((prev) => ({ ...prev, started: true }));
+        });
+
+        conn.on('CORRECT_GUESS', (msg) => {
+          setGuesses((prev) => [...prev, msg]);
+          setUser((prev) => ({ ...prev, score: msg.score })); // THERE'S A BUG HERE AGAIN -> this updates score for all users
+          setUsers([...msg.users]);
+          setRound((prev) => ({ ...prev, finished: true, winner: msg.name }));
+          setOpen(true);
+          // ADD SNACKBAR NOTIFICATION
+          // Okay to do multiple setState calls as long as they don't affect each other
+          conn.on('find the correct answer');
+        });
+
+        conn.on('INCORRECT_GUESS', (msg) => {
+          setGuesses((prev) => [...prev, msg]);
+        });
+
+        conn.on('NEXT_ROUND', (msg) => {
+          // Update round state to next round and set the round finished status to false
+          setOpen(false);
+          setRound((prev) => {
+            return { ...prev, number: prev.number + 1, finished: false, winner: null };
+          });
+        });
+
+        // conn.on('END_GAME', (msg) => {
+
+        // });
+
+        conn.on('DISCONNECT_USER', (msg) => {
+          console.log(msg);
+          setUsers((prev) => {
+            const copy = [...prev];
+            const names = copy.map((user) => user.name);
+            const index = names.indexOf(msg.name);
+            if (index !== -1)
+              // if found
+              copy.splice(index, 1);
+            return copy;
+          });
+        });
+      }
     }
+    return () => mounted = false;
   }, [conn]);
 
   ////////////////////////////////////////
