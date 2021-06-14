@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useRouteMatch } from "react-router-dom";
 
 // Styling
@@ -8,8 +8,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import RatingStars from './RatingStars/RatingStars';
+import StarIcon from '@material-ui/icons/Star';
 // import Rating from '@material-ui/core/Rating'; // HAVE TO INSTALL SOMETHING ELSE FOR RATING - leave as stretch
 // import Box from '@material-ui/core/Box';
+import { DTBContext } from '../../../contextAPI/DTBContext';
 
 const useStyles = makeStyles((theme) => ({
   cover: {
@@ -45,29 +48,29 @@ export default function Playlist({id, name, image, rating}) {
   const { path } = useRouteMatch();
 
   const classes = useStyles();
+
+  const { playlists } = useContext(DTBContext);
   
   return (
-    <div className="playlist">
+    <div className='playlist'>
       <Link to={`${path}/${id}`}>
         <CardActionArea>
-          <CardMedia
-            className={classes.cover}
-            image={image}
-            title={name}
-          />
+          <CardMedia className={classes.cover} image={image} title={name} />
           <div className={classes.overlay}>
-            <Typography variant="subtitle1" className={classes.playlistName}>{name}</Typography>
+            <Typography variant='subtitle1' className={classes.playlistName}>
+              {name}
+            </Typography>
           </div>
-          
         </CardActionArea>
       </Link>
-      <div className="playlist-footer">
+      <div className='playlist-footer'>
         {/* <Button className={classes.button}>
           <Link to={`${path}/${id}`}>Select</Link>
         </Button> */}
         {/* <Box component="fieldset" mb={3} borderColor="transparent">
           <Rating name="read-only" value={rating} readOnly />
         </Box> */}
+        <RatingStars rating={rating} />
       </div>
     </div>
   );
