@@ -55,9 +55,9 @@ function App() {
             <PlaylistPage playlists={playlists} />
           </Route>
 
-          <Route path='/join' exact>
+          {/* <Route path='/join' exact>
             <Join />
-          </Route>
+          </Route> */}
 
           <Route path='/game/:id' exact>
             {playlist ? (

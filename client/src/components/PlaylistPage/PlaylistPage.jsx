@@ -55,7 +55,7 @@ const StyledCodeBtnTwo = withStyles({
 
 // Need a handleClick function that will store the current playlist ID in the state
 
-export default function PlaylistPage({ gameLink }) {
+export default function PlaylistPage() {
   const classes = useStyles();
   const history = useHistory();
 
@@ -89,7 +89,7 @@ export default function PlaylistPage({ gameLink }) {
   };
 
   const handlePlaylistClick = (event) => {
-    history.push('/game/12345');
+    history.push('/game/epicbattle')
   };
 
   return (
@@ -115,9 +115,9 @@ export default function PlaylistPage({ gameLink }) {
                       value={difficulty}
                       onChange={handleDifficulty}
                     >
-                      <FormControlLabel value='easy' control={<Radio selected />} label='Easy (10 sec)' />
+                      <FormControlLabel value='easy' control={<Radio selected />} label='Easy (30 sec)' />
                       <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
-                      <FormControlLabel value='difficult' control={<Radio />} label='Difficult (30 sec)' />
+                      <FormControlLabel value='difficult' control={<Radio />} label='Difficult (10 sec)' />
                     </RadioGroup>
                   </FormControl>
                 </div>
@@ -155,7 +155,7 @@ export default function PlaylistPage({ gameLink }) {
               </div>
 
               <div className={classes.songs}>
-                <Typography variant='h6'>{gameLink}12345</Typography>
+                <Typography variant='h6'>https://dropthebeat/game/epicbattle</Typography>
                 <div>
                   <StyledLobbyBtnOne>COPY CODE</StyledLobbyBtnOne>
                 </div>

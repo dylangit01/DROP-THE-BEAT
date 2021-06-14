@@ -20,10 +20,8 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
   const classes = useStyles();
 
   return (
-    <div className='music-player'>
-      <Typography variant='h3' className={classes.title}>
-        {playlist.playlistName} Playlist
-      </Typography>
+    <div className="music-player">
+      <Typography variant="h4" className={classes.title}>{playlist.playlistName} Playlist</Typography>
 
       {/* Conditional rendering (displays one of these 3) depending on if a round has started */}
 

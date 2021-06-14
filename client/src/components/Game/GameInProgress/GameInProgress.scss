@@ -18,6 +18,20 @@
   }
 
   .left-side {
-    justify-content: column;
+    display: flex;
+    width: 38vw;
+    flex-direction: column;
+    justify-content: center;
+
+    .countdown {
+      align-self: center;
+      font-size: 10rem;
+      text-shadow: 2px 2px 5px white;
+    }
+
+    // .music-player {
+    //   //padding-bottom: 3vh;
+    // }
+
   }
 }

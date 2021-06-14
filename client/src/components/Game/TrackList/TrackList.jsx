@@ -48,7 +48,8 @@ export default function TrackList({ round, songs }) {
 
         {isCurrent() !== 'tracklist-album-cover--prev' && <img src={song.albumPhoto} alt='cover'></img>}
 
-        <HelpOutlineOutlinedIcon className='question-mark' />
+        <span className="question-mark">?</span>
+
       </div>
     );
   });

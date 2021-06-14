@@ -75,8 +75,8 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               <Typography variant='h6'>Difficulty</Typography>
               <div>
                 <FormControl component='fieldset'>
-                  <RadioGroup aria-label='difficulty' name='difficulty' value={'medium'}>
-                    <FormControlLabel value='medium' control={<Radio />} label='Medium (20 sec)' />
+                  <RadioGroup aria-label='difficulty' name='difficulty' value={'easy'}>
+                    <FormControlLabel value='easy' control={<Radio />} label='Easy (30 sec)' />
                   </RadioGroup>
                 </FormControl>
               </div>
