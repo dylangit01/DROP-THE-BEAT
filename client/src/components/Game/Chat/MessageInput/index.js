@@ -44,16 +44,16 @@ const MessageInput = (props) => {
   // can we disable send option if it's an empty input?
   return (
     <form onSubmit={onSubmit} noValidate autoComplete='off' className='messageInput'>
-        <div className='chat-input-box'>
-          <input className='chat-input' type='text' name='message' placeholder='Type your guess/message' />
-          <Button className={classes.button} type='submit'>
-            Send!
-          </Button>
-          {/* Can we please change the send button to this one? */}
-          <IconButton type='submit' className={classes.send} aria-label='send'>
-            <SendIcon />
-          </IconButton>
-        </div>
+      <div className='chat-input-box'>
+        <input className='chat-input' type='text' name='message' placeholder='Type your guess/message' />
+        <Button className={classes.button} type='submit'>
+          Send!
+        </Button>
+        {/* Can we please change the send button to this one? */}
+        <IconButton type='submit' className={classes.send} aria-label='send'>
+          <SendIcon />
+        </IconButton>
+      </div>
     </form>
   );
 };

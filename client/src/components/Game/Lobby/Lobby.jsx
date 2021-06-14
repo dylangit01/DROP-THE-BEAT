@@ -111,15 +111,15 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
               </div>
             )}
 
-              {/* {host && user.id === host.id && ( */}
+            {/* {host && user.id === host.id && ( */}
             <div>
-                <div className={classes.btnControl}>
+              <div className={classes.btnControl}>
                 <StyledCodeBtnTwo type='submit' onClick={(event) => handleSubmit(event)}>
                   Start game
                 </StyledCodeBtnTwo>
               </div>
             </div>
-              {/* )} */}
+            {/* )} */}
           </div>
         </div>
       </Container>

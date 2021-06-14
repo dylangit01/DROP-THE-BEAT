@@ -53,9 +53,9 @@ export default function Game({ playlist }) {
     let mounted = true;
     if (mounted) {
       const connection = io('http://localhost:3001');
-    setConn(connection);
+      setConn(connection);
     }
-    return ()=> mounted = false
+    return () => (mounted = false);
   }, []);
 
   ////////////////////////////////////////
@@ -65,8 +65,6 @@ export default function Game({ playlist }) {
     // BACK FROM SERVER (conn.on = waiting for msg)
     let mounted = true;
     if (mounted) {
-      
-   
       if (conn) {
         // Received only by one user on connecting to socket
         conn.on('INITIAL_CONNECTION', (msg) => {
@@ -143,7 +141,7 @@ export default function Game({ playlist }) {
         });
       }
     }
-    return () => mounted = false;
+    return () => (mounted = false);
   }, [conn]);
 
   ////////////////////////////////////////

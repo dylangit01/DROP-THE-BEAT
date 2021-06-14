@@ -43,9 +43,7 @@ const MessageList = ({ messages, users }) => {
               {msg.msg}
             </b>
           ) : (
-            <b style={{ color: msg.msgColor }}>
-              {msg.msg}
-            </b>
+            <b style={{ color: msg.msgColor }}>{msg.msg}</b>
           )}
         </li>
       ))}

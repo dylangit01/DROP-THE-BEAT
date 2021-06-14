@@ -3,7 +3,6 @@ import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import { makeStyles } from '@material-ui/styles';
 
 export default function Score({ setScore, setWinner, user, players, messages }) {
-
   const useStyles = makeStyles((theme) => ({
     player: {
       fontSize: '15px',

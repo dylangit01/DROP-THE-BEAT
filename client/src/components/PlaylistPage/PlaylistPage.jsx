@@ -89,7 +89,7 @@ export default function PlaylistPage({ gameLink }) {
   };
 
   const handlePlaylistClick = (event) => {
-    history.push('/game/12345')
+    history.push('/game/12345');
   };
 
   return (

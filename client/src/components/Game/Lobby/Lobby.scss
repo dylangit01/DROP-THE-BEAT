@@ -4,17 +4,16 @@
   position: relative;
 
   .name-input {
-      display: flex;
-      border: none;
-      color: #fff;
-      background-color: transparent;
-      &:focus {
-        outline: none;
-      }
+    display: flex;
+    border: none;
+    color: #fff;
+    background-color: transparent;
+    &:focus {
+      outline: none;
+    }
   }
 
   .change-btn {
     position: absolute;
-
   }
 }
