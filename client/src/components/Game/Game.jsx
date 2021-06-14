@@ -8,8 +8,8 @@ import Lobby from './Lobby/Lobby';
 import GameInProgress from './GameInProgress/GameInProgress';
 import Result from './Result/Result';
 
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from "@material-ui/core/SnackbarContent";
+// import Snackbar from '@material-ui/core/Snackbar';
+// import SnackbarContent from "@material-ui/core/SnackbarContent";
 
 export default function Game({ playlist }) {
   const [conn, setConn] = useState(undefined);
@@ -22,11 +22,11 @@ export default function Game({ playlist }) {
   ////////////////////////////////////////////////////
   // FOR SNACKBAR THAT DISPLAYS ROUND WINNER
   ////////////////////////////////////////////////////
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   // Keep track of the number of rounds for a game based on the number of songs in the selected playlist
   const songs = playlist.songs;
@@ -105,8 +105,7 @@ export default function Game({ playlist }) {
         // setUser(prev => ({ ...prev, score: msg.score })) // THERE'S A BUG HERE AGAIN -> this updates score for all users
         setUsers([...msg.users]);
         setRound(prev => ({...prev, finished: true, winner: msg.name}));
-        setOpen(true);
-        // Okay to do multiple setState calls as long as they don't affect each other
+        // setOpen(true);
       })
 
       conn.on('INCORRECT_GUESS', (msg) => {
@@ -115,7 +114,7 @@ export default function Game({ playlist }) {
 
       conn.on('NEXT_ROUND', (msg) => {
         // Update round state to next round and set the round finished status to false
-        setOpen(false);
+        // setOpen(false);
         setRound(prev => {
           return {...prev, number: prev.number + 1, finished: false, winner: null};
         });
@@ -224,7 +223,7 @@ export default function Game({ playlist }) {
       {gameStatus.finished && <Result winner={gameStatus.winner} playlistName={playlist.playlistName} />}
 
       {/* NOTIFICATION FOR ROUND WINNER */}
-      <Snackbar 
+      {/* <Snackbar 
         open={open} 
         onClose={handleClose} 
         // message={round.winner + ' got it! 🔥🔥🔥'} 
@@ -236,7 +235,7 @@ export default function Game({ playlist }) {
         }}
         message={<span>{round.winner + ' got it! 🔥🔥🔥'}</span>}
         />
-      </Snackbar>
+      </Snackbar> */}
 
     </div>
   );
