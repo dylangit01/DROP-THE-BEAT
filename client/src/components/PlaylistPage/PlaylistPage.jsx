@@ -137,7 +137,7 @@ export default function PlaylistPage() {
       {playlist && (
         <div className='playlist-page'>
           {/* <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography> */}
-            <Typography variant='h4' className="playlist-name">{playlist.playlistName} Playlist</Typography>
+            <Typography variant='h4' className="playlist-name">{playlist.playlistName.toUpperCase()} PLAYLIST</Typography>
           <div className ='playlist-page-container'>
 
 
