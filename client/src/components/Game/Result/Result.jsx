@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import './Result.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative'
   },
 }));
 
@@ -59,6 +60,9 @@ export default function Result({ score, winner }) {
             </label>
           );
         })}
+        <Link to='/'>
+          <i class='fas fa-undo-alt fa-2x' ></i>
+        </Link>
       </div>
     </div>
   );

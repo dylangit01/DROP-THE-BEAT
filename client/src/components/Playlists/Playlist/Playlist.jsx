@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useRouteMatch } from "react-router-dom";
 
 // Styling
@@ -7,12 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import RatingStars from './RatingStars/RatingStars';
-import StarIcon from '@material-ui/icons/Star';
 // import Rating from '@material-ui/core/Rating'; // HAVE TO INSTALL SOMETHING ELSE FOR RATING - leave as stretch
 // import Box from '@material-ui/core/Box';
-import { DTBContext } from '../../../contextAPI/DTBContext';
 
 const useStyles = makeStyles((theme) => ({
   cover: {
@@ -48,8 +45,6 @@ export default function Playlist({id, name, image, rating}) {
   const { path } = useRouteMatch();
 
   const classes = useStyles();
-
-  const { playlists } = useContext(DTBContext);
   
   return (
     <div className='playlist'>
