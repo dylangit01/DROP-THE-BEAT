@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './Result.scss';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,15 +16,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  stars: {
-    cursor: 'pointer',
-    transition: 'color 200ms',
-  },
-
 }));
 
 export default function Result({ score, winner }) {
   const classes = useStyles();
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
 
   return (
     <div className='result'>
@@ -47,15 +44,22 @@ export default function Result({ score, winner }) {
         alt='trophy'
       />
       <p className={classes.rating}>RATING</p>
-      <div className={classes.stars}>
-        {[...Array(5)].map((star) => (
-        <label>
-          <input type='radio' name='rating' id='' />
-          <i className='fas fa-star' style={{cursor: 'pointer', transition: 'color 200ms', margin: '0 3px'}}></i>
-        </label>
-      ))}
+      <div>
+        {[...Array(5)].map((star, i) => {
+          const ratingValue = i + 1;
+          return (
+            <label key={i}>
+              <input type='radio' name='rating' value={ratingValue} onClick={() => setRating(ratingValue)} />
+              <i
+                className='fas fa-star fa-lg'
+                style={{ color: ratingValue <= (hover || rating) ? '#FFE227' : '#E4E5E9' }}
+                onMouseEnter={() => setHover(ratingValue)}
+                onMouseLeave={() => setHover(null)}
+              ></i>
+            </label>
+          );
+        })}
       </div>
-      
     </div>
   );
 }

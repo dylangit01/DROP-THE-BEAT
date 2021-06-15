@@ -15,4 +15,10 @@
   input[type='radio']{
     display: none;
   }
+
+  .fas.fa-star {
+    cursor: pointer;
+    transition: color 200ms;
+    margin: 0 3px,
+  }
 }

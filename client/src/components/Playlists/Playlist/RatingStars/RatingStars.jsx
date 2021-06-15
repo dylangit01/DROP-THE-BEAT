@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
-import { DTBContext } from '../../../../contextAPI/DTBContext';
-import StarIcon from '@material-ui/icons/Star';
+import React from 'react';
 
 const RatingStars = ({ rating }) => {
   const stars = [];
