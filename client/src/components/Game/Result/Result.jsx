@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
   winner: {
     color: 'gold',
   },
+  rating: {
+    fontWeight: 800,
+    fontSize: '20px',
+  }
 }));
 
 export default function Result({ score, winner }) {
@@ -39,6 +43,7 @@ export default function Result({ score, winner }) {
         src='https://github.com/dylangit01/DROP-THE-BEAT/blob/ruby/feature/winner-page/client/public/images/trophy.png?raw=true'
         alt='trophy'
       />
+      <p className={classes.rating}>RATING</p>
     </div>
   );
 }

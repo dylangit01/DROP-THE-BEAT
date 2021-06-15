@@ -20,7 +20,7 @@ const RatingStars = ({ rating }) => {
       );
     } else {
       stars.push(
-        <i key={i} className='far fa-star'>
+        <i key={i} className='far fa-star' style={{ color: '#FFE227' }}>
           &nbsp;
         </i>
       );
