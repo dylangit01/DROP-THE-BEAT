@@ -160,7 +160,7 @@ export default function Game({ playlist }) {
     let highestScore = 0;
 
     // Assume only 2 players
-    users.forEach((user) => {
+    players.forEach((user) => {
       if (user.score > highestScore) {
         winner = user.name;
         highestScore = user.score;
