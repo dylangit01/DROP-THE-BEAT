@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     height: 200,
     width: 200,
-    borderRadius: '12px'
+    borderRadius: '12px',
+    //boxShadow: "0px 0px 15px #0a0a0a"
   },
   button: {
     background: "linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)",

@@ -22,7 +22,7 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
 
   return (
     <div className="music-player">
-      <Typography variant="h4" className={classes.title}>{playlist.playlistName} Playlist</Typography>
+      <Typography variant="h4" className={classes.title}>{playlist.playlistName.toUpperCase()} PLAYLIST</Typography>
 
       {/* Conditional rendering (displays one of these 2) depending on if a round has started */}
 
