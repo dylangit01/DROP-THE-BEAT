@@ -11,4 +11,8 @@
     // opacity: 0.8;
     animation: 1.5s ease 0s infinite beat;
   }
+
+  input[type='radio']{
+    display: none;
+  }
 }

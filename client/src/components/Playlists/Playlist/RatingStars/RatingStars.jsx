@@ -3,7 +3,6 @@ import { DTBContext } from '../../../../contextAPI/DTBContext';
 import StarIcon from '@material-ui/icons/Star';
 
 const RatingStars = ({ rating }) => {
-  console.log(rating);
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {

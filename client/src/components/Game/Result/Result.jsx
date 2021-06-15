@@ -12,7 +12,15 @@ const useStyles = makeStyles((theme) => ({
   rating: {
     fontWeight: 800,
     fontSize: '20px',
-  }
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  stars: {
+    cursor: 'pointer',
+    transition: 'color 200ms',
+  },
+
 }));
 
 export default function Result({ score, winner }) {
@@ -20,12 +28,7 @@ export default function Result({ score, winner }) {
 
   return (
     <div className='result'>
-      <audio
-        id="winner-audio"
-        autoPlay
-        src={winnerSound}
-      >
-      </audio>
+      <audio id='winner-audio' autoPlay src={winnerSound}></audio>
       {winner && (
         <Typography variant='h4' gutterBottom>
           Congrats <span className={classes.winner}>{winner}</span>!
@@ -44,6 +47,15 @@ export default function Result({ score, winner }) {
         alt='trophy'
       />
       <p className={classes.rating}>RATING</p>
+      <div className={classes.stars}>
+        {[...Array(5)].map((star) => (
+        <label>
+          <input type='radio' name='rating' id='' />
+          <i className='fas fa-star' style={{cursor: 'pointer', transition: 'color 200ms', margin: '0 3px'}}></i>
+        </label>
+      ))}
+      </div>
+      
     </div>
   );
 }
