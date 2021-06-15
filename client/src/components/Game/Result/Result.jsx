@@ -23,6 +23,7 @@ export default function Result({ score, winner }) {
   const classes = useStyles();
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+  const [spin, setSpin] = useState('fas fa-sync-alt fa-2x');
 
   return (
     <div className='result'>
@@ -61,7 +62,12 @@ export default function Result({ score, winner }) {
           );
         })}
         <Link to='/'>
-          <i class='fas fa-undo-alt fa-2x' ></i>
+          <i
+            className={spin}
+            style={{ color: spin.includes('fa-spin') ? '#FFE227' : '#E4E5E9' }}
+            onMouseEnter={() => setSpin('fas fa-sync-alt fa-2x fa-spin')}
+            onMouseLeave={() => setSpin('fas fa-sync-alt fa-2x')}
+          ></i>
         </Link>
       </div>
     </div>
