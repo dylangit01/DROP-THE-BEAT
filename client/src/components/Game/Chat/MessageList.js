@@ -52,7 +52,7 @@ const MessageList = ({ messages, users }) => {
         return <li style={{ color }}>RubyOffTheRails</li>;
       })} */}
       {messages.map((msg, idx) => (
-        <li key={idx} className="message-list--item">
+        <li key={idx} className="message-list-item">
           <MusicNoteRoundedIcon
             style={{ color: msg.color }}
             className={classes.musicIcon}
