@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   mainHeading: {
     display: 'flex',
     alignItems: 'center',
+    margin: '1vh',
   },
   difficulty: {
     marginLeft: theme.spacing(6),
