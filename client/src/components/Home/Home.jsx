@@ -24,11 +24,11 @@ export default function Home() {
       <img className="headphones-img" src="https://github.com/dylangit01/DROP-THE-BEAT/blob/ruby/feature/navbar-home/client/public/images/headphones.png?raw=true" alt="headphones" />
       <div className="call-to-action">
         <div>
-          <p>Want to host a game?</p>
+          <p className="question">WANT TO HOST A GAME?</p>
           <Button variant="contained" className={classes.button} endIcon={<QueueMusicIcon />}><Link to="/playlists">Select a Playlist</Link></Button>
         </div>
         <div>
-          <p>Have a game code?</p>
+          <p className="question">HAVE A GAME CODE?</p>
           <Button variant="contained" className={classes.button} endIcon={<ExitToAppOutlinedIcon />}>Join A Game</Button>
         </div>
       </div>

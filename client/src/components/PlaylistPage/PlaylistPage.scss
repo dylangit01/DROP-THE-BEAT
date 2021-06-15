@@ -1,17 +1,26 @@
 .playlist-page {
   display: flex;
+  // flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 90vh;
   width: 100vw;
 
+  .playlist-page-container {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+  }
+
   .playlist-page-left {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    margin-right: 5%;
-    width: 25vw;
+    height: inherit;
+    width: 30vw;
+    margin-right: 8rem;
 
     img {
       width: inherit;
@@ -20,9 +29,11 @@
   }
 
   .playlist-page-right {
-    margin-left: 5%;
-    width: 30vw;
-    // min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 30vw;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 16px;
 
