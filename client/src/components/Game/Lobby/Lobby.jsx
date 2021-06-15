@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import PlayerList from './PlayerList';
-import { DTBContext } from '../../../contextAPI/DTBContext';
 
 // Styling
 import './Lobby.scss';
@@ -99,8 +98,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, host, players }) {
   const classes = useStyles();
-
-  const { host } = useContext(DTBContext);
 
   const handleStartGame = (event) => {
     event.preventDefault();
