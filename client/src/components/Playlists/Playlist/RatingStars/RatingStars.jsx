@@ -3,26 +3,30 @@ import { DTBContext } from '../../../../contextAPI/DTBContext';
 import StarIcon from '@material-ui/icons/Star';
 
 const RatingStars = ({ rating }) => {
-	console.log(rating);
-	const stars = [];
-	for (let i = 0; i < 5; i++){
-				if (i < rating) {
-          stars.push(
-            <i className='fas fa-star' style={{ color: '#FFE227' }}>
-              &nbsp;
-            </i>
-          );
-        } else {
-          stars.push(<i className='far fa-star'></i>);
-        }
-	}
-
-  // const playlistRating = play
-  return (
-    <div>
-      {stars}
-    </div>
-  );
+  console.log(rating);
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      stars.push(
+        <i key={i} className='fas fa-star' style={{ color: '#FFE227' }}>
+          &nbsp;
+        </i>
+      );
+    } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+      stars.push(
+        <i key={i} className='fas fa-star-half-alt' style={{ color: '#FFE227' }}>
+          &nbsp;
+        </i>
+      );
+    } else {
+      stars.push(
+        <i key={i} className='far fa-star'>
+          &nbsp;
+        </i>
+      );
+    }
+  }
+  return <div>{stars}</div>;
 };
 
 export default RatingStars;
