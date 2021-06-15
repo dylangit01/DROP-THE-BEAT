@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     color: 'white',
     background: 'transparent',
+    padding: 0,
   },
   icon: {
     background: 'linear-gradient(45deg, #9e66f2 30%, #2162f3 90%)',
@@ -81,9 +82,22 @@ const useStyles = makeStyles((theme) => ({
   players: {
     marginLeft: theme.spacing(5.5),
   },
+  overlay: {
+    position: 'absolute',
+    bottom: 0,
+    width: '30vw',
+    borderRadius: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    paddingBottom: theme.spacing(0.5),
+    height: '30%',
+    color: 'white',
+    backgroundImage: 'linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))',
+  },
 }));
 
-export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, players }) {
+export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, host, players }) {
   const classes = useStyles();
 
   const { host } = useContext(DTBContext);
@@ -104,14 +118,18 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
     <>
       {playlist && (
         <div className='lobby'>
+            {/* <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography> */}
           {/* PLAYLIST DETAILS LEFT SIDE */}
-          <div className='lobby-left'>
-            <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
-            <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
-          </div>
+          <div className='lobby-container'>
+            <div className='lobby-left'>
+              <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
+              <div className={classes.overlay}>
+                <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
+              </div>
+            </div>
 
-          {/* PLAYLIST DETAILS RIGHT SIDE */}
-          <div className='lobby-right'>
+            {/* PLAYLIST DETAILS RIGHT SIDE */}
+            <div className='lobby-right'>
             <List className={classes.root}>
               {/* Difficulty */}
               <ListItem >
@@ -188,7 +206,8 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
             </List>
 
             {/* Start Game Button (only for the host)*/}
-            {user.id === host.id && (<Button variant="contained" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>)}
+            {user.id === host.id && (<Button variant="contained" size="small" className={classes.button} onClick={(event) => handleStartGame(event)}>Start Game</Button>)}
+          </div>
           </div>
         </div>
       )}

@@ -164,7 +164,7 @@ io.on('connection', (socket) => {
 
     // Hard-coded colours for demo purposes
     if (newName.toLowerCase().includes('ruby')) {
-      socket.color = '#f54748';
+      socket.color = '#FF7F7F';
     } else if (newName.toLowerCase().includes('nelly')) {
       socket.color = '#98acf8';
     }
