@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
   mainHeading: {
     display: 'flex',
     alignItems: 'center',
+    margin: '1vh',
   },
   difficulty: {
     marginLeft: theme.spacing(6),
@@ -136,14 +137,13 @@ export default function PlaylistPage() {
     <>
       {playlist && (
         <div className='playlist-page'>
-          {/* <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography> */}
+            <Typography variant='h4' className="playlist-name">{playlist.playlistName.toUpperCase()} PLAYLIST</Typography>
           <div className ='playlist-page-container'>
+
+
             {/* PLAYLIST DETAILS LEFT SIDE */}
             <div className='playlist-page-left'>
               <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
-              <div className={classes.overlay}>
-                <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
-              </div>
             </div>
 
             {/* PLAYLIST DETAILS RIGHT SIDE */}
@@ -218,7 +218,7 @@ export default function PlaylistPage() {
                       <span>Game Code</span>
                     </Typography>
                     <div className='game-code-section'>
-                      <input type="text" name="gameLink" className={classes.gameLink} value="https://drop-the-beat.com/game/epicbattle"></input>
+                      <input type="text" name="gameLink" className={classes.gameLink} defaultValue="https://drop-the-beat.com/game/epicbattle"></input>
                       <IconButton color="inherit" aria-label="copy" component="span"><FileCopyIcon /></IconButton>
                     </div>
                   </ListItemText>
