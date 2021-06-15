@@ -8,7 +8,6 @@ import AudioPlayer from './AudioPlayer/AudioPlayer';
 import './MusicPlayer.scss';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-//import { host } from '../../../../../server/db';
 
 const useStyles = makeStyles((theme) => ({
   title: {

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PlayerList from './PlayerList';
+import { DTBContext } from '../../../contextAPI/DTBContext';
 
 // Styling
 import './Lobby.scss';
@@ -82,8 +83,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, host, players }) {
+export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, players }) {
   const classes = useStyles();
+
+  const { host } = useContext(DTBContext);
 
   const handleStartGame = (event) => {
     event.preventDefault();
@@ -152,6 +155,7 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
                     <span>Host</span>
                   </Typography>
                   <Typography variant='subtitle1' className={classes.listItem}>
+
                     {host.name}
                     {user.id === host.id && <span> (You)</span>}
                   </Typography>
@@ -170,13 +174,14 @@ export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, use
                   <Typography variant='subtitle1' className={classes.players}>
                     <PlayerList {...{ players, user }} />
                   </Typography>
+
                   {/* Form to Change Name (if you're a player) */}
-                  {user.id !== host.id && (
+                  {/* {user.id !== host.id && ( */}
                     <form className='change-name-form' onSubmit={(event) => handleChangeName(event)}>
                       <input type="text" name="name" className={classes.nameChange} placeholder='Type your updated name here'></input>
                       <Button variant="contained" type='submit' className={classes.nameButton}>Change</Button>
                     </form>
-                  )}
+                  {/* )} */}
 
                 </ListItemText>
               </ListItem>

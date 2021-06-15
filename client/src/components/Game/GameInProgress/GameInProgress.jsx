@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Chat from '../Chat/Chat';
 import Score from '../Score/Score';
 import MusicPlayer from '../MusicPlayer/MusicPlayer';
 import TrackList from '../TrackList/TrackList';
 import './GameInProgress.scss';
 import MessageInput from '../Chat/MessageInput/index'
+import { DTBContext } from '../../../contextAPI/DTBContext';
 
-export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage, host, players}) {
-
+export default function GameInProgress({ playlist, nextRound, song, round, setRound,user, users, messages, sendMessage, players}) {
+  const { host } = useContext(DTBContext);
   const [counter, setCounter] = useState(3);
   
   useEffect(() => {
@@ -54,7 +55,7 @@ export default function GameInProgress({ playlist, nextRound, song, round, setRo
       <div className='right-side'>
         <Score {...{ user, players, messages }} />
         <Chat {...{ user, users, messages }} />
-        <MessageInput onSubmit={sendMessage} host={host} user={user} />
+        <MessageInput onSubmit={sendMessage} user={user} />
       </div>
     </div>
   );

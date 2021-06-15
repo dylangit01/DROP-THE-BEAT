@@ -9,6 +9,7 @@ var debug = require('debug')('server:server');
 var http = require('http');
 const socketio = require('socket.io');
 const { log } = require('console');
+const { user } = require('pg/lib/defaults');
 
 /**
  * Get port from environment and store in Express.
@@ -69,8 +70,8 @@ const getAllUsers = (sockets) => {
     });
   }
   // set up the first user as a host
-  users[0].isHost = true;
-  users[0].name = 'DJ Dylan';
+  // users[0].isHost = true;
+  // users[0].name = 'DJ Dylan';
   return users;
 };
 
@@ -98,19 +99,6 @@ io.on('connection', (socket) => {
   const users = getAllUsers(io.sockets.sockets);
   const numberOfUsers = users.length;
 
-  // Emit to connected user only
-  if (numberOfUsers === 1) {
-    // Emit host properties (hard-coded) if it's the first user
-    socket.emit('INITIAL_CONNECTION', {
-      id,
-      name: 'DJ Dylan',
-      color,
-      score,
-      users,
-      isHost: true,
-      msgColor,
-    }); // Only emits to connected user
-  } else {
     // Emit player properties if it's not the first user who connects
     socket.emit('INITIAL_CONNECTION', {
       id,
@@ -120,8 +108,32 @@ io.on('connection', (socket) => {
       users,
       isHost,
       msgColor,
-    }); // Only emits to connected user
-  }
+    }); 
+
+  // Emit to connected user only
+  // if (numberOfUsers === 1) {
+  //   // Emit host properties (hard-coded) if it's the first user
+  //   socket.emit('INITIAL_CONNECTION', {
+  //     id,
+  //     name: 'DJ Dylan',
+  //     color,
+  //     score,
+  //     users,
+  //     isHost: true,
+  //     msgColor,
+  //   }); // Only emits to connected user
+  // } else {
+  //   // Emit player properties if it's not the first user who connects
+  //   socket.emit('INITIAL_CONNECTION', {
+  //     id,
+  //     name,
+  //     color,
+  //     score,
+  //     users,
+  //     isHost,
+  //     msgColor,
+  //   }); // Only emits to connected user
+  // }
 
   // Emit to all users except connected user
   socket.broadcast.emit('NEW_USER', {
@@ -138,6 +150,17 @@ io.on('connection', (socket) => {
     // Get the name from the input and update socket's name
     const newName = msg;
     socket.name = newName;
+    if (newName.toLowerCase().includes('host')) {
+      socket.isHost = true;
+      const formedDjName = newName.toLowerCase().replace('host', '');
+      const djName = formedDjName.charAt(0).toUpperCase() + formedDjName.slice(1)
+      socket.name = `DJ ${djName}`;
+      socket.color = '#FB9300';
+
+      const users = getAllUsers(io.sockets.sockets);
+      socket.emit('CHANGE_NAME', { name: djName, color: socket.color, users }); // Emit update only to user that sent it
+      socket.broadcast.emit('USER_NAME_CHANGE', { users }); 
+    }
 
     // Hard-coded colours for demo purposes
     if (newName.toLowerCase().includes('ruby')) {

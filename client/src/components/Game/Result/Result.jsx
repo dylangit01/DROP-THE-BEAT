@@ -67,6 +67,7 @@ export default function Result({ score, winner }) {
             style={{ color: spin.includes('fa-spin') ? '#FFE227' : '#E4E5E9' }}
             onMouseEnter={() => setSpin('fas fa-sync-alt fa-2x fa-spin')}
             onMouseLeave={() => setSpin('fas fa-sync-alt fa-2x')}
+            onClick={()=>window.location.reload()}
           ></i>
         </Link>
       </div>

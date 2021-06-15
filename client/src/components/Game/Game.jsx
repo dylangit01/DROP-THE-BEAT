@@ -172,7 +172,17 @@ export default function Game({ playlist }) {
   };
 
   // find a host
-  const host = users.find((user) => user.isHost === true) || {};
+  const { host, setHost } = useContext(DTBContext);
+  useEffect(() => {
+    // const temp = users.map(user => user.isHost === true)
+    // console.log(temp);
+    // setHost([...temp[temp.length-1]])
+    setHost(users.find((user) => user.isHost === true) || {});
+  }, [users, setHost])
+  // console.log(users);
+  // console.log(host);
+
+  //const host = users.find((user) => user.isHost === true) || {};
 
   // array of only players excluding the host
   // Using context to update players, which messageInput component needs host info:
@@ -181,7 +191,9 @@ export default function Game({ playlist }) {
   // FAKE ROOM SETUP: Only two players will show up in the game room,
   useEffect(() => {
     const getPlayers = () => {
-      setPlayers(users.slice(1, 3));
+      const newUsers = [...users]
+      const res = newUsers.filter((user) => user.isHost !== true);
+      setPlayers(res.slice(0, 2));
     };
     getPlayers();
   }, [setPlayers, users]);
