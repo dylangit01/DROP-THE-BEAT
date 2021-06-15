@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, users, host, players }) {
+export default function Lobby({ playlist, sendMessage, songs, numberOfSongs, user, host, players }) {
   const classes = useStyles();
 
   const handleStartGame = (event) => {
