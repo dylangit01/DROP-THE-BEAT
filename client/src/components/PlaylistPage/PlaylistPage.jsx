@@ -137,7 +137,6 @@ export default function PlaylistPage() {
     <>
       {playlist && (
         <div className='playlist-page'>
-          {/* <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography> */}
             <Typography variant='h4' className="playlist-name">{playlist.playlistName.toUpperCase()} PLAYLIST</Typography>
           <div className ='playlist-page-container'>
 
@@ -145,9 +144,6 @@ export default function PlaylistPage() {
             {/* PLAYLIST DETAILS LEFT SIDE */}
             <div className='playlist-page-left'>
               <img src={playlist.playlistPhoto} alt="playlistPhoto"></img>
-              {/* <div className={classes.overlay}>
-                <Typography variant='h4' gutterBottom>{playlist.playlistName} Playlist</Typography>
-              </div> */}
             </div>
 
             {/* PLAYLIST DETAILS RIGHT SIDE */}
