@@ -42,9 +42,9 @@ export default function Game({ playlist }) {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
-      const baseURL = 'https://drop-the-beat-app.herokuapp.com';
-      // const connection = io('http://localhost:3001');
-      const connection = io(`${baseURL}`);
+      // const baseURL = 'https://drop-the-beat-app.herokuapp.com';
+      const connection = io('http://localhost:3001');
+      // const connection = io(`${baseURL}`);
       setConn(connection);
     }
     return () => (mounted = false);
