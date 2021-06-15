@@ -218,7 +218,7 @@ export default function PlaylistPage() {
                       <span>Game Code</span>
                     </Typography>
                     <div className='game-code-section'>
-                      <input type="text" name="gameLink" className={classes.gameLink} value="https://drop-the-beat.com/game/epicbattle"></input>
+                      <input type="text" name="gameLink" className={classes.gameLink} defaultValue="https://drop-the-beat.com/game/epicbattle"></input>
                       <IconButton color="inherit" aria-label="copy" component="span"><FileCopyIcon /></IconButton>
                     </div>
                   </ListItemText>
