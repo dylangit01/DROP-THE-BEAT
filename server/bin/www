@@ -24,8 +24,8 @@ app.set('port', port);
 var server = http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: 'http://localhost:3000',
-    // origin: 'https://festive-kare-87b75b.netlify.app',
+    // origin: 'http://localhost:3000',
+    origin: 'https://festive-kare-87b75b.netlify.app',
     // origin: '*',
     methods: ['GET', 'POST'],
   },
