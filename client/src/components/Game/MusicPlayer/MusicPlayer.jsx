@@ -3,13 +3,11 @@ import React from 'react';
 import RoundUnknown from './RoundUnknown/RoundUnknown';
 import RoundKnown from './RoundKnown/RoundKnown';
 import AudioPlayer from './AudioPlayer/AudioPlayer';
-import AudioVisualizer from './Audio/AudioVisualizer';
 
 // Styles
 import './MusicPlayer.scss';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-//import { host } from '../../../../../server/db';
 
 const useStyles = makeStyles((theme) => ({
   title: {
