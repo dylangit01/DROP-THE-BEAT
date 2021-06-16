@@ -19,7 +19,11 @@
   .fas.fa-star {
     cursor: pointer;
     transition: color 200ms;
-    margin: 0 3px,
+    margin: 0 3px;
+    transition: all .2s ease-in-out;
+    &:hover{
+      transform: scale(1.2);
+    }
   }
 
   .fas.fa-sync-alt{
