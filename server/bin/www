@@ -44,13 +44,13 @@ const randomColor = () => {
     '#ffcb74',
     '#ff8474',
     '#00ead3',
-    '#77acf1',
+    // '#77acf1',
     '#efbbcf',
     // '#f54748',
     '#7868e6',
     '#f7fd04',
-    '#ff0004',
-    '#033fff',
+    // '#ff0004',
+    // '#033fff',
   ];
   return randomColorArr[Math.floor(Math.random() * randomColorArr.length)];
 };
