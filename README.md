@@ -4,10 +4,10 @@ DROP THE BEAT is a simple but competitive live multiplayer “name that song” 
 
 Deployed version: https://drop-the-beat.netlify.app/
 
-![Home page](http://full/path/to/img.jpg "Optional title")
-![Select playlist](http://full/path/to/img.jpg "Optional title")
-![Invite players](http://full/path/to/img.jpg "Optional title")
-![Play game](http://full/path/to/img.jpg "Optional title")
+![Home page](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/home-page.gif?raw=true "Optional title")
+![Select playlist](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/select-playlist.gif?raw=true "Optional title")
+![Invite players](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/invite-players.gif?raw=true "Optional title")
+![Play game]![image](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/play-game.gif?raw=true "Optional title")
 
 # Features
 Host can:
