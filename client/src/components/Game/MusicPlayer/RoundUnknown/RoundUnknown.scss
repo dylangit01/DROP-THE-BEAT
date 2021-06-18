@@ -7,25 +7,15 @@
     position: relative;
     // background-color: #505050;
     opacity: 0.75;
-    height: 30vw;
-    width: 30vw;
+    height: 25vw;
+    width: 25vw;
     border-radius: 16px;
     animation: fade-in 3s;
 
     .disc {
       width: inherit;
       animation: 2s linear 0s infinite spin;
-      // animation: 1.5s linear 0s infinite beat;
     }
-
-    // .question-mark {
-    //   position: absolute;
-    //   font-size: 15vw;
-    //   top: 25%;
-    //   left: 25%;
-    //   opacity: 0;
-    //   color: black;
-    // }
   }
 }
 

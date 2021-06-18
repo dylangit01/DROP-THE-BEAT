@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
   overlay: {
     position: 'absolute',
     bottom: 0,
-    width: '30vw',
+    width: '25vw',
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',

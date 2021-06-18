@@ -3,13 +3,11 @@ import React from 'react';
 import RoundUnknown from './RoundUnknown/RoundUnknown';
 import RoundKnown from './RoundKnown/RoundKnown';
 import AudioPlayer from './AudioPlayer/AudioPlayer';
-import AudioVisualizer from './Audio/AudioVisualizer';
 
 // Styles
 import './MusicPlayer.scss';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-//import { host } from '../../../../../server/db';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -32,7 +30,7 @@ export default function MusicPlayer({ song, nextRound, round, setRound, playlist
 
       {/* When a song has been guessed correctly or it's the end of the round */}
       {round.finished && <RoundKnown song={song} />}
-        <AudioVisualizer song={song} />
+   
       {/* Audio playing music here and the next song button */}
       <AudioPlayer
         song={song}

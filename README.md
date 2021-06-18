@@ -1,12 +1,13 @@
 # DROP THE BEAT
 
 DROP THE BEAT is a simple but competitive live multiplayer “name that song” game.
+
 Deployed version: https://drop-the-beat.netlify.app/
 
-![Alt text](http://full/path/to/img.jpg "Optional title")
-![Alt text](http://full/path/to/img.jpg "Optional title")
-![Alt text](http://full/path/to/img.jpg "Optional title")
-![Alt text](http://full/path/to/img.jpg "Optional title")
+![Home page](http://full/path/to/img.jpg "Optional title")
+![Select playlist](http://full/path/to/img.jpg "Optional title")
+![Invite players](http://full/path/to/img.jpg "Optional title")
+![Play game](http://full/path/to/img.jpg "Optional title")
 
 # Features
 Host can:
@@ -23,12 +24,17 @@ Players can:
 The song album cover reveals as soon as it's guessed or when the time runs out (30 seconds default). 
 When the playlist runs out of songs, the result page reveals and congratulates the winner.
 
+# Tech Stack
+
+
 # Usage
 
 Install dependencies with `npm install`.
 
 # Contributors
 
-https://github.com/Ruby-Zhuang/
-https://github.com/dylangit01
-https://github.com/NelliBtn
+Ruby Zhuang: https://github.com/Ruby-Zhuang/
+
+Dylan Du: https://github.com/dylangit01
+
+Nelli Butenko: https://github.com/NelliBtn
