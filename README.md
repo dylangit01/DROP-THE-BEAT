@@ -24,6 +24,9 @@ Players can:
 The song album cover reveals as soon as it's guessed or when the time runs out (30 seconds default). 
 When the playlist runs out of songs, the result page reveals and congratulates the winner.
 
+# Tech Stack
+
+
 # Usage
 
 Install dependencies with `npm install`.
