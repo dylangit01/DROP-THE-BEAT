@@ -1,6 +1,7 @@
 # DROP THE BEAT
 
 DROP THE BEAT is a simple but competitive live multiplayer “name that song” game.
+
 Deployed version: https://drop-the-beat.netlify.app/
 
 ![Home page](http://full/path/to/img.jpg "Optional title")
