@@ -1,6 +1,6 @@
 # DROP THE BEAT
 
-DROP THE BEAT is a simple but competitive live multiplayer “name that song” game.
+DROP THE BEAT is a simple but competitive live multiplayer “name that song” game. Two players can join host's chat room and guess the songs' title simultaneously.
 
 Deployed version: https://drop-the-beat.netlify.app/
 
@@ -25,7 +25,14 @@ The song album cover reveals as soon as it's guessed or when the time runs out (
 When the playlist runs out of songs, the result page reveals and congratulates the winner.
 
 # Tech Stack
-
+```PERN STACK```
+-	Database: PostgreSQL 
+- Client Side: React
+- Server Side: NodeJS & Express
+- Live Chat: Socket.io
+- Styles: Material UI
+- HTTP Request tool: Axios
+- State Management tool: ContextAPI
 
 # Usage
 
