@@ -1,13 +1,13 @@
 # DROP THE BEAT
 
-DROP THE BEAT is a simple but competitive live multiplayer “name that song” game.
+DROP THE BEAT is a simple but competitive live multiplayer “name that song” game. Two players can join host's chat room and guess the songs' title simultaneously.
 
 Deployed version: https://drop-the-beat.netlify.app/
 
-![Home page](http://full/path/to/img.jpg "Optional title")
-![Select playlist](http://full/path/to/img.jpg "Optional title")
-![Invite players](http://full/path/to/img.jpg "Optional title")
-![Play game](http://full/path/to/img.jpg "Optional title")
+![Home page](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/home-page.gif?raw=true "Optional title")
+![Select playlist](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/select-playlist.gif?raw=true "Optional title")
+![Invite players](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/invite-players.gif?raw=true "Optional title")
+![Play game]![image](https://github.com/dylangit01/DROP-THE-BEAT/blob/main/client/gifs/play-game.gif?raw=true "Optional title")
 
 # Features
 Host can:
@@ -25,7 +25,14 @@ The song album cover reveals as soon as it's guessed or when the time runs out (
 When the playlist runs out of songs, the result page reveals and congratulates the winner.
 
 # Tech Stack
-
+```PERN STACK```
+-	Database: PostgreSQL 
+- Client Side: React
+- Server Side: NodeJS & Express
+- Live Chat: Socket.io
+- Styles: Material UI
+- HTTP Request tool: Axios
+- State Management tool: ContextAPI
 
 # Usage
 
